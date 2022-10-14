@@ -2,7 +2,7 @@
 //  FeedChanel+CoreDataClass.swift
 //  Meedly
 //
-//  Created by Illia Poliakov on 12.10.22.
+//  Created by Illia Poliakov on 13.10.22.
 //
 //
 
@@ -13,4 +13,3 @@ import CoreData
 public class FeedChanel: NSManagedObject {
 
 }
-

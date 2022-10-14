@@ -3,13 +3,18 @@
     <entity name="Feed" representedClassName="Feed" syncable="YES">
         <attribute name="feedDescription" attributeType="String"/>
         <attribute name="imageUrl" optional="YES" attributeType="String"/>
+        <attribute name="isViewed" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="link" attributeType="String"/>
+        <attribute name="pubDate" attributeType="String"/>
         <attribute name="title" attributeType="String"/>
         <relationship name="chanelList" maxCount="1" deletionRule="Nullify" destinationEntity="FeedChanel" inverseName="feeds" inverseEntity="FeedChanel"/>
     </entity>
     <entity name="FeedChanel" representedClassName="FeedChanel" syncable="YES">
+        <attribute name="imageUrl" optional="YES" attributeType="String"/>
+        <attribute name="link" attributeType="String"/>
+        <attribute name="title" attributeType="String"/>
         <relationship name="feeds" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Feed" inverseName="chanelList" inverseEntity="Feed"/>
-        <relationship name="group" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Group" inverseName="chanels" inverseEntity="Group"/>
+        <relationship name="group" maxCount="1" deletionRule="Nullify" destinationEntity="Group" inverseName="chanels" inverseEntity="Group"/>
     </entity>
     <entity name="Group" representedClassName="Group" syncable="YES">
         <attribute name="title" attributeType="String"/>
