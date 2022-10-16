@@ -27,19 +27,19 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="square.and.arrow.up.on.square.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="boG-Mi-EIi">
-                                            <rect key="frame" x="20" y="-2" width="350" height="179.33333333333334"/>
+                                            <rect key="frame" x="20" y="8" width="350" height="179.33333333333334"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="boG-Mi-EIi" secondAttribute="height" multiplier="2:1" id="4Kz-8a-rhX"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="749" text="omg sebastian vettel won suzuki gran prii in kdnvpijaebvpjaiebnrc rehdfb ejipabncfa scph e" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cjL-cw-5JG">
-                                            <rect key="frame" x="25" y="190" width="340" height="64.333333333333314"/>
+                                            <rect key="frame" x="25" y="200" width="340" height="57"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="08.05.2003" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZOc-5z-gEn">
-                                            <rect key="frame" x="15" y="269.33333333333331" width="360" height="19.666666666666686"/>
+                                            <rect key="frame" x="15" y="272" width="360" height="17"/>
                                             <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -52,7 +52,7 @@
                                         <constraint firstItem="ZOc-5z-gEn" firstAttribute="leading" secondItem="r8a-6j-6oC" secondAttribute="leading" constant="15" id="JX3-LV-sWK"/>
                                         <constraint firstAttribute="trailing" secondItem="cjL-cw-5JG" secondAttribute="trailing" constant="25" id="KSK-7u-i3H"/>
                                         <constraint firstItem="cjL-cw-5JG" firstAttribute="top" secondItem="boG-Mi-EIi" secondAttribute="bottom" constant="15" id="cg5-mn-BLa"/>
-                                        <constraint firstItem="boG-Mi-EIi" firstAttribute="top" secondItem="r8a-6j-6oC" secondAttribute="top" id="dNO-PG-ttH"/>
+                                        <constraint firstItem="boG-Mi-EIi" firstAttribute="top" secondItem="r8a-6j-6oC" secondAttribute="top" constant="10" id="dNO-PG-ttH"/>
                                         <constraint firstItem="ZOc-5z-gEn" firstAttribute="top" secondItem="cjL-cw-5JG" secondAttribute="bottom" constant="15" id="hgu-xT-Ss0"/>
                                         <constraint firstAttribute="trailing" secondItem="boG-Mi-EIi" secondAttribute="trailing" constant="20" id="krZ-JT-P76"/>
                                         <constraint firstAttribute="trailing" secondItem="ZOc-5z-gEn" secondAttribute="trailing" constant="15" id="wc5-22-KGD"/>

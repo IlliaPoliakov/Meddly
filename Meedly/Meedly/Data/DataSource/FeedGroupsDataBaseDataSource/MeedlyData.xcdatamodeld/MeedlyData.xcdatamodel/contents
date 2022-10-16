@@ -2,6 +2,7 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21279" systemVersion="21G115" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Feed" representedClassName="Feed" syncable="YES">
         <attribute name="feedDescription" attributeType="String"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="imageUrl" optional="YES" attributeType="String"/>
         <attribute name="isViewed" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="link" attributeType="String"/>
@@ -10,6 +11,7 @@
         <relationship name="chanelList" maxCount="1" deletionRule="Nullify" destinationEntity="FeedChanel" inverseName="feeds" inverseEntity="FeedChanel"/>
     </entity>
     <entity name="FeedChanel" representedClassName="FeedChanel" syncable="YES">
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="imageUrl" optional="YES" attributeType="String"/>
         <attribute name="link" attributeType="String"/>
         <attribute name="title" attributeType="String"/>
@@ -17,6 +19,7 @@
         <relationship name="group" maxCount="1" deletionRule="Nullify" destinationEntity="Group" inverseName="chanels" inverseEntity="Group"/>
     </entity>
     <entity name="Group" representedClassName="Group" syncable="YES">
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="title" attributeType="String"/>
         <relationship name="chanels" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="FeedChanel" inverseName="group" inverseEntity="FeedChanel"/>
     </entity>

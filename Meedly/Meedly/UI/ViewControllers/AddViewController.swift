@@ -67,7 +67,14 @@ class AddViewController: UIViewController, UITableViewDelegate, UITableViewDataS
   // MARK: - IBActions -
   
   @IBAction func createNewGroup() {
+    let alert = UIAlertController(title: "New Group", message: "Enter a Group Title:", preferredStyle: .alert)
+    alert.addTextField { _ in }
+    alert.addAction(UIAlertAction(title: "Add", style: .default) { [weak alert] (_) in
+      let textField = alert!.textFields![0]
     
+    })
+
+    self.present(alert, animated: true, completion: nil)
   }
   
   @IBAction func addChanel() {

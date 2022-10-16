@@ -10,6 +10,6 @@ import Foundation
 import CoreData
 
 @objc(Feed)
-public class Feed: NSManagedObject {
-
+public class Feed: NSManagedObject, Identifiable {
+  public var id: UUID = UUID()
 }

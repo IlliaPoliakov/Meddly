@@ -48,7 +48,3 @@ extension Feed {
     }
   }
 }
-
-extension Feed : Identifiable {
-  
-}

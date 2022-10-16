@@ -6,13 +6,16 @@
 //
 
 import UIKit
+import CoreData
 
 class MainTableViewController: UITableViewController {
+  
   
   override func viewDidLoad() {
     super.viewDidLoad()
     tableView.rowHeight = UITableView.automaticDimension
     tableView.estimatedRowHeight = 600
+    //customizr tableview title
   }
   
   // MARK: - Maintain table view -
@@ -33,7 +36,6 @@ class MainTableViewController: UITableViewController {
     else {
       fatalError("Can't deque custom cell in MainTVC.")
     }
-    
     
     return cell
   }

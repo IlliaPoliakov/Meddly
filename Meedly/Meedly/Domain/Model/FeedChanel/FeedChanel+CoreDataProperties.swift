@@ -74,7 +74,3 @@ extension FeedChanel {
   @NSManaged public func removeFromFeeds(_ values: NSOrderedSet)
   
 }
-
-extension FeedChanel : Identifiable {
-  
-}

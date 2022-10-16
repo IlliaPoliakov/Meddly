@@ -6,10 +6,14 @@
 //
 
 import Foundation
+import UIKit
 
-class GetFeedgroupsUseCase {
-  var repo: FeedGroupsRepository
+class GetGroupsUseCase {
   
+  // -MARK: - Dependencies -
+  
+  private var repo: FeedGroupsRepository
+
   init(repo: FeedGroupsRepository) {
     self.repo = repo
   }
@@ -17,5 +21,4 @@ class GetFeedgroupsUseCase {
   func execute() -> [Group] {
     return repo.getFeedGroups()
   }
-  
 }

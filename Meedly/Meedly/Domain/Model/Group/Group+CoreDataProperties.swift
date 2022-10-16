@@ -68,7 +68,3 @@ extension Group {
   @NSManaged public func removeFromChanels(_ values: NSOrderedSet)
   
 }
-
-extension Group : Identifiable {
-  
-}
