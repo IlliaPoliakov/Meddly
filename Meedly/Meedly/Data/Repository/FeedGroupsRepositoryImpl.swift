@@ -8,7 +8,7 @@
 import Foundation
 
 
-class FeedGroupsRepositoryImpl: FeedsRepository {
+class FeedGroupsRepositoryImpl: FeedGroupsRepository {
 
   
   // -MARK: - Dependencies -
@@ -21,8 +21,8 @@ class FeedGroupsRepositoryImpl: FeedsRepository {
     self.remoteDataSource = remoteDataSource
   }
   
-  func getFeeds() -> [Feed] {
+  func getFeedGroups() -> [Group]? {
     
-    return [Feed()] // temporarry
+    return [Group()] // temporarry
   }
 }

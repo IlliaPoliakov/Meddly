@@ -12,10 +12,10 @@ class MainTableViewController: UITableViewController {
   
   // -MARK: - Properties -
   
-  let getGroupsUseCase: GetFeedsUseCase = GetFeedsUseCase(
+  let getGroupsUseCase: GetFeedGroupsUseCase = GetFeedGroupsUseCase(
     repo: FeedGroupsRepositoryImpl(
-      localDataSource: FeedsDataBaseDataSource(),
-      remoteDataSource: FeedsNetworkDataSource()
+      localDataSource: FeedGroupsDataBaseDataSource(),
+      remoteDataSource: FeedGroupsNetworkDataSource()
     )
   )
   
@@ -27,7 +27,14 @@ class MainTableViewController: UITableViewController {
     else {
       fatalError("Can't deque custom cell in MainVC.")
     }
-    cell.updateData(withFeed: groups[indexPath.section].ch)
+    
+    guard let feed = self.groups?[indexPath.section].feeds?[indexPath.row]
+    else {
+      return cell
+    }
+    cell.updateData(withFeed: feed)
+    
+    return cell
   }
   
   // -MARK: - LifeCycle -
@@ -35,34 +42,27 @@ class MainTableViewController: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+//    groups = getGroupsUseCase.execute()
+    groups = nil
+    
     tableView.dataSource = dataSource
     
     tableView.rowHeight = UITableView.automaticDimension // for dynamic cell hight
     tableView.estimatedRowHeight = 600
     
-    groups = getGroupsUseCase.execute()
-    // set coresponding tableView title
+    
+    
   }
   
   
   // MARK: - Maintain table view -
   
   override func numberOfSections(in tableView: UITableView) -> Int {
-    return groups?.count ?? 1
+    return groups?.count ?? 0
   }
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    
-    guard let chanels = groups?[section].chanels
-    else {
-      return 0
-    }
-    
-    var amountOfFeeds = 0
-    for chanel in chanels {
-      amountOfFeeds += chanel.feeds.count
-    }
-    return amountOfFeeds
+    return groups?[section].feeds?.count ?? 0
   }
   
   
@@ -74,9 +74,17 @@ class MainTableViewController: UITableViewController {
     else {
       fatalError("Can't perform segue to AddVC")
     }
+    destinaitonVC.groups = groups
+  }
+  
+  @IBAction func unwind( _ segue: UIStoryboardSegue) {
+    
   }
   
   // MARK: - IBActions -
+  
+  @IBAction func showSideBar(_ sender: Any) {
+  }
   
   @IBAction func checkActivity(_ sender: Any) {
   }
@@ -86,8 +94,7 @@ class MainTableViewController: UITableViewController {
   
   @IBAction func markAsReaded(_ sender: Any) {
   }
-  @IBAction func showSideBar(_ sender: Any) {
-  }
+  
   @IBAction func sortPresentation(_ sender: Any) {
   }
 }

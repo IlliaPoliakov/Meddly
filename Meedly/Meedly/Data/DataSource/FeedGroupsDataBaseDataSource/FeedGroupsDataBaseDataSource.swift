@@ -8,6 +8,6 @@
 import Foundation
 import CoreData
 
-class FeedsDataBaseDataSource: LocalDataSource {
+class FeedGroupsDataBaseDataSource: LocalDataSource {
   
 }

@@ -16,11 +16,10 @@ extension Group {
     return NSFetchRequest<Group>(entityName: "Group")
   }
   
-  @NSManaged public var title: String?
-  @NSManaged public var amountOfCachedData: Int16
+  @NSManaged public var title: String
   @NSManaged public var id: UUID?
-  @NSManaged public var chanels: NSOrderedSet?
-  @NSManaged public var feeds: NSOrderedSet?
+  @NSManaged public var chanels: [FeedChanel]?
+  @NSManaged public var feeds: [Feed]?
   
   
   static func createNew(withTitle title: String,
@@ -35,6 +34,10 @@ extension Group {
       let nserror = error as NSError
       fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
     }
+  }
+  
+  func doesExist(forTitle title: String) -> Bool {
+    return self.title == title ? true : false
   }
   
 }

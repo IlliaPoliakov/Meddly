@@ -75,14 +75,14 @@
                         <barButtonItem title="Item" image="line.3.horizontal.decrease" catalog="system" springLoaded="YES" style="done" id="Sre-Mj-v2e">
                             <color key="tintColor" red="0.74901960784313726" green="0.35294117647058826" blue="0.94901960784313721" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
-                                <action selector="showSideBar:" destination="Ii9-o7-ios" id="zL9-bS-gva"/>
+                                <action selector="showSideBar:" destination="Ii9-o7-ios" id="hsT-g8-g94"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem systemItem="flexibleSpace" id="HUX-fK-aAE"/>
                         <barButtonItem title="Item" image="arrow.up.and.down.text.horizontal" catalog="system" style="done" id="k9Q-iU-sfW">
                             <color key="tintColor" red="0.74901960779999999" green="0.35294117650000001" blue="0.94901960780000005" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
-                                <action selector="sortPresentation:" destination="Ii9-o7-ios" id="iDC-cs-vWv"/>
+                                <action selector="sortPresentation:" destination="Ii9-o7-ios" id="2GB-5A-ZUI"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem systemItem="flexibleSpace" id="Gp7-pT-G9W"/>
@@ -98,20 +98,20 @@
                         <barButtonItem key="leftBarButtonItem" title="Item" image="circle" catalog="system" style="done" id="PLl-fx-Y2S">
                             <color key="tintColor" red="0.74901960779999999" green="0.35294117650000001" blue="0.94901960780000005" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
-                                <action selector="checkActivityButton:" destination="Ii9-o7-ios" id="PNV-C3-xkb"/>
+                                <action selector="checkActivity:" destination="Ii9-o7-ios" id="wsT-ST-Ode"/>
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem title="Item" image="checkmark.circle" catalog="system" style="done" id="RZH-qh-502">
                                 <color key="tintColor" red="0.74901960779999999" green="0.35294117650000001" blue="0.94901960780000005" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
-                                    <action selector="markAsReaded:" destination="Ii9-o7-ios" id="gwa-qn-E65"/>
+                                    <action selector="markAsReaded:" destination="Ii9-o7-ios" id="5Ov-4e-h4e"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem title="Item" image="pencil.circle" catalog="system" style="done" id="i61-qn-FE9">
                                 <color key="tintColor" red="0.74901960779999999" green="0.35294117650000001" blue="0.94901960780000005" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
-                                    <action selector="configurePresentationButton:" destination="Ii9-o7-ios" id="qBC-Gg-XJR"/>
+                                    <action selector="configureTypeOfPresentation:" destination="Ii9-o7-ios" id="dcl-VF-YRn"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
@@ -160,7 +160,7 @@
                                         <color key="tintColor" red="0.74901960779999999" green="0.35294117650000001" blue="0.94901960780000005" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                                         <buttonConfiguration key="configuration" style="plain"/>
                                         <connections>
-                                            <action selector="createNewGroup" destination="Tra-FC-Whj" eventType="touchUpInside" id="ncb-D2-xwY"/>
+                                            <action selector="createNewGroup:" destination="Tra-FC-Whj" eventType="touchUpInside" id="Jp9-KP-cYi"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -209,7 +209,7 @@
                                     <color key="baseForegroundColor" red="0.74901960779999999" green="0.35294117650000001" blue="0.94901960780000005" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="addChanel" destination="Tra-FC-Whj" eventType="touchUpInside" id="BAD-U8-sar"/>
+                                    <action selector="addNewChanel:" destination="Tra-FC-Whj" eventType="touchUpInside" id="aoC-gK-NL3"/>
                                 </connections>
                             </button>
                         </subviews>
