@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainTVCConvinientCell: UITableViewCell {
+class MainTableViewControllerCustomCell: UITableViewCell {
   
   @IBOutlet weak var pubDateLabel: UILabel!
   @IBOutlet weak var titleLabel: UILabel!

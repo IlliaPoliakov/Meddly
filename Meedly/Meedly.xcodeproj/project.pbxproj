@@ -12,22 +12,23 @@
 		F2C4B9FB28F7269500359E5D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2C4B9F928F7269500359E5D /* Main.storyboard */; };
 		F2C4BA0028F7269600359E5D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2C4B9FF28F7269600359E5D /* Assets.xcassets */; };
 		F2C4BA0328F7269600359E5D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2C4BA0128F7269600359E5D /* LaunchScreen.storyboard */; };
-		F2C4BA3628F82E2400359E5D /* FeedChanel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4BA3028F82E2400359E5D /* FeedChanel+CoreDataClass.swift */; };
-		F2C4BA3728F82E2400359E5D /* FeedChanel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4BA3128F82E2400359E5D /* FeedChanel+CoreDataProperties.swift */; };
-		F2C4BA3828F82E2400359E5D /* Group+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4BA3228F82E2400359E5D /* Group+CoreDataClass.swift */; };
-		F2C4BA3928F82E2400359E5D /* Group+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4BA3328F82E2400359E5D /* Group+CoreDataProperties.swift */; };
-		F2C4BA3A28F82E2400359E5D /* Feed+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4BA3428F82E2400359E5D /* Feed+CoreDataClass.swift */; };
-		F2C4BA3B28F82E2400359E5D /* Feed+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4BA3528F82E2400359E5D /* Feed+CoreDataProperties.swift */; };
-		F2C4BA4228F84F5E00359E5D /* GetGroupsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4BA4128F84F5E00359E5D /* GetGroupsUseCase.swift */; };
+		F2C4BA4228F84F5E00359E5D /* GetFeedsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4BA4128F84F5E00359E5D /* GetFeedsUseCase.swift */; };
 		F2C4BA4C28F8AB7600359E5D /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4BA4B28F8AB7600359E5D /* MainTableViewController.swift */; };
 		F2C4BA4E28F8AE1C00359E5D /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4BA4D28F8AE1C00359E5D /* AddViewController.swift */; };
-		F2C4BA5228F9596700359E5D /* FeedGroupsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4BA5128F9596700359E5D /* FeedGroupsRepository.swift */; };
+		F2C4BA5228F9596700359E5D /* FeedsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4BA5128F9596700359E5D /* FeedsRepository.swift */; };
 		F2C4BA5528F97F5000359E5D /* MainTVCCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4BA5428F97F5000359E5D /* MainTVCCustomCell.swift */; };
 		F2C4BA6128F9BA0D00359E5D /* MeedlyData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F2C4BA5F28F9BA0D00359E5D /* MeedlyData.xcdatamodeld */; };
-		F2C4BA6528F9BB5000359E5D /* FeedGroupsRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4BA6428F9BB5000359E5D /* FeedGroupsRepositoryImpl.swift */; };
+		F2C4BA6528F9BB5000359E5D /* FeedsRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4BA6428F9BB5000359E5D /* FeedsRepositoryImpl.swift */; };
 		F2C4BA6728F9E38A00359E5D /* FeedGroupsNetworkDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4BA6628F9E38A00359E5D /* FeedGroupsNetworkDataSource.swift */; };
-		F2C4BA6D28FC6BCF00359E5D /* ProvideTableViewDiffableDataSourceUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4BA6C28FC6BCF00359E5D /* ProvideTableViewDiffableDataSourceUseCase.swift */; };
 		F2C4BA6F28FC823600359E5D /* FeedGroupsDataBaseDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4BA6E28FC823600359E5D /* FeedGroupsDataBaseDataSource.swift */; };
+		F2C4BA7228FDA33300359E5D /* TableViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4BA7128FDA33300359E5D /* TableViewExtensions.swift */; };
+		F2C4BA7828FDAD0400359E5D /* DataSourceProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4BA7728FDAD0400359E5D /* DataSourceProtocols.swift */; };
+		F2C4BA8B28FDCE7C00359E5D /* Feed+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4BA8528FDCE7C00359E5D /* Feed+CoreDataClass.swift */; };
+		F2C4BA8C28FDCE7C00359E5D /* Feed+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4BA8628FDCE7C00359E5D /* Feed+CoreDataProperties.swift */; };
+		F2C4BA8D28FDCE7C00359E5D /* Group+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4BA8728FDCE7C00359E5D /* Group+CoreDataClass.swift */; };
+		F2C4BA8E28FDCE7C00359E5D /* Group+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4BA8828FDCE7C00359E5D /* Group+CoreDataProperties.swift */; };
+		F2C4BA8F28FDCE7C00359E5D /* FeedChanel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4BA8928FDCE7C00359E5D /* FeedChanel+CoreDataClass.swift */; };
+		F2C4BA9028FDCE7C00359E5D /* FeedChanel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4BA8A28FDCE7C00359E5D /* FeedChanel+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,22 +39,23 @@
 		F2C4B9FF28F7269600359E5D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F2C4BA0228F7269600359E5D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F2C4BA0428F7269600359E5D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F2C4BA3028F82E2400359E5D /* FeedChanel+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FeedChanel+CoreDataClass.swift"; path = "Meedly/Domain/Model/FeedChanel/FeedChanel+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		F2C4BA3128F82E2400359E5D /* FeedChanel+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FeedChanel+CoreDataProperties.swift"; path = "Meedly/Domain/Model/FeedChanel/FeedChanel+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
-		F2C4BA3228F82E2400359E5D /* Group+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Group+CoreDataClass.swift"; path = "Meedly/Domain/Model/Group/Group+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		F2C4BA3328F82E2400359E5D /* Group+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Group+CoreDataProperties.swift"; path = "Meedly/Domain/Model/Group/Group+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
-		F2C4BA3428F82E2400359E5D /* Feed+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Feed+CoreDataClass.swift"; path = "Meedly/Domain/Model/Feed/Feed+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		F2C4BA3528F82E2400359E5D /* Feed+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Feed+CoreDataProperties.swift"; path = "Meedly/Domain/Model/Feed/Feed+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
-		F2C4BA4128F84F5E00359E5D /* GetGroupsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetGroupsUseCase.swift; sourceTree = "<group>"; };
+		F2C4BA4128F84F5E00359E5D /* GetFeedsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFeedsUseCase.swift; sourceTree = "<group>"; };
 		F2C4BA4B28F8AB7600359E5D /* MainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
 		F2C4BA4D28F8AE1C00359E5D /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
-		F2C4BA5128F9596700359E5D /* FeedGroupsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedGroupsRepository.swift; sourceTree = "<group>"; };
+		F2C4BA5128F9596700359E5D /* FeedsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedsRepository.swift; sourceTree = "<group>"; };
 		F2C4BA5428F97F5000359E5D /* MainTVCCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTVCCustomCell.swift; sourceTree = "<group>"; };
 		F2C4BA6028F9BA0D00359E5D /* MeedlyData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MeedlyData.xcdatamodel; sourceTree = "<group>"; };
-		F2C4BA6428F9BB5000359E5D /* FeedGroupsRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedGroupsRepositoryImpl.swift; sourceTree = "<group>"; };
+		F2C4BA6428F9BB5000359E5D /* FeedsRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedsRepositoryImpl.swift; sourceTree = "<group>"; };
 		F2C4BA6628F9E38A00359E5D /* FeedGroupsNetworkDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedGroupsNetworkDataSource.swift; sourceTree = "<group>"; };
-		F2C4BA6C28FC6BCF00359E5D /* ProvideTableViewDiffableDataSourceUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvideTableViewDiffableDataSourceUseCase.swift; sourceTree = "<group>"; };
 		F2C4BA6E28FC823600359E5D /* FeedGroupsDataBaseDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedGroupsDataBaseDataSource.swift; sourceTree = "<group>"; };
+		F2C4BA7128FDA33300359E5D /* TableViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewExtensions.swift; sourceTree = "<group>"; };
+		F2C4BA7728FDAD0400359E5D /* DataSourceProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceProtocols.swift; sourceTree = "<group>"; };
+		F2C4BA8528FDCE7C00359E5D /* Feed+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Feed+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F2C4BA8628FDCE7C00359E5D /* Feed+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Feed+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F2C4BA8728FDCE7C00359E5D /* Group+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Group+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F2C4BA8828FDCE7C00359E5D /* Group+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Group+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F2C4BA8928FDCE7C00359E5D /* FeedChanel+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeedChanel+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F2C4BA8A28FDCE7C00359E5D /* FeedChanel+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeedChanel+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 			children = (
 				F2C4BA4528F85E3D00359E5D /* Repository */,
 				F2C4BA4628F85E8A00359E5D /* DataSource */,
+				F2C4BA7728FDAD0400359E5D /* DataSourceProtocols.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -135,8 +138,8 @@
 		F2C4BA3C28F82E6100359E5D /* FeedChanel */ = {
 			isa = PBXGroup;
 			children = (
-				F2C4BA3028F82E2400359E5D /* FeedChanel+CoreDataClass.swift */,
-				F2C4BA3128F82E2400359E5D /* FeedChanel+CoreDataProperties.swift */,
+				F2C4BA8928FDCE7C00359E5D /* FeedChanel+CoreDataClass.swift */,
+				F2C4BA8A28FDCE7C00359E5D /* FeedChanel+CoreDataProperties.swift */,
 			);
 			path = FeedChanel;
 			sourceTree = "<group>";
@@ -144,8 +147,8 @@
 		F2C4BA3D28F82E7200359E5D /* Group */ = {
 			isa = PBXGroup;
 			children = (
-				F2C4BA3228F82E2400359E5D /* Group+CoreDataClass.swift */,
-				F2C4BA3328F82E2400359E5D /* Group+CoreDataProperties.swift */,
+				F2C4BA8728FDCE7C00359E5D /* Group+CoreDataClass.swift */,
+				F2C4BA8828FDCE7C00359E5D /* Group+CoreDataProperties.swift */,
 			);
 			path = Group;
 			sourceTree = "<group>";
@@ -153,8 +156,8 @@
 		F2C4BA3E28F82E8200359E5D /* Feed */ = {
 			isa = PBXGroup;
 			children = (
-				F2C4BA3428F82E2400359E5D /* Feed+CoreDataClass.swift */,
-				F2C4BA3528F82E2400359E5D /* Feed+CoreDataProperties.swift */,
+				F2C4BA8528FDCE7C00359E5D /* Feed+CoreDataClass.swift */,
+				F2C4BA8628FDCE7C00359E5D /* Feed+CoreDataProperties.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -162,8 +165,7 @@
 		F2C4BA4028F830AD00359E5D /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
-				F2C4BA4128F84F5E00359E5D /* GetGroupsUseCase.swift */,
-				F2C4BA6C28FC6BCF00359E5D /* ProvideTableViewDiffableDataSourceUseCase.swift */,
+				F2C4BA4128F84F5E00359E5D /* GetFeedsUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -171,6 +173,7 @@
 		F2C4BA4328F8501F00359E5D /* App */ = {
 			isa = PBXGroup;
 			children = (
+				F2C4BA7028FDA31200359E5D /* Extensions */,
 				F2C4BA0428F7269600359E5D /* Info.plist */,
 				F2C4B9F328F7269500359E5D /* AppDelegate.swift */,
 				F2C4B9F528F7269500359E5D /* SceneDelegate.swift */,
@@ -181,7 +184,7 @@
 		F2C4BA4428F85DF000359E5D /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				F2C4BA5128F9596700359E5D /* FeedGroupsRepository.swift */,
+				F2C4BA5128F9596700359E5D /* FeedsRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -189,7 +192,7 @@
 		F2C4BA4528F85E3D00359E5D /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				F2C4BA6428F9BB5000359E5D /* FeedGroupsRepositoryImpl.swift */,
+				F2C4BA6428F9BB5000359E5D /* FeedsRepositoryImpl.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -198,8 +201,8 @@
 			isa = PBXGroup;
 			children = (
 				F2C4BA6B28FC5E7000359E5D /* FakeDataSource??? */,
-				F2C4BA6328F9BA3A00359E5D /* FeedGrousNetworkDataSource */,
-				F2C4BA6228F9BA2A00359E5D /* FeedGroupsDataBaseDataSource */,
+				F2C4BA6328F9BA3A00359E5D /* FeedsNetworkDataSource */,
+				F2C4BA6228F9BA2A00359E5D /* FeedsDataBaseDataSource */,
 			);
 			path = DataSource;
 			sourceTree = "<group>";
@@ -232,21 +235,21 @@
 			path = TableViewCustomCells;
 			sourceTree = "<group>";
 		};
-		F2C4BA6228F9BA2A00359E5D /* FeedGroupsDataBaseDataSource */ = {
+		F2C4BA6228F9BA2A00359E5D /* FeedsDataBaseDataSource */ = {
 			isa = PBXGroup;
 			children = (
 				F2C4BA5F28F9BA0D00359E5D /* MeedlyData.xcdatamodeld */,
 				F2C4BA6E28FC823600359E5D /* FeedGroupsDataBaseDataSource.swift */,
 			);
-			path = FeedGroupsDataBaseDataSource;
+			path = FeedsDataBaseDataSource;
 			sourceTree = "<group>";
 		};
-		F2C4BA6328F9BA3A00359E5D /* FeedGrousNetworkDataSource */ = {
+		F2C4BA6328F9BA3A00359E5D /* FeedsNetworkDataSource */ = {
 			isa = PBXGroup;
 			children = (
 				F2C4BA6628F9E38A00359E5D /* FeedGroupsNetworkDataSource.swift */,
 			);
-			path = FeedGrousNetworkDataSource;
+			path = FeedsNetworkDataSource;
 			sourceTree = "<group>";
 		};
 		F2C4BA6B28FC5E7000359E5D /* FakeDataSource??? */ = {
@@ -254,6 +257,14 @@
 			children = (
 			);
 			path = "FakeDataSource???";
+			sourceTree = "<group>";
+		};
+		F2C4BA7028FDA31200359E5D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F2C4BA7128FDA33300359E5D /* TableViewExtensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -329,22 +340,23 @@
 			files = (
 				F2C4BA4C28F8AB7600359E5D /* MainTableViewController.swift in Sources */,
 				F2C4BA5528F97F5000359E5D /* MainTVCCustomCell.swift in Sources */,
-				F2C4BA3728F82E2400359E5D /* FeedChanel+CoreDataProperties.swift in Sources */,
+				F2C4BA7828FDAD0400359E5D /* DataSourceProtocols.swift in Sources */,
+				F2C4BA8F28FDCE7C00359E5D /* FeedChanel+CoreDataClass.swift in Sources */,
 				F2C4BA4E28F8AE1C00359E5D /* AddViewController.swift in Sources */,
-				F2C4BA3828F82E2400359E5D /* Group+CoreDataClass.swift in Sources */,
 				F2C4B9F428F7269500359E5D /* AppDelegate.swift in Sources */,
-				F2C4BA3628F82E2400359E5D /* FeedChanel+CoreDataClass.swift in Sources */,
-				F2C4BA3A28F82E2400359E5D /* Feed+CoreDataClass.swift in Sources */,
 				F2C4BA6728F9E38A00359E5D /* FeedGroupsNetworkDataSource.swift in Sources */,
-				F2C4BA6D28FC6BCF00359E5D /* ProvideTableViewDiffableDataSourceUseCase.swift in Sources */,
-				F2C4BA4228F84F5E00359E5D /* GetGroupsUseCase.swift in Sources */,
-				F2C4BA3928F82E2400359E5D /* Group+CoreDataProperties.swift in Sources */,
-				F2C4BA6528F9BB5000359E5D /* FeedGroupsRepositoryImpl.swift in Sources */,
+				F2C4BA4228F84F5E00359E5D /* GetFeedsUseCase.swift in Sources */,
+				F2C4BA6528F9BB5000359E5D /* FeedsRepositoryImpl.swift in Sources */,
+				F2C4BA8C28FDCE7C00359E5D /* Feed+CoreDataProperties.swift in Sources */,
 				F2C4B9F628F7269500359E5D /* SceneDelegate.swift in Sources */,
 				F2C4BA6128F9BA0D00359E5D /* MeedlyData.xcdatamodeld in Sources */,
-				F2C4BA5228F9596700359E5D /* FeedGroupsRepository.swift in Sources */,
-				F2C4BA3B28F82E2400359E5D /* Feed+CoreDataProperties.swift in Sources */,
+				F2C4BA8B28FDCE7C00359E5D /* Feed+CoreDataClass.swift in Sources */,
+				F2C4BA8D28FDCE7C00359E5D /* Group+CoreDataClass.swift in Sources */,
+				F2C4BA5228F9596700359E5D /* FeedsRepository.swift in Sources */,
+				F2C4BA8E28FDCE7C00359E5D /* Group+CoreDataProperties.swift in Sources */,
 				F2C4BA6F28FC823600359E5D /* FeedGroupsDataBaseDataSource.swift in Sources */,
+				F2C4BA9028FDCE7C00359E5D /* FeedChanel+CoreDataProperties.swift in Sources */,
+				F2C4BA7228FDA33300359E5D /* TableViewExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

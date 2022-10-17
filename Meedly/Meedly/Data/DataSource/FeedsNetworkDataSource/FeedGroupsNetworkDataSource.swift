@@ -7,6 +7,6 @@
 
 import Foundation
 
-class FeedGroupsNetworkDataSource {
+class FeedsNetworkDataSource: RemoteDataSource {
   
 }

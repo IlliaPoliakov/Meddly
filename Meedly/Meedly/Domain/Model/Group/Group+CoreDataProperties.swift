@@ -2,7 +2,7 @@
 //  Group+CoreDataProperties.swift
 //  Meedly
 //
-//  Created by Illia Poliakov on 13.10.22.
+//  Created by Illia Poliakov on 17.10.22.
 //
 //
 
@@ -12,15 +12,19 @@ import CoreData
 
 extension Group {
   
-  @NSManaged public var title: String?
-  @NSManaged public var chanels: [FeedChanel]
-  
   @nonobjc public class func fetchRequest() -> NSFetchRequest<Group> {
     return NSFetchRequest<Group>(entityName: "Group")
   }
   
-  static func create(withTitle title: String,
-                     in managedObjectContext: NSManagedObjectContext) {
+  @NSManaged public var title: String?
+  @NSManaged public var amountOfCachedData: Int16
+  @NSManaged public var id: UUID?
+  @NSManaged public var chanels: NSOrderedSet?
+  @NSManaged public var feeds: NSOrderedSet?
+  
+  
+  static func createNew(withTitle title: String,
+                        in managedObjectContext: NSManagedObjectContext) {
     let newGroup = self.init(context: managedObjectContext)
     newGroup.title = title
     
@@ -32,6 +36,7 @@ extension Group {
       fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
     }
   }
+  
 }
 
 // MARK: Generated accessors for chanels
@@ -66,5 +71,44 @@ extension Group {
   
   @objc(removeChanels:)
   @NSManaged public func removeFromChanels(_ values: NSOrderedSet)
+  
+}
+
+// MARK: Generated accessors for feeds
+extension Group {
+  
+  @objc(insertObject:inFeedsAtIndex:)
+  @NSManaged public func insertIntoFeeds(_ value: Feed, at idx: Int)
+  
+  @objc(removeObjectFromFeedsAtIndex:)
+  @NSManaged public func removeFromFeeds(at idx: Int)
+  
+  @objc(insertFeeds:atIndexes:)
+  @NSManaged public func insertIntoFeeds(_ values: [Feed], at indexes: NSIndexSet)
+  
+  @objc(removeFeedsAtIndexes:)
+  @NSManaged public func removeFromFeeds(at indexes: NSIndexSet)
+  
+  @objc(replaceObjectInFeedsAtIndex:withObject:)
+  @NSManaged public func replaceFeeds(at idx: Int, with value: Feed)
+  
+  @objc(replaceFeedsAtIndexes:withFeeds:)
+  @NSManaged public func replaceFeeds(at indexes: NSIndexSet, with values: [Feed])
+  
+  @objc(addFeedsObject:)
+  @NSManaged public func addToFeeds(_ value: Feed)
+  
+  @objc(removeFeedsObject:)
+  @NSManaged public func removeFromFeeds(_ value: Feed)
+  
+  @objc(addFeeds:)
+  @NSManaged public func addToFeeds(_ values: NSOrderedSet)
+  
+  @objc(removeFeeds:)
+  @NSManaged public func removeFromFeeds(_ values: NSOrderedSet)
+  
+}
+
+extension Group : Identifiable {
   
 }

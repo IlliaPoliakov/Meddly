@@ -26,12 +26,10 @@ class AddViewController: UIViewController, UITableViewDelegate, UITableViewDataS
   // MARK: - Maintain table view -
   
   func numberOfSections(in tableView: UITableView) -> Int {
-    // #warning Incomplete implementation, return the number of sections
     return 1
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    // #warning Incomplete implementation, return the number of rows
     return 200
   }
   
@@ -39,6 +37,7 @@ class AddViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     let cell = tableView.dequeueReusableCell(withIdentifier: "AddTableViewCell", for: indexPath)
     cell.backgroundColor = UIColor.clear
     cell.textLabel!.text = "JOPAAAA"
+    
     if selectedRowIndexPath == indexPath {
       cell.backgroundColor = UIColor.lightGray
     }
@@ -55,6 +54,7 @@ class AddViewController: UIViewController, UITableViewDelegate, UITableViewDataS
       }
       prevSelectedCell.backgroundColor = UIColor.clear
     }
+    
     guard let selectedCell = tableView.cellForRow(at: indexPath)
     else {
       fatalError("can't perform cell selection")

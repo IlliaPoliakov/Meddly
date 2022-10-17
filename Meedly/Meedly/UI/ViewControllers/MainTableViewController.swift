@@ -10,34 +10,59 @@ import CoreData
 
 class MainTableViewController: UITableViewController {
   
+  // -MARK: - Properties -
+  
+  let getGroupsUseCase: GetFeedsUseCase = GetFeedsUseCase(
+    repo: FeedGroupsRepositoryImpl(
+      localDataSource: FeedsDataBaseDataSource(),
+      remoteDataSource: FeedsNetworkDataSource()
+    )
+  )
+  
+  var groups: [Group]?
+  
+  private lazy var dataSource: UITableViewDiffableDataSource<String, Feed> = UITableViewDiffableDataSource(tableView: tableView) { tableView, indexPath, itemIdentifier in
+    guard let cell = tableView.dequeueReusableCell(withIdentifier: "MainVCCustomCell")
+            as? MainTableViewControllerCustomCell
+    else {
+      fatalError("Can't deque custom cell in MainVC.")
+    }
+    cell.updateData(withFeed: groups[indexPath.section].ch)
+  }
+  
+  // -MARK: - LifeCycle -
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    tableView.rowHeight = UITableView.automaticDimension
+    
+    tableView.dataSource = dataSource
+    
+    tableView.rowHeight = UITableView.automaticDimension // for dynamic cell hight
     tableView.estimatedRowHeight = 600
-    //customizr tableview title
+    
+    groups = getGroupsUseCase.execute()
+    // set coresponding tableView title
   }
+  
   
   // MARK: - Maintain table view -
   
   override func numberOfSections(in tableView: UITableView) -> Int {
-    // #warning Incomplete implementation, return the number of sections
-    return 1
+    return groups?.count ?? 1
   }
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    // #warning Incomplete implementation, return the number of rows
-    return 50
-  }
-  
-  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard let cell = tableView.dequeueReusableCell(
-      withIdentifier: "mainVCCustomCell") as? MainTVCConvinientCell
+    
+    guard let chanels = groups?[section].chanels
     else {
-      fatalError("Can't deque custom cell in MainTVC.")
+      return 0
     }
     
-    return cell
+    var amountOfFeeds = 0
+    for chanel in chanels {
+      amountOfFeeds += chanel.feeds.count
+    }
+    return amountOfFeeds
   }
   
   
@@ -49,9 +74,6 @@ class MainTableViewController: UITableViewController {
     else {
       fatalError("Can't perform segue to AddVC")
     }
-    
-    
-    // set addvc code here
   }
   
   // MARK: - IBActions -

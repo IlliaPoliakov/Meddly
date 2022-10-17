@@ -2,7 +2,7 @@
 //  Feed+CoreDataProperties.swift
 //  Meedly
 //
-//  Created by Illia Poliakov on 13.10.22.
+//  Created by Illia Poliakov on 17.10.22.
 //
 //
 
@@ -12,25 +12,26 @@ import CoreData
 
 extension Feed {
   
-  @NSManaged public var title: String?
-  @NSManaged public var feedDescription: String?
-  @NSManaged public var link: String?
-  @NSManaged public var imageUrl: String?
-  @NSManaged public var isViewed: Bool
-  @NSManaged public var pubDate: String?
-  @NSManaged public var chanelList: FeedChanel?
-  
   @nonobjc public class func fetchRequest() -> NSFetchRequest<Feed> {
     return NSFetchRequest<Feed>(entityName: "Feed")
   }
   
-  static func create(withTitle title: String,
-                     withDescription feedDescription: String,
-                     withLink link: String,
-                     withImageUrl imageUrl: String,
-                     viewed isViewed: Bool,
-                     withPubDate pubDate: String,
-                     in managedObjectContext: NSManagedObjectContext) {
+  @NSManaged public var feedDescription: String?
+  @NSManaged public var imageUrl: String?
+  @NSManaged public var isViewed: Bool
+  @NSManaged public var link: String?
+  @NSManaged public var pubDate: String?
+  @NSManaged public var title: String?
+  @NSManaged public var id: UUID?
+  @NSManaged public var group: Group?
+  
+  static func createNew(withTitle title: String,
+                        withDescription feedDescription: String,
+                        withLink link: String,
+                        withImageUrl imageUrl: String,
+                        viewed isViewed: Bool,
+                        withPubDate pubDate: String,
+                        in managedObjectContext: NSManagedObjectContext) {
     let newFeed = self.init(context: managedObjectContext)
     newFeed.title = title
     newFeed.feedDescription = feedDescription
@@ -38,7 +39,7 @@ extension Feed {
     newFeed.imageUrl = imageUrl
     newFeed.isViewed = isViewed
     newFeed.pubDate = pubDate
-
+    
     do {
       try managedObjectContext.save()
     }
@@ -47,4 +48,9 @@ extension Feed {
       fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
     }
   }
+  
+}
+
+extension Feed : Identifiable {
+  
 }

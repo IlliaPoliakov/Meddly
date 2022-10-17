@@ -19,7 +19,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <color key="separatorColor" red="0.74901960779999999" green="0.35294117650000001" blue="0.94901960780000005" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="mainVCCustomCell" rowHeight="319" id="GXf-oZ-D2B" userLabel="mainVCCustomCell" customClass="MainTVCConvinientCell" customModule="Meedly" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MainVCCustomCell" rowHeight="319" id="GXf-oZ-D2B" userLabel="mainVCCustomCell" customClass="MainTableViewControllerCustomCell" customModule="Meedly" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="50" width="390" height="319"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GXf-oZ-D2B" id="r8a-6j-6oC">
@@ -59,9 +59,9 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="feedImage" destination="boG-Mi-EIi" id="vZx-Fc-3fO"/>
-                                    <outlet property="pubDateLabel" destination="ZOc-5z-gEn" id="uxm-lv-1JH"/>
-                                    <outlet property="titleLabel" destination="cjL-cw-5JG" id="tpK-X3-49J"/>
+                                    <outlet property="feedImage" destination="boG-Mi-EIi" id="VSg-iW-tnB"/>
+                                    <outlet property="pubDateLabel" destination="cjL-cw-5JG" id="MTW-r8-InH"/>
+                                    <outlet property="titleLabel" destination="ZOc-5z-gEn" id="aOj-Ku-Ztl"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

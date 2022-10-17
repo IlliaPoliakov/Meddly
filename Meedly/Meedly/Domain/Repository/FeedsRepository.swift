@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol FeedGroupsRepository {
-  func getFeedGroups() -> [Group] 
+protocol FeedsRepository {
+  func getFeeds() -> [Feed]
 }
