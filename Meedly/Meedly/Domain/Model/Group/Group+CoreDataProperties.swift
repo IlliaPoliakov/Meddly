@@ -2,7 +2,7 @@
 //  Group+CoreDataProperties.swift
 //  Meedly
 //
-//  Created by Illia Poliakov on 17.10.22.
+//  Created by Illia Poliakov on 18.10.22.
 //
 //
 
@@ -16,29 +16,10 @@ extension Group {
     return NSFetchRequest<Group>(entityName: "Group")
   }
   
+  @NSManaged public var id: UUID
   @NSManaged public var title: String
-  @NSManaged public var id: UUID?
   @NSManaged public var chanels: [FeedChanel]?
   @NSManaged public var feeds: [Feed]?
-  
-  
-  static func createNew(withTitle title: String,
-                        in managedObjectContext: NSManagedObjectContext) {
-    let newGroup = self.init(context: managedObjectContext)
-    newGroup.title = title
-    
-    do {
-      try managedObjectContext.save()
-    }
-    catch {
-      let nserror = error as NSError
-      fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-    }
-  }
-  
-  func doesExist(forTitle title: String) -> Bool {
-    return self.title == title ? true : false
-  }
   
 }
 

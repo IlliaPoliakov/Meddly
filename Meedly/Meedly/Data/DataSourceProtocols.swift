@@ -9,4 +9,7 @@ import Foundation
 
 protocol RemoteDataSource {}
 
-protocol LocalDataSource {}
+protocol LocalDataSource {
+  func loadData() -> [Group]?
+  func saveNewGroup(_ newGroupName: String)
+}

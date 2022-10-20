@@ -21,7 +21,7 @@ class MainTableViewControllerCustomCell: UITableViewCell {
   func updateData(withFeed feed: Feed) {
     self.pubDateLabel.text = feed.pubDate
     self.titleLabel.text = feed.title
-    if feed.imageUrl != nil {
+    if feed.image != nil {
       let cachesDirectory = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).first!
       let path = cachesDirectory.appendingPathComponent("\(String(describing: feed.title)).jpg")
       guard let data = try? Data(contentsOf: path),

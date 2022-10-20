@@ -9,4 +9,13 @@ import Foundation
 
 class FeedGroupsNetworkDataSource: RemoteDataSource {
   
+  // ugly, but need for URLs
+  let localDataSource: FeedGroupsDataBaseDataSource = FeedGroupsDataBaseDataSource()
+  
+  func loadData() -> [String: [Feed]]? {
+    
+    
+    return nil // tmp
+  }
+  
 }

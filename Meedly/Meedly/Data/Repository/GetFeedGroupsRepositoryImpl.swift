@@ -8,13 +8,12 @@
 import Foundation
 
 
-class FeedGroupsRepositoryImpl: FeedGroupsRepository {
-
+class GetFeedGroupsRepositoryImpl: GetFeedGroupsRepository {
   
-  // -MARK: - Dependencies -
   
   private let localDataSource: LocalDataSource
   private let remoteDataSource: RemoteDataSource
+  
   
   init(localDataSource: LocalDataSource, remoteDataSource: RemoteDataSource) {
     self.localDataSource = localDataSource
@@ -23,6 +22,7 @@ class FeedGroupsRepositoryImpl: FeedGroupsRepository {
   
   func getFeedGroups() -> [Group]? {
     
-    return [Group()] // temporarry
+    return localDataSource.loadData()
   }
+  
 }

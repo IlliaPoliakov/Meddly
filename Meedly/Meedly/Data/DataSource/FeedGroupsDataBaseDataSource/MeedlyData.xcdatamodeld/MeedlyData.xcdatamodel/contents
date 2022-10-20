@@ -3,7 +3,7 @@
     <entity name="Feed" representedClassName="Feed" syncable="YES">
         <attribute name="feedDescription" attributeType="String"/>
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="imageUrl" optional="YES" attributeType="String"/>
+        <attribute name="image" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
         <attribute name="isViewed" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="link" attributeType="String"/>
         <attribute name="pubDate" attributeType="String"/>
@@ -12,16 +12,15 @@
     </entity>
     <entity name="FeedChanel" representedClassName="FeedChanel" syncable="YES">
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="imageUrl" optional="YES" attributeType="String"/>
+        <attribute name="image" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
         <attribute name="link" attributeType="String"/>
         <attribute name="title" attributeType="String"/>
         <relationship name="group" maxCount="1" deletionRule="Nullify" destinationEntity="Group" inverseName="chanels" inverseEntity="Group"/>
     </entity>
     <entity name="Group" representedClassName="Group" syncable="YES">
-        <attribute name="amountOfCachedData" transient="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="title" attributeType="String"/>
         <relationship name="chanels" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="FeedChanel" inverseName="group" inverseEntity="FeedChanel"/>
-        <relationship name="feeds" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Feed" inverseName="group" inverseEntity="Feed"/>
+        <relationship name="feeds" optional="YES" toMany="YES" maxCount="30" deletionRule="Nullify" ordered="YES" destinationEntity="Feed" inverseName="group" inverseEntity="Feed"/>
     </entity>
 </model>

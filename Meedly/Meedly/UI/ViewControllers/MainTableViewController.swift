@@ -12,23 +12,47 @@ class MainTableViewController: UITableViewController {
   
   // -MARK: - Properties -
   
-  let getGroupsUseCase: GetFeedGroupsUseCase = GetFeedGroupsUseCase(
-    repo: FeedGroupsRepositoryImpl(
+  var groups: [Group]?
+  
+  let getFeedGroupsUseCase: GetFeedGroupsUseCase = GetFeedGroupsUseCase(
+    repo: GetFeedGroupsRepositoryImpl(
       localDataSource: FeedGroupsDataBaseDataSource(),
       remoteDataSource: FeedGroupsNetworkDataSource()
     )
   )
+
   
-  var groups: [Group]?
   
-  private lazy var dataSource: UITableViewDiffableDataSource<String, Feed> = UITableViewDiffableDataSource(tableView: tableView) { tableView, indexPath, itemIdentifier in
+  
+  // -MARK: - LifeCycle -
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    groups = getFeedGroupsUseCase.execute()
+    
+    tableView.dataSource = dataSource
+    tableView.delegate = self
+    
+    tableView.rowHeight = UITableView.automaticDimension // for dynamic cell hight
+    tableView.estimatedRowHeight = 600
+    
+    configureInitialSnapshot()
+    
+    
+  }
+  
+  
+  // -MARK: - Maintain table view -
+  
+  private lazy var dataSource: UITableViewDiffableDataSource<String, Feed>  =  UITableViewDiffableDataSource<String, Feed> (tableView: tableView) { tableView, indexPath, itemIdentifier in
     guard let cell = tableView.dequeueReusableCell(withIdentifier: "MainVCCustomCell")
             as? MainTableViewControllerCustomCell
     else {
       fatalError("Can't deque custom cell in MainVC.")
     }
     
-    guard let feed = self.groups?[indexPath.section].feeds?[indexPath.row]
+    guard let feed = self.groups?[indexPath.section].feeds?[indexPath.row] as? Feed
     else {
       return cell
     }
@@ -37,34 +61,52 @@ class MainTableViewController: UITableViewController {
     return cell
   }
   
-  // -MARK: - LifeCycle -
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    
-//    groups = getGroupsUseCase.execute()
-    groups = nil
-    
-    tableView.dataSource = dataSource
-    
-    tableView.rowHeight = UITableView.automaticDimension // for dynamic cell hight
-    tableView.estimatedRowHeight = 600
-    
-    
-    
+  func configureInitialSnapshot(){
+    var snapshot = NSDiffableDataSourceSnapshot<String, Feed>()
+    guard groups != nil
+    else {
+      dataSource.apply(snapshot, animatingDifferences: true)
+      return
+    }
+    for group in groups! {
+      snapshot.appendSections([group.title])
+      
+      if group.feeds != nil {
+        snapshot.appendItems(group.feeds!, toSection: group.title)
+      }
+    }
+    dataSource.apply(snapshot, animatingDifferences: true)
   }
   
-  
-  // MARK: - Maintain table view -
-  
-  override func numberOfSections(in tableView: UITableView) -> Int {
-    return groups?.count ?? 0
+  func updateSnapshot(){
+    var snapshot = dataSource.snapshot()
+    
+    guard groups != nil
+    else {
+      dataSource.apply(snapshot, animatingDifferences: true)
+      return
+    }
+    
+    for group in groups! {
+      if group.feeds != nil {
+        snapshot.appendItems(group.feeds!, toSection: group.title)
+      }
+    }
+    dataSource.apply(snapshot, animatingDifferences: true)
   }
   
-  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return groups?[section].feeds?.count ?? 0
+  func addNewSections(withNewGroupNames names: [String]?) {
+    var snapshot = dataSource.snapshot()
+    
+    guard names != nil
+    else {
+      return
+    }
+    
+    snapshot.appendSections(names!)
+    dataSource.apply(snapshot)
   }
-  
+ 
   
   // MARK: - Navigation
   
@@ -74,27 +116,63 @@ class MainTableViewController: UITableViewController {
     else {
       fatalError("Can't perform segue to AddVC")
     }
-    destinaitonVC.groups = groups
+    if groups != nil {
+      destinaitonVC.groups = groups!.map { $0.title }
+    }
   }
   
   @IBAction func unwind( _ segue: UIStoryboardSegue) {
+    guard segue.identifier == "unwindToMain",
+          let previousVC = segue.source as? AddViewController
+    else {
+      fatalError("Can't perform segue to AddVC")
+    }
     
+    let newSections = previousVC.newGroupNames
+    
+    if newSections != nil {
+      addNewSections(withNewGroupNames: newSections)
+      update()
+    }
   }
+  
   
   // MARK: - IBActions -
   
   @IBAction func showSideBar(_ sender: Any) {
+    
   }
   
   @IBAction func checkActivity(_ sender: Any) {
+    
   }
   
   @IBAction func configureTypeOfPresentation(_ sender: Any) {
+    
   }
   
   @IBAction func markAsReaded(_ sender: Any) {
+    
   }
   
   @IBAction func sortPresentation(_ sender: Any) {
+    
+  }
+  
+  @IBAction func update(_ sender: Any) {
+    update()
+  }
+  
+  
+  // -MARK: - Supplementary -
+  
+  func update(){
+    if Reachability.isConnectedToNetwork(){
+      groups = getFeedGroupsUseCase.execute()
+      updateSnapshot()
+    }
+    else{
+      print("Internet Connection not Available!")
+    }
   }
 }

@@ -17,25 +17,16 @@ class AddViewController: UIViewController {
   @IBOutlet weak var urlTextField: UITextField!
   
   var selectedRowIndexPath: IndexPath?
-  var groups: [Group]?
+  var groups: [String]?
+  var saveNewGroupNameUseCase: SaveNewGroupUseCase = SaveNewGroupUseCase(
+    repo: SaveNewGroupRepositoryImpl(
+      localDataSource: FeedGroupsDataBaseDataSource()
+    )
+  )
+  var newGroupNames: [String]?
   
-  private lazy var dataSource: UITableViewDiffableDataSource<Int, String> = UITableViewDiffableDataSource(tableView: tableView) { tableView, indexPath, itemIdentifier in
-    let cell = tableView.dequeueReusableCell(withIdentifier: "AddTableViewCell", for: indexPath)
-    cell.backgroundColor = UIColor.clear
-    
-    guard let groupName = self.groups?[indexPath.row].title
-    else {
-      return cell
-    }
-    
-    cell.textLabel!.text = groupName
-    
-    if self.selectedRowIndexPath == indexPath {
-      cell.backgroundColor = UIColor.lightGray
-    }
-    
-    return cell
-  }
+  
+  // MARK: - Lifecycle -
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -44,86 +35,94 @@ class AddViewController: UIViewController {
     configureInitialSnapshot()
   }
   
+  
   // MARK: - Maintain table view -
   
-  func numberOfSections(in tableView: UITableView) -> Int {
-    return 1
+  enum Section {
+    case main
   }
   
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return groups?.count ?? 0
-  }
-  
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+  private lazy var dataSource: UITableViewDiffableDataSource<Section, String> = UITableViewDiffableDataSource(tableView: tableView) { tableView, indexPath, itemIdentifier in
     
-    if(selectedRowIndexPath != nil) {
-      guard let prevSelectedCell = tableView.cellForRow(at: selectedRowIndexPath!)
-      else {
-        fatalError("can't perform cell selection")
-      }
-      prevSelectedCell.backgroundColor = UIColor.clear
-    }
+    let cell = tableView.dequeueReusableCell(withIdentifier: "AddTableViewCell", for: indexPath)
+    cell.backgroundColor = UIColor.clear
     
-    guard let selectedCell = tableView.cellForRow(at: indexPath)
+    guard let groupName = self.groups?[indexPath.row]
     else {
-      fatalError("can't perform cell selection")
+      return cell
     }
     
-    selectedCell.backgroundColor = UIColor.lightGray
-    selectedRowIndexPath = indexPath
+    cell.textLabel?.text = groupName
+    
+    if self.selectedRowIndexPath == indexPath {
+      cell.backgroundColor = UIColor.lightGray
+    }
+    
+    return cell
+  }
+  
+  func configureInitialSnapshot(){
+    var snapshot = NSDiffableDataSourceSnapshot<Section, String>()
+    snapshot.appendSections([.main])
+    
+    if groups != nil {
+      snapshot.appendItems(groups!, toSection: .main)
+    }
+    
+    dataSource.apply(snapshot, animatingDifferences: false)
   }
   
   func updateSnapshot(forNewGroup groupName: String){
     var snapshot = dataSource.snapshot()
-    snapshot.appendItems([groupName], toSection: 1)
+    snapshot.appendItems([groupName], toSection: .main)
+    
     dataSource.apply(snapshot, animatingDifferences: true)
   }
   
-  func configureInitialSnapshot(){
-    var snapshot = NSDiffableDataSourceSnapshot<Int, String>()
-    snapshot.appendSections([1])
-    
-    if groups != nil {
-      for group in groups! {
-        snapshot.appendItems([group.title], toSection: 1)
-      }
-    }
-    dataSource.apply(snapshot, animatingDifferences: false)
-  }
   
   // MARK: - IBActions -
   
   @IBAction func addNewChanel(_ sender: Any) {
+    performSegue(withIdentifier: "unwindToMain", sender: self)
+    
   }
   
   @IBAction func createNewGroup(_ sender: Any) {
     let alert = UIAlertController(title: "New Group", message: "Enter a Group Name:", preferredStyle: .alert)
     alert.addTextField { _ in }
-    alert.addAction(UIAlertAction(title: "Add", style: .default) { [weak alert] (_) in
+    
+    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+    
+    let addAction = UIAlertAction(title: "Add", style: .default) { [self, weak alert] (_) in
       guard let groupName = alert!.textFields![0].text
       else {
-        let alert = UIAlertController(title: "Oops...",
-                                      message: "Group with given Name already exists:",
-                                      preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Fuck!!", style: .default) { _ in })
-        self.present(alert, animated: true, completion: nil)
+        print("Group Name Feld is Emoty!")
         return
       }
       
-      guard !(self.groups?.contains(where: {$0.title == groupName}) ?? false)
+      guard !(self.groups?.contains(groupName) ?? false)
       else {
-        let alert = UIAlertController(title: "Oops...",
-                                      message: "Group with given Name already exists:",
-                                      preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Fuck!!", style: .default) { _ in })
-        self.present(alert, animated: true, completion: nil)
+        print("Group with given name already exist!")
         return
       }
+      
+      
+      groups?.append(groupName)
+      
       self.updateSnapshot(forNewGroup: groupName)
-      self.groups?.append(Group())
-    })
+      
+      saveNewGroupNameUseCase.execute(groupName)
+      
+      if newGroupNames == nil {
+        newGroupNames = [groupName]
+      }
+      else {
+        newGroupNames!.append(groupName)
+      }
+    }
     
-    
+    alert.addAction(cancelAction)
+    alert.addAction(addAction)
     
     self.present(alert, animated: true, completion: nil)
   }

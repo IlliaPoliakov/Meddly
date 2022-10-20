@@ -1,18 +1,16 @@
 //
-//  GetGroupUseCase.swift
+//  GetFeedGroupsUseCase.swift
 //  Meedly
 //
-//  Created by Illia Poliakov on 13.10.22.
+//  Created by Illia Poliakov on 20.10.22.
 //
 
 import Foundation
-import UIKit
 
 class GetFeedGroupsUseCase {
-  
-  private let repo: FeedGroupsRepository
+  private let repo: GetFeedGroupsRepository
 
-  init(repo: FeedGroupsRepository) {
+  init(repo: GetFeedGroupsRepository) {
     self.repo = repo
   }
   

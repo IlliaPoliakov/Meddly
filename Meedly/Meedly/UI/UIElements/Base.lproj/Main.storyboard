@@ -60,8 +60,8 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="feedImage" destination="boG-Mi-EIi" id="VSg-iW-tnB"/>
-                                    <outlet property="pubDateLabel" destination="cjL-cw-5JG" id="MTW-r8-InH"/>
-                                    <outlet property="titleLabel" destination="ZOc-5z-gEn" id="aOj-Ku-Ztl"/>
+                                    <outlet property="pubDateLabel" destination="ZOc-5z-gEn" id="kr2-Rj-5bx"/>
+                                    <outlet property="titleLabel" destination="cjL-cw-5JG" id="GIE-k4-oiV"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -95,12 +95,20 @@
                         <barButtonItem systemItem="flexibleSpace" id="idx-er-Ljs"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="All Your Feeds" id="ow4-7Z-EeD">
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="circle" catalog="system" style="done" id="PLl-fx-Y2S">
-                            <color key="tintColor" red="0.74901960779999999" green="0.35294117650000001" blue="0.94901960780000005" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
-                            <connections>
-                                <action selector="checkActivity:" destination="Ii9-o7-ios" id="wsT-ST-Ode"/>
-                            </connections>
-                        </barButtonItem>
+                        <leftBarButtonItems>
+                            <barButtonItem title="Item" image="circle" catalog="system" style="done" id="PLl-fx-Y2S">
+                                <color key="tintColor" red="0.74901960779999999" green="0.35294117650000001" blue="0.94901960780000005" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="checkActivity:" destination="Ii9-o7-ios" id="wsT-ST-Ode"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Item" image="clock.arrow.circlepath" catalog="system" style="done" id="nlb-O8-cHI">
+                                <color key="tintColor" red="0.74901960779999999" green="0.35294117650000001" blue="0.94901960780000005" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="update:" destination="Ii9-o7-ios" id="7Ag-HY-nDS"/>
+                                </connections>
+                            </barButtonItem>
+                        </leftBarButtonItems>
                         <rightBarButtonItems>
                             <barButtonItem title="Item" image="checkmark.circle" catalog="system" style="done" id="RZH-qh-502">
                                 <color key="tintColor" red="0.74901960779999999" green="0.35294117650000001" blue="0.94901960780000005" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
@@ -180,7 +188,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="370" height="49.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Group Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oP3-Kq-biX">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Group Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oP3-Kq-biX">
                                                     <rect key="frame" x="59.833333333333343" y="0.0" width="290.16666666666669" height="49.666667938232422"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
@@ -237,9 +245,11 @@
                     <connections>
                         <outlet property="tableView" destination="P8W-sX-f3W" id="w42-Fm-FFn"/>
                         <outlet property="urlTextField" destination="q9W-KR-Wei" id="8T4-QU-4D2"/>
+                        <segue destination="h2c-3Q-S1Z" kind="unwind" identifier="unwindToMain" unwindAction="unwind:" id="v2z-V2-Mve"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tF2-vI-LZ4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="h2c-3Q-S1Z" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1212" y="-375"/>
         </scene>
@@ -268,6 +278,7 @@
         <image name="arrow.up.and.down.text.horizontal" catalog="system" width="128" height="87"/>
         <image name="checkmark.circle" catalog="system" width="128" height="123"/>
         <image name="circle" catalog="system" width="128" height="123"/>
+        <image name="clock.arrow.circlepath" catalog="system" width="128" height="112"/>
         <image name="folder.circle" catalog="system" width="128" height="123"/>
         <image name="line.3.horizontal.decrease" catalog="system" width="128" height="73"/>
         <image name="pencil.circle" catalog="system" width="128" height="123"/>
