@@ -61,12 +61,17 @@ class FeedGroupsDataBaseDataSource: LocalDataSource {
     return groups
   }
   
-  func saveNewGroup(_ newGroupName: String) {
+  func saveNewGroup(_ newGroupName: String) -> Group {
     var group = Group.createNew(withTitle: newGroupName, in: coreDataStack.managedContext)
     //TEMPORARY UBRAT POTOM!!!
     Feed.createNew(withTitle: "This111AAAAAAA is very pretty feed, even a little sexual. Sometimes i tihnj I can read every time and everywhere. This is really awesame feeed....", withDescription: "discription", withLink: "link", withImageData: nil, viewed: false, withPubDate: "08.05.2003", in: coreDataStack.managedContext, withhGroup: group)
     Feed.createNew(withTitle: "This222BBBBBBB is very pretty feed, even a little sexual. Sometimes i tihnj I can read every time and everywhere. This is really awesame feeed....", withDescription: "discription", withLink: "link", withImageData: nil, viewed: false, withPubDate: "08.05.2003", in: coreDataStack.managedContext, withhGroup: group)
     Feed.createNew(withTitle: "This333CCCCCCCC is very pretty feed, even a little sexual. Sometimes i tihnj I can read every time and everywhere. This is really awesame feeed....", withDescription: "discription", withLink: "link", withImageData: nil, viewed: false, withPubDate: "08.05.2003", in: coreDataStack.managedContext, withhGroup: group)
+    
+    return group
+  }
+  
+  func saveNewChanel(_ newChanelURl: String) {
     
   }
 }

@@ -8,5 +8,5 @@
 import Foundation
 
 protocol SaveNewGroupRepository{
-  func saveNewGroup(_ newGroupName: String)
+  func saveNewGroup(_ newGroupName: String) -> Group
 }

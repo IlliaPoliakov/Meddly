@@ -16,14 +16,19 @@ class AddViewController: UIViewController {
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var urlTextField: UITextField!
   
+  var newGroupNames: [String]?
   var selectedRowIndexPath: IndexPath?
-  var groups: [String]?
+  var groups: [Group]?
   var saveNewGroupNameUseCase: SaveNewGroupUseCase = SaveNewGroupUseCase(
     repo: SaveNewGroupRepositoryImpl(
       localDataSource: FeedGroupsDataBaseDataSource()
     )
   )
-  var newGroupNames: [String]?
+  var saveNewChanelUseCase: SaveNewChanelUseCase = SaveNewChanelUseCase(
+    repo: SaveNewChanelRepositoryImpl(
+      localDataSource: FeedGroupsDataBaseDataSource()
+    )
+  )
   
   
   // MARK: - Lifecycle -
@@ -47,7 +52,7 @@ class AddViewController: UIViewController {
     let cell = tableView.dequeueReusableCell(withIdentifier: "AddTableViewCell", for: indexPath)
     cell.backgroundColor = UIColor.clear
     
-    guard let groupName = self.groups?[indexPath.row]
+    guard let groupName = self.groups?[indexPath.row].title
     else {
       return cell
     }
@@ -66,7 +71,9 @@ class AddViewController: UIViewController {
     snapshot.appendSections([.main])
     
     if groups != nil {
-      snapshot.appendItems(groups!, toSection: .main)
+      for group in groups! {
+        snapshot.appendItems([group.title] , toSection: .main)
+      }
     }
     
     dataSource.apply(snapshot, animatingDifferences: false)
@@ -83,8 +90,33 @@ class AddViewController: UIViewController {
   // MARK: - IBActions -
   
   @IBAction func addNewChanel(_ sender: Any) {
-    performSegue(withIdentifier: "unwindToMain", sender: self)
+    guard urlTextField.text != nil
+    else {
+      print("Field for url is empty!")
+      return
+    }
     
+    guard let url = URL(string: urlTextField.text!)
+    else {
+      print("Please check your URL!")
+      return
+    }
+    
+    guard selectedRowIndexPath != nil
+    else {
+      print("Group for url wasn't selected!")
+      return
+    }
+    
+    for group in groups! {
+      if group.chanels?.contains(where: <#T##(FeedChanel) throws -> Bool#>) {
+        for chanel in group.chanels! {
+          
+        }
+      }
+    }
+    
+    performSegue(withIdentifier: "unwindToMain", sender: self)
   }
   
   @IBAction func createNewGroup(_ sender: Any) {
@@ -94,24 +126,26 @@ class AddViewController: UIViewController {
     let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
     
     let addAction = UIAlertAction(title: "Add", style: .default) { [self, weak alert] (_) in
-      guard let groupName = alert!.textFields![0].text
+      guard let groupName = alert!.textFields![0].text,
+            groupName != ""
       else {
-        print("Group Name Feld is Emoty!")
+        print("Group Name Feld is Empty!")
         return
       }
       
-      guard !(self.groups?.contains(groupName) ?? false)
+      
+      guard !(self.groups?.contains(where: { $0.title == groupName }) ?? false)
       else {
         print("Group with given name already exist!")
         return
       }
       
       
-      groups?.append(groupName)
       
       self.updateSnapshot(forNewGroup: groupName)
       
-      saveNewGroupNameUseCase.execute(groupName)
+      var newGroup = saveNewGroupNameUseCase.execute(groupName)
+      groups?.append(newGroup)
       
       if newGroupNames == nil {
         newGroupNames = [groupName]

@@ -11,7 +11,7 @@ import CoreData
 
 @objc(Group)
 public class Group: NSManagedObject {
-
+  
   static func createNew(withTitle title: String,
                         in managedObjectContext: NSManagedObjectContext) -> Group {
     let newGroup = self.init(context: managedObjectContext)
@@ -26,4 +26,5 @@ public class Group: NSManagedObject {
     }
     return newGroup
   }
+  
 }
