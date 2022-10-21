@@ -76,8 +76,8 @@ class MainTableViewController: UITableViewController {
           snapshot.appendItems(group.feeds!, toSection: group.title)
         }
       }
-      
     }
+    
     dataSource.apply(snapshot, animatingDifferences: true)
   }
   
