@@ -18,7 +18,6 @@
 		F2C4BA4E28F8AE1C00359E5D /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4BA4D28F8AE1C00359E5D /* AddViewController.swift */; };
 		F2C4BA5228F9596700359E5D /* GetFeedGroupsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4BA5128F9596700359E5D /* GetFeedGroupsRepository.swift */; };
 		F2C4BA5528F97F5000359E5D /* MainTVCCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4BA5428F97F5000359E5D /* MainTVCCustomCell.swift */; };
-		F2C4BA6128F9BA0D00359E5D /* MeedlyData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F2C4BA5F28F9BA0D00359E5D /* MeedlyData.xcdatamodeld */; };
 		F2C4BA6528F9BB5000359E5D /* GetFeedGroupsRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4BA6428F9BB5000359E5D /* GetFeedGroupsRepositoryImpl.swift */; };
 		F2C4BA6728F9E38A00359E5D /* FeedGroupsNetworkDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4BA6628F9E38A00359E5D /* FeedGroupsNetworkDataSource.swift */; };
 		F2C4BA6F28FC823600359E5D /* FeedGroupsDataBaseDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4BA6E28FC823600359E5D /* FeedGroupsDataBaseDataSource.swift */; };
@@ -30,12 +29,13 @@
 		F2E41FB229020A4700FCA844 /* SaveNewChanelUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E41FB129020A4700FCA844 /* SaveNewChanelUseCase.swift */; };
 		F2E41FB429020ACA00FCA844 /* SaveNewChanelRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E41FB329020ACA00FCA844 /* SaveNewChanelRepository.swift */; };
 		F2E41FB629020B0500FCA844 /* SaveNewChanelRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E41FB529020B0500FCA844 /* SaveNewChanelRepositoryImpl.swift */; };
-		F2E41FC1290216BA00FCA844 /* Group+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E41FBB290216BA00FCA844 /* Group+CoreDataClass.swift */; };
-		F2E41FC2290216BA00FCA844 /* Group+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E41FBC290216BA00FCA844 /* Group+CoreDataProperties.swift */; };
-		F2E41FC3290216BA00FCA844 /* Feed+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E41FBD290216BA00FCA844 /* Feed+CoreDataClass.swift */; };
-		F2E41FC4290216BA00FCA844 /* Feed+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E41FBE290216BA00FCA844 /* Feed+CoreDataProperties.swift */; };
-		F2E41FC5290216BA00FCA844 /* FeedChanel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E41FBF290216BA00FCA844 /* FeedChanel+CoreDataClass.swift */; };
-		F2E41FC6290216BA00FCA844 /* FeedChanel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E41FC0290216BA00FCA844 /* FeedChanel+CoreDataProperties.swift */; };
+		F2E6E49D2902EC5500923F3B /* MeedlyDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F2E6E49B2902EC5500923F3B /* MeedlyDataModel.xcdatamodeld */; };
+		F2E6E4A42902EE1800923F3B /* Group+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E6E49E2902EE1800923F3B /* Group+CoreDataClass.swift */; };
+		F2E6E4A52902EE1800923F3B /* Group+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E6E49F2902EE1800923F3B /* Group+CoreDataProperties.swift */; };
+		F2E6E4A62902EE1800923F3B /* FeedChanel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E6E4A02902EE1800923F3B /* FeedChanel+CoreDataClass.swift */; };
+		F2E6E4A72902EE1800923F3B /* FeedChanel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E6E4A12902EE1800923F3B /* FeedChanel+CoreDataProperties.swift */; };
+		F2E6E4A82902EE1800923F3B /* Feed+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E6E4A22902EE1800923F3B /* Feed+CoreDataClass.swift */; };
+		F2E6E4A92902EE1800923F3B /* Feed+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E6E4A32902EE1800923F3B /* Feed+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,7 +52,6 @@
 		F2C4BA4D28F8AE1C00359E5D /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		F2C4BA5128F9596700359E5D /* GetFeedGroupsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFeedGroupsRepository.swift; sourceTree = "<group>"; };
 		F2C4BA5428F97F5000359E5D /* MainTVCCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTVCCustomCell.swift; sourceTree = "<group>"; };
-		F2C4BA6028F9BA0D00359E5D /* MeedlyData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MeedlyData.xcdatamodel; sourceTree = "<group>"; };
 		F2C4BA6428F9BB5000359E5D /* GetFeedGroupsRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFeedGroupsRepositoryImpl.swift; sourceTree = "<group>"; };
 		F2C4BA6628F9E38A00359E5D /* FeedGroupsNetworkDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedGroupsNetworkDataSource.swift; sourceTree = "<group>"; };
 		F2C4BA6E28FC823600359E5D /* FeedGroupsDataBaseDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedGroupsDataBaseDataSource.swift; sourceTree = "<group>"; };
@@ -64,12 +63,13 @@
 		F2E41FB129020A4700FCA844 /* SaveNewChanelUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveNewChanelUseCase.swift; sourceTree = "<group>"; };
 		F2E41FB329020ACA00FCA844 /* SaveNewChanelRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveNewChanelRepository.swift; sourceTree = "<group>"; };
 		F2E41FB529020B0500FCA844 /* SaveNewChanelRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveNewChanelRepositoryImpl.swift; sourceTree = "<group>"; };
-		F2E41FBB290216BA00FCA844 /* Group+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Group+CoreDataClass.swift"; sourceTree = "<group>"; };
-		F2E41FBC290216BA00FCA844 /* Group+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Group+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		F2E41FBD290216BA00FCA844 /* Feed+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Feed+CoreDataClass.swift"; sourceTree = "<group>"; };
-		F2E41FBE290216BA00FCA844 /* Feed+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Feed+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		F2E41FBF290216BA00FCA844 /* FeedChanel+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeedChanel+CoreDataClass.swift"; sourceTree = "<group>"; };
-		F2E41FC0290216BA00FCA844 /* FeedChanel+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeedChanel+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F2E6E49C2902EC5500923F3B /* MeedlyData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MeedlyData.xcdatamodel; sourceTree = "<group>"; };
+		F2E6E49E2902EE1800923F3B /* Group+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Group+CoreDataClass.swift"; path = "../../../../Group+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F2E6E49F2902EE1800923F3B /* Group+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Group+CoreDataProperties.swift"; path = "../../../../Group+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F2E6E4A02902EE1800923F3B /* FeedChanel+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FeedChanel+CoreDataClass.swift"; path = "../../../../FeedChanel+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F2E6E4A12902EE1800923F3B /* FeedChanel+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FeedChanel+CoreDataProperties.swift"; path = "../../../../FeedChanel+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F2E6E4A22902EE1800923F3B /* Feed+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Feed+CoreDataClass.swift"; path = "../../../../Feed+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F2E6E4A32902EE1800923F3B /* Feed+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Feed+CoreDataProperties.swift"; path = "../../../../Feed+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,8 +152,8 @@
 		F2C4BA3C28F82E6100359E5D /* FeedChanel */ = {
 			isa = PBXGroup;
 			children = (
-				F2E41FBF290216BA00FCA844 /* FeedChanel+CoreDataClass.swift */,
-				F2E41FC0290216BA00FCA844 /* FeedChanel+CoreDataProperties.swift */,
+				F2E6E4A02902EE1800923F3B /* FeedChanel+CoreDataClass.swift */,
+				F2E6E4A12902EE1800923F3B /* FeedChanel+CoreDataProperties.swift */,
 			);
 			path = FeedChanel;
 			sourceTree = "<group>";
@@ -161,8 +161,8 @@
 		F2C4BA3D28F82E7200359E5D /* Group */ = {
 			isa = PBXGroup;
 			children = (
-				F2E41FBB290216BA00FCA844 /* Group+CoreDataClass.swift */,
-				F2E41FBC290216BA00FCA844 /* Group+CoreDataProperties.swift */,
+				F2E6E49E2902EE1800923F3B /* Group+CoreDataClass.swift */,
+				F2E6E49F2902EE1800923F3B /* Group+CoreDataProperties.swift */,
 			);
 			path = Group;
 			sourceTree = "<group>";
@@ -170,8 +170,8 @@
 		F2C4BA3E28F82E8200359E5D /* Feed */ = {
 			isa = PBXGroup;
 			children = (
-				F2E41FBD290216BA00FCA844 /* Feed+CoreDataClass.swift */,
-				F2E41FBE290216BA00FCA844 /* Feed+CoreDataProperties.swift */,
+				F2E6E4A22902EE1800923F3B /* Feed+CoreDataClass.swift */,
+				F2E6E4A32902EE1800923F3B /* Feed+CoreDataProperties.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -258,7 +258,7 @@
 			children = (
 				F2C4BA6E28FC823600359E5D /* FeedGroupsDataBaseDataSource.swift */,
 				F219374528FEFBA100AD5AF0 /* CoreDataStack.swift */,
-				F2C4BA5F28F9BA0D00359E5D /* MeedlyData.xcdatamodeld */,
+				F2E6E49B2902EC5500923F3B /* MeedlyDataModel.xcdatamodeld */,
 			);
 			path = FeedGroupsDataBaseDataSource;
 			sourceTree = "<group>";
@@ -344,31 +344,31 @@
 			buildActionMask = 2147483647;
 			files = (
 				F2E41FB629020B0500FCA844 /* SaveNewChanelRepositoryImpl.swift in Sources */,
-				F2E41FC1290216BA00FCA844 /* Group+CoreDataClass.swift in Sources */,
-				F2E41FC3290216BA00FCA844 /* Feed+CoreDataClass.swift in Sources */,
+				F2E6E4A42902EE1800923F3B /* Group+CoreDataClass.swift in Sources */,
 				F2C4BA4C28F8AB7600359E5D /* MainTableViewController.swift in Sources */,
 				F2C4BA5528F97F5000359E5D /* MainTVCCustomCell.swift in Sources */,
-				F2E41FC4290216BA00FCA844 /* Feed+CoreDataProperties.swift in Sources */,
+				F2E6E4A92902EE1800923F3B /* Feed+CoreDataProperties.swift in Sources */,
 				F2C4BA7828FDAD0400359E5D /* DataSourceProtocols.swift in Sources */,
-				F2E41FC5290216BA00FCA844 /* FeedChanel+CoreDataClass.swift in Sources */,
 				F2C4BA4E28F8AE1C00359E5D /* AddViewController.swift in Sources */,
 				F2C4B9F428F7269500359E5D /* AppDelegate.swift in Sources */,
 				F2C4BA6728F9E38A00359E5D /* FeedGroupsNetworkDataSource.swift in Sources */,
 				F219374628FEFBA100AD5AF0 /* CoreDataStack.swift in Sources */,
+				F2E6E4A82902EE1800923F3B /* Feed+CoreDataClass.swift in Sources */,
+				F2E6E4A52902EE1800923F3B /* Group+CoreDataProperties.swift in Sources */,
 				F2E41FAC2901CC1500FCA844 /* SaveNewGroupUseCase.swift in Sources */,
-				F2E41FC2290216BA00FCA844 /* Group+CoreDataProperties.swift in Sources */,
+				F2E6E4A72902EE1800923F3B /* FeedChanel+CoreDataProperties.swift in Sources */,
 				F2C4BA6528F9BB5000359E5D /* GetFeedGroupsRepositoryImpl.swift in Sources */,
 				F2C4B9F628F7269500359E5D /* SceneDelegate.swift in Sources */,
 				F2E41FAA2901C1BE00FCA844 /* GetFeedGroupsUseCase.swift in Sources */,
 				F2574FEF290082F800CF540C /* Reachability.swift in Sources */,
 				F2E41FAE2901CE2C00FCA844 /* SaveNewGroupRepository.swift in Sources */,
-				F2C4BA6128F9BA0D00359E5D /* MeedlyData.xcdatamodeld in Sources */,
-				F2E41FC6290216BA00FCA844 /* FeedChanel+CoreDataProperties.swift in Sources */,
 				F2E41FB229020A4700FCA844 /* SaveNewChanelUseCase.swift in Sources */,
 				F2E41FB02901CEE400FCA844 /* SaveNewGroupRepositoryImpl.swift in Sources */,
 				F2C4BA5228F9596700359E5D /* GetFeedGroupsRepository.swift in Sources */,
 				F2E41FB429020ACA00FCA844 /* SaveNewChanelRepository.swift in Sources */,
 				F2C4BA6F28FC823600359E5D /* FeedGroupsDataBaseDataSource.swift in Sources */,
+				F2E6E4A62902EE1800923F3B /* FeedChanel+CoreDataClass.swift in Sources */,
+				F2E6E49D2902EC5500923F3B /* MeedlyDataModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -586,13 +586,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		F2C4BA5F28F9BA0D00359E5D /* MeedlyData.xcdatamodeld */ = {
+		F2E6E49B2902EC5500923F3B /* MeedlyDataModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				F2C4BA6028F9BA0D00359E5D /* MeedlyData.xcdatamodel */,
+				F2E6E49C2902EC5500923F3B /* MeedlyData.xcdatamodel */,
 			);
-			currentVersion = F2C4BA6028F9BA0D00359E5D /* MeedlyData.xcdatamodel */;
-			path = MeedlyData.xcdatamodeld;
+			currentVersion = F2E6E49C2902EC5500923F3B /* MeedlyData.xcdatamodel */;
+			path = MeedlyDataModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

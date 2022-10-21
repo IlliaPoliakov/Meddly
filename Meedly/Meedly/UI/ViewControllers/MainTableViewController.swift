@@ -26,6 +26,7 @@ class MainTableViewController: UITableViewController {
   
   // -MARK: - LifeCycle -
   
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -38,8 +39,6 @@ class MainTableViewController: UITableViewController {
     tableView.estimatedRowHeight = 600
     
     configureInitialSnapshot()
-    
-    
   }
   
   
@@ -68,17 +67,22 @@ class MainTableViewController: UITableViewController {
       dataSource.apply(snapshot, animatingDifferences: true)
       return
     }
+    
     for group in groups! {
       snapshot.appendSections([group.title])
       
       if group.feeds != nil {
-        snapshot.appendItems(group.feeds!, toSection: group.title)
+        if !(group.feeds!.isEmpty) {
+          snapshot.appendItems(group.feeds!, toSection: group.title)
+        }
       }
+      
     }
     dataSource.apply(snapshot, animatingDifferences: true)
   }
   
   func updateSnapshot(){
+
     var snapshot = dataSource.snapshot()
     
     guard groups != nil
@@ -116,9 +120,7 @@ class MainTableViewController: UITableViewController {
     else {
       fatalError("Can't perform segue to AddVC")
     }
-    if groups != nil {
-      destinaitonVC.groups = groups
-    }
+    destinaitonVC.groups = groups
   }
   
   @IBAction func unwind( _ segue: UIStoryboardSegue) {

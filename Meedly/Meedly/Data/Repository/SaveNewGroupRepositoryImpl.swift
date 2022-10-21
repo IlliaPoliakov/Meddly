@@ -15,7 +15,6 @@ class SaveNewGroupRepositoryImpl: SaveNewGroupRepository {
     self.localDataSource = localDataSource
   }
   
-  //where should it be??
   func saveNewGroup(_ newGroupName: String) -> Group {
     return localDataSource.saveNewGroup(newGroupName)
   }

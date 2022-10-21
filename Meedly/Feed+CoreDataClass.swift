@@ -15,7 +15,6 @@ public class Feed: NSManagedObject {
                         withDescription feedDescription: String,
                         withLink link: URL,
                         withImageData imageData: Data?,
-                        viewed isViewed: Bool,
                         withPubDate pubDate: String,
                         in managedObjectContext: NSManagedObjectContext,
                         withhGroup group: Group) {
@@ -24,10 +23,9 @@ public class Feed: NSManagedObject {
     newFeed.feedDescription = feedDescription
     newFeed.link = link
     newFeed.image = imageData
-    newFeed.isViewed = isViewed
     newFeed.pubDate = pubDate
     newFeed.id = UUID()
-    newFeed.group = group
+    newFeed.parentGroup = group
     
     do {
       try managedObjectContext.save()

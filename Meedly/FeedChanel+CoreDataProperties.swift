@@ -20,7 +20,7 @@ extension FeedChanel {
     @NSManaged public var image: Data?
     @NSManaged public var link: URL
     @NSManaged public var title: String?
-    @NSManaged public var group: Group?
+    @NSManaged public var parentGroup: Group
 
 }
 

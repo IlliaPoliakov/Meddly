@@ -21,7 +21,7 @@ public class FeedChanel: NSManagedObject {
     newChanel.image = imageData
     newChanel.link = link
     newChanel.id = UUID()
-    newChanel.group = group
+    newChanel.parentGroup = group
     
     do {
       try managedObjectContext.save()
@@ -31,4 +31,5 @@ public class FeedChanel: NSManagedObject {
       fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
     }
   }
+
 }

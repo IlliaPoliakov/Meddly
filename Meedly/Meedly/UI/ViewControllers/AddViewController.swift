@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import CoreData
 
-class AddViewController: UIViewController {
+class AddViewController: UIViewController, UITableViewDelegate {
   
   // MARK: - Properties -
   
@@ -17,8 +17,8 @@ class AddViewController: UIViewController {
   @IBOutlet weak var urlTextField: UITextField!
   
   var newGroupNames: [String]?
-  var selectedRowIndexPath: IndexPath?
-  var groups: [Group]? = nil
+  var selectedRowIndexPath: IndexPath? = nil
+  var groups: [Group]?
   var saveNewGroupNameUseCase: SaveNewGroupUseCase = SaveNewGroupUseCase(
     repo: SaveNewGroupRepositoryImpl(
       localDataSource: FeedGroupsDataBaseDataSource()
@@ -36,6 +36,7 @@ class AddViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     tableView.dataSource = dataSource
+    tableView.delegate = self
     
     configureInitialSnapshot()
   }
@@ -47,7 +48,16 @@ class AddViewController: UIViewController {
     case main
   }
   
-  private lazy var dataSource: UITableViewDiffableDataSource<Section, String> = UITableViewDiffableDataSource(tableView: tableView) { tableView, indexPath, itemIdentifier in
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    selectedRowIndexPath = indexPath
+  }
+  
+  func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+    selectedRowIndexPath = nil
+  }
+  
+  private lazy var dataSource: UITableViewDiffableDataSource<Section, String> = UITableViewDiffableDataSource(
+    tableView: tableView) { tableView, indexPath, itemIdentifier in
     
     let cell = tableView.dequeueReusableCell(withIdentifier: "AddTableViewCell", for: indexPath)
     cell.backgroundColor = UIColor.clear
@@ -71,10 +81,7 @@ class AddViewController: UIViewController {
     snapshot.appendSections([.main])
     
     if groups != nil {
-      var counter = 0
       for group in groups! {
-        print("JOPA \(counter)")
-        counter += 1
         snapshot.appendItems([group.title] , toSection: .main)
       }
     }
@@ -84,7 +91,9 @@ class AddViewController: UIViewController {
   
   func updateSnapshot(forNewGroup groupName: String){
     var snapshot = dataSource.snapshot()
+  
     snapshot.appendItems([groupName], toSection: .main)
+    
     dataSource.apply(snapshot, animatingDifferences: true)
   }
   
@@ -106,13 +115,13 @@ class AddViewController: UIViewController {
     
     guard selectedRowIndexPath != nil
     else {
-      print("Group for url wasn't selected!")
+      print("Group for new feed wasn't selected!")
       return
     }
     
     for group in groups! {
-      if group.chanels != nil {
-        if group.chanels!.contains(where: { $0.link.description == urlTextField.text! } ) {
+      if group.feedChanels != nil {
+        if group.feedChanels!.contains(where: { $0.link.description == urlTextField.text! } ) {
           print("Given chanel already eaists in group \(group)!")
           return
         }
@@ -134,7 +143,7 @@ class AddViewController: UIViewController {
       guard let groupName = alert!.textFields![0].text,
             groupName != ""
       else {
-        print("Group Name Feld is Empty!")
+        print("Group Name Field is Empty!")
         return
       }
       
@@ -144,10 +153,15 @@ class AddViewController: UIViewController {
         return
       }
       
-      self.updateSnapshot(forNewGroup: groupName)
-      
       let newGroup = saveNewGroupNameUseCase.execute(groupName)
-      groups?.append(newGroup)
+      
+      if groups != nil {
+        groups?.append(newGroup)
+      }
+      else {
+        groups = [newGroup]
+      }
+      updateSnapshot(forNewGroup: groupName)
       
       if newGroupNames == nil {
         newGroupNames = [groupName]

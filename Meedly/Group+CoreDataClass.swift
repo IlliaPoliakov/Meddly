@@ -25,5 +25,4 @@ public class Group: NSManagedObject {
     }
     return newGroup
   }
-  
 }

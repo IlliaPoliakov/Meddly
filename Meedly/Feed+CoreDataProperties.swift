@@ -17,13 +17,13 @@ extension Feed {
     }
 
     @NSManaged public var feedDescription: String
-    @NSManaged public var id: UUID
     @NSManaged public var image: Data?
     @NSManaged public var isViewed: Bool
     @NSManaged public var link: URL
     @NSManaged public var pubDate: String
     @NSManaged public var title: String
-    @NSManaged public var group: Group
+    @NSManaged public var parentGroup: Group
+    @NSManaged public var id: UUID
 
 }
 

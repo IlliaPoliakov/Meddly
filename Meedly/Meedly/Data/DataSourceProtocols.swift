@@ -12,5 +12,5 @@ protocol RemoteDataSource {}
 protocol LocalDataSource {
   func loadData() -> [Group]?
   func saveNewGroup(_ newGroupName: String) -> Group
-  func saveNewChanel(_ newChanelURl: URL, _ group: Group)
+  func saveNewChanel(_ newChanelUrl: URL, _ group: Group)
 }
