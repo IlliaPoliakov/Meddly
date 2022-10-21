@@ -49,30 +49,36 @@ class FeedGroupsDataBaseDataSource: LocalDataSource {
     
     //deleting experemental rubbish
     
-//    for group in groups{
-//      for feed in group.feeds! {
-//        coreDataStack.managedContext.delete(feed)
+//    for group in groups {
+//      if group.feeds != nil {
+//        for feed in group.feeds! {
+//          coreDataStack.managedContext.delete(feed)
+//        }
+//      }
+//      if group.chanels != nil {
+//        for chanel in group.chanels! {
+//          coreDataStack.managedContext.delete(chanel)
+//        }
 //      }
 //      coreDataStack.managedContext.delete(group)
 //    }
 //    try? coreDataStack.managedContext.save()
     
-    
-    return groups
+    return self.groups
   }
   
   func saveNewGroup(_ newGroupName: String) -> Group {
-    var group = Group.createNew(withTitle: newGroupName, in: coreDataStack.managedContext)
-    //TEMPORARY UBRAT POTOM!!!
-    Feed.createNew(withTitle: "This111AAAAAAA is very pretty feed, even a little sexual. Sometimes i tihnj I can read every time and everywhere. This is really awesame feeed....", withDescription: "discription", withLink: "link", withImageData: nil, viewed: false, withPubDate: "08.05.2003", in: coreDataStack.managedContext, withhGroup: group)
-    Feed.createNew(withTitle: "This222BBBBBBB is very pretty feed, even a little sexual. Sometimes i tihnj I can read every time and everywhere. This is really awesame feeed....", withDescription: "discription", withLink: "link", withImageData: nil, viewed: false, withPubDate: "08.05.2003", in: coreDataStack.managedContext, withhGroup: group)
-    Feed.createNew(withTitle: "This333CCCCCCCC is very pretty feed, even a little sexual. Sometimes i tihnj I can read every time and everywhere. This is really awesame feeed....", withDescription: "discription", withLink: "link", withImageData: nil, viewed: false, withPubDate: "08.05.2003", in: coreDataStack.managedContext, withhGroup: group)
-    
+    let group = Group.createNew(withTitle: newGroupName, in: coreDataStack.managedContext)
+//    //TEMPORARY UBRAT POTOM!!!
+//    Feed.createNew(withTitle: "This111AAAAAAA is very pretty feed, even a little sexual. Sometimes i tihnj I can read every time and everywhere. This is really awesame feeed....", withDescription: "discription", withLink: URL(string: "https://github.com/IlliaPoliakov/Meddly/tree/main/Meedly")!, withImageData: nil, viewed: false, withPubDate: "08.05.2003", in: coreDataStack.managedContext, withhGroup: group)
+//    Feed.createNew(withTitle: "This222BBBBBBB is very pretty feed, even a little sexual. Sometimes i tihnj I can read every time and everywhere. This is really awesame feeed....", withDescription: "discription", withLink: URL(string: "https://github.com/IlliaPoliakov/Meddly/tree/main/Meedly")!, withImageData: nil, viewed: false, withPubDate: "08.05.2003", in: coreDataStack.managedContext, withhGroup: group)
+//    Feed.createNew(withTitle: "This333CCCCCCCC is very pretty feed, even a little sexual. Sometimes i tihnj I can read every time and everywhere. This is really awesame feeed....", withDescription: "discription", withLink: URL(string: "https://github.com/IlliaPoliakov/Meddly/tree/main/Meedly")!, withImageData: nil, viewed: false, withPubDate: "08.05.2003", in: coreDataStack.managedContext, withhGroup: group)
+//
     return group
   }
   
-  func saveNewChanel(_ newChanelURl: String) {
-    
+  func saveNewChanel(_ newChanelURl: URL, _ group: Group) {
+    FeedChanel.createNew(withTitle: nil, withImageData: nil, withLink: newChanelURl, withGroup: group, in: coreDataStack.managedContext)
   }
 }
 

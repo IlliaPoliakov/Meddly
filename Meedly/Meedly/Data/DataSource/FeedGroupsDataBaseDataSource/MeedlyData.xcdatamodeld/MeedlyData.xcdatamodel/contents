@@ -5,7 +5,7 @@
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="image" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
         <attribute name="isViewed" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
-        <attribute name="link" attributeType="String"/>
+        <attribute name="link" attributeType="URI"/>
         <attribute name="pubDate" attributeType="String"/>
         <attribute name="title" attributeType="String"/>
         <relationship name="group" maxCount="1" deletionRule="Nullify" destinationEntity="Group" inverseName="feeds" inverseEntity="Group"/>
@@ -13,8 +13,8 @@
     <entity name="FeedChanel" representedClassName="FeedChanel" syncable="YES">
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="image" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
-        <attribute name="link" attributeType="String"/>
-        <attribute name="title" attributeType="String"/>
+        <attribute name="link" attributeType="URI"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
         <relationship name="group" maxCount="1" deletionRule="Nullify" destinationEntity="Group" inverseName="chanels" inverseEntity="Group"/>
     </entity>
     <entity name="Group" representedClassName="Group" syncable="YES">

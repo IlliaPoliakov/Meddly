@@ -117,7 +117,7 @@ class MainTableViewController: UITableViewController {
       fatalError("Can't perform segue to AddVC")
     }
     if groups != nil {
-      destinaitonVC.groups = groups!.map { $0.title }
+      destinaitonVC.groups = groups
     }
   }
   

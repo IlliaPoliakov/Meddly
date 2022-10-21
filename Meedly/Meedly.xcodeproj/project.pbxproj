@@ -9,12 +9,6 @@
 /* Begin PBXBuildFile section */
 		F219374628FEFBA100AD5AF0 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F219374528FEFBA100AD5AF0 /* CoreDataStack.swift */; };
 		F2574FEF290082F800CF540C /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2574FEE290082F800CF540C /* Reachability.swift */; };
-		F2A0EF2628FEE96300A2E460 /* Group+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A0EF2028FEE96300A2E460 /* Group+CoreDataClass.swift */; };
-		F2A0EF2728FEE96300A2E460 /* Group+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A0EF2128FEE96300A2E460 /* Group+CoreDataProperties.swift */; };
-		F2A0EF2828FEE96300A2E460 /* FeedChanel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A0EF2228FEE96300A2E460 /* FeedChanel+CoreDataClass.swift */; };
-		F2A0EF2928FEE96300A2E460 /* FeedChanel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A0EF2328FEE96300A2E460 /* FeedChanel+CoreDataProperties.swift */; };
-		F2A0EF2A28FEE96300A2E460 /* Feed+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A0EF2428FEE96300A2E460 /* Feed+CoreDataClass.swift */; };
-		F2A0EF2B28FEE96300A2E460 /* Feed+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A0EF2528FEE96300A2E460 /* Feed+CoreDataProperties.swift */; };
 		F2C4B9F428F7269500359E5D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4B9F328F7269500359E5D /* AppDelegate.swift */; };
 		F2C4B9F628F7269500359E5D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4B9F528F7269500359E5D /* SceneDelegate.swift */; };
 		F2C4B9FB28F7269500359E5D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2C4B9F928F7269500359E5D /* Main.storyboard */; };
@@ -36,17 +30,17 @@
 		F2E41FB229020A4700FCA844 /* SaveNewChanelUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E41FB129020A4700FCA844 /* SaveNewChanelUseCase.swift */; };
 		F2E41FB429020ACA00FCA844 /* SaveNewChanelRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E41FB329020ACA00FCA844 /* SaveNewChanelRepository.swift */; };
 		F2E41FB629020B0500FCA844 /* SaveNewChanelRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E41FB529020B0500FCA844 /* SaveNewChanelRepositoryImpl.swift */; };
+		F2E41FC1290216BA00FCA844 /* Group+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E41FBB290216BA00FCA844 /* Group+CoreDataClass.swift */; };
+		F2E41FC2290216BA00FCA844 /* Group+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E41FBC290216BA00FCA844 /* Group+CoreDataProperties.swift */; };
+		F2E41FC3290216BA00FCA844 /* Feed+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E41FBD290216BA00FCA844 /* Feed+CoreDataClass.swift */; };
+		F2E41FC4290216BA00FCA844 /* Feed+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E41FBE290216BA00FCA844 /* Feed+CoreDataProperties.swift */; };
+		F2E41FC5290216BA00FCA844 /* FeedChanel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E41FBF290216BA00FCA844 /* FeedChanel+CoreDataClass.swift */; };
+		F2E41FC6290216BA00FCA844 /* FeedChanel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E41FC0290216BA00FCA844 /* FeedChanel+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		F219374528FEFBA100AD5AF0 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		F2574FEE290082F800CF540C /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
-		F2A0EF2028FEE96300A2E460 /* Group+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Group+CoreDataClass.swift"; sourceTree = "<group>"; };
-		F2A0EF2128FEE96300A2E460 /* Group+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Group+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		F2A0EF2228FEE96300A2E460 /* FeedChanel+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeedChanel+CoreDataClass.swift"; sourceTree = "<group>"; };
-		F2A0EF2328FEE96300A2E460 /* FeedChanel+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeedChanel+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		F2A0EF2428FEE96300A2E460 /* Feed+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Feed+CoreDataClass.swift"; sourceTree = "<group>"; };
-		F2A0EF2528FEE96300A2E460 /* Feed+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Feed+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F2C4B9F028F7269500359E5D /* Meedly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Meedly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2C4B9F328F7269500359E5D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F2C4B9F528F7269500359E5D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,6 +64,12 @@
 		F2E41FB129020A4700FCA844 /* SaveNewChanelUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveNewChanelUseCase.swift; sourceTree = "<group>"; };
 		F2E41FB329020ACA00FCA844 /* SaveNewChanelRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveNewChanelRepository.swift; sourceTree = "<group>"; };
 		F2E41FB529020B0500FCA844 /* SaveNewChanelRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveNewChanelRepositoryImpl.swift; sourceTree = "<group>"; };
+		F2E41FBB290216BA00FCA844 /* Group+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Group+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F2E41FBC290216BA00FCA844 /* Group+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Group+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F2E41FBD290216BA00FCA844 /* Feed+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Feed+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F2E41FBE290216BA00FCA844 /* Feed+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Feed+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F2E41FBF290216BA00FCA844 /* FeedChanel+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeedChanel+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F2E41FC0290216BA00FCA844 /* FeedChanel+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeedChanel+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,8 +152,8 @@
 		F2C4BA3C28F82E6100359E5D /* FeedChanel */ = {
 			isa = PBXGroup;
 			children = (
-				F2A0EF2228FEE96300A2E460 /* FeedChanel+CoreDataClass.swift */,
-				F2A0EF2328FEE96300A2E460 /* FeedChanel+CoreDataProperties.swift */,
+				F2E41FBF290216BA00FCA844 /* FeedChanel+CoreDataClass.swift */,
+				F2E41FC0290216BA00FCA844 /* FeedChanel+CoreDataProperties.swift */,
 			);
 			path = FeedChanel;
 			sourceTree = "<group>";
@@ -161,8 +161,8 @@
 		F2C4BA3D28F82E7200359E5D /* Group */ = {
 			isa = PBXGroup;
 			children = (
-				F2A0EF2028FEE96300A2E460 /* Group+CoreDataClass.swift */,
-				F2A0EF2128FEE96300A2E460 /* Group+CoreDataProperties.swift */,
+				F2E41FBB290216BA00FCA844 /* Group+CoreDataClass.swift */,
+				F2E41FBC290216BA00FCA844 /* Group+CoreDataProperties.swift */,
 			);
 			path = Group;
 			sourceTree = "<group>";
@@ -170,8 +170,8 @@
 		F2C4BA3E28F82E8200359E5D /* Feed */ = {
 			isa = PBXGroup;
 			children = (
-				F2A0EF2428FEE96300A2E460 /* Feed+CoreDataClass.swift */,
-				F2A0EF2528FEE96300A2E460 /* Feed+CoreDataProperties.swift */,
+				F2E41FBD290216BA00FCA844 /* Feed+CoreDataClass.swift */,
+				F2E41FBE290216BA00FCA844 /* Feed+CoreDataProperties.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -256,9 +256,9 @@
 		F2C4BA6228F9BA2A00359E5D /* FeedGroupsDataBaseDataSource */ = {
 			isa = PBXGroup;
 			children = (
-				F2C4BA5F28F9BA0D00359E5D /* MeedlyData.xcdatamodeld */,
 				F2C4BA6E28FC823600359E5D /* FeedGroupsDataBaseDataSource.swift */,
 				F219374528FEFBA100AD5AF0 /* CoreDataStack.swift */,
+				F2C4BA5F28F9BA0D00359E5D /* MeedlyData.xcdatamodeld */,
 			);
 			path = FeedGroupsDataBaseDataSource;
 			sourceTree = "<group>";
@@ -344,31 +344,31 @@
 			buildActionMask = 2147483647;
 			files = (
 				F2E41FB629020B0500FCA844 /* SaveNewChanelRepositoryImpl.swift in Sources */,
+				F2E41FC1290216BA00FCA844 /* Group+CoreDataClass.swift in Sources */,
+				F2E41FC3290216BA00FCA844 /* Feed+CoreDataClass.swift in Sources */,
 				F2C4BA4C28F8AB7600359E5D /* MainTableViewController.swift in Sources */,
 				F2C4BA5528F97F5000359E5D /* MainTVCCustomCell.swift in Sources */,
+				F2E41FC4290216BA00FCA844 /* Feed+CoreDataProperties.swift in Sources */,
 				F2C4BA7828FDAD0400359E5D /* DataSourceProtocols.swift in Sources */,
-				F2A0EF2A28FEE96300A2E460 /* Feed+CoreDataClass.swift in Sources */,
+				F2E41FC5290216BA00FCA844 /* FeedChanel+CoreDataClass.swift in Sources */,
 				F2C4BA4E28F8AE1C00359E5D /* AddViewController.swift in Sources */,
-				F2A0EF2628FEE96300A2E460 /* Group+CoreDataClass.swift in Sources */,
 				F2C4B9F428F7269500359E5D /* AppDelegate.swift in Sources */,
 				F2C4BA6728F9E38A00359E5D /* FeedGroupsNetworkDataSource.swift in Sources */,
 				F219374628FEFBA100AD5AF0 /* CoreDataStack.swift in Sources */,
 				F2E41FAC2901CC1500FCA844 /* SaveNewGroupUseCase.swift in Sources */,
-				F2A0EF2B28FEE96300A2E460 /* Feed+CoreDataProperties.swift in Sources */,
+				F2E41FC2290216BA00FCA844 /* Group+CoreDataProperties.swift in Sources */,
 				F2C4BA6528F9BB5000359E5D /* GetFeedGroupsRepositoryImpl.swift in Sources */,
 				F2C4B9F628F7269500359E5D /* SceneDelegate.swift in Sources */,
 				F2E41FAA2901C1BE00FCA844 /* GetFeedGroupsUseCase.swift in Sources */,
 				F2574FEF290082F800CF540C /* Reachability.swift in Sources */,
 				F2E41FAE2901CE2C00FCA844 /* SaveNewGroupRepository.swift in Sources */,
-				F2A0EF2828FEE96300A2E460 /* FeedChanel+CoreDataClass.swift in Sources */,
 				F2C4BA6128F9BA0D00359E5D /* MeedlyData.xcdatamodeld in Sources */,
+				F2E41FC6290216BA00FCA844 /* FeedChanel+CoreDataProperties.swift in Sources */,
 				F2E41FB229020A4700FCA844 /* SaveNewChanelUseCase.swift in Sources */,
-				F2A0EF2728FEE96300A2E460 /* Group+CoreDataProperties.swift in Sources */,
 				F2E41FB02901CEE400FCA844 /* SaveNewGroupRepositoryImpl.swift in Sources */,
 				F2C4BA5228F9596700359E5D /* GetFeedGroupsRepository.swift in Sources */,
 				F2E41FB429020ACA00FCA844 /* SaveNewChanelRepository.swift in Sources */,
 				F2C4BA6F28FC823600359E5D /* FeedGroupsDataBaseDataSource.swift in Sources */,
-				F2A0EF2928FEE96300A2E460 /* FeedChanel+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

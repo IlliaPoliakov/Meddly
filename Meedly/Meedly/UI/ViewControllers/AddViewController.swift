@@ -18,7 +18,7 @@ class AddViewController: UIViewController {
   
   var newGroupNames: [String]?
   var selectedRowIndexPath: IndexPath?
-  var groups: [Group]?
+  var groups: [Group]? = nil
   var saveNewGroupNameUseCase: SaveNewGroupUseCase = SaveNewGroupUseCase(
     repo: SaveNewGroupRepositoryImpl(
       localDataSource: FeedGroupsDataBaseDataSource()
@@ -71,7 +71,10 @@ class AddViewController: UIViewController {
     snapshot.appendSections([.main])
     
     if groups != nil {
+      var counter = 0
       for group in groups! {
+        print("JOPA \(counter)")
+        counter += 1
         snapshot.appendItems([group.title] , toSection: .main)
       }
     }
@@ -82,7 +85,6 @@ class AddViewController: UIViewController {
   func updateSnapshot(forNewGroup groupName: String){
     var snapshot = dataSource.snapshot()
     snapshot.appendItems([groupName], toSection: .main)
-    
     dataSource.apply(snapshot, animatingDifferences: true)
   }
   
@@ -96,7 +98,7 @@ class AddViewController: UIViewController {
       return
     }
     
-    guard let url = URL(string: urlTextField.text!)
+    guard let newChanelUrl = URL(string: urlTextField.text!)
     else {
       print("Please check your URL!")
       return
@@ -109,12 +111,15 @@ class AddViewController: UIViewController {
     }
     
     for group in groups! {
-      if group.chanels?.contains(where: <#T##(FeedChanel) throws -> Bool#>) {
-        for chanel in group.chanels! {
-          
+      if group.chanels != nil {
+        if group.chanels!.contains(where: { $0.link.description == urlTextField.text! } ) {
+          print("Given chanel already eaists in group \(group)!")
+          return
         }
       }
     }
+    
+    saveNewChanelUseCase.execute(newChanelUrl, groups![selectedRowIndexPath!.row])
     
     performSegue(withIdentifier: "unwindToMain", sender: self)
   }
@@ -133,18 +138,15 @@ class AddViewController: UIViewController {
         return
       }
       
-      
       guard !(self.groups?.contains(where: { $0.title == groupName }) ?? false)
       else {
         print("Group with given name already exist!")
         return
       }
       
-      
-      
       self.updateSnapshot(forNewGroup: groupName)
       
-      var newGroup = saveNewGroupNameUseCase.execute(groupName)
+      let newGroup = saveNewGroupNameUseCase.execute(groupName)
       groups?.append(newGroup)
       
       if newGroupNames == nil {

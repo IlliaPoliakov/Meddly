@@ -15,7 +15,7 @@ class SaveNewChanelRepositoryImpl: SaveNewChanelRepository {
     self.localDataSource = localDataSource
   }
   
-  func saveNewChanel(_ newChanelUrl: String) {
-    localDataSource.saveNewChanel(newChanelUrl)
+  func saveNewChanel(_ newChanelUrl: URL, _ group: Group) {
+    localDataSource.saveNewChanel(newChanelUrl, group)
   }
 }
