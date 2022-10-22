@@ -125,6 +125,9 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="imageAspectRatio" destination="4Kz-8a-rhX" id="rZc-7C-18I"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vLD-R2-xZ1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -182,20 +185,20 @@
                                 <color key="tintColor" systemColor="labelColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddTableViewCell" textLabel="oP3-Kq-biX" imageView="ssf-Gg-Hnu" style="IBUITableViewCellStyleDefault" id="yUL-5B-Bac">
-                                        <rect key="frame" x="0.0" y="50" width="370" height="49.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="50" width="370" height="51.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yUL-5B-Bac" id="SeP-u0-4pQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="370" height="49.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="370" height="51.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Group Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oP3-Kq-biX">
-                                                    <rect key="frame" x="59.833333333333343" y="0.0" width="290.16666666666669" height="49.666667938232422"/>
+                                                    <rect key="frame" x="59.833333333333343" y="0.0" width="290.16666666666669" height="51.666667938232422"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ssf-Gg-Hnu">
-                                                    <rect key="frame" x="19.166666666666664" y="12.000000000000002" width="25.666666666666668" height="25.666666666666668"/>
+                                                    <rect key="frame" x="19.166666666666664" y="13.000000000000002" width="25.666666666666668" height="25.666666666666668"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <color key="tintColor" red="0.74901960779999999" green="0.35294117650000001" blue="0.94901960780000005" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <imageReference key="image" image="folder.circle" catalog="system" symbolScale="large"/>

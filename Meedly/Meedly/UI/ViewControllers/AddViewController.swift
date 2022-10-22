@@ -19,6 +19,7 @@ class AddViewController: UIViewController, UITableViewDelegate {
   var newGroupNames: [String]?
   var selectedRowIndexPath: IndexPath? = nil
   var groups: [Group]?
+  
   var saveNewGroupNameUseCase: SaveNewGroupUseCase = SaveNewGroupUseCase(
     repo: SaveNewGroupRepositoryImpl(
       localDataSource: FeedGroupsDataBaseDataSource()

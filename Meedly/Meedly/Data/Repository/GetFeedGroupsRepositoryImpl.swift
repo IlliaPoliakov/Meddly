@@ -21,8 +21,15 @@ class GetFeedGroupsRepositoryImpl: GetFeedGroupsRepository {
   }
   
   func getFeedGroups() -> [Group]? {
-    
-    return localDataSource.loadData()
+    var groups: [Group]? = nil
+    if Reachability.isConnectedToNetwork() {
+      
+      
+    }
+    else {
+      return localDataSource.loadData()
+    }
+    return groups
   }
   
 }

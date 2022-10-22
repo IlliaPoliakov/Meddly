@@ -19,9 +19,7 @@ class MainTableViewController: UITableViewController {
       localDataSource: FeedGroupsDataBaseDataSource(),
       remoteDataSource: FeedGroupsNetworkDataSource()
     )
-  )
-
-  
+   )
   
   
   // -MARK: - LifeCycle -
@@ -111,6 +109,9 @@ class MainTableViewController: UITableViewController {
     dataSource.apply(snapshot)
   }
  
+  override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    return groups![section].title
+  }
   
   // MARK: - Navigation
   
