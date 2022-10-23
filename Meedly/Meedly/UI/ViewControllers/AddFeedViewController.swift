@@ -18,16 +18,18 @@ class AddViewController: UIViewController, UITableViewDelegate {
   
   var newGroupNames: [String]?
   var selectedRowIndexPath: IndexPath? = nil
-  var groups: [Group]?
+  var groups: [FeedGroup]?
   
   var saveNewGroupNameUseCase: SaveNewGroupUseCase = SaveNewGroupUseCase(
-    repo: SaveNewGroupRepositoryImpl(
-      localDataSource: FeedGroupsDataBaseDataSource()
+    repo: FeedRepositoryImpl(
+      localDataSource: DataBaseDataSource(),
+      remoteDataSource: NetworkDataSource()
     )
   )
-  var saveNewChanelUseCase: SaveNewChanelUseCase = SaveNewChanelUseCase(
-    repo: SaveNewChanelRepositoryImpl(
-      localDataSource: FeedGroupsDataBaseDataSource()
+  var saveNewFeedUseCase: SaveNewFeedUseCase = SaveNewFeedUseCase(
+    repo: FeedRepositoryImpl(
+      localDataSource: DataBaseDataSource(),
+      remoteDataSource: NetworkDataSource()
     )
   )
   
@@ -36,6 +38,7 @@ class AddViewController: UIViewController, UITableViewDelegate {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
     tableView.dataSource = dataSource
     tableView.delegate = self
     
@@ -59,41 +62,45 @@ class AddViewController: UIViewController, UITableViewDelegate {
   
   private lazy var dataSource: UITableViewDiffableDataSource<Section, String> = UITableViewDiffableDataSource(
     tableView: tableView) { tableView, indexPath, itemIdentifier in
-    
-    let cell = tableView.dequeueReusableCell(withIdentifier: "AddTableViewCell", for: indexPath)
-    cell.backgroundColor = UIColor.clear
-    
-    guard let groupName = self.groups?[indexPath.row].title
-    else {
+      
+      let cell = tableView.dequeueReusableCell(withIdentifier: "AddTableViewCell", for: indexPath)
+      cell.backgroundColor = UIColor.clear
+      
+      guard let groupName = self.groups?[indexPath.row].title
+      else {
+        return cell
+      }
+      
+      cell.textLabel?.text = groupName
+      
+      if self.selectedRowIndexPath == indexPath {
+        cell.backgroundColor = UIColor.lightGray
+      }
+      
       return cell
     }
-    
-    cell.textLabel?.text = groupName
-    
-    if self.selectedRowIndexPath == indexPath {
-      cell.backgroundColor = UIColor.lightGray
-    }
-    
-    return cell
-  }
   
   func configureInitialSnapshot(){
     var snapshot = NSDiffableDataSourceSnapshot<Section, String>()
     snapshot.appendSections([.main])
     
-    if groups != nil {
-      for group in groups! {
-        snapshot.appendItems([group.title] , toSection: .main)
-      }
+    guard groups != nil
+    else {
+      dataSource.apply(snapshot, animatingDifferences: false)
+      return
+    }
+    
+    for group in groups! {
+      snapshot.appendItems([group.title] , toSection: .main)
     }
     
     dataSource.apply(snapshot, animatingDifferences: false)
   }
   
-  func updateSnapshot(forNewGroup groupName: String){
+  func updateSnapshot(withNewGroupName name: String){
     var snapshot = dataSource.snapshot()
-  
-    snapshot.appendItems([groupName], toSection: .main)
+    
+    snapshot.appendItems([name], toSection: .main)
     
     dataSource.apply(snapshot, animatingDifferences: true)
   }
@@ -101,46 +108,15 @@ class AddViewController: UIViewController, UITableViewDelegate {
   
   // MARK: - IBActions -
   
-  @IBAction func addNewChanel(_ sender: Any) {
-    guard urlTextField.text != nil
-    else {
-      print("Field for url is empty!")
-      return
-    }
-    
-    guard let newChanelUrl = URL(string: urlTextField.text!)
-    else {
-      print("Please check your URL!")
-      return
-    }
-    
-    guard selectedRowIndexPath != nil
-    else {
-      print("Group for new feed wasn't selected!")
-      return
-    }
-    
-    for group in groups! {
-      if group.feedChanels != nil {
-        if group.feedChanels!.contains(where: { $0.link.description == urlTextField.text! } ) {
-          print("Given chanel already eaists in group \(group)!")
-          return
-        }
-      }
-    }
-    
-    saveNewChanelUseCase.execute(newChanelUrl, groups![selectedRowIndexPath!.row])
-    
-    performSegue(withIdentifier: "unwindToMain", sender: self)
-  }
-  
   @IBAction func createNewGroup(_ sender: Any) {
+    
     let alert = UIAlertController(title: "New Group", message: "Enter a Group Name:", preferredStyle: .alert)
     alert.addTextField { _ in }
     
     let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
     
     let addAction = UIAlertAction(title: "Add", style: .default) { [self, weak alert] (_) in
+      
       guard let groupName = alert!.textFields![0].text,
             groupName != ""
       else {
@@ -154,7 +130,7 @@ class AddViewController: UIViewController, UITableViewDelegate {
         return
       }
       
-      let newGroup = saveNewGroupNameUseCase.execute(groupName)
+      let newGroup = saveNewGroupNameUseCase.execute(withNewGroupName: groupName)
       
       if groups != nil {
         groups?.append(newGroup)
@@ -162,7 +138,8 @@ class AddViewController: UIViewController, UITableViewDelegate {
       else {
         groups = [newGroup]
       }
-      updateSnapshot(forNewGroup: groupName)
+      
+      updateSnapshot(withNewGroupName: groupName)
       
       if newGroupNames == nil {
         newGroupNames = [groupName]
@@ -177,4 +154,42 @@ class AddViewController: UIViewController, UITableViewDelegate {
     
     self.present(alert, animated: true, completion: nil)
   }
+  
+  @IBAction func addNewFeed(_ sender: Any) {
+    
+    guard urlTextField.text != nil,
+          !(urlTextField.text!.isEmpty)
+    else {
+      print("Field for url is empty!")
+      return
+    }
+    
+    guard let feedUrl = URL(string: urlTextField.text!)
+    else {
+      print("Please check your URL!")
+      return
+    }
+    
+    guard selectedRowIndexPath != nil
+    else {
+      print("Group for new feed wasn't selected!")
+      return
+    }
+    
+    for group in groups! {
+      guard group.feeds != nil,
+            !(group.feeds!.contains(where: { $0.link.description == urlTextField.text! }) )
+      else {
+        print("Given chanel already eaists in group \(group.title)!")
+        
+        return
+      }
+    }
+    
+    saveNewFeedUseCase.execute(withNewFeedUrl: feedUrl, withParentGroup:
+                                  groups![selectedRowIndexPath!.row])
+    
+    performSegue(withIdentifier: "unwindToMain", sender: self)
+  }
+  
 }

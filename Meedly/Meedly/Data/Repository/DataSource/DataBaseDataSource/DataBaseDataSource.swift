@@ -8,18 +8,18 @@
 import CoreData
 import UIKit
 
-class FeedGroupsDataBaseDataSource: LocalDataSource {
+class DataBaseDataSource: LocalDataSource {
   
   // -MARK: - Properties -
 
-  let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+  let coreDataStack = (UIApplication.shared.delegate as! AppDelegate).coreDataStack // EXPEREMENT, DONT FORGET
   
   
   // -MARK: - Functions -
   
-  func loadData() -> [Group]? {
+  func loadData() -> [FeedGroup]? {
     
-    guard let groups = try? managedContext.fetch(Group.fetchRequest()),
+    guard let groups = try? coreDataStack.managedContext.fetch(FeedGroup.fetchRequest()),
           !groups.isEmpty
     else {
       return nil
@@ -49,12 +49,24 @@ class FeedGroupsDataBaseDataSource: LocalDataSource {
     return groups
   }
   
-  func saveNewGroup(_ newGroupName: String) -> Group {
-    return Group.createNew(withTitle: newGroupName, in: managedContext)
+  func saveNewGroup(withNewGroupName name: String) -> FeedGroup {
+    let group = FeedGroup.init(context: coreDataStack.managedContext)
+    
+    group.title = name
+    group.id = UUID()
+    
+    coreDataStack.saveContext()
+    
+    return group
   }
   
-  func saveNewChanel(_ newChanelUrl: URL, _ group: Group) {
-    FeedChanel.createNew(withTitle: nil, withImageData: nil, withLink: newChanelUrl, withGroup: group, in: managedContext)
+  func saveNewFeed(withNewFeedUrl url: URL, withParentGroup group: FeedGroup) {
+    let feed = Feed.init(context: coreDataStack.managedContext)
+    
+    feed.link = url
+    feed.id = UUID()
+    feed.parentGroup = group
+    
+    coreDataStack.saveContext()
   }
 }
-

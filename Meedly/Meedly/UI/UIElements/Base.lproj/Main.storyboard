@@ -29,7 +29,7 @@
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="square.and.arrow.up.on.square.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="boG-Mi-EIi">
                                             <rect key="frame" x="20" y="8" width="350" height="179.33333333333334"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" secondItem="boG-Mi-EIi" secondAttribute="height" multiplier="2:1" id="4Kz-8a-rhX"/>
+                                                <constraint firstAttribute="width" secondItem="boG-Mi-EIi" secondAttribute="height" multiplier="2:1" id="VDj-UP-LOQ"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="749" text="omg sebastian vettel won suzuki gran prii in kdnvpijaebvpjaiebnrc rehdfb ejipabncfa scph e" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cjL-cw-5JG">
@@ -125,9 +125,6 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <outlet property="imageAspectRatio" destination="4Kz-8a-rhX" id="rZc-7C-18I"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vLD-R2-xZ1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

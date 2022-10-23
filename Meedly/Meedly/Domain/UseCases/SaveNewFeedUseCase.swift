@@ -7,14 +7,15 @@
 
 import Foundation
 
-class GetFeedGroupsUseCase {
+class SaveNewFeedUseCase {
   private let repo: FeedRepository
 
   init(repo: FeedRepository) {
     self.repo = repo
   }
   
-  func execute() -> [FeedGroup]? {
-    return repo.getFeedGroups()
+  func execute(withNewFeedUrl url: URL, withParentGroup group: FeedGroup) {
+    return repo.saveNewFeed(url, group)
   }
 }
+

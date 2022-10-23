@@ -1,27 +1,27 @@
 //
-//  FeedChanel+CoreDataClass.swift
+//  Feed+CoreDataClass.swift
 //  Meedly
 //
-//  Created by Illia Poliakov on 21.10.22.
+//  Created by Illia Poliakov on 23.10.22.
 //
 //
 
 import Foundation
 import CoreData
 
-@objc(FeedChanel)
-public class FeedChanel: NSManagedObject {
+@objc(Feed)
+public class Feed: NSManagedObject {
   static func createNew(withTitle title: String? = nil,
                         withImageData imageData: Data?,
                         withLink link: URL,
-                        withGroup group: Group,
+                        withGroup group: FeedGroup,
                         in managedObjectContext: NSManagedObjectContext) {
     let newChanel = self.init(context: managedObjectContext)
     newChanel.title = title
-    newChanel.image = imageData
+    newChanel.imageData = imageData
     newChanel.link = link
-    newChanel.id = UUID()
     newChanel.parentGroup = group
+    newChanel.id = UUID()
     
     do {
       try managedObjectContext.save()
@@ -31,5 +31,4 @@ public class FeedChanel: NSManagedObject {
       fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
     }
   }
-
 }

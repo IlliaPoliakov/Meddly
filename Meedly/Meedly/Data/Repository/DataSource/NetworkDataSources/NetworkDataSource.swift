@@ -7,10 +7,10 @@
 
 import Foundation
 
-class FeedGroupsNetworkDataSource: RemoteDataSource {
+class NetworkDataSource: RemoteDataSource {
   
   // ugly, but need for URLs
-  let localDataSource: FeedGroupsDataBaseDataSource = FeedGroupsDataBaseDataSource()
+  let localDataSource: DataBaseDataSource = DataBaseDataSource()
   
   func loadData() -> [String: [Feed]]? {
     

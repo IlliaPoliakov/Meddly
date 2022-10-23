@@ -29,7 +29,7 @@ class MainTableViewController: UITableViewController {
     super.viewDidLoad()
     
     groups = getFeedGroupsUseCase.execute()
-    
+    groups == nil ? print("NIL"): print("NOTNIL")
     tableView.dataSource = dataSource
     tableView.delegate = self
     
@@ -112,6 +112,7 @@ class MainTableViewController: UITableViewController {
   override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
     return groups![section].title
   }
+  
   
   // MARK: - Navigation
   

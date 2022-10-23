@@ -9,9 +9,11 @@ import Foundation
 import CoreData
 
 class CoreDataStack {
+  static let shared = CoreDataStack(modelName: "FeedDataModel") // hardcoded, but a kak inache?
+  
   private let modelName: String
   
-  init(modelName: String) {
+  private init(modelName: String) {
     self.modelName = modelName
   }
   
@@ -39,7 +41,7 @@ class CoreDataStack {
     do {
       try managedContext.save()
     } catch let error as NSError {
-      print("Unresolved error \(error), \(error.userInfo)")
+      fatalError("Unresolved error \(error), \(error.userInfo)")
     }
   }
   

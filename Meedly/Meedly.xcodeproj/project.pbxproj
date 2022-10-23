@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F219374628FEFBA100AD5AF0 /* CoreDataStackMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F219374528FEFBA100AD5AF0 /* CoreDataStackMock.swift */; };
+		F219374628FEFBA100AD5AF0 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F219374528FEFBA100AD5AF0 /* CoreDataStack.swift */; };
 		F2574FEF290082F800CF540C /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2574FEE290082F800CF540C /* Reachability.swift */; };
 		F2C4B9F428F7269500359E5D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4B9F328F7269500359E5D /* AppDelegate.swift */; };
 		F2C4B9F628F7269500359E5D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4B9F528F7269500359E5D /* SceneDelegate.swift */; };
@@ -39,7 +39,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F219374528FEFBA100AD5AF0 /* CoreDataStackMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStackMock.swift; sourceTree = "<group>"; };
+		F219374528FEFBA100AD5AF0 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		F2574FEE290082F800CF540C /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		F2C4B9F028F7269500359E5D /* Meedly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Meedly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2C4B9F328F7269500359E5D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -257,7 +257,7 @@
 			isa = PBXGroup;
 			children = (
 				F2C4BA6E28FC823600359E5D /* FeedGroupsDataBaseDataSource.swift */,
-				F219374528FEFBA100AD5AF0 /* CoreDataStackMock.swift */,
+				F219374528FEFBA100AD5AF0 /* CoreDataStack.swift */,
 				F2E6E49B2902EC5500923F3B /* MeedlyDataModel.xcdatamodeld */,
 			);
 			path = FeedGroupsDataBaseDataSource;
@@ -352,7 +352,7 @@
 				F2C4BA4E28F8AE1C00359E5D /* AddViewController.swift in Sources */,
 				F2C4B9F428F7269500359E5D /* AppDelegate.swift in Sources */,
 				F2C4BA6728F9E38A00359E5D /* FeedGroupsNetworkDataSource.swift in Sources */,
-				F219374628FEFBA100AD5AF0 /* CoreDataStackMock.swift in Sources */,
+				F219374628FEFBA100AD5AF0 /* CoreDataStack.swift in Sources */,
 				F2E6E4A82902EE1800923F3B /* Feed+CoreDataClass.swift in Sources */,
 				F2E6E4A52902EE1800923F3B /* Group+CoreDataProperties.swift in Sources */,
 				F2E41FAC2901CC1500FCA844 /* SaveNewGroupUseCase.swift in Sources */,
