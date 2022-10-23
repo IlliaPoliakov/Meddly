@@ -16,12 +16,12 @@ public class Feed: NSManagedObject {
                         withLink link: URL,
                         withGroup group: FeedGroup,
                         in managedObjectContext: NSManagedObjectContext) {
-    let newChanel = self.init(context: managedObjectContext)
-    newChanel.title = title
-    newChanel.imageData = imageData
-    newChanel.link = link
-    newChanel.parentGroup = group
-    newChanel.id = UUID()
+    let newFeed = self.init(context: managedObjectContext)
+    newFeed.title = title
+    newFeed.imageData = imageData
+    newFeed.link = link
+    newFeed.parentGroup = group
+    newFeed.id = UUID()
     
     do {
       try managedObjectContext.save()

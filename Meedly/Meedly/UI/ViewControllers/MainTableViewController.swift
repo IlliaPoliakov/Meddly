@@ -12,24 +12,23 @@ class MainTableViewController: UITableViewController {
   
   // -MARK: - Properties -
   
-  var groups: [Group]?
+  var groups: [FeedGroup]?
   
   let getFeedGroupsUseCase: GetFeedGroupsUseCase = GetFeedGroupsUseCase(
-    repo: GetFeedGroupsRepositoryImpl(
-      localDataSource: FeedGroupsDataBaseDataSource(),
-      remoteDataSource: FeedGroupsNetworkDataSource()
+    repo: FeedRepositoryImpl(
+      localDataSource: DataBaseDataSource(),
+      remoteDataSource: NetworkDataSource()
     )
    )
   
   
   // -MARK: - LifeCycle -
   
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     
     groups = getFeedGroupsUseCase.execute()
-    groups == nil ? print("NIL"): print("NOTNIL")
+    
     tableView.dataSource = dataSource
     tableView.delegate = self
     
@@ -42,24 +41,29 @@ class MainTableViewController: UITableViewController {
   
   // -MARK: - Maintain table view -
   
-  private lazy var dataSource: UITableViewDiffableDataSource<String, Feed>  =  UITableViewDiffableDataSource<String, Feed> (tableView: tableView) { tableView, indexPath, itemIdentifier in
+  private lazy var dataSource: UITableViewDiffableDataSource<String, FeedItem>  =  UITableViewDiffableDataSource<String, FeedItem> (tableView: tableView) {
+    tableView, indexPath, itemIdentifier in
+    
     guard let cell = tableView.dequeueReusableCell(withIdentifier: "MainVCCustomCell")
             as? MainTableViewControllerCustomCell
     else {
       fatalError("Can't deque custom cell in MainVC.")
     }
     
-    guard let feed = self.groups?[indexPath.section].feeds?[indexPath.row] as? Feed
+    guard let item = self.groups?[indexPath.section].items?[indexPath.row] as? FeedItem
     else {
       return cell
     }
-    cell.updateData(withFeed: feed)
+    
+    cell.bind(withFeedItem: item)
     
     return cell
   }
   
   func configureInitialSnapshot(){
-    var snapshot = NSDiffableDataSourceSnapshot<String, Feed>()
+    
+    var snapshot = NSDiffableDataSourceSnapshot<String, FeedItem>()
+    
     guard groups != nil
     else {
       dataSource.apply(snapshot, animatingDifferences: true)
@@ -69,14 +73,12 @@ class MainTableViewController: UITableViewController {
     for group in groups! {
       snapshot.appendSections([group.title])
       
-      if group.feeds != nil {
-        if !(group.feeds!.isEmpty) {
-          snapshot.appendItems(group.feeds!, toSection: group.title)
-        }
+      if group.items != nil && !(group.items!.isEmpty){
+        snapshot.appendItems(group.items!, toSection: group.title)
       }
     }
     
-    dataSource.apply(snapshot, animatingDifferences: true)
+    dataSource.apply(snapshot, animatingDifferences: false)
   }
   
   func updateSnapshot(){
@@ -90,10 +92,13 @@ class MainTableViewController: UITableViewController {
     }
     
     for group in groups! {
-      if group.feeds != nil {
-        snapshot.appendItems(group.feeds!, toSection: group.title)
+      snapshot.appendSections([group.title])
+      
+      if group.items != nil && !(group.items!.isEmpty){
+        snapshot.appendItems(group.items!, toSection: group.title)
       }
     }
+    
     dataSource.apply(snapshot, animatingDifferences: true)
   }
   
@@ -106,11 +111,8 @@ class MainTableViewController: UITableViewController {
     }
     
     snapshot.appendSections(names!)
+    
     dataSource.apply(snapshot)
-  }
- 
-  override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    return groups![section].title
   }
   
   
@@ -176,7 +178,7 @@ class MainTableViewController: UITableViewController {
       updateSnapshot()
     }
     else{
-      print("Internet Connection not Available!")
+      print("Internet Connection is not Available!")
     }
   }
 }

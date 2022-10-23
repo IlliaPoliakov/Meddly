@@ -8,13 +8,13 @@
 import Foundation
 
 class SaveNewGroupUseCase {
-  private let repo: SaveNewGroupRepository
+  private let repo: FeedRepository
 
-  init(repo: SaveNewGroupRepository) {
+  init(repo: FeedRepository) {
     self.repo = repo
   }
   
-  func execute(_ newGroupName: String) -> Group {
-    return repo.saveNewGroup(newGroupName)
+  func execute(withNewGroupName group: String) -> FeedGroup {
+    return repo.saveNewGroup(group)
   }
 }

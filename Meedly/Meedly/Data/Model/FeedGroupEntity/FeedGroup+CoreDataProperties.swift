@@ -16,10 +16,10 @@ extension FeedGroup {
         return NSFetchRequest<FeedGroup>(entityName: "FeedGroup")
     }
 
-    @NSManaged public var id: UUID?
-    @NSManaged public var title: String?
-    @NSManaged public var feeds: NSOrderedSet?
-    @NSManaged public var items: NSOrderedSet?
+    @NSManaged public var id: UUID
+    @NSManaged public var title: String
+    @NSManaged public var feeds: [Feed]?
+    @NSManaged public var items: [FeedItem]?
 
 }
 

@@ -59,7 +59,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="feedImage" destination="boG-Mi-EIi" id="VSg-iW-tnB"/>
+                                    <outlet property="itemImage" destination="boG-Mi-EIi" id="UwC-Qc-ulP"/>
                                     <outlet property="pubDateLabel" destination="ZOc-5z-gEn" id="kr2-Rj-5bx"/>
                                     <outlet property="titleLabel" destination="cjL-cw-5JG" id="GIE-k4-oiV"/>
                                 </connections>
@@ -217,7 +217,7 @@
                                     <color key="baseForegroundColor" red="0.74901960779999999" green="0.35294117650000001" blue="0.94901960780000005" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="addNewChanel:" destination="Tra-FC-Whj" eventType="touchUpInside" id="aoC-gK-NL3"/>
+                                    <action selector="addNewFeed:" destination="Tra-FC-Whj" eventType="touchUpInside" id="9gY-kH-jBX"/>
                                 </connections>
                             </button>
                         </subviews>
