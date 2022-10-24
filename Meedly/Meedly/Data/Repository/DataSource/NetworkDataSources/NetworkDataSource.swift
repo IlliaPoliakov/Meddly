@@ -12,7 +12,7 @@ class NetworkDataSource: RemoteDataSource {
   // ugly, but need for URLs
   let localDataSource: DataBaseDataSource = DataBaseDataSource()
   
-  func loadData() -> [String: [Feed]]? {
+  func loadData() -> [FeedGroupEntity]? {
     
     
     return nil // tmp

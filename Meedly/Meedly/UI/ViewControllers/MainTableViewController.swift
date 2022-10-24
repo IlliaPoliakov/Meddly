@@ -12,7 +12,7 @@ class MainTableViewController: UITableViewController {
   
   // -MARK: - Properties -
   
-  var groups: [FeedGroup]?
+  var groups: [FeedGroupEntity]?
   
   let getFeedGroupsUseCase: GetFeedGroupsUseCase = GetFeedGroupsUseCase(
     repo: FeedRepositoryImpl(
@@ -41,7 +41,7 @@ class MainTableViewController: UITableViewController {
   
   // -MARK: - Maintain table view -
   
-  private lazy var dataSource: UITableViewDiffableDataSource<String, FeedItem>  =  UITableViewDiffableDataSource<String, FeedItem> (tableView: tableView) {
+  private lazy var dataSource: UITableViewDiffableDataSource<String, FeedItemEntity>  =  UITableViewDiffableDataSource<String, FeedItemEntity> (tableView: tableView) {
     tableView, indexPath, itemIdentifier in
     
     guard let cell = tableView.dequeueReusableCell(withIdentifier: "MainVCCustomCell")
@@ -50,7 +50,8 @@ class MainTableViewController: UITableViewController {
       fatalError("Can't deque custom cell in MainVC.")
     }
     
-    guard let item = self.groups?[indexPath.section].items?[indexPath.row] as? FeedItem
+    guard let item = self.groups?[indexPath.section].items?[indexPath.row]
+            as? FeedItemEntity
     else {
       return cell
     }
@@ -62,7 +63,7 @@ class MainTableViewController: UITableViewController {
   
   func configureInitialSnapshot(){
     
-    var snapshot = NSDiffableDataSourceSnapshot<String, FeedItem>()
+    var snapshot = NSDiffableDataSourceSnapshot<String, FeedItemEntity>()
     
     guard groups != nil
     else {
@@ -92,8 +93,6 @@ class MainTableViewController: UITableViewController {
     }
     
     for group in groups! {
-      snapshot.appendSections([group.title])
-      
       if group.items != nil && !(group.items!.isEmpty){
         snapshot.appendItems(group.items!, toSection: group.title)
       }

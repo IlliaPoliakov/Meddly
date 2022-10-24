@@ -10,10 +10,10 @@ import Foundation
 import CoreData
 
 
-extension FeedItem {
+extension FeedItemEntity {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<FeedItem> {
-        return NSFetchRequest<FeedItem>(entityName: "FeedItem")
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<FeedItemEntity> {
+        return NSFetchRequest<FeedItemEntity>(entityName: "FeedItemEntity")
     }
 
     @NSManaged public var feedItemDescription: String
@@ -21,10 +21,10 @@ extension FeedItem {
     @NSManaged public var pubDate: String
     @NSManaged public var title: String
     @NSManaged public var link: URL
-    @NSManaged public var parentGroup: FeedGroup
+    @NSManaged public var parentGroup: FeedGroupEntity
 
 }
 
-extension FeedItem : Identifiable {
+extension FeedItemEntity : Identifiable {
 
 }

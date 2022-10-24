@@ -14,7 +14,7 @@ class GetFeedGroupsUseCase {
     self.repo = repo
   }
   
-  func execute() -> [FeedGroup]? {
+  func execute() -> [FeedGroupEntity]? {
     return repo.getFeedGroups()
   }
 }

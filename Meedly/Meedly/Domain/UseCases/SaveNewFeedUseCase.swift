@@ -14,7 +14,7 @@ class SaveNewFeedUseCase {
     self.repo = repo
   }
   
-  func execute(withNewFeedUrl url: URL, withParentGroup group: FeedGroup) {
+  func execute(withNewFeedUrl url: URL, withParentGroup group: FeedGroupEntity) {
     return repo.saveNewFeed(url, group)
   }
 }

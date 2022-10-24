@@ -10,45 +10,45 @@ import Foundation
 import CoreData
 
 
-extension FeedGroup {
+extension FeedGroupEntity {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<FeedGroup> {
-        return NSFetchRequest<FeedGroup>(entityName: "FeedGroup")
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<FeedGroupEntity> {
+        return NSFetchRequest<FeedGroupEntity>(entityName: "FeedGroupEntity")
     }
 
     @NSManaged public var id: UUID
     @NSManaged public var title: String
-    @NSManaged public var feeds: [Feed]?
-    @NSManaged public var items: [FeedItem]?
+    @NSManaged public var feeds: [FeedEntity]?
+    @NSManaged public var items: [FeedItemEntity]?
 
 }
 
 // MARK: Generated accessors for feeds
-extension FeedGroup {
+extension FeedGroupEntity {
 
     @objc(insertObject:inFeedsAtIndex:)
-    @NSManaged public func insertIntoFeeds(_ value: Feed, at idx: Int)
+    @NSManaged public func insertIntoFeeds(_ value: FeedEntity, at idx: Int)
 
     @objc(removeObjectFromFeedsAtIndex:)
     @NSManaged public func removeFromFeeds(at idx: Int)
 
     @objc(insertFeeds:atIndexes:)
-    @NSManaged public func insertIntoFeeds(_ values: [Feed], at indexes: NSIndexSet)
+    @NSManaged public func insertIntoFeeds(_ values: [FeedEntity], at indexes: NSIndexSet)
 
     @objc(removeFeedsAtIndexes:)
     @NSManaged public func removeFromFeeds(at indexes: NSIndexSet)
 
     @objc(replaceObjectInFeedsAtIndex:withObject:)
-    @NSManaged public func replaceFeeds(at idx: Int, with value: Feed)
+    @NSManaged public func replaceFeeds(at idx: Int, with value: FeedEntity)
 
     @objc(replaceFeedsAtIndexes:withFeeds:)
-    @NSManaged public func replaceFeeds(at indexes: NSIndexSet, with values: [Feed])
+    @NSManaged public func replaceFeeds(at indexes: NSIndexSet, with values: [FeedEntity])
 
     @objc(addFeedsObject:)
-    @NSManaged public func addToFeeds(_ value: Feed)
+    @NSManaged public func addToFeeds(_ value: FeedEntity)
 
     @objc(removeFeedsObject:)
-    @NSManaged public func removeFromFeeds(_ value: Feed)
+    @NSManaged public func removeFromFeeds(_ value: FeedEntity)
 
     @objc(addFeeds:)
     @NSManaged public func addToFeeds(_ values: NSOrderedSet)
@@ -59,31 +59,31 @@ extension FeedGroup {
 }
 
 // MARK: Generated accessors for items
-extension FeedGroup {
+extension FeedGroupEntity {
 
     @objc(insertObject:inItemsAtIndex:)
-    @NSManaged public func insertIntoItems(_ value: FeedItem, at idx: Int)
+    @NSManaged public func insertIntoItems(_ value: FeedItemEntity, at idx: Int)
 
     @objc(removeObjectFromItemsAtIndex:)
     @NSManaged public func removeFromItems(at idx: Int)
 
     @objc(insertItems:atIndexes:)
-    @NSManaged public func insertIntoItems(_ values: [FeedItem], at indexes: NSIndexSet)
+    @NSManaged public func insertIntoItems(_ values: [FeedItemEntity], at indexes: NSIndexSet)
 
     @objc(removeItemsAtIndexes:)
     @NSManaged public func removeFromItems(at indexes: NSIndexSet)
 
     @objc(replaceObjectInItemsAtIndex:withObject:)
-    @NSManaged public func replaceItems(at idx: Int, with value: FeedItem)
+    @NSManaged public func replaceItems(at idx: Int, with value: FeedItemEntity)
 
     @objc(replaceItemsAtIndexes:withItems:)
-    @NSManaged public func replaceItems(at indexes: NSIndexSet, with values: [FeedItem])
+    @NSManaged public func replaceItems(at indexes: NSIndexSet, with values: [FeedItemEntity])
 
     @objc(addItemsObject:)
-    @NSManaged public func addToItems(_ value: FeedItem)
+    @NSManaged public func addToItems(_ value: FeedItemEntity)
 
     @objc(removeItemsObject:)
-    @NSManaged public func removeFromItems(_ value: FeedItem)
+    @NSManaged public func removeFromItems(_ value: FeedItemEntity)
 
     @objc(addItems:)
     @NSManaged public func addToItems(_ values: NSOrderedSet)
@@ -93,6 +93,6 @@ extension FeedGroup {
 
 }
 
-extension FeedGroup : Identifiable {
+extension FeedGroupEntity : Identifiable {
 
 }

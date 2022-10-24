@@ -10,7 +10,13 @@ import Foundation
 protocol RemoteDataSource {}
 
 protocol LocalDataSource {
-  func loadData() -> [FeedGroup]?
-  func saveNewGroup(withNewGroupName name: String) -> FeedGroup
-  func saveNewFeed(withNewFeedUrl url: URL, withParentGroup group: FeedGroup)
+  func loadData() -> [FeedGroupEntity]?
+  func saveNewGroup(withNewGroupName name: String) -> FeedGroupEntity
+  func saveNewFeed(withNewFeedUrl url: URL, withParentGroup group: FeedGroupEntity)
+  func saveNewFeedItem(withTitle title: String,
+                       withDescription feedDescription: String,
+                       withLink link: URL,
+                       withImageData imageData: Data?,
+                       withPubDate pubDate: String,
+                       withhGroup group: FeedGroupEntity)
 }

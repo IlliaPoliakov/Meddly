@@ -17,7 +17,7 @@ class MainTableViewControllerCustomCell: UITableViewCell {
     super.awakeFromNib()
   }
   
-  func bind(withFeedItem item: FeedItem) {
+  func bind(withFeedItem item: FeedItemEntity) {
     
     self.pubDateLabel.text = item.pubDate
     self.titleLabel.text = item.title
