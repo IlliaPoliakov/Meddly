@@ -7,9 +7,9 @@
 
 import Foundation
 import UIKit
-import CoreData
+//import Swinject
 
-class AddViewController: UIViewController, UITableViewDelegate {
+class AddFeedViewController: UIViewController, UITableViewDelegate {
   
   // MARK: - Properties -
   
@@ -41,6 +41,8 @@ class AddViewController: UIViewController, UITableViewDelegate {
     
     tableView.dataSource = dataSource
     tableView.delegate = self
+    
+    self.hideKeyboardWhenTappedAround()
     
     configureInitialSnapshot()
   }
@@ -187,9 +189,21 @@ class AddViewController: UIViewController, UITableViewDelegate {
     }
     
     saveNewFeedUseCase.execute(withNewFeedUrl: feedUrl, withParentGroup:
-                                  groups![selectedRowIndexPath!.row])
+                                groups![selectedRowIndexPath!.row])
     
     performSegue(withIdentifier: "unwindToMain", sender: self)
   }
   
+}
+
+extension UIViewController {
+  func hideKeyboardWhenTappedAround() {
+    let tap = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+    tap.cancelsTouchesInView = false
+    view.addGestureRecognizer(tap)
+  }
+  
+  @objc func dismissKeyboard() {
+    view.endEditing(true)
+  }
 }

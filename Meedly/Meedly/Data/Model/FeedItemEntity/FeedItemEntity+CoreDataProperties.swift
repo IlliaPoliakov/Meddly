@@ -22,6 +22,7 @@ extension FeedItemEntity {
     @NSManaged public var title: String
     @NSManaged public var link: URL
     @NSManaged public var parentGroup: FeedGroupEntity
+    @NSManaged public var id: UUID
 
 }
 

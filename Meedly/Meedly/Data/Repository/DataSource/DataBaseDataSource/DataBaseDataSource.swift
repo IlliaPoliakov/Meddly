@@ -85,6 +85,7 @@ class DataBaseDataSource: LocalDataSource {
     newFeed.imageData = imageData
     newFeed.pubDate = pubDate
     newFeed.parentGroup = group
+    newFeed.id = UUID()
     
     coreDataStack.saveContext()
   }

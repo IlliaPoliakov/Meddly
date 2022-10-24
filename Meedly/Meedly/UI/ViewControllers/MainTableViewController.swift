@@ -119,7 +119,7 @@ class MainTableViewController: UITableViewController {
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     guard segue.identifier == "showAddVC",
-          let destinaitonVC = segue.destination as? AddViewController
+          let destinaitonVC = segue.destination as? AddFeedViewController
     else {
       fatalError("Can't perform segue to AddVC")
     }
@@ -128,7 +128,7 @@ class MainTableViewController: UITableViewController {
   
   @IBAction func unwind( _ segue: UIStoryboardSegue) {
     guard segue.identifier == "unwindToMain",
-          let previousVC = segue.source as? AddViewController
+          let previousVC = segue.source as? AddFeedViewController
     else {
       fatalError("Can't perform segue to AddVC")
     }

@@ -130,10 +130,10 @@
             </objects>
             <point key="canvasLocation" x="380" y="-57.582938388625593"/>
         </scene>
-        <!--Add View Controller-->
+        <!--Add Feed View Controller-->
         <scene sceneID="3sw-1M-R1n">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="Tra-FC-Whj" customClass="AddViewController" customModule="Meedly" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="Tra-FC-Whj" customClass="AddFeedViewController" customModule="Meedly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mlw-VZ-SuO">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="787"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
