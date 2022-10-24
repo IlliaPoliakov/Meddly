@@ -12,7 +12,7 @@ class DataBaseDataSource: LocalDataSource {
   
   // -MARK: - Properties -
   
-  let coreDataStack = (UIApplication.shared.delegate as! AppDelegate).coreDataStack
+  let coreDataStack = AppDelegate.DIContainer.resolve(CoreDataStack.self)!
   
   
   // -MARK: - Functions -

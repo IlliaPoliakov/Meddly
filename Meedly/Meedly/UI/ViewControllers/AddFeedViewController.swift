@@ -11,27 +11,23 @@ import UIKit
 
 class AddFeedViewController: UIViewController, UITableViewDelegate {
   
-  // MARK: - Properties -
-  
+  // MARK: - IBOutlets -
+
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var urlTextField: UITextField!
+  
+  
+  // MARK: - Properties -
   
   var newGroupNames: [String]?
   var selectedRowIndexPath: IndexPath? = nil
   var groups: [FeedGroupEntity]?
   
-  var saveNewGroupNameUseCase: SaveNewGroupUseCase = SaveNewGroupUseCase(
-    repo: FeedRepositoryImpl(
-      localDataSource: DataBaseDataSource(),
-      remoteDataSource: NetworkDataSource()
-    )
-  )
-  var saveNewFeedUseCase: SaveNewFeedUseCase = SaveNewFeedUseCase(
-    repo: FeedRepositoryImpl(
-      localDataSource: DataBaseDataSource(),
-      remoteDataSource: NetworkDataSource()
-    )
-  )
+  private let saveNewGroupUseCase: SaveNewGroupUseCase =
+  AppDelegate.DIContainer.resolve(SaveNewGroupUseCase.self)!
+  
+  private let saveNewFeedUseCase: SaveNewFeedUseCase =
+  AppDelegate.DIContainer.resolve(SaveNewFeedUseCase.self)!
   
   
   // MARK: - Lifecycle -
@@ -132,7 +128,7 @@ class AddFeedViewController: UIViewController, UITableViewDelegate {
         return
       }
       
-      let newGroup = saveNewGroupNameUseCase.execute(withNewGroupName: groupName)
+      let newGroup = saveNewGroupUseCase.execute(withNewGroupName: groupName)
       
       if groups != nil {
         groups?.append(newGroup)

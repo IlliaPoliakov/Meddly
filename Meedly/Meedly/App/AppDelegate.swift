@@ -7,18 +7,39 @@
 
 import UIKit
 import CoreData
+import Swinject
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
   
-  let coreDataStack: CoreDataStack = CoreDataStack.shared
+  // -MARK: - Properties -
+  
+  public static let DIContainer = Container()
+  
+  
+  // MARK: UISceneSession Lifecycle
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     
+    AppDelegate.DIContainer.register(LocalDataSource.self) { _ in DataBaseDataSource() }
+    AppDelegate.DIContainer.register(RemoteDataSource.self) { _ in NetworkDataSource() }
+    AppDelegate.DIContainer.register(CoreDataStack.self) { _ in CoreDataStack.shared }
+    AppDelegate.DIContainer.register(FeedRepository.self) { resolver in
+      FeedRepositoryImpl(localDataSource: resolver.resolve(LocalDataSource.self)!,
+                         remoteDataSource: resolver.resolve(RemoteDataSource.self)!)
+    }
+    AppDelegate.DIContainer.register(GetFeedGroupsUseCase.self) { resolver in
+      GetFeedGroupsUseCase(repo: resolver.resolve(FeedRepository.self)!)
+    }
+    AppDelegate.DIContainer.register(SaveNewGroupUseCase.self) { resolver in
+      SaveNewGroupUseCase(repo: resolver.resolve(FeedRepository.self)!)
+    }
+    AppDelegate.DIContainer.register(SaveNewFeedUseCase.self) { resolver in
+      SaveNewFeedUseCase(repo: resolver.resolve(FeedRepository.self)!)
+    }
+    
     return true
   }
-  
-  // MARK: UISceneSession Lifecycle
   
   func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
     
@@ -26,32 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
   
   func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-  }
-  
-  // MARK: - Core Data stack
-  
-  lazy var persistentContainer: NSPersistentContainer = {
-    let container = NSPersistentContainer(name: "FeedDataModel")
-    container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-      if let error = error as NSError? {
-        fatalError("Unresolved error \(error), \(error.userInfo)")
-      }
-    })
-    return container
-  }()
-  
-  // MARK: - Core Data Saving support
-  
-  func saveContext () {
-    let context = persistentContainer.viewContext
-    if context.hasChanges {
-      do {
-        try context.save()
-      } catch {
-        let nserror = error as NSError
-        fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-      }
-    }
+    
   }
   
 }

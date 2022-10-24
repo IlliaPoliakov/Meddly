@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		111456D2CB2D67FD5D5E02A3 /* Pods_Meedly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6252DBD852F2E91B4E0218C5 /* Pods_Meedly.framework */; };
+		DF6FB80B8F0945FCAEECACDC /* Pods_Meedly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 183F782C43C2D7071D399C3A /* Pods_Meedly.framework */; };
 		F219374628FEFBA100AD5AF0 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F219374528FEFBA100AD5AF0 /* CoreDataStack.swift */; };
 		F2574FEF290082F800CF540C /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2574FEE290082F800CF540C /* Reachability.swift */; };
 		F2929C112906E24B006B96CF /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2929C102906E24B006B96CF /* Feed.swift */; };
@@ -39,9 +39,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		11983F37A6BCC55533E052E1 /* Pods-Meedly.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Meedly.release.xcconfig"; path = "Target Support Files/Pods-Meedly/Pods-Meedly.release.xcconfig"; sourceTree = "<group>"; };
-		6252DBD852F2E91B4E0218C5 /* Pods_Meedly.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Meedly.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D7A44B29216258F4E310168F /* Pods-Meedly.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Meedly.debug.xcconfig"; path = "Target Support Files/Pods-Meedly/Pods-Meedly.debug.xcconfig"; sourceTree = "<group>"; };
+		183F782C43C2D7071D399C3A /* Pods_Meedly.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Meedly.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A20D4C0BF1D9E8C0139E171 /* Pods-Meedly.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Meedly.release.xcconfig"; path = "Target Support Files/Pods-Meedly/Pods-Meedly.release.xcconfig"; sourceTree = "<group>"; };
+		CC7759C3FA41CEFADAAB43F8 /* Pods-Meedly.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Meedly.debug.xcconfig"; path = "Target Support Files/Pods-Meedly/Pods-Meedly.debug.xcconfig"; sourceTree = "<group>"; };
 		F219374528FEFBA100AD5AF0 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		F2574FEE290082F800CF540C /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		F2929C102906E24B006B96CF /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
@@ -79,17 +79,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				111456D2CB2D67FD5D5E02A3 /* Pods_Meedly.framework in Frameworks */,
+				DF6FB80B8F0945FCAEECACDC /* Pods_Meedly.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A2817A2122C8E9BC86104CC5 /* Frameworks */ = {
+		B6C0020EA94878A088921D78 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6252DBD852F2E91B4E0218C5 /* Pods_Meedly.framework */,
+				183F782C43C2D7071D399C3A /* Pods_Meedly.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -97,10 +97,9 @@
 		BA82BC933808C5C6F11B7B63 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				D7A44B29216258F4E310168F /* Pods-Meedly.debug.xcconfig */,
-				11983F37A6BCC55533E052E1 /* Pods-Meedly.release.xcconfig */,
+				CC7759C3FA41CEFADAAB43F8 /* Pods-Meedly.debug.xcconfig */,
+				1A20D4C0BF1D9E8C0139E171 /* Pods-Meedly.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -110,7 +109,7 @@
 				F2C4B9F228F7269500359E5D /* Meedly */,
 				F2C4B9F128F7269500359E5D /* Products */,
 				BA82BC933808C5C6F11B7B63 /* Pods */,
-				A2817A2122C8E9BC86104CC5 /* Frameworks */,
+				B6C0020EA94878A088921D78 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -238,9 +237,9 @@
 		F2C4BA4628F85E8A00359E5D /* DataSource */ = {
 			isa = PBXGroup;
 			children = (
+				F2C4BA7728FDAD0400359E5D /* DataSourceProtocols.swift */,
 				F2C4BA6328F9BA3A00359E5D /* NetworkDataSources */,
 				F2C4BA6228F9BA2A00359E5D /* DataBaseDataSource */,
-				F2C4BA7728FDAD0400359E5D /* DataSourceProtocols.swift */,
 			);
 			path = DataSource;
 			sourceTree = "<group>";
@@ -258,9 +257,9 @@
 		F2C4BA4828F88B8200359E5D /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				F2C4BA5328F97EE500359E5D /* TableViewCustomCells */,
 				F2C4BA4B28F8AB7600359E5D /* MainTableViewController.swift */,
 				F2C4BA4D28F8AE1C00359E5D /* AddFeedViewController.swift */,
+				F2C4BA5328F97EE500359E5D /* TableViewCustomCells */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -333,10 +332,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F2C4BA0728F7269600359E5D /* Build configuration list for PBXNativeTarget "Meedly" */;
 			buildPhases = (
-				6A77C9E47E6680122B256918 /* [CP] Check Pods Manifest.lock */,
+				A5B277D620D044DE4E024392 /* [CP] Check Pods Manifest.lock */,
 				F2C4B9EC28F7269500359E5D /* Sources */,
 				F2C4B9ED28F7269500359E5D /* Frameworks */,
 				F2C4B9EE28F7269500359E5D /* Resources */,
+				26E558DDA55801E93AC0C1C4 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -394,7 +394,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		6A77C9E47E6680122B256918 /* [CP] Check Pods Manifest.lock */ = {
+		26E558DDA55801E93AC0C1C4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Meedly/Pods-Meedly-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Meedly/Pods-Meedly-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Meedly/Pods-Meedly-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A5B277D620D044DE4E024392 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -589,7 +606,7 @@
 		};
 		F2C4BA0828F7269600359E5D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D7A44B29216258F4E310168F /* Pods-Meedly.debug.xcconfig */;
+			baseConfigurationReference = CC7759C3FA41CEFADAAB43F8 /* Pods-Meedly.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -617,7 +634,7 @@
 		};
 		F2C4BA0928F7269600359E5D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 11983F37A6BCC55533E052E1 /* Pods-Meedly.release.xcconfig */;
+			baseConfigurationReference = 1A20D4C0BF1D9E8C0139E171 /* Pods-Meedly.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

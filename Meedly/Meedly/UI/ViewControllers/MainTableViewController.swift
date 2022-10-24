@@ -12,14 +12,10 @@ class MainTableViewController: UITableViewController {
   
   // -MARK: - Properties -
   
-  var groups: [FeedGroupEntity]?
+  private var groups: [FeedGroupEntity]?
   
-  let getFeedGroupsUseCase: GetFeedGroupsUseCase = GetFeedGroupsUseCase(
-    repo: FeedRepositoryImpl(
-      localDataSource: DataBaseDataSource(),
-      remoteDataSource: NetworkDataSource()
-    )
-   )
+  private let getFeedGroupsUseCase: GetFeedGroupsUseCase =
+  AppDelegate.DIContainer.resolve(GetFeedGroupsUseCase.self)!
   
   
   // -MARK: - LifeCycle -
@@ -36,6 +32,8 @@ class MainTableViewController: UITableViewController {
     tableView.estimatedRowHeight = 600
     
     configureInitialSnapshot()
+    
+    
   }
   
   
