@@ -14,13 +14,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   // -MARK: - Properties -
   
-  public static let DIContainer = XDIContainer.shared
+  public static let DIContainer = DependencyInjectionContainer.shared
   
   // MARK: UISceneSession Lifecycle
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     
-    XDIContainer.initialize() // initialize dependensies
+    DependencyInjectionContainer.initialize() // initialize dependensies
     
     return true
   }
