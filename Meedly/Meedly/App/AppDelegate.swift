@@ -14,29 +14,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   // -MARK: - Properties -
   
-  public static let DIContainer = Container()
-  
+  public static let DIContainer = XDIContainer.shared
   
   // MARK: UISceneSession Lifecycle
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     
-    AppDelegate.DIContainer.register(LocalDataSource.self) { _ in DataBaseDataSource() }
-    AppDelegate.DIContainer.register(RemoteDataSource.self) { _ in NetworkDataSource() }
-    AppDelegate.DIContainer.register(CoreDataStack.self) { _ in CoreDataStack.shared }
-    AppDelegate.DIContainer.register(FeedRepository.self) { resolver in
-      FeedRepositoryImpl(localDataSource: resolver.resolve(LocalDataSource.self)!,
-                         remoteDataSource: resolver.resolve(RemoteDataSource.self)!)
-    }
-    AppDelegate.DIContainer.register(GetFeedGroupsUseCase.self) { resolver in
-      GetFeedGroupsUseCase(repo: resolver.resolve(FeedRepository.self)!)
-    }
-    AppDelegate.DIContainer.register(SaveNewGroupUseCase.self) { resolver in
-      SaveNewGroupUseCase(repo: resolver.resolve(FeedRepository.self)!)
-    }
-    AppDelegate.DIContainer.register(SaveNewFeedUseCase.self) { resolver in
-      SaveNewFeedUseCase(repo: resolver.resolve(FeedRepository.self)!)
-    }
+    XDIContainer.initialize() // initialize dependensies
     
     return true
   }
@@ -46,9 +30,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
   }
   
-  func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
+  func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>){
     
   }
-  
 }
 

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Group {
+struct FeedGroup {
   public var id: UUID
   public var title: String
   public var feeds: [Feed]?

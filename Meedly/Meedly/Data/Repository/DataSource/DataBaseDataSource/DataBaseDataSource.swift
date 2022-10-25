@@ -28,24 +28,24 @@ class DataBaseDataSource: LocalDataSource {
     
     // clean experemental rubbish
     
-    //        for group in groups {
-    //          if group.feeds != nil {
-    //            if !(group.feeds!.isEmpty) {
-    //              for feed in group.feeds! {
-    //                managedContext.delete(feed)
-    //              }
-    //            }
-    //          }
-    //          if group.feedChanels != nil {
-    //            if !(group.feedChanels!.isEmpty) {
-    //              for chanel in group.feedChanels! {
-    //                managedContext.delete(chanel)
-    //              }
-    //            }
-    //          }
-    //          managedContext.delete(group)
-    //        }
-    //        try? managedContext.save()
+//    for group in groups {
+//      if group.items != nil {
+//        if !(group.items!.isEmpty) {
+//          for item in group.items! {
+//            coreDataStack.managedContext.delete(item)
+//          }
+//        }
+//      }
+//      if group.feeds != nil {
+//        if !(group.feeds!.isEmpty) {
+//          for feed in group.feeds! {
+//            coreDataStack.managedContext.delete(feed)
+//          }
+//        }
+//      }
+//      coreDataStack.managedContext.delete(group)
+//    }
+//    try? coreDataStack.managedContext.save()
     
     return groups
   }
@@ -89,5 +89,4 @@ class DataBaseDataSource: LocalDataSource {
     
     coreDataStack.saveContext()
   }
-  
 }
