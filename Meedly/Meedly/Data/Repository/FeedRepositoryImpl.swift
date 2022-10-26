@@ -26,8 +26,8 @@ class FeedRepositoryImpl: FeedRepository {
   
   func getFeedGroups() -> [FeedGroupEntity]? {
     var groups: [FeedGroupEntity]? = localDataSource.loadData()
-    if Reachability.isConnectedToNetwork() {
-      
+    if Connectivity.isConnectedToInternet() {
+
       ///
     }
     else {

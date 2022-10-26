@@ -170,7 +170,7 @@ class MainTableViewController: UITableViewController {
   // -MARK: - Supplementary -
   
   func update(){
-    if Reachability.isConnectedToNetwork(){
+    if Connectivity.isConnectedToInternet(){
       groups = getFeedGroupsUseCase.execute()
       updateSnapshot()
     }
