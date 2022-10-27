@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DF6FB80B8F0945FCAEECACDC /* Pods_Meedly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 183F782C43C2D7071D399C3A /* Pods_Meedly.framework */; };
 		F219374628FEFBA100AD5AF0 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F219374528FEFBA100AD5AF0 /* CoreDataStack.swift */; };
 		F2256F1F290876A0003DA153 /* DIConatiner.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2256F1E290876A0003DA153 /* DIConatiner.swift */; };
-		F2574FEF290082F800CF540C /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2574FEE290082F800CF540C /* Reachability.swift */; };
+		F248D723290A7AFE000E8C50 /* GetLoadedFeedGroupsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F248D722290A7AFE000E8C50 /* GetLoadedFeedGroupsUseCase.swift */; };
+		F2574FEF290082F800CF540C /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2574FEE290082F800CF540C /* Connectivity.swift */; };
 		F2929C112906E24B006B96CF /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2929C102906E24B006B96CF /* Feed.swift */; };
 		F2929C132906E296006B96CF /* FeedGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2929C122906E296006B96CF /* FeedGroup.swift */; };
 		F2932B8E2906D1B300581568 /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2932B8D2906D1B300581568 /* FeedItem.swift */; };
@@ -27,7 +27,7 @@
 		F2C4BA6528F9BB5000359E5D /* FeedRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4BA6428F9BB5000359E5D /* FeedRepositoryImpl.swift */; };
 		F2C4BA6728F9E38A00359E5D /* NetworkDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4BA6628F9E38A00359E5D /* NetworkDataSource.swift */; };
 		F2C4BA7828FDAD0400359E5D /* DataSourceProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4BA7728FDAD0400359E5D /* DataSourceProtocols.swift */; };
-		F2E41FAA2901C1BE00FCA844 /* GetFeedGroupsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E41FA92901C1BE00FCA844 /* GetFeedGroupsUseCase.swift */; };
+		F2E41FAA2901C1BE00FCA844 /* GetCachedFeedGroupsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E41FA92901C1BE00FCA844 /* GetCachedFeedGroupsUseCase.swift */; };
 		F2E41FAC2901CC1500FCA844 /* SaveNewGroupUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E41FAB2901CC1500FCA844 /* SaveNewGroupUseCase.swift */; };
 		F2E41FB229020A4700FCA844 /* SaveNewFeedUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E41FB129020A4700FCA844 /* SaveNewFeedUseCase.swift */; };
 		F2F1E56C2905D2AC00EE942A /* DataBaseDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F1E56B2905D2AC00EE942A /* DataBaseDataSource.swift */; };
@@ -37,15 +37,17 @@
 		F2F1E5782905D70200EE942A /* FeedItemEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F1E5722905D70200EE942A /* FeedItemEntity+CoreDataProperties.swift */; };
 		F2F1E5792905D70200EE942A /* Feed+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F1E5732905D70200EE942A /* Feed+CoreDataClass.swift */; };
 		F2F1E57A2905D70200EE942A /* Feed+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F1E5742905D70200EE942A /* Feed+CoreDataProperties.swift */; };
+		FB6529D7DD00F7C9912F780C /* Pods_Meedly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAC134E9D866701D7B3AED6C /* Pods_Meedly.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		183F782C43C2D7071D399C3A /* Pods_Meedly.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Meedly.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1A20D4C0BF1D9E8C0139E171 /* Pods-Meedly.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Meedly.release.xcconfig"; path = "Target Support Files/Pods-Meedly/Pods-Meedly.release.xcconfig"; sourceTree = "<group>"; };
-		CC7759C3FA41CEFADAAB43F8 /* Pods-Meedly.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Meedly.debug.xcconfig"; path = "Target Support Files/Pods-Meedly/Pods-Meedly.debug.xcconfig"; sourceTree = "<group>"; };
+		954BD52AE918519170D529BB /* Pods-Meedly.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Meedly.release.xcconfig"; path = "Target Support Files/Pods-Meedly/Pods-Meedly.release.xcconfig"; sourceTree = "<group>"; };
+		A59E9D8226821FAFC220C145 /* Pods-Meedly.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Meedly.debug.xcconfig"; path = "Target Support Files/Pods-Meedly/Pods-Meedly.debug.xcconfig"; sourceTree = "<group>"; };
+		DAC134E9D866701D7B3AED6C /* Pods_Meedly.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Meedly.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F219374528FEFBA100AD5AF0 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		F2256F1E290876A0003DA153 /* DIConatiner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIConatiner.swift; sourceTree = "<group>"; };
-		F2574FEE290082F800CF540C /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		F248D722290A7AFE000E8C50 /* GetLoadedFeedGroupsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetLoadedFeedGroupsUseCase.swift; sourceTree = "<group>"; };
+		F2574FEE290082F800CF540C /* Connectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connectivity.swift; sourceTree = "<group>"; };
 		F2929C102906E24B006B96CF /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
 		F2929C122906E296006B96CF /* FeedGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedGroup.swift; sourceTree = "<group>"; };
 		F2932B8D2906D1B300581568 /* FeedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
@@ -64,7 +66,7 @@
 		F2C4BA6428F9BB5000359E5D /* FeedRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedRepositoryImpl.swift; sourceTree = "<group>"; };
 		F2C4BA6628F9E38A00359E5D /* NetworkDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataSource.swift; sourceTree = "<group>"; };
 		F2C4BA7728FDAD0400359E5D /* DataSourceProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceProtocols.swift; sourceTree = "<group>"; };
-		F2E41FA92901C1BE00FCA844 /* GetFeedGroupsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFeedGroupsUseCase.swift; sourceTree = "<group>"; };
+		F2E41FA92901C1BE00FCA844 /* GetCachedFeedGroupsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCachedFeedGroupsUseCase.swift; sourceTree = "<group>"; };
 		F2E41FAB2901CC1500FCA844 /* SaveNewGroupUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveNewGroupUseCase.swift; sourceTree = "<group>"; };
 		F2E41FB129020A4700FCA844 /* SaveNewFeedUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveNewFeedUseCase.swift; sourceTree = "<group>"; };
 		F2F1E56B2905D2AC00EE942A /* DataBaseDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseDataSource.swift; sourceTree = "<group>"; };
@@ -81,28 +83,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DF6FB80B8F0945FCAEECACDC /* Pods_Meedly.framework in Frameworks */,
+				FB6529D7DD00F7C9912F780C /* Pods_Meedly.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B6C0020EA94878A088921D78 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				183F782C43C2D7071D399C3A /* Pods_Meedly.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		BA82BC933808C5C6F11B7B63 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				CC7759C3FA41CEFADAAB43F8 /* Pods-Meedly.debug.xcconfig */,
-				1A20D4C0BF1D9E8C0139E171 /* Pods-Meedly.release.xcconfig */,
+				A59E9D8226821FAFC220C145 /* Pods-Meedly.debug.xcconfig */,
+				954BD52AE918519170D529BB /* Pods-Meedly.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		C39A27B31085E4A2F65A2EF6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DAC134E9D866701D7B3AED6C /* Pods_Meedly.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		F2C4B9E728F7269500359E5D = {
@@ -111,7 +113,7 @@
 				F2C4B9F228F7269500359E5D /* Meedly */,
 				F2C4B9F128F7269500359E5D /* Products */,
 				BA82BC933808C5C6F11B7B63 /* Pods */,
-				B6C0020EA94878A088921D78 /* Frameworks */,
+				C39A27B31085E4A2F65A2EF6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -202,9 +204,10 @@
 		F2C4BA4028F830AD00359E5D /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
-				F2E41FA92901C1BE00FCA844 /* GetFeedGroupsUseCase.swift */,
 				F2E41FAB2901CC1500FCA844 /* SaveNewGroupUseCase.swift */,
 				F2E41FB129020A4700FCA844 /* SaveNewFeedUseCase.swift */,
+				F248D722290A7AFE000E8C50 /* GetLoadedFeedGroupsUseCase.swift */,
+				F2E41FA92901C1BE00FCA844 /* GetCachedFeedGroupsUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -289,7 +292,7 @@
 			isa = PBXGroup;
 			children = (
 				F2C4BA6628F9E38A00359E5D /* NetworkDataSource.swift */,
-				F2574FEE290082F800CF540C /* Reachability.swift */,
+				F2574FEE290082F800CF540C /* Connectivity.swift */,
 			);
 			path = NetworkDataSources;
 			sourceTree = "<group>";
@@ -335,11 +338,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F2C4BA0728F7269600359E5D /* Build configuration list for PBXNativeTarget "Meedly" */;
 			buildPhases = (
-				A5B277D620D044DE4E024392 /* [CP] Check Pods Manifest.lock */,
+				13262900F2990F22A4BB03B4 /* [CP] Check Pods Manifest.lock */,
 				F2C4B9EC28F7269500359E5D /* Sources */,
 				F2C4B9ED28F7269500359E5D /* Frameworks */,
 				F2C4B9EE28F7269500359E5D /* Resources */,
-				26E558DDA55801E93AC0C1C4 /* [CP] Embed Pods Frameworks */,
+				3471D56AFECACED79A967EAE /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -397,24 +400,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		26E558DDA55801E93AC0C1C4 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Meedly/Pods-Meedly-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Meedly/Pods-Meedly-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Meedly/Pods-Meedly-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A5B277D620D044DE4E024392 /* [CP] Check Pods Manifest.lock */ = {
+		13262900F2990F22A4BB03B4 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -434,6 +420,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3471D56AFECACED79A967EAE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Meedly/Pods-Meedly-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Meedly/Pods-Meedly-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Meedly/Pods-Meedly-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -462,8 +465,9 @@
 				F2E41FAC2901CC1500FCA844 /* SaveNewGroupUseCase.swift in Sources */,
 				F2C4BA6528F9BB5000359E5D /* FeedRepositoryImpl.swift in Sources */,
 				F2C4B9F628F7269500359E5D /* SceneDelegate.swift in Sources */,
-				F2E41FAA2901C1BE00FCA844 /* GetFeedGroupsUseCase.swift in Sources */,
-				F2574FEF290082F800CF540C /* Reachability.swift in Sources */,
+				F2E41FAA2901C1BE00FCA844 /* GetCachedFeedGroupsUseCase.swift in Sources */,
+				F248D723290A7AFE000E8C50 /* GetLoadedFeedGroupsUseCase.swift in Sources */,
+				F2574FEF290082F800CF540C /* Connectivity.swift in Sources */,
 				F2E41FB229020A4700FCA844 /* SaveNewFeedUseCase.swift in Sources */,
 				F2C4BA5228F9596700359E5D /* FeedRepository.swift in Sources */,
 				F2F1E56C2905D2AC00EE942A /* DataBaseDataSource.swift in Sources */,
@@ -610,7 +614,7 @@
 		};
 		F2C4BA0828F7269600359E5D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CC7759C3FA41CEFADAAB43F8 /* Pods-Meedly.debug.xcconfig */;
+			baseConfigurationReference = A59E9D8226821FAFC220C145 /* Pods-Meedly.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -638,7 +642,7 @@
 		};
 		F2C4BA0928F7269600359E5D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1A20D4C0BF1D9E8C0139E171 /* Pods-Meedly.release.xcconfig */;
+			baseConfigurationReference = 954BD52AE918519170D529BB /* Pods-Meedly.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

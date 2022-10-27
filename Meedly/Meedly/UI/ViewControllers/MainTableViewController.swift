@@ -14,8 +14,11 @@ class MainTableViewController: UITableViewController {
   
   private var groups: [FeedGroupEntity]?
   
-  private let getFeedGroupsUseCase: GetFeedGroupsUseCase =
-  AppDelegate.DIContainer.resolve(GetFeedGroupsUseCase.self)!
+  private let getCachedFeedGroupsUseCase: GetCachedFeedGroupsUseCase =
+  AppDelegate.DIContainer.resolve(GetCachedFeedGroupsUseCase.self)!
+  
+  private let getLoadedFeedGroupsUseCase: GetLoadedFeedGroupsUseCase =
+  AppDelegate.DIContainer.resolve(GetLoadedFeedGroupsUseCase.self)!
   
   
   // -MARK: - LifeCycle -
@@ -23,7 +26,21 @@ class MainTableViewController: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    groups = getFeedGroupsUseCase.execute()
+    DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+      let cachedGroups = self?.getCachedFeedGroupsUseCase.execute()
+      
+      DispatchQueue.main.async {
+        self?.groups = cachedGroups
+      }
+    }
+    
+    DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+      let loadedGroups = self?.getLoadedFeedGroupsUseCase.execute()
+      
+      DispatchQueue.main.async {
+        self?.groups = loadedGroups
+      }
+    }
     
     tableView.dataSource = dataSource
     tableView.delegate = self
@@ -171,8 +188,15 @@ class MainTableViewController: UITableViewController {
   
   func update(){
     if Connectivity.isConnectedToInternet(){
-      groups = getFeedGroupsUseCase.execute()
-      updateSnapshot()
+      DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+        let loadedGroups = self?.getLoadedFeedGroupsUseCase.execute()
+        
+        DispatchQueue.main.async {
+          self?.groups = loadedGroups
+          self?.updateSnapshot()
+        }
+      }
+      
     }
     else{
       print("Internet Connection is not Available!")

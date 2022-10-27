@@ -7,7 +7,7 @@
 
 import Foundation
 
-class GetFeedGroupsUseCase {
+class GetLoadedFeedGroupsUseCase {
   private let repo: FeedRepository
 
   init(repo: FeedRepository) {
@@ -15,6 +15,6 @@ class GetFeedGroupsUseCase {
   }
   
   func execute() -> [FeedGroupEntity]? {
-    return repo.getFeedGroups()
+    return repo.getLoadedFeedGroups()
   }
 }

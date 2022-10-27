@@ -8,7 +8,8 @@
 import Foundation
 
 protocol FeedRepository {
-  func getFeedGroups() -> [FeedGroupEntity]?
+  func getCachedFeedGroups() -> [FeedGroupEntity]?
+  func getLoadedFeedGroups() -> [FeedGroupEntity]?
   func saveNewGroup(_ newGroupName: String) -> FeedGroupEntity
   func saveNewFeed(_ newFeedURL: URL, _ group: FeedGroupEntity)
   func saveNewFeedItem(_ title: String,

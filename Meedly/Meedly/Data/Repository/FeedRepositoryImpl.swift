@@ -15,6 +15,7 @@ class FeedRepositoryImpl: FeedRepository {
   private let localDataSource: LocalDataSource
   private let remoteDataSource: RemoteDataSource
   
+  private var groups: [FeedGroupEntity]? = nil
   
   init(localDataSource: LocalDataSource, remoteDataSource: RemoteDataSource) {
     self.localDataSource = localDataSource
@@ -24,17 +25,22 @@ class FeedRepositoryImpl: FeedRepository {
   
   // -MARK: - Functional -
   
-  func getFeedGroups() -> [FeedGroupEntity]? {
-    var groups: [FeedGroupEntity]? = localDataSource.loadData()
+  func getCachedFeedGroups() -> [FeedGroupEntity]? {
+    groups = localDataSource.loadData()
+    return groups
+  }
+  
+  func getLoadedFeedGroups() -> [FeedGroupEntity]? {
     if Connectivity.isConnectedToInternet() {
-
-      ///
+      
+      
     }
     else {
       return groups
     }
     return groups
   }
+  
   
   func saveNewGroup(_ newGroupName: String) -> FeedGroupEntity {
     return localDataSource.saveNewGroup(withNewGroupName: newGroupName)
@@ -45,11 +51,11 @@ class FeedRepositoryImpl: FeedRepository {
   }
   
   func saveNewFeedItem(_ title: String,
-                   _ feedDescription: String,
-                   _ link: URL,
-                   _ imageData: Data?,
-                   _ pubDate: String,
-                   _ group: FeedGroupEntity) {
+                       _ feedDescription: String,
+                       _ link: URL,
+                       _ imageData: Data?,
+                       _ pubDate: String,
+                       _ group: FeedGroupEntity) {
     
     localDataSource.saveNewFeedItem(withTitle: title,
                                     withDescription: feedDescription,
