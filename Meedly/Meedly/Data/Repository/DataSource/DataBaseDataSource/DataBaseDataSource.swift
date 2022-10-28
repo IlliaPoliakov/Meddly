@@ -62,11 +62,12 @@ class DataBaseDataSource: LocalDataSource {
   }
   
   func saveNewFeed(withNewFeedUrl url: URL, withParentGroup group: FeedGroupEntity) {
-    let feed = FeedEntity.init(context: coreDataStack.managedContext)
+    let newFeed = FeedEntity.init(context: coreDataStack.managedContext)
     
-    feed.link = url
-    feed.id = UUID()
-    feed.parentGroup = group
+    newFeed.link = url
+    newFeed.id = UUID()
+    newFeed.parentGroup = group
+    group.addToFeeds(newFeed)
     
     coreDataStack.saveContext()
   }
@@ -78,14 +79,15 @@ class DataBaseDataSource: LocalDataSource {
                        withPubDate pubDate: String,
                        withhGroup group: FeedGroupEntity) {
     
-    let newFeed = FeedItemEntity.init(context: coreDataStack.managedContext)
-    newFeed.title = title
-    newFeed.feedItemDescription = feedDescription
-    newFeed.link = link
-    newFeed.imageData = imageData
-    newFeed.pubDate = pubDate
-    newFeed.parentGroup = group
-    newFeed.id = UUID()
+    let newFeedItem = FeedItemEntity.init(context: coreDataStack.managedContext)
+    newFeedItem.title = title
+    newFeedItem.feedItemDescription = feedDescription
+    newFeedItem.link = link
+    newFeedItem.imageData = imageData
+    newFeedItem.pubDate = pubDate
+    newFeedItem.parentGroup = group
+    newFeedItem.id = UUID()
+    group.addToItems(newFeedItem)
     
     coreDataStack.saveContext()
   }

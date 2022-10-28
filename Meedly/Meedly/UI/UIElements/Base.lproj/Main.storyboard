@@ -64,6 +64,41 @@
                                     <outlet property="titleLabel" destination="cjL-cw-5JG" id="GIE-k4-oiV"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MainVCCustomCellWithoutText" id="T0m-mx-drR" customClass="MainVCCustomCellWithoutText" customModule="Meedly" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="369" width="390" height="151.66667175292969"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="T0m-mx-drR" id="4wr-NF-LeR">
+                                    <rect key="frame" x="0.0" y="0.0" width="390" height="151.66667175292969"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="749" text="omg sebastian vettel won suzuki gran prii in kdnvpijaebvpjaiebnrc rehdfb ejipabncfa scph e" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h7u-Ge-nLX">
+                                            <rect key="frame" x="25" y="25" width="340" height="64.333333333333329"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="08.05.2003" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yqq-a8-dRr">
+                                            <rect key="frame" x="15" y="104.33333333333333" width="360" height="17.333333333333329"/>
+                                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="h7u-Ge-nLX" firstAttribute="top" secondItem="4wr-NF-LeR" secondAttribute="top" constant="25" id="1kz-Ns-kWq"/>
+                                        <constraint firstAttribute="bottom" secondItem="yqq-a8-dRr" secondAttribute="bottom" constant="30" id="4nK-Gu-2m4"/>
+                                        <constraint firstItem="yqq-a8-dRr" firstAttribute="top" secondItem="h7u-Ge-nLX" secondAttribute="bottom" constant="15" id="DTb-Ls-39v"/>
+                                        <constraint firstAttribute="trailing" secondItem="yqq-a8-dRr" secondAttribute="trailing" constant="15" id="YJL-re-rRg"/>
+                                        <constraint firstAttribute="trailing" secondItem="h7u-Ge-nLX" secondAttribute="trailing" constant="25" id="d6R-ab-57V"/>
+                                        <constraint firstItem="yqq-a8-dRr" firstAttribute="leading" secondItem="4wr-NF-LeR" secondAttribute="leading" constant="15" id="gdN-sh-5GS"/>
+                                        <constraint firstItem="h7u-Ge-nLX" firstAttribute="leading" secondItem="4wr-NF-LeR" secondAttribute="leading" constant="25" id="pzt-Vt-wgl"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="pubDateLabel" destination="yqq-a8-dRr" id="f8w-nq-hc2"/>
+                                    <outlet property="titleLabel" destination="h7u-Ge-nLX" id="ErU-Ju-uep"/>
+                                </connections>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="Ii9-o7-ios" id="UuH-SQ-ZJ2"/>

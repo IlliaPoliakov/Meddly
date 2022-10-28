@@ -12,10 +12,4 @@ protocol FeedRepository {
   func getLoadedFeedGroups(_ completion: @escaping ([FeedGroupEntity]?, String?) -> Void )
   func saveNewGroup(_ newGroupName: String) -> FeedGroupEntity
   func saveNewFeed(_ newFeedURL: URL, _ group: FeedGroupEntity)
-  func saveNewFeedItem(_ title: String,
-                       _ feedDescription: String,
-                       _ link: URL,
-                       _ imageData: Data?,
-                       _ pubDate: String,
-                       _ group: FeedGroupEntity)
 }

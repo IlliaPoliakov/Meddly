@@ -17,10 +17,7 @@ class DependencyInjectionContainer {
     
     DependencyInjectionContainer.shared.register(CoreDataStack.self) { _ in CoreDataStack.shared }
     
-    DependencyInjectionContainer.shared.register(FeedRepository.self) { resolver in
-      FeedRepositoryImpl(localDataSource: resolver.resolve(LocalDataSource.self)!,
-                         remoteDataSource: resolver.resolve(RemoteDataSource.self)!)
-    }
+    DependencyInjectionContainer.shared.register(FeedRepository.self) { _ in FeedRepositoryImpl.shared }
     
     DependencyInjectionContainer.shared.register(GetCachedFeedGroupsUseCase.self) { resolver in
       GetCachedFeedGroupsUseCase(repo: resolver.resolve(FeedRepository.self)!)

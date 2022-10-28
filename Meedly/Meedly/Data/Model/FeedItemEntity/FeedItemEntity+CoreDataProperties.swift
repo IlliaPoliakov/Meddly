@@ -1,8 +1,8 @@
 //
-//  FeedItem+CoreDataProperties.swift
+//  FeedItemEntity+CoreDataProperties.swift
 //  Meedly
 //
-//  Created by Illia Poliakov on 23.10.22.
+//  Created by Illia Poliakov on 28.10.22.
 //
 //
 
@@ -16,13 +16,13 @@ extension FeedItemEntity {
         return NSFetchRequest<FeedItemEntity>(entityName: "FeedItemEntity")
     }
 
+    @NSManaged public var id: UUID
     @NSManaged public var feedItemDescription: String
     @NSManaged public var imageData: Data?
+    @NSManaged public var link: URL
     @NSManaged public var pubDate: String
     @NSManaged public var title: String
-    @NSManaged public var link: URL
     @NSManaged public var parentGroup: FeedGroupEntity
-    @NSManaged public var id: UUID
 
 }
 

@@ -9,18 +9,17 @@ import Foundation
 
 struct FeedItem {
   public var feedItemDescription: String
-  public var imageData: Data?
+  public var imageUrl: URL?
   public var pubDate: String
   public var title: String
   public var link: URL
-  public var parentGroup: FeedGroupEntity
   
-  init(feedItemDescription: String, imageData: Data? = nil, pubDate: String, title: String, link: URL, parentGroup: FeedGroupEntity) {
+  init(feedItemDescription: String, imageUrl: URL? = nil,
+       pubDate: String, title: String, link: URL) {
     self.feedItemDescription = feedItemDescription
-    self.imageData = imageData
+    self.imageUrl = imageUrl
     self.pubDate = pubDate
     self.title = title
     self.link = link
-    self.parentGroup = parentGroup
   }
 }

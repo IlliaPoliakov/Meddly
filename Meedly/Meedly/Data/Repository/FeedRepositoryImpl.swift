@@ -12,12 +12,15 @@ class FeedRepositoryImpl: FeedRepository {
   
   // -MARK: - Properties -
   
+  public static var shared: FeedRepository = FeedRepositoryImpl(localDataSource: AppDelegate.DIContainer.resolve(LocalDataSource.self)!, remoteDataSource: AppDelegate.DIContainer.resolve(RemoteDataSource.self)!)
+  
   private let localDataSource: LocalDataSource
   private let remoteDataSource: RemoteDataSource
   
   private var groups: [FeedGroupEntity]? = nil
+  private var errorMessage: String? = nil
   
-  private var xmlParserDelegate: XMLParserDelegate?
+  private var xmlParserDelegate = XMLDataParser()//no needed DI?
   
   init(localDataSource: LocalDataSource, remoteDataSource: RemoteDataSource) {
     self.localDataSource = localDataSource
@@ -33,60 +36,75 @@ class FeedRepositoryImpl: FeedRepository {
   }
   
   func getLoadedFeedGroups(_ completion: @escaping ([FeedGroupEntity]?, String?) -> Void) {
+    
+    let downloadGroup = DispatchGroup()
+    
     if Connectivity.isConnectedToInternet() {
       guard groups != nil
       else {
-        completion(nil, "No feed channels yet...")
+        completion(nil, "Zero feed channels yet...")
         return
       }
       
       for group in groups! {
         if group.feeds != nil {
           for feed in group.feeds! {
-            var fetchedData: Data
-            remoteDataSource.loadData(withUrl: feed.link) { data, errorMessage in
-              fetchedData = data
-            }
+            downloadGroup.enter()
             
+            remoteDataSource.downloadData(withUrl: feed.link) { [weak self] data, error in
+              if data != nil {
+                let parser = XMLParser(data: data!)
+                parser.delegate = self?.xmlParserDelegate
+                parser.parse()
+                
+                let feeds = self?.xmlParserDelegate.getFeeds()
+                
+                if !(group.items?.contains(where: {$0.title == feeds?[0].title}) ?? false) {
+                  for modelFeed in feeds! {
+                    self?.remoteDataSource.downloadImageData(
+                      withUrl: modelFeed.imageUrl!) { fetchedImageData in
+                        
+                        self?.localDataSource
+                          .saveNewFeedItem(withTitle: modelFeed.title,
+                                           withDescription: modelFeed.feedItemDescription,
+                                           withLink: modelFeed.link, withImageData: fetchedImageData,
+                                           withPubDate: modelFeed.pubDate, withhGroup: group)
+                      }
+                  }
+                }
+              }
+              self?.errorMessage = error
+              
+              downloadGroup.leave()
+            }
           }
         }
       }
-      
-      if data != nil {
-        let parser = XMLParser(data: data!)
-        parser.delegate = xmlParserDelegate
-        parser.parse()
-      }
-      else {
-        completion(nil, nil)
-      }
     }
     else {
-      completion( nil, "No enternet connection...")
+      DispatchQueue.main.async {
+        completion( nil, "No enternet connection...")
+      }
+    }
+    
+    downloadGroup.notify(queue: DispatchQueue.main) {
+      completion(self.groups, self.errorMessage)
     }
   }
   
   
   func saveNewGroup(_ newGroupName: String) -> FeedGroupEntity {
-    return localDataSource.saveNewGroup(withNewGroupName: newGroupName)
+    let newGroup = localDataSource.saveNewGroup(withNewGroupName: newGroupName)
+    if groups == nil {
+      groups = [newGroup]
+    }
+    else {
+      groups?.append(newGroup)
+    }
+    return newGroup
   }
   
   func saveNewFeed(_ newChanelUrl: URL, _ group: FeedGroupEntity) {
     localDataSource.saveNewFeed(withNewFeedUrl: newChanelUrl, withParentGroup: group)
-  }
-  
-  func saveNewFeedItem(_ title: String,
-                       _ feedDescription: String,
-                       _ link: URL,
-                       _ imageData: Data?,
-                       _ pubDate: String,
-                       _ group: FeedGroupEntity) {
-    
-    localDataSource.saveNewFeedItem(withTitle: title,
-                                    withDescription: feedDescription,
-                                    withLink: link,
-                                    withImageData: imageData,
-                                    withPubDate: pubDate,
-                                    withhGroup: group)
   }
 }

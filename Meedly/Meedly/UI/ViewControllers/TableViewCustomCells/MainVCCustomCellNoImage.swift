@@ -7,11 +7,10 @@
 
 import UIKit
 
-class MainTableViewControllerCustomCell: UITableViewCell {
+class MainVCCustomCellWithoutText: UITableViewCell {
   
   @IBOutlet weak var pubDateLabel: UILabel!
   @IBOutlet weak var titleLabel: UILabel!
-  @IBOutlet weak var itemImage: UIImageView!
   
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -20,14 +19,5 @@ class MainTableViewControllerCustomCell: UITableViewCell {
   func bind(withFeedItem item: FeedItemEntity) {
     self.pubDateLabel.text = item.pubDate
     self.titleLabel.text = item.title
-    
-    guard item.imageData != nil
-    else {
-      return
-    }
-    
-    self.itemImage.image = UIImage(data: item.imageData!)
-    self.itemImage.layer.cornerRadius = 10
   }
-
 }
