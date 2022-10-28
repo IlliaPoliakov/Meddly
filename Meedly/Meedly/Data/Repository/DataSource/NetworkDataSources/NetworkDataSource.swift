@@ -8,63 +8,40 @@
 import Foundation
 import Alamofire
 
-class NetworkDataSource: NSObject, RemoteDataSource {
+class NetworkDataSource: RemoteDataSource {
   
+  // -MARK: - Properties -
+  
+  var dataTask: URLSessionDataTask?
   private lazy var session: URLSession = {
     let configuration = URLSessionConfiguration.default
-    //      configuration.waitsForConnectivity = true
+    configuration.waitsForConnectivity = true
     return URLSession(configuration: configuration,
-                      delegate: self, delegateQueue: nil)
+                      delegate: nil, delegateQueue: nil)
   }()
   
-  func loadData(withGroups groups: [FeedGroupEntity]?) -> [FeedGroupEntity]? {
-    guard groups != nil
-    else {
-      return nil
-    }
+  // -MARK: - Functions -
+  
+  func downloadData(withUrl url: URL, _ completion: @escaping (Data?, String?) -> Void) {
     
-    for group in groups! {
+    let request = try? URLRequest(url: url, method: .get)
+    
+    self.dataTask = session.dataTask(with: request!) { data, response, error in
       
-      if group.feeds != nil {
-        for feed in group.feeds! {
-          print(feed.title!)
+      guard let data = data, error == nil,
+            (200..<300).contains((response as? HTTPURLResponse)!.statusCode)
+      else {
+        DispatchQueue.main.async {
+          completion(nil, error?.localizedDescription)
         }
+        return
+      }
+      
+      DispatchQueue.main.async {
+        completion(data, nil)
       }
     }
     
-    return nil // tmp
+    dataTask?.resume()
   }
-  
-}
-
-
-extension NetworkDataSource: URLSessionDataDelegate {
-  
-//  func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse,
-//                  completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
-//    guard let response = response as? HTTPURLResponse,
-//          (200...299).contains(response.statusCode),
-//          let mimeType = response.mimeType,
-//          mimeType == "text/html" else {
-//      completionHandler(.cancel)
-//      return
-//    }
-//    completionHandler(.allow)
-//  }
-//  
-//  func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
-//    self.receivedData?.append(data)
-//  }
-//  
-//  func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
-//    DispatchQueue.main.async {
-//      self.loadButton.isEnabled = true
-//      if let error = error {
-//        handleClientError(error)
-//      } else if let receivedData = self.receivedData,
-//                let string = String(data: receivedData, encoding: .utf8) {
-//        self.webView.loadHTMLString(string, baseURL: task.currentRequest?.url)
-//      }
-//    }
-//  }
 }

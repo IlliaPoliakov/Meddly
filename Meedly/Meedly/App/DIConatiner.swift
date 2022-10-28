@@ -34,7 +34,6 @@ class DependencyInjectionContainer {
     DependencyInjectionContainer.shared.register(SaveNewFeedUseCase.self) { resolver in
       SaveNewFeedUseCase(repo: resolver.resolve(FeedRepository.self)!)
     }
-    
   }
 }
 

@@ -7,7 +7,9 @@
 
 import Foundation
 
-protocol RemoteDataSource {}
+protocol RemoteDataSource {
+  func downloadData(withUrl url: URL, _ complition: @escaping (Data?, String?) -> Void)
+}
 
 protocol LocalDataSource {
   func loadData() -> [FeedGroupEntity]?

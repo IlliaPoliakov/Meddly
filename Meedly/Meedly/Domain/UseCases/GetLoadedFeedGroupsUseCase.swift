@@ -14,7 +14,7 @@ class GetLoadedFeedGroupsUseCase {
     self.repo = repo
   }
   
-  func execute() -> [FeedGroupEntity]? {
-    return repo.getLoadedFeedGroups()
+  func execute(_ completion: @escaping ([FeedGroupEntity]?, String?) -> Void) {
+    repo.getLoadedFeedGroups(completion)
   }
 }

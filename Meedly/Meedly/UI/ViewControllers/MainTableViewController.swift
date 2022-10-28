@@ -26,30 +26,16 @@ class MainTableViewController: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-      let cachedGroups = self?.getCachedFeedGroupsUseCase.execute()
-      
-      DispatchQueue.main.async {
-        self?.groups = cachedGroups
-      }
-    }
-    
-    DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-      let loadedGroups = self?.getLoadedFeedGroupsUseCase.execute()
-      
-      DispatchQueue.main.async {
-        self?.groups = loadedGroups
-      }
-    }
-    
     tableView.dataSource = dataSource
     tableView.delegate = self
     
     tableView.rowHeight = UITableView.automaticDimension // for dynamic cell hight
     tableView.estimatedRowHeight = 600
     
+    groups = getCachedFeedGroupsUseCase.execute()
     configureInitialSnapshot()
     
+    update()
     
   }
   
@@ -98,7 +84,7 @@ class MainTableViewController: UITableViewController {
   }
   
   func updateSnapshot(){
-
+    
     var snapshot = dataSource.snapshot()
     
     guard groups != nil
@@ -187,19 +173,16 @@ class MainTableViewController: UITableViewController {
   // -MARK: - Supplementary -
   
   func update(){
-    if Connectivity.isConnectedToInternet(){
-      DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-        let loadedGroups = self?.getLoadedFeedGroupsUseCase.execute()
-        
-        DispatchQueue.main.async {
-          self?.groups = loadedGroups
-          self?.updateSnapshot()
-        }
+    getLoadedFeedGroupsUseCase.execute() { [weak self] loadedGroups, errorMessage in
+      if loadedGroups != nil {
+        self?.groups = loadedGroups
+        self?.updateSnapshot()
       }
       
-    }
-    else{
-      print("Internet Connection is not Available!")
+      if errorMessage != nil {
+        print("'\(errorMessage!)' occurred when downloading data.")
+      }
     }
   }
+  
 }

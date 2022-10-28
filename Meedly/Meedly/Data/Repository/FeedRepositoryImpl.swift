@@ -17,6 +17,8 @@ class FeedRepositoryImpl: FeedRepository {
   
   private var groups: [FeedGroupEntity]? = nil
   
+  private var xmlParserDelegate: XMLParserDelegate?
+  
   init(localDataSource: LocalDataSource, remoteDataSource: RemoteDataSource) {
     self.localDataSource = localDataSource
     self.remoteDataSource = remoteDataSource
@@ -30,15 +32,38 @@ class FeedRepositoryImpl: FeedRepository {
     return groups
   }
   
-  func getLoadedFeedGroups() -> [FeedGroupEntity]? {
+  func getLoadedFeedGroups(_ completion: @escaping ([FeedGroupEntity]?, String?) -> Void) {
     if Connectivity.isConnectedToInternet() {
+      guard groups != nil
+      else {
+        completion(nil, "No feed channels yet...")
+        return
+      }
       
+      for group in groups! {
+        if group.feeds != nil {
+          for feed in group.feeds! {
+            var fetchedData: Data
+            remoteDataSource.loadData(withUrl: feed.link) { data, errorMessage in
+              fetchedData = data
+            }
+            
+          }
+        }
+      }
       
+      if data != nil {
+        let parser = XMLParser(data: data!)
+        parser.delegate = xmlParserDelegate
+        parser.parse()
+      }
+      else {
+        completion(nil, nil)
+      }
     }
     else {
-      return groups
+      completion( nil, "No enternet connection...")
     }
-    return groups
   }
   
   

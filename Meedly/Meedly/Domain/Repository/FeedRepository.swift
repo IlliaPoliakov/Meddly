@@ -9,7 +9,7 @@ import Foundation
 
 protocol FeedRepository {
   func getCachedFeedGroups() -> [FeedGroupEntity]?
-  func getLoadedFeedGroups() -> [FeedGroupEntity]?
+  func getLoadedFeedGroups(_ completion: @escaping ([FeedGroupEntity]?, String?) -> Void )
   func saveNewGroup(_ newGroupName: String) -> FeedGroupEntity
   func saveNewFeed(_ newFeedURL: URL, _ group: FeedGroupEntity)
   func saveNewFeedItem(_ title: String,
