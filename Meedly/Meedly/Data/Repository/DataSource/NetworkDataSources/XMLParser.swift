@@ -59,7 +59,7 @@ class XMLDataParser: NSObject, XMLParserDelegate {
         self.linkString += data
       case "pubDate":
         self.pubDate += data
-      case "description":
+      case "content:encoded":
         self.itemDescription += data
       default:
         break
@@ -75,7 +75,9 @@ class XMLDataParser: NSObject, XMLParserDelegate {
                           pubDate: pubDate, title: itemtitle,
                           link: URL(string: linkString)!)
       feedItems.append(item)
-      print(item.title)
+      print("JOPA")
+      print(item.feedItemDescription)
+      print("JOPA")
     }
   }
   

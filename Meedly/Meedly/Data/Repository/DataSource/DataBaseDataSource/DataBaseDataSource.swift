@@ -19,9 +19,7 @@ class DataBaseDataSource: LocalDataSource {
   
   func loadData() -> [FeedGroupEntity]? {
     
-    guard let groups =
-            try? coreDataStack.managedContext.fetch(FeedGroupEntity.fetchRequest()),
-          !groups.isEmpty
+    guard var groups = try? coreDataStack.managedContext.fetch(FeedGroupEntity.fetchRequest())
     else {
       return nil
     }
@@ -46,6 +44,11 @@ class DataBaseDataSource: LocalDataSource {
 //      coreDataStack.managedContext.delete(group)
 //    }
 //    try? coreDataStack.managedContext.save()
+    
+    if groups.isEmpty {
+      let group = saveNewGroup(withNewGroupName: "Default Group")
+      groups.append(group)
+    }
     
     return groups
   }

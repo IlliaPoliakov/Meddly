@@ -12,6 +12,7 @@ class MainTableViewController: UITableViewController {
   
   // -MARK: - Properties -
   
+  
   private var groups: [FeedGroupEntity]?
   
   private let getCachedFeedGroupsUseCase: GetCachedFeedGroupsUseCase =
@@ -128,18 +129,32 @@ class MainTableViewController: UITableViewController {
     dataSource.apply(snapshot)
   }
   
+ 
+  
   
   // MARK: - Navigation
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    guard segue.identifier == "showAddVC",
-          let destinaitonVC = segue.destination as? AddFeedViewController
-    else {
-      fatalError("Can't perform segue to AddVC")
+    if segue.identifier == "showAddVC",
+       let destinaitonVC = segue.destination as? AddFeedViewController {
+      destinaitonVC.groups = groups
     }
-    destinaitonVC.groups = groups
+    else if segue.identifier == "descriptionSegueID",
+       let destinaitonVC = segue.destination as? ItemDescriptinViewConrtoller {
+      let selectedIndex = tableView.indexPathForSelectedRow
+      let feedItem = groups![selectedIndex!.section].items![selectedIndex!.row]
+      
+      destinaitonVC.titleString = feedItem.title
+      destinaitonVC.descriptionText = feedItem.feedItemDescription
+      destinaitonVC.link = feedItem.link
+      
+      if feedItem.imageData != nil {
+        destinaitonVC.image = UIImage(data: feedItem.imageData!)
+      }
+    }
+    
   }
-  
+    
   @IBAction func unwind( _ segue: UIStoryboardSegue) {
     guard segue.identifier == "unwindToMain",
           let previousVC = segue.source as? AddFeedViewController
@@ -189,12 +204,13 @@ class MainTableViewController: UITableViewController {
     getLoadedFeedGroupsUseCase.execute() { [weak self] loadedGroups, errorMessage in
       if loadedGroups != nil {
         self?.groups = loadedGroups
-        self?.updateSnapshot()
       }
       
       if errorMessage != nil {
         print("'\(errorMessage!)' occurred when downloading data.")
       }
+      
+      self?.updateSnapshot()
     }
   }
   

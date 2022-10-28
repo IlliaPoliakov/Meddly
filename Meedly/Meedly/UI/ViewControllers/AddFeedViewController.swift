@@ -203,3 +203,13 @@ extension UIViewController {
     view.endEditing(true)
   }
 }
+
+extension AddFeedViewController: UITextFieldDelegate {
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    if textField == urlTextField {
+      return tableView.becomeFirstResponder()
+    } else {
+      return textField.resignFirstResponder()
+    }
+  }
+}
