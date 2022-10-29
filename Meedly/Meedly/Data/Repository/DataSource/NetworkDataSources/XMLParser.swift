@@ -25,6 +25,8 @@ class XMLDataParser: NSObject, XMLParserDelegate {
   
   var feedItems = [FeedItem]()
   
+  var checkImage: Bool = false
+  
   
   // -MARK: - Functions -
   
@@ -42,7 +44,7 @@ class XMLDataParser: NSObject, XMLParserDelegate {
     }
     
     if elementName == "media:content" {
-      itemImageDataUrl = attributeDict["url"] ?? ""
+      itemImageDataUrl = attributeDict["url"] ?? "" // MB errors due to non-nil
     }
     
     self.elementName = elementName
@@ -75,9 +77,6 @@ class XMLDataParser: NSObject, XMLParserDelegate {
                           pubDate: pubDate, title: itemtitle,
                           link: URL(string: linkString)!)
       feedItems.append(item)
-      print("JOPA")
-      print(item.feedItemDescription)
-      print("JOPA")
     }
   }
   

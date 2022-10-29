@@ -25,9 +25,10 @@ class ItemDescriptinViewConrtoller: UIViewController {
     descriptionLabel.text = descriptionText
     
     imageView.layer.cornerRadius = 10
+    imageView.backgroundColor = UIColor.white
   }
   
-  @IBAction func visitWebSiteButtonTupped(sender: Any) {
+  @IBAction func visitWebSiteButtonTupped(_ sender: Any) {
     UIApplication.shared.open(link!)
   }
 }

@@ -192,6 +192,9 @@ class AddFeedViewController: UIViewController, UITableViewDelegate {
   
 }
 
+
+// -MARK: - Extensions -
+
 extension UIViewController {
   func hideKeyboardWhenTappedAround() {
     let tap = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))

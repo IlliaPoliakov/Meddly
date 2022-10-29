@@ -28,6 +28,7 @@ class MainTableViewControllerCustomCell: UITableViewCell {
     
     self.itemImage.image = UIImage(data: item.imageData!)
     self.itemImage.layer.cornerRadius = 10
+    self.itemImage.backgroundColor = UIColor.white
   }
 
 }

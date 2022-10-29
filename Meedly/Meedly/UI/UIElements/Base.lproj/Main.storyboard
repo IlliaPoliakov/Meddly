@@ -169,30 +169,29 @@
         <scene sceneID="mAv-R6-1Uc">
             <objects>
                 <viewController id="YsR-D6-0j1" customClass="ItemDescriptinViewConrtoller" customModule="Meedly" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="F9W-n7-Ok6">
+                    <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="F9W-n7-Ok6">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z2g-h7-IJu">
-                                <rect key="frame" x="0.0" y="91" width="390" height="655"/>
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="749"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ss7-Uk-uL4">
-                                        <rect key="frame" x="0.0" y="0.0" width="390" height="302.33333333333331"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="390" height="309.66666666666669"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7DW-ST-wf7">
-                                                <rect key="frame" x="10" y="20" width="370" height="26.333333333333329"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                                <nil key="textColor"/>
+                                                <rect key="frame" x="10" y="19.999999999999996" width="370" height="33.666666666666657"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="26B-7Q-ybD">
-                                                <rect key="frame" x="10" y="56.333333333333343" width="370" height="185"/>
+                                                <rect key="frame" x="10" y="63.666666666666657" width="370" height="185"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="26B-7Q-ybD" secondAttribute="height" multiplier="2:1" id="Y5O-o8-afe"/>
                                                 </constraints>
                                             </imageView>
                                             <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" delaysContentTouches="NO" canCancelContentTouches="NO" editable="NO" text="text" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KYc-yN-F0c">
-                                                <rect key="frame" x="20" y="251.33333333333331" width="350" height="41"/>
+                                                <rect key="frame" x="20" y="258.66666666666669" width="350" height="41"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <color key="textColor" systemColor="labelColor"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
@@ -213,42 +212,41 @@
                                             <constraint firstItem="KYc-yN-F0c" firstAttribute="top" secondItem="26B-7Q-ybD" secondAttribute="bottom" constant="10" id="x30-CN-3wg"/>
                                         </constraints>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MMA-C0-JO6">
+                                        <rect key="frame" x="20" y="294.66666666666669" width="350" height="40.333333333333314"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Visit Web Site" cornerStyle="medium">
+                                            <backgroundConfiguration key="background">
+                                                <color key="backgroundColor" systemColor="secondarySystemFillColor"/>
+                                            </backgroundConfiguration>
+                                            <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle2"/>
+                                            <color key="baseForegroundColor" red="0.74901960779999999" green="0.35294117650000001" blue="0.94901960780000005" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="addNewFeed:" destination="Tra-FC-Whj" eventType="touchUpInside" id="iJX-ak-GoD"/>
+                                            <action selector="visitWebSiteButtonTupped:" destination="YsR-D6-0j1" eventType="touchUpInside" id="aKX-1y-7R8"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="ss7-Uk-uL4" firstAttribute="leading" secondItem="Z2g-h7-IJu" secondAttribute="leading" id="01c-Tp-nhf"/>
+                                    <constraint firstAttribute="trailing" secondItem="MMA-C0-JO6" secondAttribute="trailing" constant="20" id="12e-J9-e08"/>
                                     <constraint firstAttribute="trailing" secondItem="ss7-Uk-uL4" secondAttribute="trailing" id="1C6-JG-IKx"/>
-                                    <constraint firstAttribute="bottom" secondItem="ss7-Uk-uL4" secondAttribute="bottom" id="LZ3-E0-x6V"/>
+                                    <constraint firstAttribute="bottom" secondItem="ss7-Uk-uL4" secondAttribute="bottom" constant="35" id="LZ3-E0-x6V"/>
+                                    <constraint firstItem="MMA-C0-JO6" firstAttribute="leading" secondItem="Z2g-h7-IJu" secondAttribute="leading" constant="20" id="Ox5-D4-HSk"/>
                                     <constraint firstItem="ss7-Uk-uL4" firstAttribute="top" secondItem="Z2g-h7-IJu" secondAttribute="top" id="he0-qW-Mq0"/>
                                     <constraint firstItem="ss7-Uk-uL4" firstAttribute="width" secondItem="Z2g-h7-IJu" secondAttribute="width" id="q61-ZX-PSb"/>
+                                    <constraint firstItem="MMA-C0-JO6" firstAttribute="top" secondItem="Z2g-h7-IJu" secondAttribute="bottom" constant="-50" id="rpo-Yq-FHe"/>
                                 </constraints>
                             </scrollView>
-                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" role="primary" translatesAutoresizingMaskIntoConstraints="NO" id="169-rf-BwQ">
-                                <rect key="frame" x="20" y="763" width="350" height="51"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Visit Web Site" cornerStyle="medium">
-                                    <backgroundConfiguration key="background">
-                                        <color key="backgroundColor" systemColor="secondarySystemFillColor"/>
-                                    </backgroundConfiguration>
-                                    <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle2"/>
-                                    <color key="baseForegroundColor" red="0.74901960779999999" green="0.35294117650000001" blue="0.94901960780000005" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="addNewFeed:" destination="Tra-FC-Whj" eventType="touchUpInside" id="ZAo-Ts-6xM"/>
-                                    <action selector="visitWebSiteButtonTuppedWithSender:" destination="YsR-D6-0j1" eventType="touchUpInside" id="Q1m-wm-rZh"/>
-                                </connections>
-                            </button>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="poF-au-WnK"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="169-rf-BwQ" secondAttribute="trailing" constant="20" id="666-K4-8oO"/>
-                            <constraint firstItem="169-rf-BwQ" firstAttribute="leading" secondItem="F9W-n7-Ok6" secondAttribute="leading" constant="20" id="9MN-2L-v8d"/>
-                            <constraint firstItem="Z2g-h7-IJu" firstAttribute="leading" secondItem="poF-au-WnK" secondAttribute="leading" id="GwD-Hl-BrE"/>
-                            <constraint firstItem="poF-au-WnK" firstAttribute="bottom" secondItem="Z2g-h7-IJu" secondAttribute="bottom" constant="15" id="LXx-Xc-Neq"/>
-                            <constraint firstItem="poF-au-WnK" firstAttribute="trailing" secondItem="Z2g-h7-IJu" secondAttribute="trailing" id="Lo8-EF-D8m"/>
-                            <constraint firstItem="169-rf-BwQ" firstAttribute="top" secondItem="Z2g-h7-IJu" secondAttribute="bottom" constant="17" id="T3V-NN-je0"/>
-                            <constraint firstAttribute="bottom" secondItem="169-rf-BwQ" secondAttribute="bottom" constant="30" id="ish-GS-Rxe"/>
-                            <constraint firstItem="Z2g-h7-IJu" firstAttribute="top" secondItem="poF-au-WnK" secondAttribute="top" id="zVU-v3-DrQ"/>
+                            <constraint firstItem="Z2g-h7-IJu" firstAttribute="leading" secondItem="F9W-n7-Ok6" secondAttribute="leading" id="GwD-Hl-BrE"/>
+                            <constraint firstAttribute="bottom" secondItem="Z2g-h7-IJu" secondAttribute="bottom" constant="95" id="LXx-Xc-Neq"/>
+                            <constraint firstAttribute="trailing" secondItem="Z2g-h7-IJu" secondAttribute="trailing" id="Lo8-EF-D8m"/>
+                            <constraint firstItem="Z2g-h7-IJu" firstAttribute="top" secondItem="F9W-n7-Ok6" secondAttribute="top" id="zVU-v3-DrQ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Vu1-Hw-kte"/>
@@ -348,23 +346,7 @@
                                     <color key="baseForegroundColor" red="0.74901960779999999" green="0.35294117650000001" blue="0.94901960780000005" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="addNewFeed:" destination="Tra-FC-Whj" eventType="touchUpInside" id="9gY-kH-jBX"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gFv-3V-1cA">
-                                <rect key="frame" x="10" y="716" width="370" height="40.333333333333371"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Add" cornerStyle="medium">
-                                    <backgroundConfiguration key="background">
-                                        <color key="backgroundColor" systemColor="secondarySystemFillColor"/>
-                                    </backgroundConfiguration>
-                                    <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle2"/>
-                                    <color key="baseForegroundColor" red="0.74901960779999999" green="0.35294117650000001" blue="0.94901960780000005" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="addNewFeed:" destination="Tra-FC-Whj" eventType="touchUpInside" id="oyc-Ov-AqO"/>
+                                    <action selector="addNewFeed:" destination="Tra-FC-Whj" eventType="touchUpInside" id="Tw9-b0-2cT"/>
                                 </connections>
                             </button>
                         </subviews>

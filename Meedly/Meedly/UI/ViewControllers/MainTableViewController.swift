@@ -202,15 +202,15 @@ class MainTableViewController: UITableViewController {
   
   func update(){
     getLoadedFeedGroupsUseCase.execute() { [weak self] loadedGroups, errorMessage in
-      if loadedGroups != nil {
+      if loadedGroups != nil && loadedGroups != self?.groups {
         self?.groups = loadedGroups
+        self?.updateSnapshot()
       }
       
       if errorMessage != nil {
         print("'\(errorMessage!)' occurred when downloading data.")
       }
       
-      self?.updateSnapshot()
     }
   }
   
