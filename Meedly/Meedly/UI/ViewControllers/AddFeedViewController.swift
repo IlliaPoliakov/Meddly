@@ -20,9 +20,9 @@ class AddFeedViewController: UIViewController, UITableViewDelegate {
   // MARK: - Properties -
   
   lazy var addFeedTableView: AddFeedTableView = AddFeedTableView(tableView: tableView, groups: groups)
-  lazy var groups: [FeedGroupEntity]? = nil
+  lazy var groups: [FeedGroup]? = nil
   
-  var newGroupNames: [String]?
+  var newGroups: [FeedGroup]?
   
   private let saveNewGroupUseCase: SaveNewGroupUseCase =
   AppDelegate.DIContainer.resolve(SaveNewGroupUseCase.self)!
@@ -81,11 +81,11 @@ class AddFeedViewController: UIViewController, UITableViewDelegate {
       
         addFeedTableView.updateSnapshot(withNewGroupName: groupName)
       
-      if newGroupNames == nil {
-        newGroupNames = [groupName]
+      if newGroups == nil {
+        newGroups = [newGroup]
       }
       else {
-        newGroupNames!.append(groupName)
+        newGroups!.append(newGroup)
       }
     }
     
@@ -152,7 +152,7 @@ extension UIViewController {
 extension AddFeedViewController: UITextFieldDelegate {
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     if textField == urlTextField {
-      return tableView.becomeFirstResponder()
+      return textField.becomeFirstResponder()
     } else {
       return textField.resignFirstResponder()
     }

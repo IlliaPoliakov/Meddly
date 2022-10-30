@@ -9,7 +9,6 @@ import Foundation
 
 protocol RemoteDataSource {
   func downloadData(withUrl url: URL, _ completion: @escaping (Data?, String?) -> Void)
-  func downloadImageData(withUrl url: URL, _ completion: @escaping (Data?) -> Void)
 }
 
 protocol LocalDataSource {

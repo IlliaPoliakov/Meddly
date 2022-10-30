@@ -11,21 +11,18 @@ class XMLDataParser: NSObject, XMLParserDelegate {
   
   // -MARK: - Properties -
 
-  var elementName: String = ""
+  var elementName: String? = nil
   //feed item data
-  var itemtitle: String = ""
-  var itemDescription: String = ""
-  var link: URL? = nil
-  var linkString: String = ""
-  var pubDate: String = ""
-  var itemImageDataUrl: String = ""
+  var itemtitle: String? = nil
+  var itemDescription: String? = nil
+  var itemLink: String? = nil
+  var pubDate: String? = nil
+  var itemImageUrl: String? = nil
   // feed chanel data
-  var feedTitle: String = ""
-  var feedImageData: Data? = nil
+  var feedTitle: String? = nil
+  var feedImageUrl: String? = nil
   
   var feedItems = [FeedItem]()
-  
-  var checkImage: Bool = false
   
   
   // -MARK: - Functions -
@@ -37,14 +34,13 @@ class XMLDataParser: NSObject, XMLParserDelegate {
     if elementName == "item" {
       itemtitle = ""
       itemDescription = ""
-      link = nil
-      linkString = ""
+      itemLink = ""
       pubDate = ""
-      itemImageDataUrl = ""
+      itemImageUrl = ""
     }
     
     if elementName == "media:thumbnail" {
-      itemImageDataUrl = attributeDict["url"] ?? "" // MB errors due to non-nil
+      itemImageUrl = attributeDict["url"]
     }
     
     self.elementName = elementName
@@ -56,13 +52,13 @@ class XMLDataParser: NSObject, XMLParserDelegate {
     if (!data.isEmpty) {
       switch self.elementName {
       case "title":
-        self.itemtitle += data
+        self.itemtitle! += data
       case "link":
-        self.linkString += data
+        self.itemLink! += data
       case "pubDate":
-        self.pubDate += data
+        self.pubDate! += data
       case "content:encoded":
-        self.itemDescription += data
+        self.itemDescription! += data
       default:
         break
       }
@@ -73,9 +69,9 @@ class XMLDataParser: NSObject, XMLParserDelegate {
               namespaceURI: String?, qualifiedName qName: String?) {
     if elementName == "item" {
       let item = FeedItem(feedItemDescription: itemDescription,
-                          imageUrl: URL(string: itemImageDataUrl)!,
+                          imageUrl: URL(string: itemImageUrl)!,
                           pubDate: pubDate, title: itemtitle,
-                          link: URL(string: linkString)!)
+                          link: URL(string: link)!)
       feedItems.append(item)
     }
   }

@@ -58,14 +58,7 @@ class MainTableViewController: UITableViewController {
       let selectedIndex = tableView.indexPathForSelectedRow
       let feedItem = mainTableView.groups![selectedIndex!.section].items![selectedIndex!.row]
       
-      destinaitonVC.titleString = feedItem.title
-      destinaitonVC.descriptionText = feedItem.feedItemDescription
-      destinaitonVC.link = feedItem.link
-      
-      if feedItem.imageData != nil {
-        destinaitonVC.image = UIImage(data: feedItem.imageData!)
-      }
-      
+      destinaitonVC.item = feedItem
     }
   }
     
@@ -76,9 +69,10 @@ class MainTableViewController: UITableViewController {
       fatalError("Can't perform segue to AddVC")
     }
     
-    let newSections = previousVC.newGroupNames
+    let newGroups = previousVC.newGroups
     
-    mainTableView.addNewSections(withNewGroupNames: newSections)
+    mainTableView.addNewGroups(withNewGroups: newGroups)
+    
     updateGroups()
     mainTableView.updateSnapshot()
   }

@@ -8,16 +8,12 @@
 import UIKit
 
 class MainTableView: NSObject, UITableViewDelegate {
+  
+  // -MARK: - Properties -
 
   var tableView: UITableView
   var groups: [FeedGroup]?
   
-  init(tableView: UITableView, groups: [FeedGroup]?) {
-    self.tableView = tableView
-    self.groups = groups
-  }
-  
-
   lazy var dataSource: UITableViewDiffableDataSource<FeedGroup, FeedItem> =  UITableViewDiffableDataSource<FeedGroup, FeedItem> (tableView: tableView) {
     tableView, indexPath, itemIdentifier in
     
@@ -50,11 +46,19 @@ class MainTableView: NSObject, UITableViewDelegate {
       return cell
     }
   }
+  
 
+  init(tableView: UITableView, groups: [FeedGroup]?) {
+    self.tableView = tableView
+    self.groups = groups
+  }
+  
+  
+  // -MARK: - Functions -
   
   func configureInitialSnapshot(){
     
-    var snapshot = NSDiffableDataSourceSnapshot<String, FeedItem>()
+    var snapshot = NSDiffableDataSourceSnapshot<FeedGroup, FeedItem>()
     
     guard groups != nil
     else {
@@ -63,10 +67,10 @@ class MainTableView: NSObject, UITableViewDelegate {
     }
     
     for group in groups! {
-      snapshot.appendSections([group.title])
+      snapshot.appendSections([group])
       
       if group.items != nil && !(group.items!.isEmpty){
-        snapshot.appendItems(group.items!, toSection: group.title)
+        snapshot.appendItems(group.items!, toSection: group)
       }
     }
     
@@ -85,22 +89,22 @@ class MainTableView: NSObject, UITableViewDelegate {
     
     for group in groups! {
       if group.items != nil && !(group.items!.isEmpty){
-        snapshot.appendItems(group.items!, toSection: group.title)
+        snapshot.appendItems(group.items!, toSection: group)
       }
     }
     
     dataSource.apply(snapshot, animatingDifferences: true)
   }
   
-  func addNewSections(withNewGroupNames names: [String]?) {
+  func addNewGroups(withNewGroups newGroups: [FeedGroup]?) {
     var snapshot = dataSource.snapshot()
     
-    guard names != nil
+    guard newGroups != nil
     else {
       return
     }
     
-    snapshot.appendSections(names!)
+    snapshot.appendSections(newGroups!)
     
     dataSource.apply(snapshot)
   }

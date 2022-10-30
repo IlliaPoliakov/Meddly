@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PINRemoteImage
 
 class MainTableViewControllerCustomCell: UITableViewCell {
   
@@ -21,12 +22,13 @@ class MainTableViewControllerCustomCell: UITableViewCell {
     self.pubDateLabel.text = item.pubDate
     self.titleLabel.text = item.title
     
-    guard item.imageData != nil
+    guard item.imageUrl != nil
     else {
       return
     }
     
-    self.itemImage.image = UIImage(data: item.imageData!)
+    self.itemImage.pin_updateWithProgress = true
+    self.itemImage.pin_setImage(from: item.imageUrl!)
     self.itemImage.layer.cornerRadius = 10
     self.itemImage.backgroundColor = UIColor.white
   }

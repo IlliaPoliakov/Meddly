@@ -9,6 +9,18 @@ import Foundation
 
 
 class FeedRepositoryImpl: FeedRepository {
+  func getFeedGroups(_ completion: @escaping ([FeedGroup]?, String?) -> Void) {
+    <#code#>
+  }
+  
+  func saveNewGroup(_ newGroupName: String) -> FeedGroup {
+    <#code#>
+  }
+  
+  func saveNewFeed(_ newFeedURL: URL, _ group: FeedGroup) {
+    <#code#>
+  }
+  
   
   // -MARK: - Properties -
   
@@ -16,9 +28,6 @@ class FeedRepositoryImpl: FeedRepository {
   
   private let localDataSource: LocalDataSource
   private let remoteDataSource: RemoteDataSource
-  
-  private var groups: [FeedGroupEntity]? = nil
-  private var errorMessage: String? = nil
   
   private var xmlParserDelegate = XMLDataParser()//no needed DI?
   
@@ -30,37 +39,30 @@ class FeedRepositoryImpl: FeedRepository {
   
   // -MARK: - Functional -
   
-  func getCachedFeedGroups() -> [FeedGroupEntity]? {
-    groups = localDataSource.loadData()
-    return groups
-  }
-  
-  func getLoadedFeedGroups(_ completion: @escaping ([FeedGroupEntity]?, String?) -> Void) {
+  func getFeedGroups(_ completion: @escaping ([FeedGroupEntity]?, String?) -> Void) {
     
-    let downloadGroup = DispatchGroup()
-    
-    if Connectivity.isConnectedToInternet() {
-      guard groups != nil
-      else {
-        completion(nil, "Zero feed channels yet...")
-        return
+    DispatchQueue.global(qos: .userInteractive){
+      let groups = localDataSource.loadData()
+      
+      DispatchQueue.main.async {
+        completion(groups, nil)
       }
       
-      for group in groups! {
-        if group.feeds != nil {
-          for feed in group.feeds! {
-            downloadGroup.enter()
-            
-            remoteDataSource.downloadData(withUrl: feed.link) { [weak self] data, error in
-              if data != nil {
-                let parser = XMLParser(data: data!)
-                parser.delegate = self?.xmlParserDelegate
-                parser.parse()
-                
-                let feeds = self?.xmlParserDelegate.getFeeds()
-                
-                if !(group.items?.contains(where: {$0.title == feeds?[0].title}) ?? false) {
-                  for modelFeed in feeds! {
+      let downloadGroup = DispatchGroup()
+      
+      if Connectivity.isConnectedToInternet() {
+        for group in groups! {
+          if group.feeds != nil {
+            for feed in group.feeds! {
+              downloadGroup.enter()
+              
+              remoteDataSource.downloadData(withUrl: feed.link) { [weak self] data, error in
+                if data != nil {
+                  let parser = XMLParser(data: data!)
+                  parser.delegate = self?.xmlParserDelegate
+                  parser.parse()
+                  
+                  let feeds = self?.xmlParserDelegate.getFeeds() { [weak self] in
                     self?.remoteDataSource.downloadImageData(
                       withUrl: modelFeed.imageUrl!) { fetchedImageData in
                         
@@ -73,23 +75,23 @@ class FeedRepositoryImpl: FeedRepository {
                       }
                   }
                 }
+                self?.errorMessage = error
+                
+                downloadGroup.leave()
               }
-              self?.errorMessage = error
-              
-              downloadGroup.leave()
             }
           }
         }
       }
-    }
-    else {
-      DispatchQueue.main.async {
-        completion( nil, "No enternet connection...")
+      else {
+        DispatchQueue.main.async {
+          completion( nil, "No enternet connection...")
+        }
       }
-    }
-    
-    downloadGroup.notify(queue: DispatchQueue.main) {
-      completion(self.groups, self.errorMessage)
+      
+      downloadGroup.notify(queue: DispatchQueue.main) {
+        completion(self.groups, self.errorMessage)
+      }
     }
   }
   

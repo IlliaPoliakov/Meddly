@@ -7,28 +7,39 @@
 
 import Foundation
 import UIKit
+import PINRemoteImage
 
 class ItemDescriptinViewConrtoller: UIViewController {
+  
+  // -MARK: - IBOutlets -
+  
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var imageView: UIImageView!
   @IBOutlet weak var descriptionLabel: UITextView!
-  var titleString: String?
-  var image: UIImage?
-  var descriptionText: String?
-  var link: URL?
+  
+  
+  // -MARK: - Properties -
+  
+  var item: FeedItem?
+  
+  
+  // -MARK: - Lifecycle -
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    titleLabel.text = titleString
-    imageView.image = image
-    descriptionLabel.text = descriptionText
+    titleLabel.text = item!.title
+    imageView.pin_setImage(from: item!.imageUrl!)
+    descriptionLabel.text = item!.feedItemDescription
     
     imageView.layer.cornerRadius = 10
     imageView.backgroundColor = UIColor.white
   }
   
+  
+  // -MARK: - IBActions and Functions
+  
   @IBAction func visitWebSiteButtonTupped(_ sender: Any) {
-    UIApplication.shared.open(link!)
+    UIApplication.shared.open(item!.link)
   }
 }

@@ -44,25 +44,5 @@ class NetworkDataSource: RemoteDataSource {
     
     dataTask?.resume()
   }
-  
-  func downloadImageData(withUrl url: URL, _ completion: @escaping (Data?) -> Void){
-    let request = try? URLRequest(url: url, method: .get)
-    
-    self.dataTask = session.dataTask(with: request!) { data, response, error in
-      guard let data = data, error == nil,
-            (200..<300).contains((response as? HTTPURLResponse)!.statusCode)
-      else {
-        DispatchQueue.main.async {
-          completion(nil)
-        }
-        return
-      }
-      
-      DispatchQueue.main.async {
-        completion(data)
-      }
-    }
-    
-    dataTask?.resume()
-  }
+
 }

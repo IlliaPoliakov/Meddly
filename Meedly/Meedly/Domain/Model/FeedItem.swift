@@ -14,6 +14,7 @@ struct FeedItem: Hashable {
   var title: String
   var link: URL
   var parentGroup: FeedGroup
+  var isViewed: Bool = false
   
   init(feedItemDescription: String,
        imageUrl: URL? = nil,

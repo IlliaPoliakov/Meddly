@@ -9,20 +9,15 @@ import UIKit
 
 class AddFeedTableView: NSObject, UITableViewDelegate {
   
+  enum Section {
+    case main
+  }
+  
   // -MARK: - Properties -
   
   var selectedRowIndexPath: IndexPath? = nil
   var tableView: UITableView?
-  var groups: [FeedGroupEntity]?
-  
-  init(tableView: UITableView?, groups: [FeedGroupEntity]?) {
-    self.tableView = tableView
-    self.groups = groups
-  }
-  
-  enum Section {
-    case main
-  }
+  var groups: [FeedGroup]?
   
   lazy var dataSource: UITableViewDiffableDataSource<Section, String> = UITableViewDiffableDataSource(
     tableView: tableView!) { tableView, indexPath, itemIdentifier in
@@ -43,6 +38,12 @@ class AddFeedTableView: NSObject, UITableViewDelegate {
       
       return cell
     }
+  
+  
+  init(tableView: UITableView?, groups: [FeedGroup]?) {
+    self.tableView = tableView
+    self.groups = groups
+  }
   
   
   // -MARK: - Functions -
