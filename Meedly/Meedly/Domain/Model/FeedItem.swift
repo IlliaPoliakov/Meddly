@@ -7,19 +7,25 @@
 
 import Foundation
 
-struct FeedItem {
-  public var feedItemDescription: String
-  public var imageUrl: URL?
-  public var pubDate: String
-  public var title: String
-  public var link: URL
+struct FeedItem: Hashable {
+  var feedItemDescription: String
+  var imageUrl: URL?
+  var pubDate: String
+  var title: String
+  var link: URL
+  var parentGroup: FeedGroup
   
-  init(feedItemDescription: String, imageUrl: URL? = nil,
-       pubDate: String, title: String, link: URL) {
+  init(feedItemDescription: String,
+       imageUrl: URL? = nil,
+       pubDate: String,
+       title: String,
+       link: URL,
+       parentGroup: FeedGroup) {
     self.feedItemDescription = feedItemDescription
     self.imageUrl = imageUrl
     self.pubDate = pubDate
     self.title = title
     self.link = link
+    self.parentGroup = parentGroup
   }
 }

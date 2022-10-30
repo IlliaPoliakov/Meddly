@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FeedGroup {
+struct FeedGroup: Hashable {
   public var id: UUID
   public var title: String
   public var feeds: [Feed]?

@@ -19,11 +19,8 @@ class DependencyInjectionContainer {
     
     DependencyInjectionContainer.shared.register(FeedRepository.self) { _ in FeedRepositoryImpl.shared }
     
-    DependencyInjectionContainer.shared.register(GetCachedFeedGroupsUseCase.self) { resolver in
-      GetCachedFeedGroupsUseCase(repo: resolver.resolve(FeedRepository.self)!)
-    }
-    DependencyInjectionContainer.shared.register(GetLoadedFeedGroupsUseCase.self) { resolver in
-      GetLoadedFeedGroupsUseCase(repo: resolver.resolve(FeedRepository.self)!)
+    DependencyInjectionContainer.shared.register(GetFeedGroupsUseCase.self) { resolver in
+      GetFeedGroupsUseCase(repo: resolver.resolve(FeedRepository.self)!)
     }
     DependencyInjectionContainer.shared.register(SaveNewGroupUseCase.self) { resolver in
       SaveNewGroupUseCase(repo: resolver.resolve(FeedRepository.self)!)

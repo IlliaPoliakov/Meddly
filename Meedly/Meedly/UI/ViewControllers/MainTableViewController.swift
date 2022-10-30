@@ -14,11 +14,11 @@ class MainTableViewController: UITableViewController {
   
   lazy var mainTableView = MainTableView(tableView: tableView, groups: nil)
   
-  private let getCachedFeedGroupsUseCase: GetCachedFeedGroupsUseCase =
-  AppDelegate.DIContainer.resolve(GetCachedFeedGroupsUseCase.self)!
+
+  // -MARK: - Dependencyes _
   
-  private let getLoadedFeedGroupsUseCase: GetLoadedFeedGroupsUseCase =
-  AppDelegate.DIContainer.resolve(GetLoadedFeedGroupsUseCase.self)!
+  private let getFeedGroupsUseCase: GetFeedGroupsUseCase =
+  AppDelegate.DIContainer.resolve(GetFeedGroupsUseCase.self)!
   
   
   // -MARK: - LifeCycle -
@@ -26,17 +26,19 @@ class MainTableViewController: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    mainTableView.groups = getCachedFeedGroupsUseCase.execute()
-
+    updateGroups()
+    mainTableView.configureInitialSnapshot()
+    
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
     tableView.dataSource = mainTableView.dataSource
     tableView.delegate = mainTableView
     
     tableView.rowHeight = UITableView.automaticDimension
     tableView.estimatedRowHeight = 600
-    
-    mainTableView.configureInitialSnapshot()
-    
-    update()
     
   }
   
@@ -46,10 +48,13 @@ class MainTableViewController: UITableViewController {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "showAddVC",
        let destinaitonVC = segue.destination as? AddFeedViewController {
+      
       destinaitonVC.groups = mainTableView.groups
+      
     }
     else if segue.identifier == "descriptionSegueID",
        let destinaitonVC = segue.destination as? ItemDescriptinViewConrtoller {
+      
       let selectedIndex = tableView.indexPathForSelectedRow
       let feedItem = mainTableView.groups![selectedIndex!.section].items![selectedIndex!.row]
       
@@ -60,8 +65,8 @@ class MainTableViewController: UITableViewController {
       if feedItem.imageData != nil {
         destinaitonVC.image = UIImage(data: feedItem.imageData!)
       }
+      
     }
-    
   }
     
   @IBAction func unwind( _ segue: UIStoryboardSegue) {
@@ -74,7 +79,8 @@ class MainTableViewController: UITableViewController {
     let newSections = previousVC.newGroupNames
     
     mainTableView.addNewSections(withNewGroupNames: newSections)
-    update()
+    updateGroups()
+    mainTableView.updateSnapshot()
   }
   
   
@@ -101,17 +107,17 @@ class MainTableViewController: UITableViewController {
   }
   
   @IBAction func update(_ sender: Any) {
-    update()
+    updateGroups()
+    mainTableView.updateSnapshot()
   }
   
   
   // -MARK: - Supplementary -
   
-  func update(){
-    getLoadedFeedGroupsUseCase.execute() { [weak self] loadedGroups, errorMessage in
+  func updateGroups(){
+    getFeedGroupsUseCase.execute() { [weak self] loadedGroups, errorMessage in
       if loadedGroups != nil && loadedGroups != self?.mainTableView.groups {
         self?.mainTableView.groups = loadedGroups
-        self?.mainTableView.updateSnapshot()
       }
    
       if errorMessage != nil {

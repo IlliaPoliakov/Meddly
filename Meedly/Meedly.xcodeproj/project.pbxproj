@@ -7,15 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E4A1BB02F84B84571F55F17 /* Pods_Meedly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C93F3276B4A8D7FC09E2DBAE /* Pods_Meedly.framework */; };
 		F219374628FEFBA100AD5AF0 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F219374528FEFBA100AD5AF0 /* CoreDataStack.swift */; };
 		F2256F1F290876A0003DA153 /* DIConatiner.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2256F1E290876A0003DA153 /* DIConatiner.swift */; };
-		F248D723290A7AFE000E8C50 /* GetLoadedFeedGroupsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F248D722290A7AFE000E8C50 /* GetLoadedFeedGroupsUseCase.swift */; };
 		F25708CA290C4A2B005FBE1D /* ItemDescripitonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25708C9290C4A2B005FBE1D /* ItemDescripitonViewController.swift */; };
 		F2574FEF290082F800CF540C /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2574FEE290082F800CF540C /* Connectivity.swift */; };
 		F265B020290ED5F5006EA513 /* AddFeedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F265B01F290ED5F5006EA513 /* AddFeedTableView.swift */; };
 		F2929C112906E24B006B96CF /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2929C102906E24B006B96CF /* Feed.swift */; };
 		F2929C132906E296006B96CF /* FeedGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2929C122906E296006B96CF /* FeedGroup.swift */; };
 		F2932B8E2906D1B300581568 /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2932B8D2906D1B300581568 /* FeedItem.swift */; };
+		F2A31C13290EF6A100EC5B79 /* GetFeedGrouspUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A31C12290EF6A100EC5B79 /* GetFeedGrouspUseCase.swift */; };
 		F2C4B9F428F7269500359E5D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4B9F328F7269500359E5D /* AppDelegate.swift */; };
 		F2C4B9F628F7269500359E5D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4B9F528F7269500359E5D /* SceneDelegate.swift */; };
 		F2C4B9FB28F7269500359E5D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2C4B9F928F7269500359E5D /* Main.storyboard */; };
@@ -38,26 +39,24 @@
 		F2C95DEA290C3941000E36DD /* MainVCCustomCellNoImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C95DE9290C3941000E36DD /* MainVCCustomCellNoImage.swift */; };
 		F2DC31F2290B302500071EED /* XMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DC31F1290B302500071EED /* XMLParser.swift */; };
 		F2E2D7F3290D9C720019B5F7 /* MainTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E2D7F2290D9C720019B5F7 /* MainTableView.swift */; };
-		F2E41FAA2901C1BE00FCA844 /* GetCachedFeedGroupsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E41FA92901C1BE00FCA844 /* GetCachedFeedGroupsUseCase.swift */; };
 		F2E41FAC2901CC1500FCA844 /* SaveNewGroupUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E41FAB2901CC1500FCA844 /* SaveNewGroupUseCase.swift */; };
 		F2E41FB229020A4700FCA844 /* SaveNewFeedUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E41FB129020A4700FCA844 /* SaveNewFeedUseCase.swift */; };
 		F2F1E56C2905D2AC00EE942A /* DataBaseDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F1E56B2905D2AC00EE942A /* DataBaseDataSource.swift */; };
-		FB6529D7DD00F7C9912F780C /* Pods_Meedly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAC134E9D866701D7B3AED6C /* Pods_Meedly.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		954BD52AE918519170D529BB /* Pods-Meedly.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Meedly.release.xcconfig"; path = "Target Support Files/Pods-Meedly/Pods-Meedly.release.xcconfig"; sourceTree = "<group>"; };
-		A59E9D8226821FAFC220C145 /* Pods-Meedly.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Meedly.debug.xcconfig"; path = "Target Support Files/Pods-Meedly/Pods-Meedly.debug.xcconfig"; sourceTree = "<group>"; };
-		DAC134E9D866701D7B3AED6C /* Pods_Meedly.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Meedly.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A12E61E65AE2C583E7CDE90 /* Pods-Meedly.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Meedly.release.xcconfig"; path = "Target Support Files/Pods-Meedly/Pods-Meedly.release.xcconfig"; sourceTree = "<group>"; };
+		70C46748FC7A5FFF55C2D6A0 /* Pods-Meedly.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Meedly.debug.xcconfig"; path = "Target Support Files/Pods-Meedly/Pods-Meedly.debug.xcconfig"; sourceTree = "<group>"; };
+		C93F3276B4A8D7FC09E2DBAE /* Pods_Meedly.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Meedly.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F219374528FEFBA100AD5AF0 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		F2256F1E290876A0003DA153 /* DIConatiner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIConatiner.swift; sourceTree = "<group>"; };
-		F248D722290A7AFE000E8C50 /* GetLoadedFeedGroupsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetLoadedFeedGroupsUseCase.swift; sourceTree = "<group>"; };
 		F25708C9290C4A2B005FBE1D /* ItemDescripitonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDescripitonViewController.swift; sourceTree = "<group>"; };
 		F2574FEE290082F800CF540C /* Connectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connectivity.swift; sourceTree = "<group>"; };
 		F265B01F290ED5F5006EA513 /* AddFeedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedTableView.swift; sourceTree = "<group>"; };
 		F2929C102906E24B006B96CF /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
 		F2929C122906E296006B96CF /* FeedGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedGroup.swift; sourceTree = "<group>"; };
 		F2932B8D2906D1B300581568 /* FeedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
+		F2A31C12290EF6A100EC5B79 /* GetFeedGrouspUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFeedGrouspUseCase.swift; sourceTree = "<group>"; };
 		F2C4B9F028F7269500359E5D /* Meedly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Meedly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2C4B9F328F7269500359E5D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F2C4B9F528F7269500359E5D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -82,7 +81,6 @@
 		F2C95DE9290C3941000E36DD /* MainVCCustomCellNoImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVCCustomCellNoImage.swift; sourceTree = "<group>"; };
 		F2DC31F1290B302500071EED /* XMLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLParser.swift; sourceTree = "<group>"; };
 		F2E2D7F2290D9C720019B5F7 /* MainTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableView.swift; sourceTree = "<group>"; };
-		F2E41FA92901C1BE00FCA844 /* GetCachedFeedGroupsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCachedFeedGroupsUseCase.swift; sourceTree = "<group>"; };
 		F2E41FAB2901CC1500FCA844 /* SaveNewGroupUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveNewGroupUseCase.swift; sourceTree = "<group>"; };
 		F2E41FB129020A4700FCA844 /* SaveNewFeedUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveNewFeedUseCase.swift; sourceTree = "<group>"; };
 		F2F1E56B2905D2AC00EE942A /* DataBaseDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseDataSource.swift; sourceTree = "<group>"; };
@@ -93,28 +91,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FB6529D7DD00F7C9912F780C /* Pods_Meedly.framework in Frameworks */,
+				6E4A1BB02F84B84571F55F17 /* Pods_Meedly.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9E293D0104ACD72063598681 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C93F3276B4A8D7FC09E2DBAE /* Pods_Meedly.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		BA82BC933808C5C6F11B7B63 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				A59E9D8226821FAFC220C145 /* Pods-Meedly.debug.xcconfig */,
-				954BD52AE918519170D529BB /* Pods-Meedly.release.xcconfig */,
+				70C46748FC7A5FFF55C2D6A0 /* Pods-Meedly.debug.xcconfig */,
+				4A12E61E65AE2C583E7CDE90 /* Pods-Meedly.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		C39A27B31085E4A2F65A2EF6 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				DAC134E9D866701D7B3AED6C /* Pods_Meedly.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		F2C4B9E728F7269500359E5D = {
@@ -123,7 +121,7 @@
 				F2C4B9F228F7269500359E5D /* Meedly */,
 				F2C4B9F128F7269500359E5D /* Products */,
 				BA82BC933808C5C6F11B7B63 /* Pods */,
-				C39A27B31085E4A2F65A2EF6 /* Frameworks */,
+				9E293D0104ACD72063598681 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -216,8 +214,7 @@
 			children = (
 				F2E41FAB2901CC1500FCA844 /* SaveNewGroupUseCase.swift */,
 				F2E41FB129020A4700FCA844 /* SaveNewFeedUseCase.swift */,
-				F248D722290A7AFE000E8C50 /* GetLoadedFeedGroupsUseCase.swift */,
-				F2E41FA92901C1BE00FCA844 /* GetCachedFeedGroupsUseCase.swift */,
+				F2A31C12290EF6A100EC5B79 /* GetFeedGrouspUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -329,11 +326,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F2C4BA0728F7269600359E5D /* Build configuration list for PBXNativeTarget "Meedly" */;
 			buildPhases = (
-				13262900F2990F22A4BB03B4 /* [CP] Check Pods Manifest.lock */,
+				6A7A7AABBFDAA792A02E1998 /* [CP] Check Pods Manifest.lock */,
 				F2C4B9EC28F7269500359E5D /* Sources */,
 				F2C4B9ED28F7269500359E5D /* Frameworks */,
 				F2C4B9EE28F7269500359E5D /* Resources */,
-				3471D56AFECACED79A967EAE /* [CP] Embed Pods Frameworks */,
+				9668B32B83FC45B0C3805602 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -391,7 +388,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		13262900F2990F22A4BB03B4 /* [CP] Check Pods Manifest.lock */ = {
+		6A7A7AABBFDAA792A02E1998 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -413,7 +410,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		3471D56AFECACED79A967EAE /* [CP] Embed Pods Frameworks */ = {
+		9668B32B83FC45B0C3805602 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -454,6 +451,7 @@
 				F2C4BA6728F9E38A00359E5D /* NetworkDataSource.swift in Sources */,
 				F2C95DE8290C2745000E36DD /* FeedGroupEntity+CoreDataProperties.swift in Sources */,
 				F2E2D7F3290D9C720019B5F7 /* MainTableView.swift in Sources */,
+				F2A31C13290EF6A100EC5B79 /* GetFeedGrouspUseCase.swift in Sources */,
 				F219374628FEFBA100AD5AF0 /* CoreDataStack.swift in Sources */,
 				F2E41FAC2901CC1500FCA844 /* SaveNewGroupUseCase.swift in Sources */,
 				F2C95DE3290C2745000E36DD /* FeedItemEntity+CoreDataClass.swift in Sources */,
@@ -461,8 +459,6 @@
 				F2C4BA6528F9BB5000359E5D /* FeedRepositoryImpl.swift in Sources */,
 				F2C95DEA290C3941000E36DD /* MainVCCustomCellNoImage.swift in Sources */,
 				F2C4B9F628F7269500359E5D /* SceneDelegate.swift in Sources */,
-				F2E41FAA2901C1BE00FCA844 /* GetCachedFeedGroupsUseCase.swift in Sources */,
-				F248D723290A7AFE000E8C50 /* GetLoadedFeedGroupsUseCase.swift in Sources */,
 				F2574FEF290082F800CF540C /* Connectivity.swift in Sources */,
 				F2C95DE6290C2745000E36DD /* FeedEntity+CoreDataProperties.swift in Sources */,
 				F2E41FB229020A4700FCA844 /* SaveNewFeedUseCase.swift in Sources */,
@@ -610,7 +606,7 @@
 		};
 		F2C4BA0828F7269600359E5D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A59E9D8226821FAFC220C145 /* Pods-Meedly.debug.xcconfig */;
+			baseConfigurationReference = 70C46748FC7A5FFF55C2D6A0 /* Pods-Meedly.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -638,7 +634,7 @@
 		};
 		F2C4BA0928F7269600359E5D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 954BD52AE918519170D529BB /* Pods-Meedly.release.xcconfig */;
+			baseConfigurationReference = 4A12E61E65AE2C583E7CDE90 /* Pods-Meedly.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

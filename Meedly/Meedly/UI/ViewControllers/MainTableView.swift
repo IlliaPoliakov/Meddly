@@ -10,21 +10,21 @@ import UIKit
 class MainTableView: NSObject, UITableViewDelegate {
 
   var tableView: UITableView
-  var groups: [FeedGroupEntity]?
+  var groups: [FeedGroup]?
   
-  init(tableView: UITableView, groups: [FeedGroupEntity]?) {
+  init(tableView: UITableView, groups: [FeedGroup]?) {
     self.tableView = tableView
     self.groups = groups
   }
   
 
-  lazy var dataSource: UITableViewDiffableDataSource<String, FeedItemEntity> =  UITableViewDiffableDataSource<String, FeedItemEntity> (tableView: tableView) {
+  lazy var dataSource: UITableViewDiffableDataSource<FeedGroup, FeedItem> =  UITableViewDiffableDataSource<FeedGroup, FeedItem> (tableView: tableView) {
     tableView, indexPath, itemIdentifier in
     
     guard let item = self.groups?[indexPath.section].items?[indexPath.row]
-            as? FeedItemEntity
+            as? FeedItem
     else {
-      return nil
+      return
     }
     
     if item.imageData != nil {
@@ -54,7 +54,7 @@ class MainTableView: NSObject, UITableViewDelegate {
   
   func configureInitialSnapshot(){
     
-    var snapshot = NSDiffableDataSourceSnapshot<String, FeedItemEntity>()
+    var snapshot = NSDiffableDataSourceSnapshot<String, FeedItem>()
     
     guard groups != nil
     else {

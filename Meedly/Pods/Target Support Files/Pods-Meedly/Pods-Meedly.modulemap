@@ -1,0 +1,6 @@
+framework module Pods_Meedly {
+  umbrella header "Pods-Meedly-umbrella.h"
+
+  export *
+  module * { export * }
+}

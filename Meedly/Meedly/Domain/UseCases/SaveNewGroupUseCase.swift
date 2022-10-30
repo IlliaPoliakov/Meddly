@@ -14,7 +14,7 @@ class SaveNewGroupUseCase {
     self.repo = repo
   }
   
-  func execute(withNewGroupName group: String) -> FeedGroupEntity {
+  func execute(withNewGroupName group: String) -> FeedGroup {
     return repo.saveNewGroup(group)
   }
 }
