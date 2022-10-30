@@ -12,6 +12,7 @@
 		F248D723290A7AFE000E8C50 /* GetLoadedFeedGroupsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F248D722290A7AFE000E8C50 /* GetLoadedFeedGroupsUseCase.swift */; };
 		F25708CA290C4A2B005FBE1D /* ItemDescripitonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25708C9290C4A2B005FBE1D /* ItemDescripitonViewController.swift */; };
 		F2574FEF290082F800CF540C /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2574FEE290082F800CF540C /* Connectivity.swift */; };
+		F265B020290ED5F5006EA513 /* AddFeedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F265B01F290ED5F5006EA513 /* AddFeedTableView.swift */; };
 		F2929C112906E24B006B96CF /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2929C102906E24B006B96CF /* Feed.swift */; };
 		F2929C132906E296006B96CF /* FeedGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2929C122906E296006B96CF /* FeedGroup.swift */; };
 		F2932B8E2906D1B300581568 /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2932B8D2906D1B300581568 /* FeedItem.swift */; };
@@ -36,6 +37,7 @@
 		F2C95DE8290C2745000E36DD /* FeedGroupEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C95DE2290C2745000E36DD /* FeedGroupEntity+CoreDataProperties.swift */; };
 		F2C95DEA290C3941000E36DD /* MainVCCustomCellNoImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C95DE9290C3941000E36DD /* MainVCCustomCellNoImage.swift */; };
 		F2DC31F2290B302500071EED /* XMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DC31F1290B302500071EED /* XMLParser.swift */; };
+		F2E2D7F3290D9C720019B5F7 /* MainTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E2D7F2290D9C720019B5F7 /* MainTableView.swift */; };
 		F2E41FAA2901C1BE00FCA844 /* GetCachedFeedGroupsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E41FA92901C1BE00FCA844 /* GetCachedFeedGroupsUseCase.swift */; };
 		F2E41FAC2901CC1500FCA844 /* SaveNewGroupUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E41FAB2901CC1500FCA844 /* SaveNewGroupUseCase.swift */; };
 		F2E41FB229020A4700FCA844 /* SaveNewFeedUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E41FB129020A4700FCA844 /* SaveNewFeedUseCase.swift */; };
@@ -52,6 +54,7 @@
 		F248D722290A7AFE000E8C50 /* GetLoadedFeedGroupsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetLoadedFeedGroupsUseCase.swift; sourceTree = "<group>"; };
 		F25708C9290C4A2B005FBE1D /* ItemDescripitonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDescripitonViewController.swift; sourceTree = "<group>"; };
 		F2574FEE290082F800CF540C /* Connectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connectivity.swift; sourceTree = "<group>"; };
+		F265B01F290ED5F5006EA513 /* AddFeedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedTableView.swift; sourceTree = "<group>"; };
 		F2929C102906E24B006B96CF /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
 		F2929C122906E296006B96CF /* FeedGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedGroup.swift; sourceTree = "<group>"; };
 		F2932B8D2906D1B300581568 /* FeedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
@@ -78,6 +81,7 @@
 		F2C95DE2290C2745000E36DD /* FeedGroupEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FeedGroupEntity+CoreDataProperties.swift"; path = "Meedly/Data/Model/FeedGroupEntity/FeedGroupEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		F2C95DE9290C3941000E36DD /* MainVCCustomCellNoImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVCCustomCellNoImage.swift; sourceTree = "<group>"; };
 		F2DC31F1290B302500071EED /* XMLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLParser.swift; sourceTree = "<group>"; };
+		F2E2D7F2290D9C720019B5F7 /* MainTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableView.swift; sourceTree = "<group>"; };
 		F2E41FA92901C1BE00FCA844 /* GetCachedFeedGroupsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCachedFeedGroupsUseCase.swift; sourceTree = "<group>"; };
 		F2E41FAB2901CC1500FCA844 /* SaveNewGroupUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveNewGroupUseCase.swift; sourceTree = "<group>"; };
 		F2E41FB129020A4700FCA844 /* SaveNewFeedUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveNewFeedUseCase.swift; sourceTree = "<group>"; };
@@ -270,7 +274,9 @@
 			isa = PBXGroup;
 			children = (
 				F2C4BA4B28F8AB7600359E5D /* MainTableViewController.swift */,
+				F2E2D7F2290D9C720019B5F7 /* MainTableView.swift */,
 				F2C4BA4D28F8AE1C00359E5D /* AddFeedViewController.swift */,
+				F265B01F290ED5F5006EA513 /* AddFeedTableView.swift */,
 				F25708C9290C4A2B005FBE1D /* ItemDescripitonViewController.swift */,
 				F2C4BA5328F97EE500359E5D /* TableViewCustomCells */,
 			);
@@ -460,6 +466,7 @@
 				F2929C112906E24B006B96CF /* Feed.swift in Sources */,
 				F2929C132906E296006B96CF /* FeedGroup.swift in Sources */,
 				F2C95DE5290C2745000E36DD /* FeedEntity+CoreDataClass.swift in Sources */,
+				F265B020290ED5F5006EA513 /* AddFeedTableView.swift in Sources */,
 				F2C4BA5528F97F5000359E5D /* MainTVCCustomCell.swift in Sources */,
 				F25708CA290C4A2B005FBE1D /* ItemDescripitonViewController.swift in Sources */,
 				F2C4BA7828FDAD0400359E5D /* DataSourceProtocols.swift in Sources */,
@@ -470,6 +477,7 @@
 				F2C4B9F428F7269500359E5D /* AppDelegate.swift in Sources */,
 				F2C4BA6728F9E38A00359E5D /* NetworkDataSource.swift in Sources */,
 				F2C95DE8290C2745000E36DD /* FeedGroupEntity+CoreDataProperties.swift in Sources */,
+				F2E2D7F3290D9C720019B5F7 /* MainTableView.swift in Sources */,
 				F219374628FEFBA100AD5AF0 /* CoreDataStack.swift in Sources */,
 				F2E41FAC2901CC1500FCA844 /* SaveNewGroupUseCase.swift in Sources */,
 				F2C95DE3290C2745000E36DD /* FeedItemEntity+CoreDataClass.swift in Sources */,

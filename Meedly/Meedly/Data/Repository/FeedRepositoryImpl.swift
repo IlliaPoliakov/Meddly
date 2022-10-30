@@ -64,11 +64,12 @@ class FeedRepositoryImpl: FeedRepository {
                     self?.remoteDataSource.downloadImageData(
                       withUrl: modelFeed.imageUrl!) { fetchedImageData in
                         
-                        self?.localDataSource
+                        let newFeedItem = self?.localDataSource
                           .saveNewFeedItem(withTitle: modelFeed.title,
                                            withDescription: modelFeed.feedItemDescription,
                                            withLink: modelFeed.link, withImageData: fetchedImageData,
                                            withPubDate: modelFeed.pubDate, withhGroup: group)
+                        
                       }
                   }
                 }

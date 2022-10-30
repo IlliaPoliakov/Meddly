@@ -21,5 +21,5 @@ protocol LocalDataSource {
                        withLink link: URL,
                        withImageData imageData: Data?,
                        withPubDate pubDate: String,
-                       withhGroup group: FeedGroupEntity)
+                       withhGroup group: FeedGroupEntity) -> FeedItemEntity
 }

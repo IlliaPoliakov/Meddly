@@ -19,9 +19,10 @@ class AddFeedViewController: UIViewController, UITableViewDelegate {
   
   // MARK: - Properties -
   
+  lazy var addFeedTableView: AddFeedTableView = AddFeedTableView(tableView: tableView, groups: groups)
+  lazy var groups: [FeedGroupEntity]? = nil
+  
   var newGroupNames: [String]?
-  var selectedRowIndexPath: IndexPath? = nil
-  var groups: [FeedGroupEntity]?
   
   private let saveNewGroupUseCase: SaveNewGroupUseCase =
   AppDelegate.DIContainer.resolve(SaveNewGroupUseCase.self)!
@@ -35,75 +36,15 @@ class AddFeedViewController: UIViewController, UITableViewDelegate {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    tableView.dataSource = dataSource
-    tableView.delegate = self
+    tableView.dataSource = addFeedTableView.dataSource
+    tableView.delegate = addFeedTableView
     
     self.hideKeyboardWhenTappedAround()
     
-    configureInitialSnapshot()
+    addFeedTableView.configureInitialSnapshot()
   }
   
-  
-  // MARK: - Maintain table view -
-  
-  enum Section {
-    case main
-  }
-  
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    selectedRowIndexPath = indexPath
-  }
-  
-  func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-    selectedRowIndexPath = nil
-  }
-  
-  private lazy var dataSource: UITableViewDiffableDataSource<Section, String> = UITableViewDiffableDataSource(
-    tableView: tableView) { tableView, indexPath, itemIdentifier in
-      
-      let cell = tableView.dequeueReusableCell(withIdentifier: "AddTableViewCell", for: indexPath)
-      cell.backgroundColor = UIColor.clear
-      
-      guard let groupName = self.groups?[indexPath.row].title
-      else {
-        return cell
-      }
-      
-      cell.textLabel?.text = groupName
-      
-      if self.selectedRowIndexPath == indexPath {
-        cell.backgroundColor = UIColor.lightGray
-      }
-      
-      return cell
-    }
-  
-  func configureInitialSnapshot(){
-    var snapshot = NSDiffableDataSourceSnapshot<Section, String>()
-    snapshot.appendSections([.main])
-    
-    guard groups != nil
-    else {
-      dataSource.apply(snapshot, animatingDifferences: false)
-      return
-    }
-    
-    for group in groups! {
-      snapshot.appendItems([group.title] , toSection: .main)
-    }
-    
-    dataSource.apply(snapshot, animatingDifferences: false)
-  }
-  
-  func updateSnapshot(withNewGroupName name: String){
-    var snapshot = dataSource.snapshot()
-    
-    snapshot.appendItems([name], toSection: .main)
-    
-    dataSource.apply(snapshot, animatingDifferences: true)
-  }
-  
-  
+
   // MARK: - IBActions -
   
   @IBAction func createNewGroup(_ sender: Any) {
@@ -122,7 +63,8 @@ class AddFeedViewController: UIViewController, UITableViewDelegate {
         return
       }
       
-      guard !(self.groups?.contains(where: { $0.title == groupName }) ?? false)
+      guard !(self.addFeedTableView.groups?.contains(
+        where: { $0.title == groupName }) ?? false)
       else {
         print("Group with given name already exist!")
         return
@@ -130,14 +72,14 @@ class AddFeedViewController: UIViewController, UITableViewDelegate {
       
       let newGroup = saveNewGroupUseCase.execute(withNewGroupName: groupName)
       
-      if groups != nil {
-        groups?.append(newGroup)
+      if addFeedTableView.groups != nil {
+        addFeedTableView.groups?.append(newGroup)
       }
       else {
-        groups = [newGroup]
+        addFeedTableView.groups = [newGroup]
       }
       
-      updateSnapshot(withNewGroupName: groupName)
+        addFeedTableView.updateSnapshot(withNewGroupName: groupName)
       
       if newGroupNames == nil {
         newGroupNames = [groupName]
@@ -168,13 +110,13 @@ class AddFeedViewController: UIViewController, UITableViewDelegate {
       return
     }
     
-    guard selectedRowIndexPath != nil
+    guard addFeedTableView.selectedRowIndexPath != nil
     else {
       print("Group for new feed wasn't selected!")
       return
     }
     
-    for group in groups! {
+    for group in addFeedTableView.groups! {
       guard group.feeds != nil,
             !(group.feeds!.contains(where: { $0.link.description == urlTextField.text! }) )
       else {
@@ -185,7 +127,7 @@ class AddFeedViewController: UIViewController, UITableViewDelegate {
     }
     
     saveNewFeedUseCase.execute(withNewFeedUrl: feedUrl, withParentGroup:
-                                groups![selectedRowIndexPath!.row])
+                                addFeedTableView.groups![addFeedTableView.selectedRowIndexPath!.row])
     
     performSegue(withIdentifier: "unwindToMain", sender: self)
   }

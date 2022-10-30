@@ -80,7 +80,7 @@ class DataBaseDataSource: LocalDataSource {
                        withLink link: URL,
                        withImageData imageData: Data?,
                        withPubDate pubDate: String,
-                       withhGroup group: FeedGroupEntity) {
+                       withhGroup group: FeedGroupEntity) -> FeedItemEntity {
     
     let newFeedItem = FeedItemEntity.init(context: coreDataStack.managedContext)
     newFeedItem.title = title
@@ -93,5 +93,7 @@ class DataBaseDataSource: LocalDataSource {
     group.addToItems(newFeedItem)
     
     coreDataStack.saveContext()
+    
+    return newFeedItem
   }
 }
