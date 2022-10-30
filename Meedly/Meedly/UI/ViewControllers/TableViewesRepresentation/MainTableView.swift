@@ -20,10 +20,10 @@ class MainTableView: NSObject, UITableViewDelegate {
     guard let item = self.groups?[indexPath.section].items?[indexPath.row]
             as? FeedItem
     else {
-      return
+      return UITableViewCell()
     }
     
-    if item.imageData != nil {
+    if item.imageUrl != nil {
       guard let cell = tableView.dequeueReusableCell(withIdentifier: "MainVCCustomCell")
               as? MainTableViewControllerCustomCell
       else {

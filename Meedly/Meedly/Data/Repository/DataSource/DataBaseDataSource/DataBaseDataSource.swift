@@ -17,10 +17,28 @@ class DataBaseDataSource: LocalDataSource {
   
   // -MARK: - Functions -
   
+  func getPredicatedGroup(withGroup group: FeedGroup) -> FeedGroupEntity? {
+    
+    let predicate = NSPredicate(format: "%K == %@",
+                                #keyPath(FeedGroupEntity.title), "\(group.title)")
+    
+    let fetchRequest =
+          NSFetchRequest<FeedGroupEntity>(entityName: "FeedGroupEntity")
+        fetchRequest.resultType = .managedObjectResultType
+        fetchRequest.predicate = predicate
+    guard let group = try? coreDataStack.managedContext.fetch(fetchRequest)
+    else {
+      return nil
+    }
+    
+    return group.first
+  }
+  
   func loadData() -> [FeedGroupEntity]? {
     
     guard var groups = try? coreDataStack.managedContext.fetch(FeedGroupEntity.fetchRequest())
     else {
+      print("JOPA")
       return nil
     }
     
@@ -70,6 +88,7 @@ class DataBaseDataSource: LocalDataSource {
     newFeed.link = url
     newFeed.id = UUID()
     newFeed.parentGroup = group
+    
     group.addToFeeds(newFeed)
     
     coreDataStack.saveContext()
@@ -78,22 +97,21 @@ class DataBaseDataSource: LocalDataSource {
   func saveNewFeedItem(withTitle title: String,
                        withDescription feedDescription: String,
                        withLink link: URL,
-                       withImageData imageData: Data?,
+                       withImageUrl imageUrl: URL,
                        withPubDate pubDate: String,
-                       withhGroup group: FeedGroupEntity) -> FeedItemEntity {
+                       withGroup group: FeedGroupEntity) {
     
     let newFeedItem = FeedItemEntity.init(context: coreDataStack.managedContext)
     newFeedItem.title = title
     newFeedItem.feedItemDescription = feedDescription
     newFeedItem.link = link
-    newFeedItem.imageData = imageData
+    newFeedItem.imageUrl = imageUrl
     newFeedItem.pubDate = pubDate
     newFeedItem.parentGroup = group
     newFeedItem.id = UUID()
+    
     group.addToItems(newFeedItem)
     
     coreDataStack.saveContext()
-    
-    return newFeedItem
   }
 }

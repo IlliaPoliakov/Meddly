@@ -13,20 +13,39 @@ struct FeedItem: Hashable {
   var pubDate: String
   var title: String
   var link: URL
-  var parentGroup: FeedGroup
   var isViewed: Bool = false
   
   init(feedItemDescription: String,
        imageUrl: URL? = nil,
        pubDate: String,
        title: String,
-       link: URL,
-       parentGroup: FeedGroup) {
+       link: URL ) {
     self.feedItemDescription = feedItemDescription
     self.imageUrl = imageUrl
     self.pubDate = pubDate
     self.title = title
     self.link = link
-    self.parentGroup = parentGroup
+  }
+
+  static func convertToModelItems(withEntities entities:
+                                  [FeedItemEntity]?) -> [FeedItem]? {
+    guard entities != nil
+    else {
+      return nil
+    }
+    
+    var modelItems = [FeedItem]()
+    
+    for entity in entities! {
+      modelItems.append(FeedItem(feedItemDescription: entity.feedItemDescription,
+                                 imageUrl: entity.imageUrl,
+                                 pubDate: entity.pubDate,
+                                 title: entity.title,
+                                 link: entity.link
+                                )
+      )
+    }
+    
+    return modelItems
   }
 }

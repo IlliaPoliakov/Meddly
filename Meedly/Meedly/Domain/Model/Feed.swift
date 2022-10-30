@@ -9,20 +9,43 @@ import Foundation
 
 struct Feed: Hashable {
   var id: UUID
-  var imageData: Data?
+  var imageUrl: URL?
   var link: URL
   var title: String?
-  var parentGroup: FeedGroup
   
-  init(id: UUID, imageData: Data? = nil, link: URL, title: String? = nil, parentGroup: FeedGroup) {
+  init(id: UUID,
+       imageUrl: URL? = nil,
+       link: URL,
+       title: String? = nil ) {
     self.id = id
-    self.imageData = imageData
+    self.imageUrl = imageUrl
     self.link = link
     self.title = title
-    self.parentGroup = parentGroup
   }
   
   static func == (lhs: Feed, rhs: Feed) -> Bool {
     return lhs.id == rhs.id
   }
+  
+  static func convertToModelFeeds(withEntities entities:
+                                   [FeedEntity]?) -> [Feed]? {
+    guard entities != nil
+    else {
+      return nil
+    }
+    
+    var modelFeeds = [Feed]()
+    
+    for entity in entities! {
+      modelFeeds.append(Feed(id: entity.id,
+                             imageUrl: entity.imageUrl,
+                             link: entity.link,
+                             title: entity.title
+                             )
+      )
+    }
+    
+    return modelFeeds
+  }
+  
 }

@@ -13,10 +13,29 @@ struct FeedGroup: Hashable {
   public var feeds: [Feed]?
   public var items: [FeedItem]?
   
-  init(id: UUID, title: String, feeds: [Feed]? = nil, items: [FeedItem]? = nil) {
+  init(id: UUID = UUID(), title: String = "", feeds: [Feed]? = nil, items: [FeedItem]? = nil) {
     self.id = id
     self.title = title
     self.feeds = feeds
     self.items = items
+  }
+  
+  static func convertToModelGroups(withEntities entities:
+                                   [FeedGroupEntity]?) -> [FeedGroup]? {
+    guard entities != nil
+    else {
+      return nil
+    }
+    
+    var modelGroups = [FeedGroup]()
+    
+    for entity in entities! {
+      modelGroups.append(FeedGroup(id: entity.id,
+                                   title: entity.title,
+                                   feeds: Feed.convertToModelFeeds(withEntities: entity.feeds),
+                                   items: FeedItem.convertToModelItems(withEntities: entity.items)))
+    }
+    
+    return modelGroups
   }
 }

@@ -29,11 +29,6 @@ class MainTableViewController: UITableViewController {
     updateGroups()
     mainTableView.configureInitialSnapshot()
     
-  }
-  
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    
     tableView.dataSource = mainTableView.dataSource
     tableView.delegate = mainTableView
     
@@ -110,7 +105,7 @@ class MainTableViewController: UITableViewController {
   
   func updateGroups(){
     getFeedGroupsUseCase.execute() { [weak self] loadedGroups, errorMessage in
-      if loadedGroups != nil && loadedGroups != self?.mainTableView.groups {
+      if loadedGroups != self?.mainTableView.groups {
         self?.mainTableView.groups = loadedGroups
       }
    

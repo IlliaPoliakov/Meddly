@@ -9,18 +9,6 @@ import Foundation
 
 
 class FeedRepositoryImpl: FeedRepository {
-  func getFeedGroups(_ completion: @escaping ([FeedGroup]?, String?) -> Void) {
-    <#code#>
-  }
-  
-  func saveNewGroup(_ newGroupName: String) -> FeedGroup {
-    <#code#>
-  }
-  
-  func saveNewFeed(_ newFeedURL: URL, _ group: FeedGroup) {
-    <#code#>
-  }
-  
   
   // -MARK: - Properties -
   
@@ -39,13 +27,15 @@ class FeedRepositoryImpl: FeedRepository {
   
   // -MARK: - Functional -
   
-  func getFeedGroups(_ completion: @escaping ([FeedGroupEntity]?, String?) -> Void) {
+  func getFeedGroups(_ completion:
+                     @escaping ([FeedGroup]?, String?) -> Void) {
+    var savedErrorMessage: String? = nil
     
-    DispatchQueue.global(qos: .userInteractive){
-      let groups = localDataSource.loadData()
+    DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+      var groups = self?.localDataSource.loadData()
       
       DispatchQueue.main.async {
-        completion(groups, nil)
+        completion(FeedGroup.convertToModelGroups(withEntities: groups), nil)
       }
       
       let downloadGroup = DispatchGroup()
@@ -56,29 +46,29 @@ class FeedRepositoryImpl: FeedRepository {
             for feed in group.feeds! {
               downloadGroup.enter()
               
-              remoteDataSource.downloadData(withUrl: feed.link) { [weak self] data, error in
+              self?.remoteDataSource.downloadData(withUrl: feed.link) {
+                [weak self] data, error in
                 if data != nil {
                   let parser = XMLParser(data: data!)
                   parser.delegate = self?.xmlParserDelegate
                   parser.parse()
                   
-                  let feeds = self?.xmlParserDelegate.getFeeds() { [weak self] in
-                    self?.remoteDataSource.downloadImageData(
-                      withUrl: modelFeed.imageUrl!) { fetchedImageData in
-                        
-                        let newFeedItem = self?.localDataSource
-                          .saveNewFeedItem(withTitle: modelFeed.title,
-                                           withDescription: modelFeed.feedItemDescription,
-                                           withLink: modelFeed.link, withImageData: fetchedImageData,
-                                           withPubDate: modelFeed.pubDate, withhGroup: group)
-                        
-                      }
+                  let feeds = self?.xmlParserDelegate.getFeeds()
+                  
+                  for feed in feeds! {
+                    self?.localDataSource
+                      .saveNewFeedItem(withTitle: feed.title,
+                                       withDescription: feed.feedItemDescription,
+                                       withLink: feed.link,
+                                       withImageUrl: feed.imageUrl!,
+                                       withPubDate: feed.pubDate,
+                                       withGroup: group)
                   }
                 }
-                self?.errorMessage = error
-                
-                downloadGroup.leave()
+                savedErrorMessage = error
               }
+              
+              downloadGroup.leave()
             }
           }
         }
@@ -89,25 +79,25 @@ class FeedRepositoryImpl: FeedRepository {
         }
       }
       
+      
       downloadGroup.notify(queue: DispatchQueue.main) {
-        completion(self.groups, self.errorMessage)
+        groups = self?.localDataSource.loadData()
+        completion(FeedGroup.convertToModelGroups(withEntities: groups), savedErrorMessage)
       }
     }
   }
   
   
-  func saveNewGroup(_ newGroupName: String) -> FeedGroupEntity {
+  func saveNewGroup(_ newGroupName: String) -> FeedGroup {
     let newGroup = localDataSource.saveNewGroup(withNewGroupName: newGroupName)
-    if groups == nil {
-      groups = [newGroup]
-    }
-    else {
-      groups?.append(newGroup)
-    }
-    return newGroup
+    
+    return FeedGroup.convertToModelGroups(withEntities: [newGroup])!.first!
   }
   
-  func saveNewFeed(_ newChanelUrl: URL, _ group: FeedGroupEntity) {
-    localDataSource.saveNewFeed(withNewFeedUrl: newChanelUrl, withParentGroup: group)
+  func saveNewFeed(_ newChanelUrl: URL, _ group: FeedGroup) {
+    
+    let groupEntity = localDataSource.getPredicatedGroup(withGroup: group)
+    localDataSource.saveNewFeed(withNewFeedUrl: newChanelUrl, withParentGroup: groupEntity!)
   }
+  
 }

@@ -10,14 +10,16 @@ import Foundation
 class XMLDataParser: NSObject, XMLParserDelegate {
   
   // -MARK: - Properties -
+  
+  let defaultImageUrl: String = "https://cdn.i.haymarketmedia.asia/?n=campaign-asia%2Fcontent%2FcroppedF1logo.png&h=570&w=855&q=100&v=20170226&c=1"
 
   var elementName: String? = nil
   //feed item data
-  var itemtitle: String? = nil
-  var itemDescription: String? = nil
-  var itemLink: String? = nil
-  var pubDate: String? = nil
-  var itemImageUrl: String? = nil
+  var itemtitle: String = ""
+  var itemDescription: String = ""
+  var itemLink: String = ""
+  var pubDate: String = ""
+  var itemImageUrl: String = ""
   // feed chanel data
   var feedTitle: String? = nil
   var feedImageUrl: String? = nil
@@ -40,7 +42,7 @@ class XMLDataParser: NSObject, XMLParserDelegate {
     }
     
     if elementName == "media:thumbnail" {
-      itemImageUrl = attributeDict["url"]
+      itemImageUrl = attributeDict["url"] ?? defaultImageUrl
     }
     
     self.elementName = elementName
@@ -52,13 +54,13 @@ class XMLDataParser: NSObject, XMLParserDelegate {
     if (!data.isEmpty) {
       switch self.elementName {
       case "title":
-        self.itemtitle! += data
+        self.itemtitle += data
       case "link":
-        self.itemLink! += data
+        self.itemLink += data
       case "pubDate":
-        self.pubDate! += data
+        self.pubDate += data
       case "content:encoded":
-        self.itemDescription! += data
+        self.itemDescription += data
       default:
         break
       }
@@ -70,8 +72,9 @@ class XMLDataParser: NSObject, XMLParserDelegate {
     if elementName == "item" {
       let item = FeedItem(feedItemDescription: itemDescription,
                           imageUrl: URL(string: itemImageUrl)!,
-                          pubDate: pubDate, title: itemtitle,
-                          link: URL(string: link)!)
+                          pubDate: pubDate,
+                          title: itemtitle,
+                          link: URL(string: itemLink)!)
       feedItems.append(item)
     }
   }

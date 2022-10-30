@@ -12,13 +12,14 @@ protocol RemoteDataSource {
 }
 
 protocol LocalDataSource {
+  func getPredicatedGroup(withGroup group: FeedGroup) -> FeedGroupEntity?
   func loadData() -> [FeedGroupEntity]?
   func saveNewGroup(withNewGroupName name: String) -> FeedGroupEntity
   func saveNewFeed(withNewFeedUrl url: URL, withParentGroup group: FeedGroupEntity)
   func saveNewFeedItem(withTitle title: String,
                        withDescription feedDescription: String,
                        withLink link: URL,
-                       withImageData imageData: Data?,
+                       withImageUrl imageUrl: URL,
                        withPubDate pubDate: String,
-                       withhGroup group: FeedGroupEntity) -> FeedItemEntity
+                       withGroup group: FeedGroupEntity)
 }
