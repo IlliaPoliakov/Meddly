@@ -26,9 +26,10 @@ class MainTableViewController: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    updateGroups()
-    mainTableView.configureInitialSnapshot()
-    
+    updateGroups() { [weak self] in
+      self?.mainTableView.configureInitialSnapshot()
+    }
+      
     tableView.dataSource = mainTableView.dataSource
     tableView.delegate = mainTableView
     
@@ -68,8 +69,9 @@ class MainTableViewController: UITableViewController {
     
     mainTableView.addNewGroups(withNewGroups: newGroups)
     
-    updateGroups()
-    mainTableView.updateSnapshot()
+    updateGroups() { [weak self] in
+      self?.mainTableView.updateSnapshot()
+    }
   }
   
   
@@ -96,14 +98,15 @@ class MainTableViewController: UITableViewController {
   }
   
   @IBAction func update(_ sender: Any) {
-    updateGroups()
-    mainTableView.updateSnapshot()
+    updateGroups() { [weak self] in
+      self?.mainTableView.updateSnapshot()
+    }
   }
   
   
   // -MARK: - Supplementary -
   
-  func updateGroups(){
+  func updateGroups(_ completion: @escaping () -> Void){
     getFeedGroupsUseCase.execute() { [weak self] loadedGroups, errorMessage in
       if loadedGroups != self?.mainTableView.groups {
         self?.mainTableView.groups = loadedGroups
@@ -113,6 +116,7 @@ class MainTableViewController: UITableViewController {
         print("'\(errorMessage!)' occurred when downloading data.")
       }
       
+      completion()
     }
   }
   

@@ -30,7 +30,7 @@ struct FeedGroup: Hashable {
     var modelGroups = [FeedGroup]()
     
     for entity in entities! {
-      modelGroups.append(FeedGroup(id: entity.id,
+      modelGroups.append(FeedGroup(id: UUID(),
                                    title: entity.title,
                                    feeds: Feed.convertToModelFeeds(withEntities: entity.feeds),
                                    items: FeedItem.convertToModelItems(withEntities: entity.items)))

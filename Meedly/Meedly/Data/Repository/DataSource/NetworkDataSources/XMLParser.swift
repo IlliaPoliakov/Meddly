@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class XMLDataParser: NSObject, XMLParserDelegate {
   
@@ -83,3 +84,4 @@ class XMLDataParser: NSObject, XMLParserDelegate {
     return feedItems
   }
 }
+
