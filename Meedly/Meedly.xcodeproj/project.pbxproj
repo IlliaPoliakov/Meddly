@@ -315,35 +315,11 @@
 		F2F1E5522905231D00EE942A /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				F2F1E5532905235800EE942A /* FeedItem */,
-				F2F1E5542905236000EE942A /* Feed */,
-				F2F1E5552905236600EE942A /* Group */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		F2F1E5532905235800EE942A /* FeedItem */ = {
-			isa = PBXGroup;
-			children = (
 				F2932B8D2906D1B300581568 /* FeedItem.swift */,
-			);
-			path = FeedItem;
-			sourceTree = "<group>";
-		};
-		F2F1E5542905236000EE942A /* Feed */ = {
-			isa = PBXGroup;
-			children = (
 				F2929C102906E24B006B96CF /* Feed.swift */,
-			);
-			path = Feed;
-			sourceTree = "<group>";
-		};
-		F2F1E5552905236600EE942A /* Group */ = {
-			isa = PBXGroup;
-			children = (
 				F2929C122906E296006B96CF /* FeedGroup.swift */,
 			);
-			path = Group;
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

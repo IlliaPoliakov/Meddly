@@ -43,7 +43,7 @@ class XMLDataParser: NSObject, XMLParserDelegate {
       itemImageDataUrl = ""
     }
     
-    if elementName == "media:content" {
+    if elementName == "media:thumbnail" {
       itemImageDataUrl = attributeDict["url"] ?? "" // MB errors due to non-nil
     }
     

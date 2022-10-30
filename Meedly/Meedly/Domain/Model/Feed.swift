@@ -12,9 +12,9 @@ struct Feed {
   public var imageData: Data?
   public var link: URL
   public var title: String?
-  public var parentGroup: FeedGroupEntity
+  public var parentGroup: FeedGroup
   
-  init(id: UUID, imageData: Data? = nil, link: URL, title: String? = nil, parentGroup: FeedGroupEntity) {
+  init(id: UUID, imageData: Data? = nil, link: URL, title: String? = nil, parentGroup: FeedGroup) {
     self.id = id
     self.imageData = imageData
     self.link = link
