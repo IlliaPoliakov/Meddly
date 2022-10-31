@@ -60,12 +60,6 @@ class MainTableView: NSObject, UITableViewDelegate {
     
     var snapshot = NSDiffableDataSourceSnapshot<FeedGroup, FeedItem>()
     
-    guard groups != nil
-    else {
-      dataSource.apply(snapshot, animatingDifferences: true)
-      return
-    }
-    
     for group in groups! {
       snapshot.appendSections([group])
       
@@ -77,21 +71,23 @@ class MainTableView: NSObject, UITableViewDelegate {
     dataSource.apply(snapshot, animatingDifferences: false)
   }
   
-  func updateSnapshot(){
-    
+  func updateSnapshot(withGroups newGroups: [FeedGroup]?){
     var snapshot = dataSource.snapshot()
     
-    guard groups != nil
+    guard newGroups != nil
     else {
-      dataSource.apply(snapshot, animatingDifferences: true)
       return
     }
     
-    for group in groups! {
-      if group.items != nil && !(group.items!.isEmpty){
-        snapshot.appendItems(group.items!, toSection: group)
+    for i in 0 ..< newGroups!.count {
+      let diffItems = self.groups![i].items?.difference(from: newGroups![i].items!)
+      
+      if diffItems != nil {
+        snapshot.appendItems(diffItems!, toSection: self.groups![i])
       }
     }
+    
+    self.groups = newGroups
     
     dataSource.apply(snapshot, animatingDifferences: true)
   }

@@ -7,24 +7,24 @@
 
 import Foundation
 
-struct Feed: Hashable, Equatable {
+struct Feed: Identifiable, Equatable, Hashable {
   var id: UUID
   var imageUrl: URL?
   var link: URL
   var title: String?
   
-  init(id: UUID,
-       imageUrl: URL? = nil,
+  init(imageUrl: URL? = nil,
        link: URL,
-       title: String? = nil ) {
-    self.id = id
+       title: String? = nil,
+       id: UUID = UUID()) {
     self.imageUrl = imageUrl
     self.link = link
     self.title = title
+    self.id = id
   }
-  
+
   static func == (lhs: Feed, rhs: Feed) -> Bool {
-    return lhs.id == rhs.id
+    return lhs.link == rhs.link
   }
   
   static func convertToModelFeeds(withEntities entities:
@@ -37,10 +37,10 @@ struct Feed: Hashable, Equatable {
     var modelFeeds = [Feed]()
     
     for entity in entities! {
-      modelFeeds.append(Feed(id: entity.id,
-                             imageUrl: entity.imageUrl,
+      modelFeeds.append(Feed(imageUrl: entity.imageUrl,
                              link: entity.link,
-                             title: entity.title
+                             title: entity.title,
+                             id: entity.id
                              )
       )
     }

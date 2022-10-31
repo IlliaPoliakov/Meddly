@@ -120,7 +120,7 @@ class AddFeedViewController: UIViewController, UITableViewDelegate {
       guard group.feeds != nil,
             !(group.feeds!.contains(where: { $0.link.description == urlTextField.text! }) )
       else {
-        print("Given chanel already eaists in group \(group.title)!")
+        print("Given chanel already exists in group \(group.title)!")
         
         return
       }

@@ -14,7 +14,8 @@ class GetFeedGroupsUseCase {
     self.repo = repo
   }
   
-  func execute(_ completion: @escaping ([FeedGroup]?, String?) -> Void) {
-    repo.getFeedGroups(completion)
+  func execute(updateState state: UpdateState,
+               _ completion: @escaping ([FeedGroup]?, String?) -> Void) {
+    repo.getFeedGroups(updateState: state, completion)
   }
 }

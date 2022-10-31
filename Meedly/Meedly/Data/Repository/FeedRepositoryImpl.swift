@@ -25,17 +25,18 @@ class FeedRepositoryImpl: FeedRepository {
   }
   
   
-  // -MARK: - Functional -
+  // -MARK: - UseCase func-s -
   
-  func getFeedGroups(_ completion:
-                     @escaping ([FeedGroup]?, String?) -> Void) {
+  func getFeedGroups(updateState state: UpdateState,
+                     _ completion: @escaping ([FeedGroup]?, String?) -> Void) {
     var savedErrorMessage: String? = nil
     
     DispatchQueue.global(qos: .userInteractive).async { [weak self] in
       var groups = self?.localDataSource.loadData()
-      
-      DispatchQueue.main.async {
-        completion(FeedGroup.convertToModelGroups(withEntities: groups), nil)
+      if state == .regularUpdate {
+        DispatchQueue.main.async {
+          completion(FeedGroup.convertToModelGroups(withEntities: groups), nil)
+        }
       }
       
       let downloadGroup = DispatchGroup()
@@ -44,6 +45,7 @@ class FeedRepositoryImpl: FeedRepository {
         for group in groups! {
           if group.feeds != nil {
             for feed in group.feeds! {
+              
               downloadGroup.enter()
               
               self?.remoteDataSource.downloadData(withUrl: feed.link) {
@@ -53,16 +55,16 @@ class FeedRepositoryImpl: FeedRepository {
                   parser.delegate = self?.xmlParserDelegate
                   parser.parse()
                   
-                  let feeds = self?.xmlParserDelegate.getFeeds()
+                  let items = self?.xmlParserDelegate.getFeedItems()
                   
-                  for feed in feeds! {
-                    if !(group.feeds?.contains(where: { $0.title == feed.title}) ?? false) {
+                  for item in items! {
+                    if !(group.items?.contains(where: { $0.title == item.title}) ?? false) {
                       self?.localDataSource
-                        .saveNewFeedItem(withTitle: feed.title,
-                                         withDescription: feed.feedItemDescription,
-                                         withLink: feed.link,
-                                         withImageUrl: feed.imageUrl!,
-                                         withPubDate: feed.pubDate,
+                        .saveNewFeedItem(withTitle: item.title,
+                                         withDescription: item.feedItemDescription,
+                                         withLink: item.link,
+                                         withImageUrl: item.imageUrl!,
+                                         withPubDate: item.pubDate,
                                          withGroup: group)
                     }
                   }
@@ -71,6 +73,7 @@ class FeedRepositoryImpl: FeedRepository {
               }
               
               downloadGroup.leave()
+              
             }
           }
         }

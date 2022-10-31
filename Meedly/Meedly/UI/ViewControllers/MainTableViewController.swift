@@ -6,7 +6,11 @@
 //
 
 import UIKit
-import CoreData
+
+enum UpdateState {
+  case regularUpdate
+  case updateAfterAdd
+}
 
 class MainTableViewController: UITableViewController {
   
@@ -26,7 +30,8 @@ class MainTableViewController: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    updateGroups() { [weak self] in
+    updateGroups(updateState: .regularUpdate) { [weak self] newGroups in
+      self?.mainTableView.groups = newGroups
       self?.mainTableView.configureInitialSnapshot()
     }
       
@@ -69,8 +74,8 @@ class MainTableViewController: UITableViewController {
     
     mainTableView.addNewGroups(withNewGroups: newGroups)
     
-    updateGroups() { [weak self] in
-      self?.mainTableView.configureInitialSnapshot()
+    updateGroups(updateState: .updateAfterAdd) { [weak self] newGroups in
+      self?.mainTableView.updateSnapshot(withGroups: newGroups)
     }
   }
   
@@ -98,25 +103,22 @@ class MainTableViewController: UITableViewController {
   }
   
   @IBAction func update(_ sender: Any) {
-    updateGroups() { [weak self] in
-      self?.mainTableView.configureInitialSnapshot()
+    updateGroups(updateState: .regularUpdate) { [weak self] newGroups in
+      self?.mainTableView.updateSnapshot(withGroups: newGroups)
     }
   }
   
   
   // -MARK: - Supplementary -
   
-  func updateGroups(_ completion: @escaping () -> Void){
-    getFeedGroupsUseCase.execute() { [weak self] loadedGroups, errorMessage in
-      if loadedGroups != self?.mainTableView.groups {
-        self?.mainTableView.groups = loadedGroups
-      }
+  func updateGroups(updateState state: UpdateState, _ completion: @escaping ([FeedGroup]?) -> Void){
+    getFeedGroupsUseCase.execute(updateState: state) { loadedGroups, errorMessage in
+      
+      completion(loadedGroups)
    
       if errorMessage != nil {
         print("'\(errorMessage!)' occurred when downloading data.")
       }
-      
-      completion()
     }
   }
   

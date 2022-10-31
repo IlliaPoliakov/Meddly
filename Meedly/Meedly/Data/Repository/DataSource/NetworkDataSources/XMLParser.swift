@@ -12,7 +12,7 @@ class XMLDataParser: NSObject, XMLParserDelegate {
   
   // -MARK: - Properties -
   
-  let defaultImageUrl: String = "https://cdn.i.haymarketmedia.asia/?n=campaign-asia%2Fcontent%2FcroppedF1logo.png&h=570&w=855&q=100&v=20170226&c=1"
+  let defaultImageUrl: URL = URL(string:"https://cdn.i.haymarketmedia.asia/?n=campaign-asia%2Fcontent%2FcroppedF1logo.png&h=570&w=855&q=100&v=20170226&c=1")!
 
   var elementName: String? = nil
   //feed item data
@@ -43,7 +43,7 @@ class XMLDataParser: NSObject, XMLParserDelegate {
     }
     
     if elementName == "media:thumbnail" {
-      itemImageUrl = attributeDict["url"] ?? defaultImageUrl
+      itemImageUrl = attributeDict["url"] ?? ""
     }
     
     self.elementName = elementName
@@ -72,7 +72,7 @@ class XMLDataParser: NSObject, XMLParserDelegate {
               namespaceURI: String?, qualifiedName qName: String?) {
     if elementName == "item" {
       let item = FeedItem(feedItemDescription: itemDescription,
-                          imageUrl: URL(string: itemImageUrl)!,
+                          imageUrl: URL(string: itemImageUrl) ?? defaultImageUrl,
                           pubDate: pubDate,
                           title: itemtitle,
                           link: URL(string: itemLink)!)
@@ -80,7 +80,7 @@ class XMLDataParser: NSObject, XMLParserDelegate {
     }
   }
   
-  func getFeeds() -> [FeedItem]? {
+  func getFeedItems() -> [FeedItem]? {
     return feedItems
   }
 }
