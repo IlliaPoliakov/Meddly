@@ -56,13 +56,15 @@ class FeedRepositoryImpl: FeedRepository {
                   let feeds = self?.xmlParserDelegate.getFeeds()
                   
                   for feed in feeds! {
-                    self?.localDataSource
-                      .saveNewFeedItem(withTitle: feed.title,
-                                       withDescription: feed.feedItemDescription,
-                                       withLink: feed.link,
-                                       withImageUrl: feed.imageUrl!,
-                                       withPubDate: feed.pubDate,
-                                       withGroup: group)
+                    if !(group.feeds?.contains(where: { $0.title == feed.title}) ?? false) {
+                      self?.localDataSource
+                        .saveNewFeedItem(withTitle: feed.title,
+                                         withDescription: feed.feedItemDescription,
+                                         withLink: feed.link,
+                                         withImageUrl: feed.imageUrl!,
+                                         withPubDate: feed.pubDate,
+                                         withGroup: group)
+                    }
                   }
                 }
                 savedErrorMessage = error

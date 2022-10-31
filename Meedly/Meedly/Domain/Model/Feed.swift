@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Feed: Hashable {
+struct Feed: Hashable, Equatable {
   var id: UUID
   var imageUrl: URL?
   var link: URL

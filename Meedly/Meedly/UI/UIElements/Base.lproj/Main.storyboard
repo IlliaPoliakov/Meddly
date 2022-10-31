@@ -25,8 +25,8 @@
                                     <rect key="frame" x="0.0" y="0.0" width="390" height="319"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="square.and.arrow.up.on.square.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="boG-Mi-EIi">
-                                            <rect key="frame" x="20" y="8" width="350" height="179.33333333333334"/>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ruler" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="boG-Mi-EIi">
+                                            <rect key="frame" x="20" y="15" width="350" height="165.66666666666669"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="boG-Mi-EIi" secondAttribute="height" multiplier="2:1" id="VDj-UP-LOQ"/>
                                             </constraints>
@@ -241,6 +241,7 @@
                                 </constraints>
                             </scrollView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="koc-Z3-Gzw"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Z2g-h7-IJu" firstAttribute="leading" secondItem="F9W-n7-Ok6" secondAttribute="leading" id="GwD-Hl-BrE"/>
@@ -412,7 +413,7 @@
         <image name="line.3.horizontal.decrease" catalog="system" width="128" height="73"/>
         <image name="pencil.circle" catalog="system" width="128" height="123"/>
         <image name="plus.app" catalog="system" width="128" height="114"/>
-        <image name="square.and.arrow.up.on.square.fill" catalog="system" width="119" height="128"/>
+        <image name="ruler" catalog="system" width="128" height="57"/>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

@@ -70,7 +70,7 @@ class MainTableViewController: UITableViewController {
     mainTableView.addNewGroups(withNewGroups: newGroups)
     
     updateGroups() { [weak self] in
-      self?.mainTableView.updateSnapshot()
+      self?.mainTableView.configureInitialSnapshot()
     }
   }
   
@@ -99,7 +99,7 @@ class MainTableViewController: UITableViewController {
   
   @IBAction func update(_ sender: Any) {
     updateGroups() { [weak self] in
-      self?.mainTableView.updateSnapshot()
+      self?.mainTableView.configureInitialSnapshot()
     }
   }
   

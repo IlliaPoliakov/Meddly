@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FeedItem: Hashable {
+struct FeedItem: Hashable, Equatable {
   var feedItemDescription: String
   var imageUrl: URL?
   var pubDate: String
