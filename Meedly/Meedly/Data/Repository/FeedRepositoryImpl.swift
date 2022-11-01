@@ -12,16 +12,17 @@ class FeedRepositoryImpl: FeedRepository {
   
   // -MARK: - Properties -
   
-  public static var shared: FeedRepository = FeedRepositoryImpl(localDataSource: AppDelegate.DIContainer.resolve(LocalDataSource.self)!, remoteDataSource: AppDelegate.DIContainer.resolve(RemoteDataSource.self)!)
-  
   private let localDataSource: LocalDataSource
   private let remoteDataSource: RemoteDataSource
   
-  private var xmlParserDelegate = XMLDataParser()//no needed DI?
+  private let xmlParserDelegate: XMLParserDelegate
   
-  init(localDataSource: LocalDataSource, remoteDataSource: RemoteDataSource) {
+  init(localDataSource: LocalDataSource,
+       remoteDataSource: RemoteDataSource,
+       xmlParserDelegate: XMLParserDelegate) {
     self.localDataSource = localDataSource
     self.remoteDataSource = remoteDataSource
+    self.xmlParserDelegate = xmlParserDelegate
   }
   
   

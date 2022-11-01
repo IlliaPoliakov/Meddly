@@ -17,7 +17,13 @@ class DependencyInjectionContainer {
     
     DependencyInjectionContainer.shared.register(CoreDataStack.self) { _ in CoreDataStack.shared }
     
-    DependencyInjectionContainer.shared.register(FeedRepository.self) { _ in FeedRepositoryImpl.shared }
+    DependencyInjectionContainer.shared.register(XMLParserDelegate.self) { _ in XMLDataParser() }
+    
+    DependencyInjectionContainer.shared
+      .register(FeedRepository.self) {
+        resolver in FeedRepositoryImpl(localDataSource: resolver.resolve(LocalDataSource.self)!,
+                                       remoteDataSource: resolver.resolve(RemoteDataSource.self)!,
+                                       xmlParserDelegate: resolver.resolve(XMLDataParser.self)!) }
     
     DependencyInjectionContainer.shared.register(GetFeedGroupsUseCase.self) { resolver in
       GetFeedGroupsUseCase(repo: resolver.resolve(FeedRepository.self)!)
