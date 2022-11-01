@@ -31,64 +31,62 @@ class FeedRepositoryImpl: FeedRepository {
                      _ completion: @escaping ([FeedGroup]?, String?) -> Void) {
     var savedErrorMessage: String? = nil
     
-    DispatchQueue.global(qos: .userInteractive).async { [weak self] in
-      var groups = self?.localDataSource.loadData()
-      if state == .regularUpdate {
-        DispatchQueue.main.async {
-          completion(FeedGroup.convertToModelGroups(withEntities: groups), nil)
-        }
+    var groups = self.localDataSource.loadData()
+    if state == .regularUpdate {
+      DispatchQueue.main.async {
+        completion(FeedGroup.convertToModelGroups(withEntities: groups), nil)
       }
-      
-      let downloadGroup = DispatchGroup()
-      
-      if Connectivity.isConnectedToInternet() {
-        for group in groups! {
-          if group.feeds != nil {
-            for feed in group.feeds! {
+    }
+    
+    let downloadGroup = DispatchGroup()
+    
+    if Connectivity.isConnectedToInternet() {
+      for group in groups! {
+        if group.feeds != nil {
+          for feed in group.feeds! {
+            
+            downloadGroup.enter()
+            
+            self.remoteDataSource.downloadData(withUrl: feed.link) {
+              [weak self] data, error in
               
-              downloadGroup.enter()
-              
-              self?.remoteDataSource.downloadData(withUrl: feed.link) {
-                [weak self] data, error in
-                if data != nil {
-                  let parser = XMLParser(data: data!)
-                  parser.delegate = self?.xmlParserDelegate
-                  parser.parse()
-                  
-                  let items = self?.xmlParserDelegate.getFeedItems()
-                  
-                  for item in items! {
-                    if !(group.items?.contains(where: { $0.title == item.title}) ?? false) {
-                      self?.localDataSource
-                        .saveNewFeedItem(withTitle: item.title,
-                                         withDescription: item.feedItemDescription,
-                                         withLink: item.link,
-                                         withImageUrl: item.imageUrl!,
-                                         withPubDate: item.pubDate,
-                                         withGroup: group)
-                    }
+              if data != nil {
+                let parser = XMLParser(data: data!)
+                parser.delegate = self?.xmlParserDelegate
+                parser.parse()
+                
+                let items = self?.xmlParserDelegate.getFeedItems()
+                
+                for item in items! {
+                  if !(group.items?.contains(where: { $0.title == item.title}) ?? false) {
+                    self?.localDataSource
+                      .saveNewFeedItem(withTitle: item.title,
+                                       withDescription: item.feedItemDescription,
+                                       withLink: item.link,
+                                       withImageUrl: item.imageUrl!,
+                                       withPubDate: item.pubDate,
+                                       withGroup: group)
                   }
                 }
-                savedErrorMessage = error
               }
-              
-              downloadGroup.leave()
-              
+              savedErrorMessage = error
             }
+            
+            downloadGroup.leave()
+            
           }
         }
       }
-      else {
-        DispatchQueue.main.async {
-          completion( nil, "No enternet connection...")
-        }
+    }
+    else {
+      DispatchQueue.main.async {
+        completion( nil, "No enternet connection...")
       }
-      
-      
-      downloadGroup.notify(queue: DispatchQueue.main) {
-        groups = self?.localDataSource.loadData()
-        completion(FeedGroup.convertToModelGroups(withEntities: groups), savedErrorMessage)
-      }
+    }
+    
+    downloadGroup.notify(queue: DispatchQueue.main) {
+      groups = self.localDataSource.loadData()
+      completion(FeedGroup.convertToModelGroups(withEntities: groups), savedErrorMessage)
     }
   }
   
