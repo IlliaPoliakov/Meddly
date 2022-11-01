@@ -72,12 +72,12 @@ class MainTableView: NSObject, UITableViewDelegate {
   }
   
   func updateSnapshot(withGroups newGroups: [FeedGroup]?){
-    var snapshot = dataSource.snapshot()
-    
     guard newGroups != nil
     else {
       return
     }
+    
+    var snapshot = dataSource.snapshot()
     
     for i in 0 ..< newGroups!.count {
       let diffItems = self.groups![i].items?.difference(from: newGroups![i].items!)
@@ -100,6 +100,9 @@ class MainTableView: NSObject, UITableViewDelegate {
       return
     }
     
+    for group in newGroups! {
+      self.groups!.append(group)
+    }
     snapshot.appendSections(newGroups!)
     
     dataSource.apply(snapshot)

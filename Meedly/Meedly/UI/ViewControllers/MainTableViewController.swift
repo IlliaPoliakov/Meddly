@@ -67,12 +67,12 @@ class MainTableViewController: UITableViewController {
     guard segue.identifier == "unwindToMain",
           let previousVC = segue.source as? AddFeedViewController
     else {
-      fatalError("Can't perform segue to AddVC")
+      fatalError("Can't perform segue from AddVC")
     }
     
-    let newGroups = previousVC.newGroups
+    let newAddGroups = previousVC.newGroups
     
-    mainTableView.addNewGroups(withNewGroups: newGroups)
+    mainTableView.addNewGroups(withNewGroups: newAddGroups)
     
     updateGroups(updateState: .updateAfterAdd) { [weak self] newGroups in
       self?.mainTableView.updateSnapshot(withGroups: newGroups)

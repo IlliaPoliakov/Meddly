@@ -22,7 +22,7 @@ class AddFeedViewController: UIViewController, UITableViewDelegate {
   lazy var addFeedTableView: AddFeedTableView = AddFeedTableView(tableView: tableView, groups: groups)
   lazy var groups: [FeedGroup]? = nil
   
-  var newGroups: [FeedGroup]?
+  var newGroups: [FeedGroup]? = nil
   
   private let saveNewGroupUseCase: SaveNewGroupUseCase =
   AppDelegate.DIContainer.resolve(SaveNewGroupUseCase.self)!
@@ -72,14 +72,9 @@ class AddFeedViewController: UIViewController, UITableViewDelegate {
       
       let newGroup = saveNewGroupUseCase.execute(withNewGroupName: groupName)
       
-      if addFeedTableView.groups != nil {
-        addFeedTableView.groups?.append(newGroup)
-      }
-      else {
-        addFeedTableView.groups = [newGroup]
-      }
+      addFeedTableView.groups?.append(newGroup)
       
-        addFeedTableView.updateSnapshot(withNewGroupName: groupName)
+      addFeedTableView.updateSnapshot(withNewGroupName: groupName)
       
       if newGroups == nil {
         newGroups = [newGroup]

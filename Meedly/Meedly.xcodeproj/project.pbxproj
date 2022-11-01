@@ -117,13 +117,13 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		F27D280D290F0CF700290AD7 /* TableViewesRepresentation */ = {
+		F27D280D290F0CF700290AD7 /* TableViewe'sRepresentation */ = {
 			isa = PBXGroup;
 			children = (
 				F2E2D7F2290D9C720019B5F7 /* MainTableView.swift */,
 				F265B01F290ED5F5006EA513 /* AddFeedTableView.swift */,
 			);
-			path = TableViewesRepresentation;
+			path = "TableViewe'sRepresentation";
 			sourceTree = "<group>";
 		};
 		F2C4B9E728F7269500359E5D = {
@@ -283,7 +283,7 @@
 			isa = PBXGroup;
 			children = (
 				F2C4BA5328F97EE500359E5D /* TableViewCustomCells */,
-				F27D280D290F0CF700290AD7 /* TableViewesRepresentation */,
+				F27D280D290F0CF700290AD7 /* TableViewe'sRepresentation */,
 				F2C4BA4B28F8AB7600359E5D /* MainTableViewController.swift */,
 				F2C4BA4D28F8AE1C00359E5D /* AddFeedViewController.swift */,
 				F25708C9290C4A2B005FBE1D /* ItemDescripitonViewController.swift */,

@@ -17,7 +17,7 @@ class DependencyInjectionContainer {
     
     DependencyInjectionContainer.shared.register(CoreDataStack.self) { _ in CoreDataStack.shared }
     
-    DependencyInjectionContainer.shared.register(XMLParserDelegate.self) { _ in XMLDataParser() }
+    DependencyInjectionContainer.shared.register(XMLDataParser.self) { _ in XMLDataParser() }
     
     DependencyInjectionContainer.shared
       .register(FeedRepository.self) {
