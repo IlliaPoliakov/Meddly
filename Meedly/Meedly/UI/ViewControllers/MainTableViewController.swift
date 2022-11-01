@@ -16,7 +16,7 @@ class MainTableViewController: UITableViewController {
   
   // -MARK: - Properties -
   
-  lazy var mainTableView = MainTableView(tableView: tableView, groups: nil)
+  lazy var mainTableView: MainTableView = AppDelegate.DIContainer.resolve(MainTableView.self)!
   
 
   // -MARK: - Dependencyes _
@@ -29,6 +29,8 @@ class MainTableViewController: UITableViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    mainTableView.tableView = tableView
     
     updateGroups(updateState: .regularUpdate) { [weak self] newGroups in
       self?.mainTableView.groups = newGroups

@@ -10,6 +10,9 @@ import UIKit
 class MainTableView: NSObject, UITableViewDelegate {
   
   // -MARK: - Properties -
+  
+  public static var shared: MainTableView = MainTableView(tableView: UITableView(),
+                                                          groups: nil)
 
   var tableView: UITableView
   var groups: [FeedGroup]?
@@ -48,7 +51,7 @@ class MainTableView: NSObject, UITableViewDelegate {
   }
   
 
-  init(tableView: UITableView, groups: [FeedGroup]?) {
+  private init(tableView: UITableView, groups: [FeedGroup]?) {
     self.tableView = tableView
     self.groups = groups
   }

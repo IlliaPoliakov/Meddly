@@ -19,6 +19,8 @@ class DependencyInjectionContainer {
     
     DependencyInjectionContainer.shared.register(XMLDataParser.self) { _ in XMLDataParser() }
     
+    DependencyInjectionContainer.shared.register(MainTableView.self) { _ in MainTableView.shared }
+    
     DependencyInjectionContainer.shared
       .register(FeedRepository.self) {
         resolver in FeedRepositoryImpl(localDataSource: resolver.resolve(LocalDataSource.self)!,
