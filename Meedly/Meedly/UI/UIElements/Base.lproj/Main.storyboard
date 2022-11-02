@@ -31,7 +31,7 @@
                                                 <constraint firstAttribute="width" secondItem="boG-Mi-EIi" secondAttribute="height" multiplier="2:1" id="VDj-UP-LOQ"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="749" text="omg sebastian vettel won suzuki gran prii in kdnvpijaebvpjaiebnrc rehdfb ejipabncfa scph e" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cjL-cw-5JG">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="749" text="omg sebastian vettel won suzuki gran prii in kdnvpijaebvpjaiebnrc rehdfb ejipabncfa scph e" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cjL-cw-5JG">
                                             <rect key="frame" x="25" y="200" width="340" height="57"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <nil key="textColor"/>

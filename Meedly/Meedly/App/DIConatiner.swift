@@ -19,7 +19,7 @@ class DependencyInjectionContainer {
     
     DependencyInjectionContainer.shared.register(XMLDataParser.self) { _ in XMLDataParser() }
     
-    DependencyInjectionContainer.shared.register(MainTableView.self) { _ in MainTableView.shared }
+    DependencyInjectionContainer.shared.register(MainTableView.self) { _ in MainTableView(tableView: UITableView(), groups: nil) } // here
     
     DependencyInjectionContainer.shared
       .register(FeedRepository.self) {

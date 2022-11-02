@@ -71,9 +71,9 @@ class XMLDataParser: NSObject, XMLParserDelegate {
   func parser(_ parser: XMLParser, didEndElement elementName: String,
               namespaceURI: String?, qualifiedName qName: String?) {
     if elementName == "item" {
-      let item = FeedItem(feedItemDescription: itemDescription,
+      let item = FeedItem(feedItemDescription: itemDescription.html2String,
                           imageUrl: URL(string: itemImageUrl) ?? defaultImageUrl,
-                          pubDate: pubDate,
+                          pubDate: pubDate.replacingOccurrences(of: "+0000",with: ""),
                           title: itemtitle,
                           link: URL(string: itemLink)!)
       feedItems.append(item)
@@ -84,4 +84,3 @@ class XMLDataParser: NSObject, XMLParserDelegate {
     return feedItems
   }
 }
-
