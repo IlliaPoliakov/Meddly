@@ -2,7 +2,7 @@
 //  FeedEntity+CoreDataClass.swift
 //  Meedly
 //
-//  Created by Illia Poliakov on 31.10.22.
+//  Created by Illia Poliakov on 8.11.22.
 //
 //
 
@@ -11,7 +11,7 @@ import CoreData
 
 @objc(FeedEntity)
 public class FeedEntity: NSManagedObject {
-  static func convertToModelFeeds(withEntities entities:
+  static func convertToDomainFeeds(withEntities entities:
                                    [FeedEntity]?) -> [Feed]? {
     guard entities != nil
     else {
@@ -24,8 +24,7 @@ public class FeedEntity: NSManagedObject {
       modelFeeds.append(Feed(imageUrl: entity.imageUrl,
                              link: entity.link,
                              title: entity.title,
-                             id: entity.id
-                             )
+                             id: entity.id)
       )
     }
     

@@ -17,17 +17,15 @@ class DependencyInjectionContainer {
     
     DependencyInjectionContainer.shared.register(CoreDataStack.self) { _ in CoreDataStack.shared }
     
-    DependencyInjectionContainer.shared.register(XMLDataParser.self) { _ in XMLDataParser() }
-    
-    DependencyInjectionContainer.shared.register(MainTableView.self) { _ in MainTableView(tableView: UITableView(), groups: nil) } // here
+    DependencyInjectionContainer.shared.register(MainTableView.self) { _ in MainTableView(tableView: UITableView(), groups: nil) }
     
     DependencyInjectionContainer.shared
-      .register(FeedRepository.self) {
-        resolver in FeedRepositoryImpl(localDataSource:
-                                        resolver.resolve(DataBaseDataSource.self)!,
-                                       remoteDataSource:
-                                        resolver.resolve(NetworkDataSource.self)!,
-                                       xmlParserDelegate: resolver.resolve(XMLDataParser.self)!) }
+      .register(FeedRepository.self) { resolver in
+        FeedRepositoryImpl(localDataSource:
+                            resolver.resolve(DataBaseDataSource.self)!,
+                           remoteDataSource:
+                            resolver.resolve(NetworkDataSource.self)!)
+      }
     
     DependencyInjectionContainer.shared.register(GetFeedGroupsUseCase.self) { resolver in
       GetFeedGroupsUseCase(repo: resolver.resolve(FeedRepository.self)!)

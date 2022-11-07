@@ -2,7 +2,7 @@
 //  FeedEntity+CoreDataProperties.swift
 //  Meedly
 //
-//  Created by Illia Poliakov on 31.10.22.
+//  Created by Illia Poliakov on 8.11.22.
 //
 //
 
@@ -20,7 +20,7 @@ extension FeedEntity {
     @NSManaged public var imageUrl: URL?
     @NSManaged public var link: URL
     @NSManaged public var title: String?
-    @NSManaged public var parentGroup: FeedGroupEntity
+    @NSManaged public var parentGroup: FeedGroupEntity?
 
 }
 

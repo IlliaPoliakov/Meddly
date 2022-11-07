@@ -2,7 +2,7 @@
 //  FeedItemEntity+CoreDataClass.swift
 //  Meedly
 //
-//  Created by Illia Poliakov on 31.10.22.
+//  Created by Illia Poliakov on 8.11.22.
 //
 //
 
@@ -11,8 +11,7 @@ import CoreData
 
 @objc(FeedItemEntity)
 public class FeedItemEntity: NSManagedObject {
-  
-  static func convertToModelItems(withEntities entities:
+  static func convertToDomainItems(withEntities entities:
                                   [FeedItemEntity]?) -> [FeedItem]? {
     guard entities != nil
     else {
@@ -27,8 +26,8 @@ public class FeedItemEntity: NSManagedObject {
                                  pubDate: entity.pubDate,
                                  title: entity.title,
                                  link: entity.link,
-                                 id: entity.id
-                                )
+                                 id: entity.id,
+                                 isViewed: entity.isViewed)
       )
     }
     

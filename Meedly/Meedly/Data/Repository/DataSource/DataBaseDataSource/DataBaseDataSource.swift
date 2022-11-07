@@ -97,7 +97,7 @@ class DataBaseDataSource {
   func saveNewFeedItem(withTitle title: String,
                        withDescription feedDescription: String,
                        withLink link: URL,
-                       withImageUrl imageUrl: URL,
+                       withImageUrl imageUrl: URL?,
                        withPubDate pubDate: String,
                        withGroup group: FeedGroupEntity) {
     
@@ -112,6 +112,10 @@ class DataBaseDataSource {
     
     group.addToItems(newFeedItem)
     
+    coreDataStack.saveContext()
+  }
+  
+  func saveContext(){
     coreDataStack.saveContext()
   }
 }

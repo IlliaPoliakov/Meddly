@@ -16,14 +16,10 @@ class FeedRepositoryImpl: FeedRepository {
   private let localDataSource: DataBaseDataSource
   private let remoteDataSource: NetworkDataSource
   
-  private let xmlParserDelegate: XMLDataParser
-  
   init(localDataSource: DataBaseDataSource,
-       remoteDataSource: NetworkDataSource,
-       xmlParserDelegate: XMLDataParser) {
+       remoteDataSource: NetworkDataSource) {
     self.localDataSource = localDataSource
     self.remoteDataSource = remoteDataSource
-    self.xmlParserDelegate = xmlParserDelegate
   }
   
   
@@ -39,7 +35,7 @@ class FeedRepositoryImpl: FeedRepository {
       
       if state == .regularUpdate {
         DispatchQueue.main.async {
-          completion(FeedGroupEntity.convertToModelGroups(withEntities: groups), nil)
+          completion(FeedGroupEntity.convertToDomainGroups(withEntities: groups), nil)
         }
       }
       
@@ -48,38 +44,108 @@ class FeedRepositoryImpl: FeedRepository {
       if Connectivity.isConnectedToInternet() {
         for group in groups! {
           if group.feeds != nil {
-            for feed in group.feeds! {
+            for groupFeed in group.feeds! {
               
               downloadGroup.enter()
               
-              self.remoteDataSource.downloadData(withUrl: feed.link) {
+              self.remoteDataSource.downloadData(withUrl: groupFeed.link) {
                 [weak self] data, error in
                 
                 if data != nil {
-                  let parserTmp = FeedParser(data: data!)
+                  let parser = FeedParser(data: data!)
+                  let resultFeed = parser.parse()
                   
-                  let parser = XMLParser(data: data!)
-                  parser.delegate = self?.xmlParserDelegate
-                  parser.parse()
-                  let rssFeed: RSSFeed
-                  
-                  let items = self?.xmlParserDelegate.getFeedItems()
-                  
-                  for item in items! {
-                    if !(group.items?.contains(where: { $0.title == item.title}) ?? false) {
-                      self?.localDataSource
-                        .saveNewFeedItem(withTitle: item.title,
-                                         withDescription: item.feedItemDescription,
-                                         withLink: item.link,
-                                         withImageUrl: item.imageUrl!,
-                                         withPubDate: item.pubDate,
-                                         withGroup: group)
+                  switch resultFeed {
+                  case .success(let success):
+                    
+                    switch success {
+                      
+                    case .atom(let atomFeed):
+                      groupFeed.title = atomFeed.title ?? "[no title]"
+                      groupFeed.imageUrl = atomFeed.icon != nil ? URL(string: atomFeed.icon!) :
+                      nil
+//                    groupFeed.imageUrl = atomFeed.logo != nil ? URL(string: atomFeed.logo!) :
+//                    nil
+                      if atomFeed.entries != nil {
+                        for entry in atomFeed.entries! {
+
+                          let date: String = entry.published == nil ? "[no date]" :
+                          DateFormatter().string(from: entry.published!)
+
+                          let description: String = entry.summary?.value?.html2String ??
+                          "[no description]"
+
+                          let imageUrl = entry.media?.mediaThumbnails?.first?.value != nil ?
+                          URL(string: entry.media!.mediaThumbnails!.first!.value!) : nil
+
+                          let link: URL = URL(string: entry.links!.first!.attributes!.href!)!
+
+                          self?.localDataSource
+                            .saveNewFeedItem(withTitle: entry.title ?? "[no title]",
+                                             withDescription: description,
+                                             withLink: link,
+                                             withImageUrl: imageUrl,
+                                             withPubDate: date,
+                                             withGroup: group)
+                        }
+                      }
+                      
+                    case .json(let jsonFeed):
+                      groupFeed.title = jsonFeed.title ?? "[no title]"
+                      groupFeed.imageUrl = jsonFeed.icon != nil ? URL(string: jsonFeed.icon!) : nil
+                      if jsonFeed.items != nil {
+                        for item in jsonFeed.items! {
+                          
+                          let imageUrl = item.image != nil ? URL(string: item.image!) : nil
+                          
+                          let date = item.datePublished == nil ? "[no date]" :
+                          DateFormatter().string(from: item.datePublished!)
+                          
+                          self?.localDataSource
+                            .saveNewFeedItem(withTitle: item.title ?? "[no title]",
+                                             withDescription: item.summary ?? "[no descripiton]",
+                                             withLink: URL(string: item.url!)!,
+                                             withImageUrl: imageUrl,
+                                             withPubDate: date,
+                                             withGroup: group)
+                        }
+                      }
+                      
+                    case .rss(let rssFeed):
+                      groupFeed.title = rssFeed.title
+                      groupFeed.imageUrl = rssFeed.image?.url != nil ?
+                      URL(string: (rssFeed.image?.url)!) : nil
+                      if rssFeed.items != nil {
+                        for item in rssFeed.items! {
+                          
+                          let imageUrl = item.enclosure?.attributes?.url != nil ? URL(string: item.enclosure!.attributes!.url!) : nil
+                          
+                          let date: String
+                          let formatter = DateFormatter()
+                          formatter.dateFormat = "HH:mm E, d MMM y"
+                          date = item.pubDate != nil ? formatter.string(from: item.pubDate!) :
+                          "[no pubDate]"
+                          
+                          self?.localDataSource
+                            .saveNewFeedItem(withTitle: item.title ?? "[no title]",
+                                             withDescription: item.description ?? "[no description]",
+                                             withLink: URL(string: item.link!)!,
+                                             withImageUrl: imageUrl,
+                                             withPubDate: date,
+                                             withGroup: group)
+                        }
+                      }
                     }
+                    
+                    
+                  case .failure(let failure):
+                    savedErrorMessage = failure.errorDescription
                   }
+                  
+                  savedErrorMessage = error
+                  
+                  downloadGroup.leave()
                 }
-                savedErrorMessage = error
-                
-                downloadGroup.leave()
               }
             }
           }
@@ -93,22 +159,22 @@ class FeedRepositoryImpl: FeedRepository {
       
       downloadGroup.notify(queue: DispatchQueue.main) {
         groups = self.localDataSource.loadData()
-        completion(FeedGroupEntity.convertToModelGroups(withEntities: groups), savedErrorMessage)
+        completion(FeedGroupEntity.convertToDomainGroups(withEntities: groups),
+                   savedErrorMessage)
       }
     }
   }
   
-  
   func saveNewGroup(_ newGroupName: String) -> FeedGroup {
     let newGroup = localDataSource.saveNewGroup(withNewGroupName: newGroupName)
     
-    return FeedGroupEntity.convertToModelGroups(withEntities: [newGroup])!.first!
+    return FeedGroupEntity.convertToDomainGroups(withEntities: [newGroup])!.first!
   }
   
-  func saveNewFeed(_ newChanelUrl: URL, _ group: FeedGroup) {
+  func saveNewFeed(_ newFeedUrl: URL, _ group: FeedGroup) {
     
     let groupEntity = localDataSource.getPredicatedGroup(withGroup: group)
-    localDataSource.saveNewFeed(withNewFeedUrl: newChanelUrl, withParentGroup: groupEntity!)
+    localDataSource.saveNewFeed(withNewFeedUrl: newFeedUrl, withParentGroup: groupEntity!)
   }
   
 }

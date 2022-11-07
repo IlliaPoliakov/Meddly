@@ -21,13 +21,15 @@ struct FeedItem: Identifiable, Equatable, Hashable {
        pubDate: String,
        title: String,
        link: URL,
-       id: UUID = UUID()) {
+       id: UUID,
+       isViewed: Bool) {
     self.feedItemDescription = feedItemDescription
     self.imageUrl = imageUrl
     self.pubDate = pubDate
     self.title = title
     self.link = link
     self.id = id
+    self.isViewed = isViewed
   }
   
   static func == (lhs: FeedItem, rhs: FeedItem) -> Bool {

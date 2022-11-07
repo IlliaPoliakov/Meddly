@@ -13,7 +13,10 @@ struct FeedGroup: Identifiable, Equatable, Hashable {
   public var feeds: [Feed]?
   public var items: [FeedItem]?
   
-  init(title: String = "", feeds: [Feed]? = nil, items: [FeedItem]? = nil, id: UUID = UUID()) {
+  init(title: String = "",
+       feeds: [Feed]?,
+       items: [FeedItem]?,
+       id: UUID) {
     self.title = title
     self.feeds = feeds
     self.items = items

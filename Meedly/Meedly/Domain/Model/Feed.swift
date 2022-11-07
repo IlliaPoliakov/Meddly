@@ -13,10 +13,10 @@ struct Feed: Identifiable, Equatable, Hashable {
   var link: URL
   var title: String?
   
-  init(imageUrl: URL? = nil,
+  init(imageUrl: URL?,
        link: URL,
-       title: String? = nil,
-       id: UUID = UUID()) {
+       title: String?,
+       id: UUID) {
     self.imageUrl = imageUrl
     self.link = link
     self.title = title

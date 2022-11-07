@@ -2,7 +2,7 @@
 //  FeedGroupEntity+CoreDataClass.swift
 //  Meedly
 //
-//  Created by Illia Poliakov on 31.10.22.
+//  Created by Illia Poliakov on 8.11.22.
 //
 //
 
@@ -11,8 +11,7 @@ import CoreData
 
 @objc(FeedGroupEntity)
 public class FeedGroupEntity: NSManagedObject {
-  
-  static func convertToModelGroups(withEntities entities:
+  static func convertToDomainGroups(withEntities entities:
                                    [FeedGroupEntity]?) -> [FeedGroup]? {
     guard entities != nil
     else {
@@ -24,14 +23,13 @@ public class FeedGroupEntity: NSManagedObject {
     for entity in entities! {
       modelGroups.append(FeedGroup(title: entity.title,
                                    feeds: FeedEntity
-        .convertToModelFeeds(withEntities: entity.feeds),
+        .convertToDomainFeeds(withEntities: entity.feeds),
                                    items: FeedItemEntity
-        .convertToModelItems(withEntities: entity.items),
+        .convertToDomainItems(withEntities: entity.items),
                                    id: entity.id)
       )
     }
     
     return modelGroups
   }
-  
 }
