@@ -11,5 +11,27 @@ import CoreData
 
 @objc(FeedItemEntity)
 public class FeedItemEntity: NSManagedObject {
-
+  
+  static func convertToModelItems(withEntities entities:
+                                  [FeedItemEntity]?) -> [FeedItem]? {
+    guard entities != nil
+    else {
+      return nil
+    }
+    
+    var modelItems = [FeedItem]()
+    
+    for entity in entities! {
+      modelItems.append(FeedItem(feedItemDescription: entity.feedItemDescription,
+                                 imageUrl: entity.imageUrl,
+                                 pubDate: entity.pubDate,
+                                 title: entity.title,
+                                 link: entity.link,
+                                 id: entity.id
+                                )
+      )
+    }
+    
+    return modelItems
+  }
 }

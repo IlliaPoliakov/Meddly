@@ -36,7 +36,6 @@
 		F2C4BA5528F97F5000359E5D /* MainTVCCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4BA5428F97F5000359E5D /* MainTVCCustomCell.swift */; };
 		F2C4BA6528F9BB5000359E5D /* FeedRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4BA6428F9BB5000359E5D /* FeedRepositoryImpl.swift */; };
 		F2C4BA6728F9E38A00359E5D /* NetworkDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4BA6628F9E38A00359E5D /* NetworkDataSource.swift */; };
-		F2C4BA7828FDAD0400359E5D /* DataSourceProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4BA7728FDAD0400359E5D /* DataSourceProtocols.swift */; };
 		F2C95DEA290C3941000E36DD /* MainVCCustomCellNoImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C95DE9290C3941000E36DD /* MainVCCustomCellNoImage.swift */; };
 		F2DC31F2290B302500071EED /* XMLDataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DC31F1290B302500071EED /* XMLDataParser.swift */; };
 		F2E2D7F3290D9C720019B5F7 /* MainTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E2D7F2290D9C720019B5F7 /* MainTableView.swift */; };
@@ -79,7 +78,6 @@
 		F2C4BA5428F97F5000359E5D /* MainTVCCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTVCCustomCell.swift; sourceTree = "<group>"; };
 		F2C4BA6428F9BB5000359E5D /* FeedRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedRepositoryImpl.swift; sourceTree = "<group>"; };
 		F2C4BA6628F9E38A00359E5D /* NetworkDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataSource.swift; sourceTree = "<group>"; };
-		F2C4BA7728FDAD0400359E5D /* DataSourceProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceProtocols.swift; sourceTree = "<group>"; };
 		F2C95DE9290C3941000E36DD /* MainVCCustomCellNoImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVCCustomCellNoImage.swift; sourceTree = "<group>"; };
 		F2DC31F1290B302500071EED /* XMLDataParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLDataParser.swift; sourceTree = "<group>"; };
 		F2E2D7F2290D9C720019B5F7 /* MainTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableView.swift; sourceTree = "<group>"; };
@@ -117,13 +115,13 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		F27D280D290F0CF700290AD7 /* TableViewe'sRepresentation */ = {
+		F27D280D290F0CF700290AD7 /* TableVieweRepresentation */ = {
 			isa = PBXGroup;
 			children = (
 				F2E2D7F2290D9C720019B5F7 /* MainTableView.swift */,
 				F265B01F290ED5F5006EA513 /* AddFeedTableView.swift */,
 			);
-			path = "TableViewe'sRepresentation";
+			path = TableVieweRepresentation;
 			sourceTree = "<group>";
 		};
 		F2C4B9E728F7269500359E5D = {
@@ -262,7 +260,6 @@
 		F2C4BA4628F85E8A00359E5D /* DataSource */ = {
 			isa = PBXGroup;
 			children = (
-				F2C4BA7728FDAD0400359E5D /* DataSourceProtocols.swift */,
 				F2C4BA6328F9BA3A00359E5D /* NetworkDataSources */,
 				F2C4BA6228F9BA2A00359E5D /* DataBaseDataSource */,
 			);
@@ -283,7 +280,7 @@
 			isa = PBXGroup;
 			children = (
 				F2C4BA5328F97EE500359E5D /* TableViewCustomCells */,
-				F27D280D290F0CF700290AD7 /* TableViewe'sRepresentation */,
+				F27D280D290F0CF700290AD7 /* TableVieweRepresentation */,
 				F2C4BA4B28F8AB7600359E5D /* MainTableViewController.swift */,
 				F2C4BA4D28F8AE1C00359E5D /* AddFeedViewController.swift */,
 				F25708C9290C4A2B005FBE1D /* ItemDescripitonViewController.swift */,
@@ -455,7 +452,6 @@
 				F29FAEB2290F350B0021D55E /* CoreDataModel.xcdatamodeld in Sources */,
 				F2C4BA5528F97F5000359E5D /* MainTVCCustomCell.swift in Sources */,
 				F25708CA290C4A2B005FBE1D /* ItemDescripitonViewController.swift in Sources */,
-				F2C4BA7828FDAD0400359E5D /* DataSourceProtocols.swift in Sources */,
 				F29FAEBD290F36DF0021D55E /* FeedItemEntity+CoreDataClass.swift in Sources */,
 				F2C4BA4E28F8AE1C00359E5D /* AddFeedViewController.swift in Sources */,
 				F29FAEBE290F36DF0021D55E /* FeedItemEntity+CoreDataProperties.swift in Sources */,

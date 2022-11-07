@@ -6,19 +6,20 @@
 //
 
 import Foundation
+import FeedKit
 
 
 class FeedRepositoryImpl: FeedRepository {
   
   // -MARK: - Properties -
   
-  private let localDataSource: LocalDataSource
-  private let remoteDataSource: RemoteDataSource
+  private let localDataSource: DataBaseDataSource
+  private let remoteDataSource: NetworkDataSource
   
   private let xmlParserDelegate: XMLDataParser
   
-  init(localDataSource: LocalDataSource,
-       remoteDataSource: RemoteDataSource,
+  init(localDataSource: DataBaseDataSource,
+       remoteDataSource: NetworkDataSource,
        xmlParserDelegate: XMLDataParser) {
     self.localDataSource = localDataSource
     self.remoteDataSource = remoteDataSource
@@ -38,7 +39,7 @@ class FeedRepositoryImpl: FeedRepository {
       
       if state == .regularUpdate {
         DispatchQueue.main.async {
-          completion(FeedGroup.convertToModelGroups(withEntities: groups), nil)
+          completion(FeedGroupEntity.convertToModelGroups(withEntities: groups), nil)
         }
       }
       
@@ -55,9 +56,12 @@ class FeedRepositoryImpl: FeedRepository {
                 [weak self] data, error in
                 
                 if data != nil {
+                  let parserTmp = FeedParser(data: data!)
+                  
                   let parser = XMLParser(data: data!)
                   parser.delegate = self?.xmlParserDelegate
                   parser.parse()
+                  let rssFeed: RSSFeed
                   
                   let items = self?.xmlParserDelegate.getFeedItems()
                   
@@ -89,7 +93,7 @@ class FeedRepositoryImpl: FeedRepository {
       
       downloadGroup.notify(queue: DispatchQueue.main) {
         groups = self.localDataSource.loadData()
-        completion(FeedGroup.convertToModelGroups(withEntities: groups), savedErrorMessage)
+        completion(FeedGroupEntity.convertToModelGroups(withEntities: groups), savedErrorMessage)
       }
     }
   }
@@ -98,7 +102,7 @@ class FeedRepositoryImpl: FeedRepository {
   func saveNewGroup(_ newGroupName: String) -> FeedGroup {
     let newGroup = localDataSource.saveNewGroup(withNewGroupName: newGroupName)
     
-    return FeedGroup.convertToModelGroups(withEntities: [newGroup])!.first!
+    return FeedGroupEntity.convertToModelGroups(withEntities: [newGroup])!.first!
   }
   
   func saveNewFeed(_ newChanelUrl: URL, _ group: FeedGroup) {

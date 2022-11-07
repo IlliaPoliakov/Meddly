@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 
-class NetworkDataSource: RemoteDataSource {
+class NetworkDataSource {
   
   // -MARK: - Properties -
   
@@ -20,6 +20,7 @@ class NetworkDataSource: RemoteDataSource {
     return URLSession(configuration: configuration,
                       delegate: nil, delegateQueue: nil)
   }()
+  
   
   // -MARK: - Functions -
   

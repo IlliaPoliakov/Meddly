@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (5.6.2)
+  - FeedKit (9.1.2)
   - PINCache (3.0.3):
     - PINCache/Arc-exception-safe (= 3.0.3)
     - PINCache/Core (= 3.0.3)
@@ -19,12 +20,14 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 5.6)
+  - FeedKit (~> 9.1)
   - PINRemoteImage (~> 3.0)
   - Swinject (~> 2.8)
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - FeedKit
     - PINCache
     - PINOperation
     - PINRemoteImage
@@ -32,11 +35,12 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: d368e1ff8a298e6dde360e35a3e68e6c610e7204
+  FeedKit: 71653273ab08e618cd6fd1301ca08fc02dca6a9e
   PINCache: 7a8fc1a691173d21dbddbf86cd515de6efa55086
   PINOperation: 00c935935f1e8cf0d1e2d6b542e75b88fc3e5e20
   PINRemoteImage: f1295b29f8c5e640e25335a1b2bd9d805171bd01
   Swinject: b4a11b31992e8668308dc594ba1cb9b3164a37ab
 
-PODFILE CHECKSUM: a2cc7a78c2a1471beb59327cb91968f54f85d255
+PODFILE CHECKSUM: 7d8921d96dec7920ebf95fdfb370541dd8ce402b
 
 COCOAPODS: 1.11.3

@@ -23,25 +23,5 @@ struct FeedGroup: Identifiable, Equatable, Hashable {
   static func == (lhs: FeedGroup, rhs: FeedGroup) -> Bool {
     return lhs.feeds == rhs.feeds && lhs.items == rhs.items && lhs.title == rhs.title
   }
-  
-  static func convertToModelGroups(withEntities entities:
-                                   [FeedGroupEntity]?) -> [FeedGroup]? {
-    guard entities != nil
-    else {
-      return nil
-    }
-    
-    var modelGroups = [FeedGroup]()
-    
-    for entity in entities! {
-      modelGroups.append(FeedGroup(title: entity.title,
-                                   feeds: Feed.convertToModelFeeds(withEntities: entity.feeds),
-                                   items: FeedItem.convertToModelItems(withEntities: entity.items),
-                                   id: entity.id
-                                  )
-      )
-    }
-    
-    return modelGroups
-  }
+
 }

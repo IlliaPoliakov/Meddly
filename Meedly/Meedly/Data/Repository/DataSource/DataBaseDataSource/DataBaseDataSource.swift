@@ -8,7 +8,7 @@
 import CoreData
 import UIKit
 
-class DataBaseDataSource: LocalDataSource {
+class DataBaseDataSource {
   
   // -MARK: - Properties -
   

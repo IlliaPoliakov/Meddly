@@ -12,8 +12,8 @@ class DependencyInjectionContainer {
   public static var shared : Container = Container()
   
   public static func initialize(){
-    DependencyInjectionContainer.shared.register(LocalDataSource.self) { _ in DataBaseDataSource() }
-    DependencyInjectionContainer.shared.register(RemoteDataSource.self) { _ in NetworkDataSource() }
+    DependencyInjectionContainer.shared.register(DataBaseDataSource.self) { _ in DataBaseDataSource()}
+    DependencyInjectionContainer.shared.register(NetworkDataSource.self) { _ in NetworkDataSource()}
     
     DependencyInjectionContainer.shared.register(CoreDataStack.self) { _ in CoreDataStack.shared }
     
@@ -23,8 +23,10 @@ class DependencyInjectionContainer {
     
     DependencyInjectionContainer.shared
       .register(FeedRepository.self) {
-        resolver in FeedRepositoryImpl(localDataSource: resolver.resolve(LocalDataSource.self)!,
-                                       remoteDataSource: resolver.resolve(RemoteDataSource.self)!,
+        resolver in FeedRepositoryImpl(localDataSource:
+                                        resolver.resolve(DataBaseDataSource.self)!,
+                                       remoteDataSource:
+                                        resolver.resolve(NetworkDataSource.self)!,
                                        xmlParserDelegate: resolver.resolve(XMLDataParser.self)!) }
     
     DependencyInjectionContainer.shared.register(GetFeedGroupsUseCase.self) { resolver in

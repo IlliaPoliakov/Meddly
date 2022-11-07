@@ -19,7 +19,7 @@ class MainTableViewController: UITableViewController {
   lazy var mainTableView: MainTableView = AppDelegate.DIContainer.resolve(MainTableView.self)!
   
 
-  // -MARK: - Dependencyes _
+  // -MARK: - Dependencies -
   
   private let getFeedGroupsUseCase: GetFeedGroupsUseCase =
   AppDelegate.DIContainer.resolve(GetFeedGroupsUseCase.self)!
