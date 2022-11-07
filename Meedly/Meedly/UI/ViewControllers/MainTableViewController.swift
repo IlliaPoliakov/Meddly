@@ -49,19 +49,37 @@ class MainTableViewController: UITableViewController {
   // MARK: - Navigation
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if segue.identifier == "showAddVC",
-       let destinaitonVC = segue.destination as? AddFeedViewController {
+    switch segue.identifier {
+    case "showAddVC":
+      guard let destinaitonVC = segue.destination as? AddFeedViewController
+      else {
+        return
+      }
       
       destinaitonVC.groups = mainTableView.groups
       
-    }
-    else if segue.identifier == "descriptionSegueID",
-       let destinaitonVC = segue.destination as? ItemDescriptinViewConrtoller {
+    case "descriptionSegueID" :
+      guard let destinaitonVC = segue.destination as? ItemDescriptinViewConrtoller
+      else {
+        return
+      }
       
       let selectedIndex = tableView.indexPathForSelectedRow
       let feedItem = mainTableView.groups![selectedIndex!.section].items![selectedIndex!.row]
       
       destinaitonVC.item = feedItem
+    case "descriptionSegueWithoutPicID":
+      guard let destinaitonVC = segue.destination as? ItemDescriptinViewConrtoller
+      else {
+        return
+      }
+      
+      let selectedIndex = tableView.indexPathForSelectedRow
+      let feedItem = mainTableView.groups![selectedIndex!.section].items![selectedIndex!.row]
+      
+      destinaitonVC.item = feedItem
+    default:
+      break
     }
   }
     

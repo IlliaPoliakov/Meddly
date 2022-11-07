@@ -29,7 +29,9 @@ class ItemDescriptinViewConrtoller: UIViewController {
     super.viewDidLoad()
     
     titleLabel.text = item!.title
-    imageView.pin_setImage(from: item!.imageUrl!)
+    if item?.imageUrl != nil {
+      imageView.pin_setImage(from: item!.imageUrl!)
+    }
     descriptionLabel.text = item!.feedItemDescription
     
     imageView.layer.cornerRadius = 10

@@ -80,13 +80,17 @@ class FeedRepositoryImpl: FeedRepository {
 
                           let link: URL = URL(string: entry.links!.first!.attributes!.href!)!
 
-                          self?.localDataSource
-                            .saveNewFeedItem(withTitle: entry.title ?? "[no title]",
-                                             withDescription: description,
-                                             withLink: link,
-                                             withImageUrl: imageUrl,
-                                             withPubDate: date,
-                                             withGroup: group)
+                          if !(group.items?.contains(where: { $0.title == entry.title}) ?? false) {
+
+                            self?.localDataSource
+                              .saveNewFeedItem(withTitle: entry.title ?? "[no title]",
+                                               withDescription: description,
+                                               withLink: link,
+                                               withImageUrl: imageUrl,
+                                               withPubDate: date,
+                                               withGroup: group)
+                          }
+
                         }
                       }
                       
@@ -95,19 +99,20 @@ class FeedRepositoryImpl: FeedRepository {
                       groupFeed.imageUrl = jsonFeed.icon != nil ? URL(string: jsonFeed.icon!) : nil
                       if jsonFeed.items != nil {
                         for item in jsonFeed.items! {
-                          
+
                           let imageUrl = item.image != nil ? URL(string: item.image!) : nil
-                          
+
                           let date = item.datePublished == nil ? "[no date]" :
                           DateFormatter().string(from: item.datePublished!)
-                          
-                          self?.localDataSource
-                            .saveNewFeedItem(withTitle: item.title ?? "[no title]",
-                                             withDescription: item.summary ?? "[no descripiton]",
-                                             withLink: URL(string: item.url!)!,
-                                             withImageUrl: imageUrl,
-                                             withPubDate: date,
-                                             withGroup: group)
+                          if !(group.items?.contains(where: { $0.title == item.title}) ?? false) {
+                            self?.localDataSource
+                              .saveNewFeedItem(withTitle: item.title ?? "[no title]",
+                                               withDescription: item.summary ?? "[no descripiton]",
+                                               withLink: URL(string: item.url!)!,
+                                               withImageUrl: imageUrl,
+                                               withPubDate: date,
+                                               withGroup: group)
+                          }
                         }
                       }
                       
@@ -118,23 +123,26 @@ class FeedRepositoryImpl: FeedRepository {
                       if rssFeed.items != nil {
                         for item in rssFeed.items! {
                           
-                          let imageUrl = item.enclosure?.attributes?.url != nil ? URL(string: item.enclosure!.attributes!.url!) : nil
-                          
+                          let imageUrl = item.media?.mediaThumbnails?.first?.attributes?.url != nil ? URL(string: item.media!.mediaThumbnails!.first!.attributes!.url!) : nil
+
                           let date: String
                           let formatter = DateFormatter()
-                          formatter.dateFormat = "HH:mm E, d MMM y"
+//                          formatter.dateFormat = "HH:mm E, d MMM y"
                           date = item.pubDate != nil ? formatter.string(from: item.pubDate!) :
                           "[no pubDate]"
-                          
-                          self?.localDataSource
-                            .saveNewFeedItem(withTitle: item.title ?? "[no title]",
-                                             withDescription: item.description ?? "[no description]",
-                                             withLink: URL(string: item.link!)!,
-                                             withImageUrl: imageUrl,
-                                             withPubDate: date,
-                                             withGroup: group)
+                          if !(group.items?.contains(where: { $0.title == item.title}) ?? false) {
+                            self?.localDataSource
+                              .saveNewFeedItem(withTitle: item.title ?? "[no title]",
+                                               withDescription: item.content?.contentEncoded?.html2String ?? "[no description]",
+                                               withLink: URL(string: item.link!)!,
+                                               withImageUrl: imageUrl,
+                                               withPubDate: date,
+                                               withGroup: group)
+                          }
                         }
                       }
+                    default:
+                      break
                     }
                     
                     
