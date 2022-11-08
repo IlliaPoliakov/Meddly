@@ -71,9 +71,18 @@ class MainTableViewController: UITableViewController {
       }
       
       let selectedIndex = tableView.indexPathForSelectedRow
-      let feedItem = mainTableView.groups![selectedIndex!.section].items![selectedIndex!.row]
+
+      if mainTableView.presentationType == "Show All" {
+        let feedItem = mainTableView.groups![selectedIndex!.section].items![selectedIndex!.row]
+        destinaitonVC.item = feedItem
+        mainTableView.groups![selectedIndex!.section].items![selectedIndex!.row].isViewed = true
+      }
+      else {
+        let feedItem = mainTableView.allItems![selectedIndex!.row]
+        destinaitonVC.item = feedItem
+        mainTableView.allItems![selectedIndex!.row].isViewed = true
+      }
       
-      destinaitonVC.item = feedItem
     case "itemDescriptionWIthoutImageId":
       guard let destinaitonVC = segue.destination as? ItemDescriptinViewConrtollerWithoutImage
       else {
@@ -81,9 +90,15 @@ class MainTableViewController: UITableViewController {
       }
       
       let selectedIndex = tableView.indexPathForSelectedRow
-      let feedItem = mainTableView.groups![selectedIndex!.section].items![selectedIndex!.row]
-      
-      destinaitonVC.item = feedItem
+
+      if mainTableView.presentationType == "Show All" {
+        let feedItem = mainTableView.groups![selectedIndex!.section].items![selectedIndex!.row]
+        destinaitonVC.item = feedItem
+      }
+      else {
+        let feedItem = mainTableView.allItems![selectedIndex!.row]
+        destinaitonVC.item = feedItem
+      }
       
     case "SortVCSegueId":
       guard let destinaitonVC = segue.destination as? SortViewController
@@ -126,6 +141,22 @@ class MainTableViewController: UITableViewController {
       
       let chosenPresenationType = previousVC.chosenPresentationType
       self.mainTableView.sortPresentation(withSortType: chosenPresenationType)
+      switch chosenPresenationType {
+      case "Show All":
+        self.title = "All Your Feeds"
+        
+      case "New First":
+        self.title = "Fresh Feeds"
+          
+      case "Old First":
+        self.title = "Old Feeds"
+            
+      case "Unread First":
+        self.title = "Unread Feeds"
+            
+      default:
+        self.title = chosenPresenationType
+      }
       
     default:
       break

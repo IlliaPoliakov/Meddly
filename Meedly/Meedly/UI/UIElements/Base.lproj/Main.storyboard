@@ -182,7 +182,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="singleLineEtched" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="MZO-sj-LXE">
-                                <rect key="frame" x="20" y="111" width="350" height="656"/>
+                                <rect key="frame" x="20" y="96" width="350" height="671"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="separatorColor" red="0.74901960779999999" green="0.35294117650000001" blue="0.94901960780000005" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
@@ -217,7 +217,7 @@
                             <constraint firstItem="at4-j2-7gy" firstAttribute="leading" secondItem="hao-08-wi6" secondAttribute="leading" constant="10" id="LI6-F6-gsX"/>
                             <constraint firstItem="MZO-sj-LXE" firstAttribute="leading" secondItem="hao-08-wi6" secondAttribute="leading" constant="20" id="LiX-Ps-eco"/>
                             <constraint firstItem="hao-08-wi6" firstAttribute="trailing" secondItem="at4-j2-7gy" secondAttribute="trailing" constant="10" id="cLM-de-w8Z"/>
-                            <constraint firstItem="MZO-sj-LXE" firstAttribute="top" secondItem="at4-j2-7gy" secondAttribute="bottom" constant="20" id="eQd-Is-rV0"/>
+                            <constraint firstItem="MZO-sj-LXE" firstAttribute="top" secondItem="at4-j2-7gy" secondAttribute="bottom" constant="5" id="eQd-Is-rV0"/>
                             <constraint firstItem="hao-08-wi6" firstAttribute="trailing" secondItem="MZO-sj-LXE" secondAttribute="trailing" constant="20" id="qzr-TV-y3Y"/>
                             <constraint firstItem="at4-j2-7gy" firstAttribute="top" secondItem="hao-08-wi6" secondAttribute="top" constant="10" id="s06-uA-xMV"/>
                             <constraint firstItem="hao-08-wi6" firstAttribute="bottom" secondItem="MZO-sj-LXE" secondAttribute="bottom" constant="20" id="v7J-g2-fX5"/>

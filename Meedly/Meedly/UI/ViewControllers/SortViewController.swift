@@ -23,7 +23,7 @@ class SortViewController: UIViewController, UITableViewDelegate {
   // -MARK: - Properties -
   
   var chosenPresentationType: String = "Show All"
-  var groups: [String] = ["Show All", "New First", "Old First"]
+  var groups: [String] = ["Show All", "Unread First", "New First", "Old First"]
   
   lazy var dataSource: UITableViewDiffableDataSource<Section, String> = UITableViewDiffableDataSource(
     tableView: tableView!) { tableView, indexPath, itemIdentifier in
@@ -36,7 +36,7 @@ class SortViewController: UIViewController, UITableViewDelegate {
         groupName = self.groups[indexPath.row]
       }
       else {
-        groupName = self.groups[indexPath.row + 3]
+        groupName = self.groups[indexPath.row + 4]
         cell.imageView?.image = UIImage(systemName: "folder.circle")
       }
       
@@ -61,7 +61,7 @@ class SortViewController: UIViewController, UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     chosenPresentationType = indexPath.section == 0 ? groups[indexPath.row] :
-    groups[indexPath.row + 3]
+    groups[indexPath.row + 4]
     performSegue(withIdentifier: "unwindFromSort", sender: nil)
   }
   
@@ -70,7 +70,7 @@ class SortViewController: UIViewController, UITableViewDelegate {
     snapshot.appendSections([.staticSection, .groupSection])
     
     for i in (0..<groups.count) {
-      if i < 3 {
+      if i < 4 {
         snapshot.appendItems([groups[i]], toSection: .staticSection)
       }
       else {

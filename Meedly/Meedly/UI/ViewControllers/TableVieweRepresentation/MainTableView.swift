@@ -14,24 +14,34 @@ class MainTableView: NSObject, UITableViewDelegate {
   var tableView: UITableView
   var groups: [FeedGroup]?
   lazy var allItems: [FeedItem]? = groups?.flatMap { $0.items != nil ? $0.items! : [FeedItem]() }
+  var presentationType: String = "Show All"
   
   lazy var dataSource: UITableViewDiffableDataSource<FeedGroup, FeedItem> =  UITableViewDiffableDataSource<FeedGroup, FeedItem> (tableView: tableView) {
     tableView, indexPath, itemIdentifier in
     
-    guard let item = self.groups?[indexPath.section].items?[indexPath.row]
-            as? FeedItem
+    var item: FeedItem? = nil
+    
+    switch self.presentationType {
+    case "Show All":
+      item = self.groups?[indexPath.section].items?[indexPath.row]
+      as? FeedItem
+    default:
+      item = self.allItems![indexPath.row]
+    }
+    
+    guard item != nil
     else {
       return UITableViewCell()
     }
     
-    if item.imageUrl != nil {
+    if item!.imageUrl != nil {
       guard let cell = tableView.dequeueReusableCell(withIdentifier: "MainVCCustomCell")
               as? MainTableViewControllerCustomCell
       else {
         fatalError("Can't deque custom cell in MainVC.")
       }
       
-      cell.bind(withFeedItem: item)
+      cell.bind(withFeedItem: item!)
       
       return cell
     }
@@ -42,7 +52,7 @@ class MainTableView: NSObject, UITableViewDelegate {
         fatalError("Can't deque custom cell in MainVC.")
       }
       
-      cell.bind(withFeedItem: item)
+      cell.bind(withFeedItem: item!)
       
       return cell
     }
@@ -73,15 +83,17 @@ class MainTableView: NSObject, UITableViewDelegate {
     dataSource.apply(snapshot, animatingDifferences: false)
   }
   
-  func updateSnapshot(forItems items: [FeedItem]?){
-    guard items != nil
+  func updateSnapshot(){
+    guard allItems != nil,
+          !(allItems!.isEmpty)
     else {
       return
     }
     
     var snapshot = NSDiffableDataSourceSnapshot<FeedGroup, FeedItem>()
-    snapshot.appendSections([groups![0]])
-    snapshot.appendItems(items!, toSection: groups![0])
+    let group = FeedGroup(feeds: nil, items: nil, id: UUID())
+    snapshot.appendSections([group])
+    snapshot.appendItems(allItems!, toSection: group)
     
     dataSource.apply(snapshot, animatingDifferences: true)
   }
@@ -124,6 +136,8 @@ class MainTableView: NSObject, UITableViewDelegate {
   }
   
   func sortPresentation(withSortType sortType: String){
+    presentationType = sortType
+    
     switch sortType {
     case "New First":
       if allItems != nil {
@@ -131,21 +145,34 @@ class MainTableView: NSObject, UITableViewDelegate {
         formatter.locale = Locale(identifier: "en_US_POSIX")
         formatter.dateFormat = "HH:mm E, d MMM y"
         let newItems = allItems!.sorted {
-          formatter.date(from: $0.pubDate)! < formatter.date(from: $1.pubDate)!
+          formatter.date(from: $0.pubDate)! > formatter.date(from: $1.pubDate)!
         }
-        updateSnapshot(forItems: newItems)
         
+        allItems = newItems
+        updateSnapshot()
       }
+      
     case "Old First":
-      if allItems != nil { let formatter = DateFormatter()
+      if allItems != nil {
+        let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "en_US_POSIX")
         formatter.dateFormat = "HH:mm E, d MMM y"
         let newItems = allItems!.sorted {
-          formatter.date(from: $0.pubDate)! > formatter.date(from: $1.pubDate)!
+          formatter.date(from: $0.pubDate)! < formatter.date(from: $1.pubDate)!
         }
-        updateSnapshot(forItems: newItems)
         
+        allItems = newItems
+        updateSnapshot()
       }
+    
+    case "Unread First":
+      if allItems != nil {
+        let newItems = allItems!.filter { $0.isViewed == true }
+        
+        allItems = newItems
+        updateSnapshot()
+      }
+      
     case "Show All":
       configureInitialSnapshot(withGroups: groups)
       
