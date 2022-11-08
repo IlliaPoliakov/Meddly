@@ -45,5 +45,9 @@ class NetworkDataSource {
     
     dataTask?.resume()
   }
+  
+  func parseData(withData data: Data) {
+    //her will live this monsterious parsing part from repo impl
+  }
 
 }

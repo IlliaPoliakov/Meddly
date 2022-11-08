@@ -56,7 +56,8 @@ class MainTableView: NSObject, UITableViewDelegate {
   
   // -MARK: - Functions -
   
-  func configureInitialSnapshot(){
+  func configureInitialSnapshot(withGroups groups: [FeedGroup]?){
+    self.groups = groups
     
     var snapshot = NSDiffableDataSourceSnapshot<FeedGroup, FeedItem>()
     

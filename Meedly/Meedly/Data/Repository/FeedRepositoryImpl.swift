@@ -33,7 +33,7 @@ class FeedRepositoryImpl: FeedRepository {
       
       var groups = self.localDataSource.loadData()
       
-      if state == .regularUpdate {
+      if state == .initialUpdate {
         DispatchQueue.main.async {
           completion(FeedGroupEntity.convertToDomainGroups(withEntities: groups), nil)
         }
@@ -127,13 +127,21 @@ class FeedRepositoryImpl: FeedRepository {
 
                           let date: String
                           let formatter = DateFormatter()
-//                          formatter.dateFormat = "HH:mm E, d MMM y"
+                          formatter.locale = Locale(identifier: "en_US_POSIX")
+                          formatter.dateFormat = "HH:mm E, d MMM y"
                           date = item.pubDate != nil ? formatter.string(from: item.pubDate!) :
                           "[no pubDate]"
+                          
+                          let description: String
+                          let contentDiscp = item.content?.contentEncoded?.html2String ?? "[no description]"
+                          let descriptionDescp = item.description?.html2String ?? "[no description]"
+                          description = contentDiscp.count >= descriptionDescp.count ?
+                          contentDiscp : descriptionDescp
+                          
                           if !(group.items?.contains(where: { $0.title == item.title}) ?? false) {
                             self?.localDataSource
                               .saveNewFeedItem(withTitle: item.title ?? "[no title]",
-                                               withDescription: item.content?.contentEncoded?.html2String ?? "[no description]",
+                                               withDescription: description,
                                                withLink: URL(string: item.link!)!,
                                                withImageUrl: imageUrl,
                                                withPubDate: date,
@@ -141,8 +149,6 @@ class FeedRepositoryImpl: FeedRepository {
                           }
                         }
                       }
-                    default:
-                      break
                     }
                     
                     
@@ -173,11 +179,13 @@ class FeedRepositoryImpl: FeedRepository {
     }
   }
   
+  
   func saveNewGroup(_ newGroupName: String) -> FeedGroup {
     let newGroup = localDataSource.saveNewGroup(withNewGroupName: newGroupName)
     
     return FeedGroupEntity.convertToDomainGroups(withEntities: [newGroup])!.first!
   }
+  
   
   func saveNewFeed(_ newFeedUrl: URL, _ group: FeedGroup) {
     

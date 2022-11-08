@@ -8,8 +8,8 @@
 import UIKit
 
 enum UpdateState {
+  case initialUpdate
   case regularUpdate
-  case updateAfterAdd
 }
 
 class MainTableViewController: UITableViewController {
@@ -17,6 +17,7 @@ class MainTableViewController: UITableViewController {
   // -MARK: - Properties -
   
   lazy var mainTableView: MainTableView = AppDelegate.DIContainer.resolve(MainTableView.self)!
+  var updateState: UpdateState = .initialUpdate
   
 
   // -MARK: - Dependencies -
@@ -32,9 +33,14 @@ class MainTableViewController: UITableViewController {
     
     mainTableView.tableView = tableView
     
-    updateGroups(updateState: .regularUpdate) { [weak self] newGroups in
-      self?.mainTableView.groups = newGroups
-      self?.mainTableView.configureInitialSnapshot()
+    updateGroups(updateState: updateState) { [weak self] newGroups in
+      if self?.updateState == .initialUpdate {
+        self?.mainTableView.configureInitialSnapshot(withGroups: newGroups)
+        self?.updateState = .regularUpdate
+      }
+      else {
+        self?.mainTableView.updateSnapshot(withGroups: newGroups)
+      }
     }
       
     tableView.dataSource = mainTableView.dataSource
@@ -68,8 +74,8 @@ class MainTableViewController: UITableViewController {
       let feedItem = mainTableView.groups![selectedIndex!.section].items![selectedIndex!.row]
       
       destinaitonVC.item = feedItem
-    case "descriptionSegueWithoutPicID":
-      guard let destinaitonVC = segue.destination as? ItemDescriptinViewConrtoller
+    case "itemDescriptionWIthoutImageId":
+      guard let destinaitonVC = segue.destination as? ItemDescriptinViewConrtollerWithoutImage
       else {
         return
       }
@@ -94,7 +100,7 @@ class MainTableViewController: UITableViewController {
     
     mainTableView.addNewGroups(withNewGroups: newAddGroups)
     
-    updateGroups(updateState: .updateAfterAdd) { [weak self] newGroups in
+    updateGroups(updateState: .regularUpdate) { [weak self] newGroups in
       self?.mainTableView.updateSnapshot(withGroups: newGroups)
     }
   }
