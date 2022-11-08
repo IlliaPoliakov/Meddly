@@ -84,24 +84,51 @@ class MainTableViewController: UITableViewController {
       let feedItem = mainTableView.groups![selectedIndex!.section].items![selectedIndex!.row]
       
       destinaitonVC.item = feedItem
+      
+    case "SortVCSegueId":
+      guard let destinaitonVC = segue.destination as? SortViewController
+      else {
+        return
+      }
+      let groupNames = self.mainTableView.groups?.map { $0.title }
+      if groupNames != nil {
+        for groupName in groupNames! {
+          destinaitonVC.groups.append(groupName)
+        }
+      }
+      
     default:
       break
     }
   }
     
   @IBAction func unwind( _ segue: UIStoryboardSegue) {
-    guard segue.identifier == "unwindToMain",
-          let previousVC = segue.source as? AddFeedViewController
-    else {
-      fatalError("Can't perform segue from AddVC")
-    }
-    
-    let newAddGroups = previousVC.newGroups
-    
-    mainTableView.addNewGroups(withNewGroups: newAddGroups)
-    
-    updateGroups(updateState: .regularUpdate) { [weak self] newGroups in
-      self?.mainTableView.updateSnapshot(withGroups: newGroups)
+    switch segue.identifier {
+    case "unwindToMain":
+      guard let previousVC = segue.source as? AddFeedViewController
+      else {
+        fatalError("Can't perform segue from AddVC")
+      }
+      
+      let newAddGroups = previousVC.newGroups
+      
+      mainTableView.addNewGroups(withNewGroups: newAddGroups)
+      
+      updateGroups(updateState: .regularUpdate) { [weak self] newGroups in
+        self?.mainTableView.updateSnapshot(withGroups: newGroups)
+      }
+      
+    case "unwindFromSort":
+      guard let previousVC = segue.source as? SortViewController
+      else {
+        fatalError("Can't perform segue from AddVC")
+      }
+      
+      let chosenPresenationType = previousVC.chosenPresentationType
+      self.mainTableView.sortPresentation(withSortType: chosenPresenationType)
+      
+    default:
+      break
     }
   }
   

@@ -13,6 +13,7 @@ class MainTableView: NSObject, UITableViewDelegate {
   
   var tableView: UITableView
   var groups: [FeedGroup]?
+  lazy var allItems: [FeedItem]? = groups?.flatMap { $0.items != nil ? $0.items! : [FeedItem]() }
   
   lazy var dataSource: UITableViewDiffableDataSource<FeedGroup, FeedItem> =  UITableViewDiffableDataSource<FeedGroup, FeedItem> (tableView: tableView) {
     tableView, indexPath, itemIdentifier in
@@ -72,6 +73,19 @@ class MainTableView: NSObject, UITableViewDelegate {
     dataSource.apply(snapshot, animatingDifferences: false)
   }
   
+  func updateSnapshot(forItems items: [FeedItem]?){
+    guard items != nil
+    else {
+      return
+    }
+    
+    var snapshot = NSDiffableDataSourceSnapshot<FeedGroup, FeedItem>()
+    snapshot.appendSections([groups![0]])
+    snapshot.appendItems(items!, toSection: groups![0])
+    
+    dataSource.apply(snapshot, animatingDifferences: true)
+  }
+  
   func updateSnapshot(withGroups newGroups: [FeedGroup]?){
     guard newGroups != nil
     else {
@@ -109,6 +123,36 @@ class MainTableView: NSObject, UITableViewDelegate {
     dataSource.apply(snapshot)
   }
   
- 
+  func sortPresentation(withSortType sortType: String){
+    switch sortType {
+    case "New First":
+      if allItems != nil {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.dateFormat = "HH:mm E, d MMM y"
+        let newItems = allItems!.sorted {
+          formatter.date(from: $0.pubDate)! < formatter.date(from: $1.pubDate)!
+        }
+        updateSnapshot(forItems: newItems)
+        
+      }
+    case "Old First":
+      if allItems != nil { let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.dateFormat = "HH:mm E, d MMM y"
+        let newItems = allItems!.sorted {
+          formatter.date(from: $0.pubDate)! > formatter.date(from: $1.pubDate)!
+        }
+        updateSnapshot(forItems: newItems)
+        
+      }
+    case "Show All":
+      configureInitialSnapshot(withGroups: groups)
+      
+    default:
+      let newGroup = groups?.filter { $0.title == sortType }
+      configureInitialSnapshot(withGroups: newGroup)
+    }
+  }
 
 }

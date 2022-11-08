@@ -119,6 +119,7 @@
                             <color key="tintColor" red="0.74901960779999999" green="0.35294117650000001" blue="0.94901960780000005" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="sortPresentation:" destination="Ii9-o7-ios" id="2GB-5A-ZUI"/>
+                                <segue destination="MX7-hs-Flf" kind="presentation" identifier="SortVCSegueId" id="XcU-RV-Mj4"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem systemItem="flexibleSpace" id="Gp7-pT-G9W"/>
@@ -165,6 +166,72 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vLD-R2-xZ1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="380" y="-57.582938388625593"/>
+        </scene>
+        <!--Sort View Controller-->
+        <scene sceneID="Kgr-km-7OY">
+            <objects>
+                <viewController id="MX7-hs-Flf" customClass="SortViewController" customModule="Meedly" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lCE-0M-Kvf">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="787"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sort type:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="at4-j2-7gy">
+                                <rect key="frame" x="10" y="57" width="370" height="34"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <color key="textColor" red="0.74901960779999999" green="0.35294117650000001" blue="0.94901960780000005" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="singleLineEtched" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="MZO-sj-LXE">
+                                <rect key="frame" x="20" y="111" width="350" height="656"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="separatorColor" red="0.74901960779999999" green="0.35294117650000001" blue="0.94901960780000005" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SortTableViewCell" textLabel="c1D-ng-vxf" imageView="oMN-iC-O91" style="IBUITableViewCellStyleDefault" id="IOx-Zx-AR6" userLabel="SortTableViewCell">
+                                        <rect key="frame" x="20" y="55.333332061767578" width="310" height="51.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="IOx-Zx-AR6" id="dcD-3c-9ie">
+                                            <rect key="frame" x="0.0" y="0.0" width="310" height="51.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="New First" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="c1D-ng-vxf">
+                                                    <rect key="frame" x="55.833333333333329" y="0.0" width="238.16666666666666" height="51.666667938232422"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="oMN-iC-O91">
+                                                    <rect key="frame" x="15.166666666666666" y="13.000000000000002" width="25.666666666666668" height="25.666666666666668"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <color key="tintColor" red="0.74901960779999999" green="0.35294117650000001" blue="0.94901960780000005" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <imageReference key="image" image="clock" catalog="system" symbolScale="large"/>
+                                                </imageView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="hao-08-wi6"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="at4-j2-7gy" firstAttribute="leading" secondItem="hao-08-wi6" secondAttribute="leading" constant="10" id="LI6-F6-gsX"/>
+                            <constraint firstItem="MZO-sj-LXE" firstAttribute="leading" secondItem="hao-08-wi6" secondAttribute="leading" constant="20" id="LiX-Ps-eco"/>
+                            <constraint firstItem="hao-08-wi6" firstAttribute="trailing" secondItem="at4-j2-7gy" secondAttribute="trailing" constant="10" id="cLM-de-w8Z"/>
+                            <constraint firstItem="MZO-sj-LXE" firstAttribute="top" secondItem="at4-j2-7gy" secondAttribute="bottom" constant="20" id="eQd-Is-rV0"/>
+                            <constraint firstItem="hao-08-wi6" firstAttribute="trailing" secondItem="MZO-sj-LXE" secondAttribute="trailing" constant="20" id="qzr-TV-y3Y"/>
+                            <constraint firstItem="at4-j2-7gy" firstAttribute="top" secondItem="hao-08-wi6" secondAttribute="top" constant="10" id="s06-uA-xMV"/>
+                            <constraint firstItem="hao-08-wi6" firstAttribute="bottom" secondItem="MZO-sj-LXE" secondAttribute="bottom" constant="20" id="v7J-g2-fX5"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="MZO-sj-LXE" id="7CV-ni-36p"/>
+                        <segue destination="ing-2a-lmP" kind="unwind" identifier="unwindFromSort" unwindAction="unwind:" id="Xjz-qP-XRe"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ubj-zv-CAo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="ing-2a-lmP" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="380" y="635"/>
         </scene>
         <!--Item Descriptin View Conrtoller-->
         <scene sceneID="mAv-R6-1Uc">
@@ -502,6 +569,7 @@
         <image name="arrow.up.and.down.text.horizontal" catalog="system" width="128" height="87"/>
         <image name="checkmark.circle" catalog="system" width="128" height="123"/>
         <image name="circle" catalog="system" width="128" height="123"/>
+        <image name="clock" catalog="system" width="128" height="123"/>
         <image name="clock.arrow.circlepath" catalog="system" width="128" height="112"/>
         <image name="folder.circle" catalog="system" width="128" height="123"/>
         <image name="line.3.horizontal.decrease" catalog="system" width="128" height="73"/>
