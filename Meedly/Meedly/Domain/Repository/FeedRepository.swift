@@ -8,8 +8,9 @@
 import Foundation
 
 protocol FeedRepository {
-  func getFeedGroups( updateState state: UpdateState,
-                      _ completion: @escaping ([FeedGroup]?, String?) -> Void )
+  func getFeedGroups(updateState state: UpdateState,
+                     _ completion: @escaping ([FeedGroup]?, String?) -> Void )
   func saveNewGroup(_ newGroupName: String) -> FeedGroup
   func saveNewFeed(_ newFeedURL: URL, _ group: FeedGroup)
+  func markAsReaded(feedItem item: FeedItem)
 }

@@ -68,8 +68,6 @@ class MainTableView: NSObject, UITableViewDelegate {
   // -MARK: - Functions -
   
   func configureInitialSnapshot(withGroups groups: [FeedGroup]?){
-    self.groups = groups
-    
     var snapshot = NSDiffableDataSourceSnapshot<FeedGroup, FeedItem>()
     
     for group in groups! {
@@ -80,10 +78,15 @@ class MainTableView: NSObject, UITableViewDelegate {
       }
     }
     
-    dataSource.apply(snapshot, animatingDifferences: false)
+    dataSource.apply(snapshot, animatingDifferences: true)
   }
   
-  func updateSnapshot(){
+  func getAllItems() -> [FeedItem]?{
+    return groups?.flatMap { $0.items != nil ? $0.items! : [FeedItem]() }
+  }
+  
+  func updateSnapshotWithItems(){
+    
     guard allItems != nil,
           !(allItems!.isEmpty)
     else {
@@ -94,27 +97,6 @@ class MainTableView: NSObject, UITableViewDelegate {
     let group = FeedGroup(feeds: nil, items: nil, id: UUID())
     snapshot.appendSections([group])
     snapshot.appendItems(allItems!, toSection: group)
-    
-    dataSource.apply(snapshot, animatingDifferences: true)
-  }
-  
-  func updateSnapshot(withGroups newGroups: [FeedGroup]?){
-    guard newGroups != nil
-    else {
-      return
-    }
-    
-    var snapshot = dataSource.snapshot()
-    
-    for i in 0 ..< newGroups!.count {
-      let diffItems = self.groups![i].items?.difference(from: newGroups![i].items!)
-      
-      if diffItems != nil {
-        snapshot.appendItems(diffItems!, toSection: self.groups![i])
-      }
-    }
-    
-    self.groups = newGroups
     
     dataSource.apply(snapshot, animatingDifferences: true)
   }
@@ -135,21 +117,22 @@ class MainTableView: NSObject, UITableViewDelegate {
     dataSource.apply(snapshot)
   }
   
-  func sortPresentation(withSortType sortType: String){
-    presentationType = sortType
+  func updatePresentation(){
+    allItems = getAllItems()
     
-    switch sortType {
+    switch presentationType {
     case "New First":
       if allItems != nil {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "en_US_POSIX")
         formatter.dateFormat = "HH:mm E, d MMM y"
+        
         let newItems = allItems!.sorted {
           formatter.date(from: $0.pubDate)! > formatter.date(from: $1.pubDate)!
         }
         
         allItems = newItems
-        updateSnapshot()
+        updateSnapshotWithItems()
       }
       
     case "Old First":
@@ -157,27 +140,28 @@ class MainTableView: NSObject, UITableViewDelegate {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "en_US_POSIX")
         formatter.dateFormat = "HH:mm E, d MMM y"
+        
         let newItems = allItems!.sorted {
           formatter.date(from: $0.pubDate)! < formatter.date(from: $1.pubDate)!
         }
         
         allItems = newItems
-        updateSnapshot()
+        updateSnapshotWithItems()
       }
     
-    case "Unread First":
+    case "Unread Only":
       if allItems != nil {
         let newItems = allItems!.filter { $0.isViewed == true }
         
         allItems = newItems
-        updateSnapshot()
+        updateSnapshotWithItems()
       }
       
     case "Show All":
       configureInitialSnapshot(withGroups: groups)
       
     default:
-      let newGroup = groups?.filter { $0.title == sortType }
+      let newGroup = groups?.filter { $0.title == presentationType }
       configureInitialSnapshot(withGroups: newGroup)
     }
   }

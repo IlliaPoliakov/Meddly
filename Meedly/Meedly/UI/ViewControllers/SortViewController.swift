@@ -23,7 +23,7 @@ class SortViewController: UIViewController, UITableViewDelegate {
   // -MARK: - Properties -
   
   var chosenPresentationType: String = "Show All"
-  var groups: [String] = ["Show All", "Unread First", "New First", "Old First"]
+  var groups: [String] = ["Show All", "Unread Only", "New First", "Old First"]
   
   lazy var dataSource: UITableViewDiffableDataSource<Section, String> = UITableViewDiffableDataSource(
     tableView: tableView!) { tableView, indexPath, itemIdentifier in

@@ -115,6 +115,10 @@ class DataBaseDataSource {
     coreDataStack.saveContext()
   }
   
+  func markAsReaded(forFeedItem item: FeedItem){
+    
+  }
+  
   func saveContext(){
     coreDataStack.saveContext()
   }

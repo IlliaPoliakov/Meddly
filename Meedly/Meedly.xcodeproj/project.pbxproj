@@ -32,6 +32,7 @@
 		F2C4BA6728F9E38A00359E5D /* NetworkDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4BA6628F9E38A00359E5D /* NetworkDataSource.swift */; };
 		F2C95DEA290C3941000E36DD /* MainVCCustomCellNoImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C95DE9290C3941000E36DD /* MainVCCustomCellNoImage.swift */; };
 		F2CD5C4F291A604B00F0A0B5 /* ItemDescriptionVCWithoutImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CD5C4E291A604B00F0A0B5 /* ItemDescriptionVCWithoutImage.swift */; };
+		F2CD63DA291BB906003B48BD /* MarkAsReadedUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CD63D9291BB905003B48BD /* MarkAsReadedUseCase.swift */; };
 		F2D151AD29199FB300940546 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F2D151AB29199FB300940546 /* CoreDataModel.xcdatamodeld */; };
 		F2D151B42919C0E200940546 /* FeedEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D151AE2919C0E200940546 /* FeedEntity+CoreDataClass.swift */; };
 		F2D151B52919C0E200940546 /* FeedEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D151AF2919C0E200940546 /* FeedEntity+CoreDataProperties.swift */; };
@@ -75,6 +76,7 @@
 		F2C4BA6628F9E38A00359E5D /* NetworkDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataSource.swift; sourceTree = "<group>"; };
 		F2C95DE9290C3941000E36DD /* MainVCCustomCellNoImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVCCustomCellNoImage.swift; sourceTree = "<group>"; };
 		F2CD5C4E291A604B00F0A0B5 /* ItemDescriptionVCWithoutImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDescriptionVCWithoutImage.swift; sourceTree = "<group>"; };
+		F2CD63D9291BB905003B48BD /* MarkAsReadedUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkAsReadedUseCase.swift; sourceTree = "<group>"; };
 		F2D151AC29199FB300940546 /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
 		F2D151AE2919C0E200940546 /* FeedEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FeedEntity+CoreDataClass.swift"; path = "Meedly/Data/Model/FeedEntity/FeedEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		F2D151AF2919C0E200940546 /* FeedEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FeedEntity+CoreDataProperties.swift"; path = "Meedly/Data/Model/FeedEntity/FeedEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
@@ -226,6 +228,7 @@
 				F2E41FAB2901CC1500FCA844 /* SaveNewGroupUseCase.swift */,
 				F2E41FB129020A4700FCA844 /* SaveNewFeedUseCase.swift */,
 				F2A31C12290EF6A100EC5B79 /* GetFeedGrouspUseCase.swift */,
+				F2CD63D9291BB905003B48BD /* MarkAsReadedUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -463,6 +466,7 @@
 				F2E41FAC2901CC1500FCA844 /* SaveNewGroupUseCase.swift in Sources */,
 				F2C4BA6528F9BB5000359E5D /* FeedRepositoryImpl.swift in Sources */,
 				F28AE71B291AC29100B45184 /* SortViewController.swift in Sources */,
+				F2CD63DA291BB906003B48BD /* MarkAsReadedUseCase.swift in Sources */,
 				F2D151B62919C0E200940546 /* FeedItemEntity+CoreDataClass.swift in Sources */,
 				F2C95DEA290C3941000E36DD /* MainVCCustomCellNoImage.swift in Sources */,
 				F2C4B9F628F7269500359E5D /* SceneDelegate.swift in Sources */,

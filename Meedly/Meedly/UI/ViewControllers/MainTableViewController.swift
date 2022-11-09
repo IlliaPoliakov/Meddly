@@ -34,15 +34,12 @@ class MainTableViewController: UITableViewController {
     mainTableView.tableView = tableView
     
     updateGroups(updateState: updateState) { [weak self] newGroups in
-      if self?.updateState == .initialUpdate {
-        self?.mainTableView.configureInitialSnapshot(withGroups: newGroups)
-        self?.updateState = .regularUpdate
-      }
-      else {
-        self?.mainTableView.updateSnapshot(withGroups: newGroups)
-      }
-    }
+      self?.mainTableView.configureInitialSnapshot(withGroups: newGroups)
+      self?.mainTableView.groups = newGroups
       
+      self?.updateState = .regularUpdate
+    }
+    
     tableView.dataSource = mainTableView.dataSource
     tableView.delegate = mainTableView
     
@@ -130,7 +127,8 @@ class MainTableViewController: UITableViewController {
       mainTableView.addNewGroups(withNewGroups: newAddGroups)
       
       updateGroups(updateState: .regularUpdate) { [weak self] newGroups in
-        self?.mainTableView.updateSnapshot(withGroups: newGroups)
+        self?.mainTableView.groups = newGroups
+        self?.mainTableView.updatePresentation()
       }
       
     case "unwindFromSort":
@@ -140,19 +138,21 @@ class MainTableViewController: UITableViewController {
       }
       
       let chosenPresenationType = previousVC.chosenPresentationType
-      self.mainTableView.sortPresentation(withSortType: chosenPresenationType)
+      self.mainTableView.presentationType = chosenPresenationType
+      self.mainTableView.updatePresentation()
+      
       switch chosenPresenationType {
       case "Show All":
-        self.title = "All Your Feeds"
+        self.title = "All Your Posts"
         
       case "New First":
-        self.title = "Fresh Feeds"
+        self.title = "Fresh Posts"
           
       case "Old First":
-        self.title = "Old Feeds"
+        self.title = "Old Posts"
             
-      case "Unread First":
-        self.title = "Unread Feeds"
+      case "Unread Only":
+        self.title = "Unread Posts"
             
       default:
         self.title = chosenPresenationType
@@ -188,7 +188,8 @@ class MainTableViewController: UITableViewController {
   
   @IBAction func update(_ sender: Any) {
     updateGroups(updateState: .regularUpdate) { [weak self] newGroups in
-      self?.mainTableView.updateSnapshot(withGroups: newGroups)
+      self?.mainTableView.groups = newGroups
+      self?.mainTableView.updatePresentation()
     }
   }
   

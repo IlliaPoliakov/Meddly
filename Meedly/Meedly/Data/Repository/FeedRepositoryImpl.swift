@@ -23,7 +23,7 @@ class FeedRepositoryImpl: FeedRepository {
   }
   
   
-  // -MARK: - UseCase func-s -
+  // -MARK: - UseCase funcs -
   
   func getFeedGroups(updateState state: UpdateState,
                      _ completion: @escaping ([FeedGroup]?, String?) -> Void) {
@@ -188,9 +188,12 @@ class FeedRepositoryImpl: FeedRepository {
   
   
   func saveNewFeed(_ newFeedUrl: URL, _ group: FeedGroup) {
-    
     let groupEntity = localDataSource.getPredicatedGroup(withGroup: group)
     localDataSource.saveNewFeed(withNewFeedUrl: newFeedUrl, withParentGroup: groupEntity!)
+  }
+  
+  func markAsReaded(feedItem item: FeedItem) {
+    localDataSource.markAsReaded(forFeedItem: item)
   }
   
 }
