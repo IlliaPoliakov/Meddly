@@ -27,7 +27,8 @@ public class FeedItemEntity: NSManagedObject {
                                  title: entity.title,
                                  link: entity.link,
                                  id: entity.id,
-                                 isViewed: entity.isViewed)
+                                 isViewed: entity.isViewed,
+                                 parentGroupTitle: entity.parentGroup!.title)
       )
     }
     

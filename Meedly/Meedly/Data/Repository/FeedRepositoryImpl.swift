@@ -188,7 +188,7 @@ class FeedRepositoryImpl: FeedRepository {
   
   
   func saveNewFeed(_ newFeedUrl: URL, _ group: FeedGroup) {
-    let groupEntity = localDataSource.getPredicatedGroup(withGroup: group)
+    let groupEntity = localDataSource.getPredicatedGroup(withGroupTitle: group.title)
     localDataSource.saveNewFeed(withNewFeedUrl: newFeedUrl, withParentGroup: groupEntity!)
   }
   

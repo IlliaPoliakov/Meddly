@@ -24,6 +24,9 @@ class MainTableViewController: UITableViewController {
   
   private let getFeedGroupsUseCase: GetFeedGroupsUseCase =
   AppDelegate.DIContainer.resolve(GetFeedGroupsUseCase.self)!
+  private let markAsReadedUseCase: MarkAsReadedUseCase =
+  AppDelegate.DIContainer.resolve(MarkAsReadedUseCase.self)!
+  
   
   
   // -MARK: - LifeCycle -
@@ -68,17 +71,23 @@ class MainTableViewController: UITableViewController {
       }
       
       let selectedIndex = tableView.indexPathForSelectedRow
-
+      let feedItem: FeedItem
+      
       if mainTableView.presentationType == "Show All" {
-        let feedItem = mainTableView.groups![selectedIndex!.section].items![selectedIndex!.row]
+        mainTableView.groups![selectedIndex!.section].items![selectedIndex!.row].isViewed = true
+        feedItem = mainTableView.groups![selectedIndex!.section].items![selectedIndex!.row]
         destinaitonVC.item = feedItem
         mainTableView.groups![selectedIndex!.section].items![selectedIndex!.row].isViewed = true
       }
       else {
-        let feedItem = mainTableView.allItems![selectedIndex!.row]
+        mainTableView.allItems![selectedIndex!.row].isViewed = true
+        feedItem = mainTableView.allItems![selectedIndex!.row]
         destinaitonVC.item = feedItem
         mainTableView.allItems![selectedIndex!.row].isViewed = true
       }
+      
+      markAsReadedUseCase.execute(forFeedItem: feedItem)
+      
       
     case "itemDescriptionWIthoutImageId":
       guard let destinaitonVC = segue.destination as? ItemDescriptinViewConrtollerWithoutImage

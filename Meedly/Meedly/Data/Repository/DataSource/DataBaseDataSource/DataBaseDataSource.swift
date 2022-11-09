@@ -17,10 +17,10 @@ class DataBaseDataSource {
   
   // -MARK: - Functions -
   
-  func getPredicatedGroup(withGroup group: FeedGroup) -> FeedGroupEntity? {
+  func getPredicatedGroup(withGroupTitle groupTitle: String) -> FeedGroupEntity? {
     
     let predicate = NSPredicate(format: "%K == %@",
-                                #keyPath(FeedGroupEntity.title), "\(group.title)")
+                                #keyPath(FeedGroupEntity.title), "\(groupTitle)")
     
     let fetchRequest =
           NSFetchRequest<FeedGroupEntity>(entityName: "FeedGroupEntity")
@@ -116,7 +116,10 @@ class DataBaseDataSource {
   }
   
   func markAsReaded(forFeedItem item: FeedItem){
-    
+    let group = getPredicatedGroup(withGroupTitle: item.parentGroupTitle)
+    let groupItem = group!.items?.filter { $0.title == item.title }
+    groupItem!.first!.isViewed = true
+    coreDataStack.saveContext()
   }
   
   func saveContext(){

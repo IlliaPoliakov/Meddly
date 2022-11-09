@@ -21,12 +21,6 @@ class MainTableViewControllerCustomCell: UITableViewCell {
   func bind(withFeedItem item: FeedItem) {
     self.pubDateLabel.text = item.pubDate
     self.titleLabel.text = item.title
-    
-    guard item.imageUrl != nil
-    else {
-      return
-    }
-    
     self.itemImage.pin_updateWithProgress = true
     self.itemImage.pin_setImage(from: item.imageUrl!)
     self.itemImage.layer.cornerRadius = 10

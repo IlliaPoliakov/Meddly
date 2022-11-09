@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct FeedItem: Identifiable, Equatable, Hashable {
   var feedItemDescription: String
@@ -13,8 +14,9 @@ struct FeedItem: Identifiable, Equatable, Hashable {
   var pubDate: String
   var title: String
   var link: URL
-  var isViewed: Bool = false
+  var isViewed: Bool
   var id: UUID
+  var parentGroupTitle: String
   
   init(feedItemDescription: String,
        imageUrl: URL? = nil,
@@ -22,7 +24,8 @@ struct FeedItem: Identifiable, Equatable, Hashable {
        title: String,
        link: URL,
        id: UUID,
-       isViewed: Bool) {
+       isViewed: Bool,
+       parentGroupTitle: String) {
     self.feedItemDescription = feedItemDescription
     self.imageUrl = imageUrl
     self.pubDate = pubDate
@@ -30,6 +33,7 @@ struct FeedItem: Identifiable, Equatable, Hashable {
     self.link = link
     self.id = id
     self.isViewed = isViewed
+    self.parentGroupTitle = parentGroupTitle
   }
   
   static func == (lhs: FeedItem, rhs: FeedItem) -> Bool {

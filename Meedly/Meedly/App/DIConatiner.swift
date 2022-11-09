@@ -36,6 +36,9 @@ class DependencyInjectionContainer {
     DependencyInjectionContainer.shared.register(SaveNewFeedUseCase.self) { resolver in
       SaveNewFeedUseCase(repo: resolver.resolve(FeedRepository.self)!)
     }
+    DependencyInjectionContainer.shared.register(MarkAsReadedUseCase.self) { resolver in
+      MarkAsReadedUseCase(repo: resolver.resolve(FeedRepository.self)!)
+    }
   }
 }
 

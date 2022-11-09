@@ -25,8 +25,13 @@ class MainTableView: NSObject, UITableViewDelegate {
     case "Show All":
       item = self.groups?[indexPath.section].items?[indexPath.row]
       as? FeedItem
-    default:
+      
+    case "New First", "Old First", "Unread Only" :
       item = self.allItems![indexPath.row]
+      
+    default:
+      let chosenGroup = self.groups!.filter { $0.title == self.presentationType }
+      item = chosenGroup.first!.items![indexPath.row]
     }
     
     guard item != nil
@@ -53,6 +58,10 @@ class MainTableView: NSObject, UITableViewDelegate {
       }
       
       cell.bind(withFeedItem: item!)
+      
+      if item!.isViewed == true {
+        cell.alpha = 1
+      }
       
       return cell
     }
