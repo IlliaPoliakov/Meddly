@@ -118,7 +118,6 @@
                         <barButtonItem title="Item" image="arrow.up.and.down.text.horizontal" catalog="system" style="done" id="k9Q-iU-sfW">
                             <color key="tintColor" red="0.74901960779999999" green="0.35294117650000001" blue="0.94901960780000005" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
-                                <action selector="sortPresentation:" destination="Ii9-o7-ios" id="2GB-5A-ZUI"/>
                                 <segue destination="MX7-hs-Flf" kind="presentation" identifier="SortVCSegueId" id="XcU-RV-Mj4"/>
                             </connections>
                         </barButtonItem>
@@ -142,7 +141,7 @@
                             <barButtonItem title="Item" image="clock.arrow.circlepath" catalog="system" style="done" id="nlb-O8-cHI">
                                 <color key="tintColor" red="0.74901960779999999" green="0.35294117650000001" blue="0.94901960780000005" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
-                                    <action selector="update:" destination="Ii9-o7-ios" id="7Ag-HY-nDS"/>
+                                    <action selector="update:" destination="Ii9-o7-ios" id="lld-eR-tYX"/>
                                 </connections>
                             </barButtonItem>
                         </leftBarButtonItems>

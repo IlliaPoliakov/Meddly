@@ -34,17 +34,17 @@ class MainTableViewController: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    mainTableView.tableView = tableView
-    
     updateGroups(updateState: updateState) { [weak self] newGroups in
       self?.mainTableView.configureInitialSnapshot(withGroups: newGroups)
       self?.mainTableView.groups = newGroups
       
       self?.updateState = .regularUpdate
+      
+      self?.mainTableView.tableView = self!.tableView
+      
+      self?.tableView.dataSource = self?.mainTableView.dataSource
+      self?.tableView.delegate = self?.mainTableView
     }
-    
-    tableView.dataSource = mainTableView.dataSource
-    tableView.delegate = mainTableView
     
     tableView.rowHeight = UITableView.automaticDimension
     tableView.estimatedRowHeight = 600
@@ -188,10 +188,6 @@ class MainTableViewController: UITableViewController {
   }
   
   @IBAction func markAsReaded(_ sender: Any) {
-    
-  }
-  
-  @IBAction func sortPresentation(_ sender: Any) {
     
   }
   

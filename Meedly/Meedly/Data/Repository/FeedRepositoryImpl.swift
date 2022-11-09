@@ -167,7 +167,7 @@ class FeedRepositoryImpl: FeedRepository {
       }
       else {
         DispatchQueue.main.async {
-          completion( nil, "No enternet connection...")
+          completion( FeedGroupEntity.convertToDomainGroups(withEntities: groups), "No enternet connection...")
         }
       }
       

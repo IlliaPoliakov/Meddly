@@ -24,7 +24,6 @@ class MainTableView: NSObject, UITableViewDelegate {
     switch self.presentationType {
     case "Show All":
       item = self.groups?[indexPath.section].items?[indexPath.row]
-      as? FeedItem
       
     case "New First", "Old First", "Unread Only" :
       item = self.allItems![indexPath.row]
