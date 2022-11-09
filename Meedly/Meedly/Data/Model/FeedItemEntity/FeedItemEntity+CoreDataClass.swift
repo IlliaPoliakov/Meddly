@@ -2,7 +2,7 @@
 //  FeedItemEntity+CoreDataClass.swift
 //  Meedly
 //
-//  Created by Illia Poliakov on 8.11.22.
+//  Created by Illia Poliakov on 10.11.22.
 //
 //
 
@@ -12,7 +12,7 @@ import CoreData
 @objc(FeedItemEntity)
 public class FeedItemEntity: NSManagedObject {
   static func convertToDomainItems(withEntities entities:
-                                  [FeedItemEntity]?) -> [FeedItem]? {
+                                   [FeedItemEntity]?) -> [FeedItem]? {
     guard entities != nil
     else {
       return nil
@@ -28,7 +28,7 @@ public class FeedItemEntity: NSManagedObject {
                                  link: entity.link,
                                  id: entity.id,
                                  isViewed: entity.isViewed,
-                                 parentGroupTitle: entity.parentGroup!.title)
+                                 parentGroupTitle: entity.parentGroup.title)
       )
     }
     

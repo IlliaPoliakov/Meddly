@@ -38,9 +38,7 @@ class NetworkDataSource {
         return
       }
       
-      DispatchQueue.main.async {
-        completion(data, nil)
-      }
+      completion(data, nil)
     }
     
     dataTask?.resume()

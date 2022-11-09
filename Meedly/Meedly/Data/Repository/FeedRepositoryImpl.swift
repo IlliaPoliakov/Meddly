@@ -11,6 +11,10 @@ import FeedKit
 
 class FeedRepositoryImpl: FeedRepository {
   
+  func cleanData(){
+    localDataSource.cleanData()
+  }
+  
   // -MARK: - Properties -
   
   private let localDataSource: DataBaseDataSource
@@ -64,8 +68,8 @@ class FeedRepositoryImpl: FeedRepository {
                       groupFeed.title = atomFeed.title ?? "[no title]"
                       groupFeed.imageUrl = atomFeed.icon != nil ? URL(string: atomFeed.icon!) :
                       nil
-//                    groupFeed.imageUrl = atomFeed.logo != nil ? URL(string: atomFeed.logo!) :
-//                    nil
+                      groupFeed.imageUrl = atomFeed.logo != nil ? URL(string: atomFeed.logo!) :
+                      nil
                       if atomFeed.entries != nil {
                         for entry in atomFeed.entries! {
 
@@ -88,7 +92,8 @@ class FeedRepositoryImpl: FeedRepository {
                                                withLink: link,
                                                withImageUrl: imageUrl,
                                                withPubDate: date,
-                                               withGroup: group)
+                                               withGroup: group,
+                                               withParentFeedLink: groupFeed.link)
                           }
 
                         }
@@ -111,7 +116,8 @@ class FeedRepositoryImpl: FeedRepository {
                                                withLink: URL(string: item.url!)!,
                                                withImageUrl: imageUrl,
                                                withPubDate: date,
-                                               withGroup: group)
+                                               withGroup: group,
+                                               withParentFeedLink: groupFeed.link)
                           }
                         }
                       }
@@ -145,7 +151,8 @@ class FeedRepositoryImpl: FeedRepository {
                                                withLink: URL(string: item.link!)!,
                                                withImageUrl: imageUrl,
                                                withPubDate: date,
-                                               withGroup: group)
+                                               withGroup: group,
+                                               withParentFeedLink: groupFeed.link)
                           }
                         }
                       }
@@ -171,7 +178,9 @@ class FeedRepositoryImpl: FeedRepository {
         }
       }
       
-      downloadGroup.notify(queue: DispatchQueue.main) {
+      downloadGroup.wait()
+      
+      DispatchQueue.main.async {
         groups = self.localDataSource.loadData()
         completion(FeedGroupEntity.convertToDomainGroups(withEntities: groups),
                    savedErrorMessage)
@@ -194,6 +203,14 @@ class FeedRepositoryImpl: FeedRepository {
   
   func markAsReaded(feedItem item: FeedItem) {
     localDataSource.markAsReaded(forFeedItem: item)
+  }
+  
+  func deleteFeed(forFeed feed: Feed) {
+    localDataSource.deleteFeed(forFeed: feed)
+  }
+  
+  func deleteGroup(forGroup group: FeedGroup) {
+    localDataSource.deleteGroup(forGroup: group)
   }
   
 }

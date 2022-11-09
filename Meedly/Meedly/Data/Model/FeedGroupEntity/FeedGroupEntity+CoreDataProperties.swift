@@ -2,7 +2,7 @@
 //  FeedGroupEntity+CoreDataProperties.swift
 //  Meedly
 //
-//  Created by Illia Poliakov on 8.11.22.
+//  Created by Illia Poliakov on 10.11.22.
 //
 //
 
@@ -16,8 +16,8 @@ extension FeedGroupEntity {
         return NSFetchRequest<FeedGroupEntity>(entityName: "FeedGroupEntity")
     }
 
-    @NSManaged public var id: UUID
     @NSManaged public var title: String
+    @NSManaged public var id: UUID
     @NSManaged public var feeds: [FeedEntity]?
     @NSManaged public var items: [FeedItemEntity]?
 

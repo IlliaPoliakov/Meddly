@@ -19,6 +19,13 @@
 		F2929C132906E296006B96CF /* FeedGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2929C122906E296006B96CF /* FeedGroup.swift */; };
 		F2932B8E2906D1B300581568 /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2932B8D2906D1B300581568 /* FeedItem.swift */; };
 		F2A31C13290EF6A100EC5B79 /* GetFeedGrouspUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A31C12290EF6A100EC5B79 /* GetFeedGrouspUseCase.swift */; };
+		F2B86315291C5B0A000C3BBA /* NewCoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F2B86313291C5B0A000C3BBA /* NewCoreDataModel.xcdatamodeld */; };
+		F2B8631C291C5CB1000C3BBA /* FeedItemEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B86316291C5CB1000C3BBA /* FeedItemEntity+CoreDataClass.swift */; };
+		F2B8631D291C5CB1000C3BBA /* FeedItemEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B86317291C5CB1000C3BBA /* FeedItemEntity+CoreDataProperties.swift */; };
+		F2B8631E291C5CB1000C3BBA /* FeedEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B86318291C5CB1000C3BBA /* FeedEntity+CoreDataClass.swift */; };
+		F2B8631F291C5CB1000C3BBA /* FeedEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B86319291C5CB1000C3BBA /* FeedEntity+CoreDataProperties.swift */; };
+		F2B86320291C5CB1000C3BBA /* FeedGroupEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B8631A291C5CB1000C3BBA /* FeedGroupEntity+CoreDataClass.swift */; };
+		F2B86321291C5CB1000C3BBA /* FeedGroupEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B8631B291C5CB1000C3BBA /* FeedGroupEntity+CoreDataProperties.swift */; };
 		F2C4B9F428F7269500359E5D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4B9F328F7269500359E5D /* AppDelegate.swift */; };
 		F2C4B9F628F7269500359E5D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4B9F528F7269500359E5D /* SceneDelegate.swift */; };
 		F2C4B9FB28F7269500359E5D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2C4B9F928F7269500359E5D /* Main.storyboard */; };
@@ -33,13 +40,8 @@
 		F2C95DEA290C3941000E36DD /* MainVCCustomCellNoImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C95DE9290C3941000E36DD /* MainVCCustomCellNoImage.swift */; };
 		F2CD5C4F291A604B00F0A0B5 /* ItemDescriptionVCWithoutImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CD5C4E291A604B00F0A0B5 /* ItemDescriptionVCWithoutImage.swift */; };
 		F2CD63DA291BB906003B48BD /* MarkAsReadedUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CD63D9291BB905003B48BD /* MarkAsReadedUseCase.swift */; };
-		F2D151AD29199FB300940546 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F2D151AB29199FB300940546 /* CoreDataModel.xcdatamodeld */; };
-		F2D151B42919C0E200940546 /* FeedEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D151AE2919C0E200940546 /* FeedEntity+CoreDataClass.swift */; };
-		F2D151B52919C0E200940546 /* FeedEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D151AF2919C0E200940546 /* FeedEntity+CoreDataProperties.swift */; };
-		F2D151B62919C0E200940546 /* FeedItemEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D151B02919C0E200940546 /* FeedItemEntity+CoreDataClass.swift */; };
-		F2D151B72919C0E200940546 /* FeedItemEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D151B12919C0E200940546 /* FeedItemEntity+CoreDataProperties.swift */; };
-		F2D151B82919C0E200940546 /* FeedGroupEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D151B22919C0E200940546 /* FeedGroupEntity+CoreDataClass.swift */; };
-		F2D151B92919C0E200940546 /* FeedGroupEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D151B32919C0E200940546 /* FeedGroupEntity+CoreDataProperties.swift */; };
+		F2CD63DC291C269D003B48BD /* DeleteGroupUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CD63DB291C269D003B48BD /* DeleteGroupUseCase.swift */; };
+		F2CD63DE291C26B0003B48BD /* DeleteFeedUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CD63DD291C26B0003B48BD /* DeleteFeedUseCase.swift */; };
 		F2E2D7F3290D9C720019B5F7 /* MainTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E2D7F2290D9C720019B5F7 /* MainTableView.swift */; };
 		F2E41FAC2901CC1500FCA844 /* SaveNewGroupUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E41FAB2901CC1500FCA844 /* SaveNewGroupUseCase.swift */; };
 		F2E41FB229020A4700FCA844 /* SaveNewFeedUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E41FB129020A4700FCA844 /* SaveNewFeedUseCase.swift */; };
@@ -61,6 +63,13 @@
 		F2929C122906E296006B96CF /* FeedGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedGroup.swift; sourceTree = "<group>"; };
 		F2932B8D2906D1B300581568 /* FeedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
 		F2A31C12290EF6A100EC5B79 /* GetFeedGrouspUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFeedGrouspUseCase.swift; sourceTree = "<group>"; };
+		F2B86314291C5B0A000C3BBA /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
+		F2B86316291C5CB1000C3BBA /* FeedItemEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FeedItemEntity+CoreDataClass.swift"; path = "Meedly/Data/Model/FeedItemEntity/FeedItemEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		F2B86317291C5CB1000C3BBA /* FeedItemEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FeedItemEntity+CoreDataProperties.swift"; path = "Meedly/Data/Model/FeedItemEntity/FeedItemEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		F2B86318291C5CB1000C3BBA /* FeedEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FeedEntity+CoreDataClass.swift"; path = "Meedly/Data/Model/FeedEntity/FeedEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		F2B86319291C5CB1000C3BBA /* FeedEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FeedEntity+CoreDataProperties.swift"; path = "Meedly/Data/Model/FeedEntity/FeedEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		F2B8631A291C5CB1000C3BBA /* FeedGroupEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FeedGroupEntity+CoreDataClass.swift"; path = "Meedly/Data/Model/FeedGroupEntity/FeedGroupEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		F2B8631B291C5CB1000C3BBA /* FeedGroupEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FeedGroupEntity+CoreDataProperties.swift"; path = "Meedly/Data/Model/FeedGroupEntity/FeedGroupEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		F2C4B9F028F7269500359E5D /* Meedly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Meedly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2C4B9F328F7269500359E5D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F2C4B9F528F7269500359E5D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -77,13 +86,8 @@
 		F2C95DE9290C3941000E36DD /* MainVCCustomCellNoImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVCCustomCellNoImage.swift; sourceTree = "<group>"; };
 		F2CD5C4E291A604B00F0A0B5 /* ItemDescriptionVCWithoutImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDescriptionVCWithoutImage.swift; sourceTree = "<group>"; };
 		F2CD63D9291BB905003B48BD /* MarkAsReadedUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkAsReadedUseCase.swift; sourceTree = "<group>"; };
-		F2D151AC29199FB300940546 /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
-		F2D151AE2919C0E200940546 /* FeedEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FeedEntity+CoreDataClass.swift"; path = "Meedly/Data/Model/FeedEntity/FeedEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		F2D151AF2919C0E200940546 /* FeedEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FeedEntity+CoreDataProperties.swift"; path = "Meedly/Data/Model/FeedEntity/FeedEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
-		F2D151B02919C0E200940546 /* FeedItemEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FeedItemEntity+CoreDataClass.swift"; path = "Meedly/Data/Model/FeedItemEntity/FeedItemEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		F2D151B12919C0E200940546 /* FeedItemEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FeedItemEntity+CoreDataProperties.swift"; path = "Meedly/Data/Model/FeedItemEntity/FeedItemEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
-		F2D151B22919C0E200940546 /* FeedGroupEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FeedGroupEntity+CoreDataClass.swift"; path = "Meedly/Data/Model/FeedGroupEntity/FeedGroupEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		F2D151B32919C0E200940546 /* FeedGroupEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FeedGroupEntity+CoreDataProperties.swift"; path = "Meedly/Data/Model/FeedGroupEntity/FeedGroupEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		F2CD63DB291C269D003B48BD /* DeleteGroupUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteGroupUseCase.swift; sourceTree = "<group>"; };
+		F2CD63DD291C26B0003B48BD /* DeleteFeedUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteFeedUseCase.swift; sourceTree = "<group>"; };
 		F2E2D7F2290D9C720019B5F7 /* MainTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableView.swift; sourceTree = "<group>"; };
 		F2E41FAB2901CC1500FCA844 /* SaveNewGroupUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveNewGroupUseCase.swift; sourceTree = "<group>"; };
 		F2E41FB129020A4700FCA844 /* SaveNewFeedUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveNewFeedUseCase.swift; sourceTree = "<group>"; };
@@ -198,8 +202,8 @@
 		F2C4BA3C28F82E6100359E5D /* FeedEntity */ = {
 			isa = PBXGroup;
 			children = (
-				F2D151AE2919C0E200940546 /* FeedEntity+CoreDataClass.swift */,
-				F2D151AF2919C0E200940546 /* FeedEntity+CoreDataProperties.swift */,
+				F2B86318291C5CB1000C3BBA /* FeedEntity+CoreDataClass.swift */,
+				F2B86319291C5CB1000C3BBA /* FeedEntity+CoreDataProperties.swift */,
 			);
 			path = FeedEntity;
 			sourceTree = "<group>";
@@ -207,8 +211,8 @@
 		F2C4BA3D28F82E7200359E5D /* FeedGroupEntity */ = {
 			isa = PBXGroup;
 			children = (
-				F2D151B22919C0E200940546 /* FeedGroupEntity+CoreDataClass.swift */,
-				F2D151B32919C0E200940546 /* FeedGroupEntity+CoreDataProperties.swift */,
+				F2B8631A291C5CB1000C3BBA /* FeedGroupEntity+CoreDataClass.swift */,
+				F2B8631B291C5CB1000C3BBA /* FeedGroupEntity+CoreDataProperties.swift */,
 			);
 			path = FeedGroupEntity;
 			sourceTree = "<group>";
@@ -216,8 +220,8 @@
 		F2C4BA3E28F82E8200359E5D /* FeedItemEntity */ = {
 			isa = PBXGroup;
 			children = (
-				F2D151B02919C0E200940546 /* FeedItemEntity+CoreDataClass.swift */,
-				F2D151B12919C0E200940546 /* FeedItemEntity+CoreDataProperties.swift */,
+				F2B86316291C5CB1000C3BBA /* FeedItemEntity+CoreDataClass.swift */,
+				F2B86317291C5CB1000C3BBA /* FeedItemEntity+CoreDataProperties.swift */,
 			);
 			path = FeedItemEntity;
 			sourceTree = "<group>";
@@ -229,6 +233,8 @@
 				F2E41FB129020A4700FCA844 /* SaveNewFeedUseCase.swift */,
 				F2A31C12290EF6A100EC5B79 /* GetFeedGrouspUseCase.swift */,
 				F2CD63D9291BB905003B48BD /* MarkAsReadedUseCase.swift */,
+				F2CD63DB291C269D003B48BD /* DeleteGroupUseCase.swift */,
+				F2CD63DD291C26B0003B48BD /* DeleteFeedUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -309,7 +315,7 @@
 			children = (
 				F2F1E56B2905D2AC00EE942A /* DataBaseDataSource.swift */,
 				F219374528FEFBA100AD5AF0 /* CoreDataStack.swift */,
-				F2D151AB29199FB300940546 /* CoreDataModel.xcdatamodeld */,
+				F2B86313291C5B0A000C3BBA /* NewCoreDataModel.xcdatamodeld */,
 			);
 			path = DataBaseDataSource;
 			sourceTree = "<group>";
@@ -450,14 +456,20 @@
 			files = (
 				F2C4BA4C28F8AB7600359E5D /* MainTableViewController.swift in Sources */,
 				F2929C112906E24B006B96CF /* Feed.swift in Sources */,
+				F2B86321291C5CB1000C3BBA /* FeedGroupEntity+CoreDataProperties.swift in Sources */,
+				F2B8631E291C5CB1000C3BBA /* FeedEntity+CoreDataClass.swift in Sources */,
 				F2929C132906E296006B96CF /* FeedGroup.swift in Sources */,
 				F265B020290ED5F5006EA513 /* AddFeedTableView.swift in Sources */,
-				F2D151B42919C0E200940546 /* FeedEntity+CoreDataClass.swift in Sources */,
 				F2C4BA5528F97F5000359E5D /* MainTVCCustomCell.swift in Sources */,
+				F2CD63DC291C269D003B48BD /* DeleteGroupUseCase.swift in Sources */,
+				F2B8631C291C5CB1000C3BBA /* FeedItemEntity+CoreDataClass.swift in Sources */,
+				F2B8631F291C5CB1000C3BBA /* FeedEntity+CoreDataProperties.swift in Sources */,
 				F25708CA290C4A2B005FBE1D /* ItemDescripitonViewController.swift in Sources */,
 				F2C4BA4E28F8AE1C00359E5D /* AddFeedViewController.swift in Sources */,
 				F2932B8E2906D1B300581568 /* FeedItem.swift in Sources */,
+				F2B86320291C5CB1000C3BBA /* FeedGroupEntity+CoreDataClass.swift in Sources */,
 				F2256F1F290876A0003DA153 /* DIConatiner.swift in Sources */,
+				F2B86315291C5B0A000C3BBA /* NewCoreDataModel.xcdatamodeld in Sources */,
 				F2C4B9F428F7269500359E5D /* AppDelegate.swift in Sources */,
 				F2C4BA6728F9E38A00359E5D /* NetworkDataSource.swift in Sources */,
 				F2E2D7F3290D9C720019B5F7 /* MainTableView.swift in Sources */,
@@ -466,18 +478,14 @@
 				F2E41FAC2901CC1500FCA844 /* SaveNewGroupUseCase.swift in Sources */,
 				F2C4BA6528F9BB5000359E5D /* FeedRepositoryImpl.swift in Sources */,
 				F28AE71B291AC29100B45184 /* SortViewController.swift in Sources */,
+				F2B8631D291C5CB1000C3BBA /* FeedItemEntity+CoreDataProperties.swift in Sources */,
 				F2CD63DA291BB906003B48BD /* MarkAsReadedUseCase.swift in Sources */,
-				F2D151B62919C0E200940546 /* FeedItemEntity+CoreDataClass.swift in Sources */,
 				F2C95DEA290C3941000E36DD /* MainVCCustomCellNoImage.swift in Sources */,
 				F2C4B9F628F7269500359E5D /* SceneDelegate.swift in Sources */,
 				F2574FEF290082F800CF540C /* Connectivity.swift in Sources */,
-				F2D151B82919C0E200940546 /* FeedGroupEntity+CoreDataClass.swift in Sources */,
-				F2D151AD29199FB300940546 /* CoreDataModel.xcdatamodeld in Sources */,
-				F2D151B72919C0E200940546 /* FeedItemEntity+CoreDataProperties.swift in Sources */,
-				F2D151B52919C0E200940546 /* FeedEntity+CoreDataProperties.swift in Sources */,
+				F2CD63DE291C26B0003B48BD /* DeleteFeedUseCase.swift in Sources */,
 				F2347487290FAEF60027C0A2 /* Extensions.swift in Sources */,
 				F2E41FB229020A4700FCA844 /* SaveNewFeedUseCase.swift in Sources */,
-				F2D151B92919C0E200940546 /* FeedGroupEntity+CoreDataProperties.swift in Sources */,
 				F2CD5C4F291A604B00F0A0B5 /* ItemDescriptionVCWithoutImage.swift in Sources */,
 				F2C4BA5228F9596700359E5D /* FeedRepository.swift in Sources */,
 				F2F1E56C2905D2AC00EE942A /* DataBaseDataSource.swift in Sources */,
@@ -700,13 +708,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		F2D151AB29199FB300940546 /* CoreDataModel.xcdatamodeld */ = {
+		F2B86313291C5B0A000C3BBA /* NewCoreDataModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				F2D151AC29199FB300940546 /* CoreDataModel.xcdatamodel */,
+				F2B86314291C5B0A000C3BBA /* CoreDataModel.xcdatamodel */,
 			);
-			currentVersion = F2D151AC29199FB300940546 /* CoreDataModel.xcdatamodel */;
-			path = CoreDataModel.xcdatamodeld;
+			currentVersion = F2B86314291C5B0A000C3BBA /* CoreDataModel.xcdatamodel */;
+			path = NewCoreDataModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

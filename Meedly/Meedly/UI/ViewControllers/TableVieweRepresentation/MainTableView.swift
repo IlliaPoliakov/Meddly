@@ -47,6 +47,10 @@ class MainTableView: NSObject, UITableViewDelegate {
       
       cell.bind(withFeedItem: item!)
       
+      if item!.isViewed == true {
+        cell.contentView.alpha = 0.6
+      }
+      
       return cell
     }
     else {
@@ -59,7 +63,7 @@ class MainTableView: NSObject, UITableViewDelegate {
       cell.bind(withFeedItem: item!)
       
       if item!.isViewed == true {
-        cell.alpha = 1
+        cell.contentView.alpha = 0.5
       }
       
       return cell
@@ -78,6 +82,12 @@ class MainTableView: NSObject, UITableViewDelegate {
   func configureInitialSnapshot(withGroups groups: [FeedGroup]?){
     var snapshot = NSDiffableDataSourceSnapshot<FeedGroup, FeedItem>()
     
+    guard groups != nil
+    else {
+      dataSource.apply(snapshot)
+      return
+    }
+    
     for group in groups! {
       snapshot.appendSections([group])
       
@@ -85,7 +95,6 @@ class MainTableView: NSObject, UITableViewDelegate {
         snapshot.appendItems(group.items!, toSection: group)
       }
     }
-    
     dataSource.apply(snapshot, animatingDifferences: true)
   }
   
@@ -159,7 +168,7 @@ class MainTableView: NSObject, UITableViewDelegate {
     
     case "Unread Only":
       if allItems != nil {
-        let newItems = allItems!.filter { $0.isViewed == true }
+        let newItems = allItems!.filter { $0.isViewed == false }
         
         allItems = newItems
         updateSnapshotWithItems()
@@ -170,6 +179,7 @@ class MainTableView: NSObject, UITableViewDelegate {
       
     default:
       let newGroup = groups?.filter { $0.title == presentationType }
+      allItems = newGroup!.first!.items
       configureInitialSnapshot(withGroups: newGroup)
     }
   }

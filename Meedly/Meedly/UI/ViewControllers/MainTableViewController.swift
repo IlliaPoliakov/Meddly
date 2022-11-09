@@ -14,6 +14,12 @@ enum UpdateState {
 
 class MainTableViewController: UITableViewController {
   
+  
+  @IBAction func cleanData(_ sender: Any) {
+    getFeedGroupsUseCase.cleanData()
+    viewDidLoad()
+  }
+  
   // -MARK: - Properties -
   
   lazy var mainTableView: MainTableView = AppDelegate.DIContainer.resolve(MainTableView.self)!
@@ -34,21 +40,20 @@ class MainTableViewController: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    updateGroups(updateState: updateState) { [weak self] newGroups in
-      self?.mainTableView.configureInitialSnapshot(withGroups: newGroups)
-      self?.mainTableView.groups = newGroups
-      
-      self?.updateState = .regularUpdate
-      
-      self?.mainTableView.tableView = self!.tableView
-      
-      self?.tableView.dataSource = self?.mainTableView.dataSource
-      self?.tableView.delegate = self?.mainTableView
-    }
+    mainTableView.tableView = tableView
+    
+    tableView.dataSource = mainTableView.dataSource
+    tableView.delegate = mainTableView
     
     tableView.rowHeight = UITableView.automaticDimension
     tableView.estimatedRowHeight = 600
     
+    updateGroups(updateState: updateState) { [weak self] newGroups in
+      self?.mainTableView.groups = newGroups
+      self?.mainTableView.configureInitialSnapshot(withGroups: newGroups)
+      
+      self?.updateState = .regularUpdate
+    }
   }
   
   
@@ -74,19 +79,24 @@ class MainTableViewController: UITableViewController {
       let feedItem: FeedItem
       
       if mainTableView.presentationType == "Show All" {
-        mainTableView.groups![selectedIndex!.section].items![selectedIndex!.row].isViewed = true
         feedItem = mainTableView.groups![selectedIndex!.section].items![selectedIndex!.row]
         destinaitonVC.item = feedItem
-        mainTableView.groups![selectedIndex!.section].items![selectedIndex!.row].isViewed = true
       }
       else {
-        mainTableView.allItems![selectedIndex!.row].isViewed = true
         feedItem = mainTableView.allItems![selectedIndex!.row]
         destinaitonVC.item = feedItem
-        mainTableView.allItems![selectedIndex!.row].isViewed = true
       }
       
-      markAsReadedUseCase.execute(forFeedItem: feedItem)
+      let groupIndex = mainTableView.groups?.firstIndex {
+        $0.items != nil && $0.items!.contains(feedItem)
+      }
+      let itemIndex = mainTableView.groups![groupIndex!]
+        .items!.firstIndex(of: mainTableView.allItems![selectedIndex!.row])
+      
+      mainTableView.groups![groupIndex!].items![itemIndex!].isViewed = true
+      
+      tableView.cellForRow(at: selectedIndex!)?.contentView.alpha = 0.5
+//      markAsReadedUseCase.execute(forFeedItem: feedItem)
       
       
     case "itemDescriptionWIthoutImageId":
@@ -96,15 +106,23 @@ class MainTableViewController: UITableViewController {
       }
       
       let selectedIndex = tableView.indexPathForSelectedRow
-
+      let feedItem: FeedItem
+      
       if mainTableView.presentationType == "Show All" {
-        let feedItem = mainTableView.groups![selectedIndex!.section].items![selectedIndex!.row]
+        feedItem = mainTableView.groups![selectedIndex!.section].items![selectedIndex!.row]
         destinaitonVC.item = feedItem
+        
+        mainTableView.groups![selectedIndex!.section].items![selectedIndex!.row].isViewed = true
       }
       else {
-        let feedItem = mainTableView.allItems![selectedIndex!.row]
+        feedItem = mainTableView.allItems![selectedIndex!.row]
         destinaitonVC.item = feedItem
+
+        mainTableView.allItems![selectedIndex!.row].isViewed = true
       }
+      
+      tableView.cellForRow(at: selectedIndex!)?.contentView.alpha = 0.5
+      markAsReadedUseCase.execute(forFeedItem: feedItem)
       
     case "SortVCSegueId":
       guard let destinaitonVC = segue.destination as? SortViewController
@@ -147,6 +165,7 @@ class MainTableViewController: UITableViewController {
       }
       
       let chosenPresenationType = previousVC.chosenPresentationType
+      
       self.mainTableView.presentationType = chosenPresenationType
       self.mainTableView.updatePresentation()
       

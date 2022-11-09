@@ -19,6 +19,7 @@
         <attribute name="imageUrl" optional="YES" attributeType="URI"/>
         <attribute name="isViewed" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="link" attributeType="URI"/>
+        <attribute name="parentFeedLink" attributeType="URI"/>
         <attribute name="pubDate" attributeType="String"/>
         <attribute name="title" attributeType="String"/>
         <relationship name="parentGroup" maxCount="1" deletionRule="Nullify" destinationEntity="FeedGroupEntity" inverseName="items" inverseEntity="FeedGroupEntity"/>

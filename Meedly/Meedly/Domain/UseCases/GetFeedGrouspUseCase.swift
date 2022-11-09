@@ -18,4 +18,8 @@ class GetFeedGroupsUseCase {
                _ completion: @escaping ([FeedGroup]?, String?) -> Void) {
     repo.getFeedGroups(updateState: state, completion)
   }
+  
+  func cleanData(){
+    repo.cleanData()
+  }
 }
