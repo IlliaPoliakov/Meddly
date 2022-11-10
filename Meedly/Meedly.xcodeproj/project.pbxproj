@@ -26,6 +26,8 @@
 		F2B8631F291C5CB1000C3BBA /* FeedEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B86319291C5CB1000C3BBA /* FeedEntity+CoreDataProperties.swift */; };
 		F2B86320291C5CB1000C3BBA /* FeedGroupEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B8631A291C5CB1000C3BBA /* FeedGroupEntity+CoreDataClass.swift */; };
 		F2B86321291C5CB1000C3BBA /* FeedGroupEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B8631B291C5CB1000C3BBA /* FeedGroupEntity+CoreDataProperties.swift */; };
+		F2B86323291C6BA1000C3BBA /* SideBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B86322291C6BA1000C3BBA /* SideBarViewController.swift */; };
+		F2B86325291C6F32000C3BBA /* SideBarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B86324291C6F32000C3BBA /* SideBarTableViewCell.swift */; };
 		F2C4B9F428F7269500359E5D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4B9F328F7269500359E5D /* AppDelegate.swift */; };
 		F2C4B9F628F7269500359E5D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4B9F528F7269500359E5D /* SceneDelegate.swift */; };
 		F2C4B9FB28F7269500359E5D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2C4B9F928F7269500359E5D /* Main.storyboard */; };
@@ -70,6 +72,8 @@
 		F2B86319291C5CB1000C3BBA /* FeedEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FeedEntity+CoreDataProperties.swift"; path = "Meedly/Data/Model/FeedEntity/FeedEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		F2B8631A291C5CB1000C3BBA /* FeedGroupEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FeedGroupEntity+CoreDataClass.swift"; path = "Meedly/Data/Model/FeedGroupEntity/FeedGroupEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		F2B8631B291C5CB1000C3BBA /* FeedGroupEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FeedGroupEntity+CoreDataProperties.swift"; path = "Meedly/Data/Model/FeedGroupEntity/FeedGroupEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		F2B86322291C6BA1000C3BBA /* SideBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarViewController.swift; sourceTree = "<group>"; };
+		F2B86324291C6F32000C3BBA /* SideBarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarTableViewCell.swift; sourceTree = "<group>"; };
 		F2C4B9F028F7269500359E5D /* Meedly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Meedly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2C4B9F328F7269500359E5D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F2C4B9F528F7269500359E5D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -290,24 +294,26 @@
 		F2C4BA4828F88B8200359E5D /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				F2C4BA5328F97EE500359E5D /* TableViewCustomCells */,
+				F2C4BA5328F97EE500359E5D /* CustomCells */,
 				F27D280D290F0CF700290AD7 /* TableVieweRepresentation */,
 				F2C4BA4B28F8AB7600359E5D /* MainTableViewController.swift */,
 				F2C4BA4D28F8AE1C00359E5D /* AddFeedViewController.swift */,
 				F25708C9290C4A2B005FBE1D /* ItemDescripitonViewController.swift */,
 				F2CD5C4E291A604B00F0A0B5 /* ItemDescriptionVCWithoutImage.swift */,
 				F28AE71A291AC29100B45184 /* SortViewController.swift */,
+				F2B86322291C6BA1000C3BBA /* SideBarViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		F2C4BA5328F97EE500359E5D /* TableViewCustomCells */ = {
+		F2C4BA5328F97EE500359E5D /* CustomCells */ = {
 			isa = PBXGroup;
 			children = (
 				F2C4BA5428F97F5000359E5D /* MainTVCCustomCell.swift */,
 				F2C95DE9290C3941000E36DD /* MainVCCustomCellNoImage.swift */,
+				F2B86324291C6F32000C3BBA /* SideBarTableViewCell.swift */,
 			);
-			path = TableViewCustomCells;
+			path = CustomCells;
 			sourceTree = "<group>";
 		};
 		F2C4BA6228F9BA2A00359E5D /* DataBaseDataSource */ = {
@@ -473,6 +479,7 @@
 				F2C4B9F428F7269500359E5D /* AppDelegate.swift in Sources */,
 				F2C4BA6728F9E38A00359E5D /* NetworkDataSource.swift in Sources */,
 				F2E2D7F3290D9C720019B5F7 /* MainTableView.swift in Sources */,
+				F2B86323291C6BA1000C3BBA /* SideBarViewController.swift in Sources */,
 				F2A31C13290EF6A100EC5B79 /* GetFeedGrouspUseCase.swift in Sources */,
 				F219374628FEFBA100AD5AF0 /* CoreDataStack.swift in Sources */,
 				F2E41FAC2901CC1500FCA844 /* SaveNewGroupUseCase.swift in Sources */,
@@ -484,6 +491,7 @@
 				F2C4B9F628F7269500359E5D /* SceneDelegate.swift in Sources */,
 				F2574FEF290082F800CF540C /* Connectivity.swift in Sources */,
 				F2CD63DE291C26B0003B48BD /* DeleteFeedUseCase.swift in Sources */,
+				F2B86325291C6F32000C3BBA /* SideBarTableViewCell.swift in Sources */,
 				F2347487290FAEF60027C0A2 /* Extensions.swift in Sources */,
 				F2E41FB229020A4700FCA844 /* SaveNewFeedUseCase.swift in Sources */,
 				F2CD5C4F291A604B00F0A0B5 /* ItemDescriptionVCWithoutImage.swift in Sources */,

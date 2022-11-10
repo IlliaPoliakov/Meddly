@@ -136,6 +136,14 @@ class MainTableViewController: UITableViewController {
         }
       }
       
+    case "id":
+      guard let destinaitonVC = segue.destination as? SideBarViewController
+      else {
+        return
+      }
+      
+      destinaitonVC.groups = self.mainTableView.groups!
+      
     default:
       break
     }
