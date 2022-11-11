@@ -45,6 +45,8 @@ class MainTableView: NSObject, UITableViewDelegate {
         fatalError("Can't deque custom cell in MainVC.")
       }
       
+      cell.contentView.alpha = 1
+
       cell.bind(withFeedItem: item!)
       
       if item!.isViewed == true {
@@ -60,10 +62,12 @@ class MainTableView: NSObject, UITableViewDelegate {
         fatalError("Can't deque custom cell in MainVC.")
       }
       
+      cell.contentView.alpha = 1
+
       cell.bind(withFeedItem: item!)
       
       if item!.isViewed == true {
-        cell.contentView.alpha = 0.5
+        cell.contentView.alpha = 0.6
       }
       
       return cell

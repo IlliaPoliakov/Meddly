@@ -48,11 +48,15 @@ class MainTableViewController: UITableViewController {
     tableView.rowHeight = UITableView.automaticDimension
     tableView.estimatedRowHeight = 600
     
+    updateState = .initialUpdate
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
     updateGroups(updateState: updateState) { [weak self] newGroups in
       self?.mainTableView.groups = newGroups
       self?.mainTableView.configureInitialSnapshot(withGroups: newGroups)
-      
-      self?.updateState = .regularUpdate
     }
   }
   
@@ -81,22 +85,16 @@ class MainTableViewController: UITableViewController {
       if mainTableView.presentationType == "Show All" {
         feedItem = mainTableView.groups![selectedIndex!.section].items![selectedIndex!.row]
         destinaitonVC.item = feedItem
+        mainTableView.groups![selectedIndex!.section].items![selectedIndex!.row].isViewed = true
       }
       else {
         feedItem = mainTableView.allItems![selectedIndex!.row]
         destinaitonVC.item = feedItem
+        mainTableView.allItems![selectedIndex!.row].isViewed = true
       }
-      
-      let groupIndex = mainTableView.groups?.firstIndex {
-        $0.items != nil && $0.items!.contains(feedItem)
-      }
-      let itemIndex = mainTableView.groups![groupIndex!]
-        .items!.firstIndex(of: mainTableView.allItems![selectedIndex!.row])
-      
-      mainTableView.groups![groupIndex!].items![itemIndex!].isViewed = true
       
       tableView.cellForRow(at: selectedIndex!)?.contentView.alpha = 0.5
-//      markAsReadedUseCase.execute(forFeedItem: feedItem)
+      markAsReadedUseCase.execute(forFeedItem: feedItem)
       
       
     case "itemDescriptionWIthoutImageId":
@@ -141,8 +139,8 @@ class MainTableViewController: UITableViewController {
       else {
         return
       }
-      
-      destinaitonVC.groups = self.mainTableView.groups!
+      destinaitonVC.groups = self.mainTableView.groups!.filter { $0.feeds != nil &&
+        !($0.feeds!.isEmpty) }
       
     default:
       break
@@ -163,7 +161,9 @@ class MainTableViewController: UITableViewController {
       
       updateGroups(updateState: .regularUpdate) { [weak self] newGroups in
         self?.mainTableView.groups = newGroups
-        self?.mainTableView.updatePresentation()
+        self?.mainTableView.configureInitialSnapshot(withGroups: newGroups)
+        
+        self?.updateState = .regularUpdate
       }
       
     case "unwindFromSort":

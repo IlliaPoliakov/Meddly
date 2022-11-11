@@ -27,6 +27,8 @@ class DependencyInjectionContainer {
                             resolver.resolve(NetworkDataSource.self)!)
       }
     
+    // -MARK: - UseCases -
+    
     DependencyInjectionContainer.shared.register(GetFeedGroupsUseCase.self) { resolver in
       GetFeedGroupsUseCase(repo: resolver.resolve(FeedRepository.self)!)
     }
@@ -38,6 +40,12 @@ class DependencyInjectionContainer {
     }
     DependencyInjectionContainer.shared.register(MarkAsReadedUseCase.self) { resolver in
       MarkAsReadedUseCase(repo: resolver.resolve(FeedRepository.self)!)
+    }
+    DependencyInjectionContainer.shared.register(DeleteFeedUseCase.self) { resolver in
+      DeleteFeedUseCase(repo: resolver.resolve(FeedRepository.self)!)
+    }
+    DependencyInjectionContainer.shared.register(DeleteGroupUseCase.self) { resolver in
+      DeleteGroupUseCase(repo: resolver.resolve(FeedRepository.self)!)
     }
   }
 }

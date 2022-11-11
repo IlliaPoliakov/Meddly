@@ -7,25 +7,33 @@
 
 import Foundation
 import UIKit
+import PINRemoteImage
 
 enum Section {
   case main
 }
 
-class SideBarViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SideBarViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+  
+  // -MARK: - Dependencies -
+  
+  private let deleteGroupUseCase: DeleteGroupUseCase =
+  AppDelegate.DIContainer.resolve(DeleteGroupUseCase.self)!
+  private let deleteFeedUseCase: DeleteFeedUseCase =
+  AppDelegate.DIContainer.resolve(DeleteFeedUseCase.self)!
   
   // -MARK: - IBOutlets -
   
   @IBOutlet weak var avatarImage: UIImageView!
   @IBOutlet weak var nickNameLavel: UILabel!
-  @IBOutlet weak var tableView: UITableView!
+  @IBOutlet weak var collectionVIew: UICollectionView!
   @IBOutlet weak var stackView: UIStackView!
   @IBOutlet weak var emailLabel: UILabel!
+  
   
   // -MARK: - Properties -
   
   var groups: [FeedGroup] = [FeedGroup]()
-  var storedOffsets = [Int: CGFloat]()
   
   
   // -MARK: - LifeCycle -
@@ -33,78 +41,89 @@ class SideBarViewController: UIViewController, UITableViewDelegate, UITableViewD
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    tableView.dataSource = self
-    tableView.delegate = self
+    collectionVIew.dataSource = self
+    collectionVIew.delegate = self
+    
     avatarImage.layer.cornerRadius = avatarImage.bounds.height / 2
+    avatarImage.layer.masksToBounds = true
+    avatarImage.layer.borderWidth = 2.5
+    avatarImage.layer.borderColor = UIColor(named: "mainColor")!.cgColor
+    
     stackView.layer.cornerRadius = 10
   }
   
-  
-  // -MARK: - TableView -
-  
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return groups.count
-  }
-  
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard let cell = tableView.dequeueReusableCell(withIdentifier: "SideBarTableViewCell",
-                                                   for: indexPath) as? SideBarTableViewCell
-    else {
-      return UITableViewCell()
-    }
-    
-    cell.bind(withGroup: groups[indexPath.row])
-    
-    return cell
-  }
-  
-  func tableView(_ tableView: UITableView,
-                 willDisplay cell: UITableViewCell,
-                 forRowAt indexPath: IndexPath) {
-    guard let cell = cell as? SideBarTableViewCell
-    else {
-      return
-    }
-    cell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self,
-                                             forRow: indexPath.row)
-    cell.collectionViewOffset = storedOffsets[indexPath.row] ?? 0
-  }
-  
-  private func tableView(tableView: UITableView,
-                         didEndDisplayingCell cell: UITableViewCell,
-                         forRowAtIndexPath indexPath: NSIndexPath) {
-    guard let tableViewCell = cell as? SideBarTableViewCell
-    else {
-      return
-    }
-    storedOffsets[indexPath.row] = tableViewCell.collectionViewOffset
-  }
-  
-}
-
-
-// -MARK: - Extensions -
-
-extension SideBarViewController: UICollectionViewDelegate, UICollectionViewDataSource {
   
   // -MARK: - CollectionView -
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     
     guard let cell = collectionView.dequeueReusableCell(
-      withReuseIdentifier: "SideBarCollecitonViewCell",
+      withReuseIdentifier: "SideBarCollectionViewCell",
       for: indexPath) as? SideBarCollectionViewCell
     else {
       return UICollectionViewCell()
     }
 
-    cell.bind(withFeed: groups[collectionView.tag].feeds![indexPath.row])
-
+    cell.bind(withFeed: groups[indexPath.section].feeds![indexPath.row])
     return cell
+  }
+  
+  func numberOfSections(in collectionView: UICollectionView) -> Int {
+    return groups.count
   }
   
   func collectionView(_ collectionView: UICollectionView,
                       numberOfItemsInSection section: Int) -> Int {
-    return groups[collectionView.tag].feeds?.count ?? 0
+    return groups[section].feeds?.count ?? 0
   }
+
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    let feed = groups[indexPath.section].feeds![indexPath.row]
+    let title: String = feed.title ?? "[no feed name]"
+    let message: String = feed.imageUrl != nil ? ".\n.\n.\n" : ""
+    let alert = UIAlertController(title: title,
+                                  message: message, preferredStyle: .alert)
+    
+    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+    let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { _ in 
+      self.deleteFeedUseCase.execute(forFeed:
+                                      feed)
+      self.groups[indexPath.section].feeds!.remove(at: indexPath.row)
+      collectionView.reloadData()
+    }
+    
+    if message != "" {
+      let imageView = UIImageView(frame: CGRect(x: 105, y: 50, width: 60, height: 60))
+      imageView.layer.cornerRadius = 10
+      imageView.pin_setImage(from: feed.imageUrl)
+      alert.view.addSubview(imageView)
+    }
+    
+    alert.addAction(cancelAction)
+    alert.addAction(deleteAction)
+    
+    self.present(alert, animated: true, completion: nil)
+  }
+    
+  func collectionView(_ collectionView: UICollectionView,
+                      viewForSupplementaryElementOfKind kind: String,
+                      at indexPath: IndexPath ) -> UICollectionReusableView {
+    switch kind {
+    case UICollectionView.elementKindSectionHeader:
+      guard let headerView = collectionView.dequeueReusableSupplementaryView(
+        ofKind: kind,
+        withReuseIdentifier: "headerId",
+        for: indexPath) as? CollectionReusableView
+      else {
+        return UICollectionReusableView()
+      }
+      
+      headerView.groupNameTitle.text = groups[indexPath.section].title
+      
+      return headerView
+    default:
+      assert(false, "Invalid element type")
+    }
+  }
+
 }
