@@ -8,8 +8,6 @@
 import Foundation
 
 protocol FeedRepository {
-  func cleanData()
-  
   func getFeedGroups(updateState state: UpdateState,
                      _ completion: @escaping ([FeedGroup]?, String?) -> Void )
   func saveNewGroup(_ newGroupName: String) -> FeedGroup

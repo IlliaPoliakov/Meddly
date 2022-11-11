@@ -4,7 +4,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Image references" minToolsVersion="12.0"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="UIMenu" message="Requires Xcode 11 or later." minToolsVersion="11.0" requiredIntegratedClassName="UICommandDiff"/>
@@ -151,11 +150,6 @@
                                     <action selector="update:" destination="Ii9-o7-ios" id="lld-eR-tYX"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem systemItem="trash" id="R7w-VK-YPz">
-                                <connections>
-                                    <action selector="cleanData:" destination="Ii9-o7-ios" id="d3n-At-HWS"/>
-                                </connections>
-                            </barButtonItem>
                         </leftBarButtonItems>
                         <rightBarButtonItems>
                             <barButtonItem title="Item" image="checkmark.circle" catalog="system" style="done" id="RZH-qh-502">
@@ -241,7 +235,6 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" name="mainColor"/>
                                 <constraints>
                                     <constraint firstItem="LUE-G5-5MP" firstAttribute="height" secondItem="TrV-xv-1Gn" secondAttribute="height" id="x6h-yY-ulb"/>
                                 </constraints>
@@ -298,33 +291,20 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Group Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a6t-wJ-cVk">
-                                            <rect key="frame" x="13" y="8" width="317.33333333333331" height="34"/>
+                                            <rect key="frame" x="13" y="8" width="369" height="34"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gnX-sp-kUd">
-                                            <rect key="frame" x="335.33333333333331" y="5" width="49.666666666666686" height="40"/>
-                                            <color key="tintColor" name="mainColor"/>
-                                            <state key="normal" title="Button"/>
-                                            <buttonConfiguration key="configuration" style="plain" image="trash.circle" catalog="system"/>
-                                            <connections>
-                                                <action selector="deleteGroupButton:" destination="IO9-Na-45g" eventType="touchUpInside" id="zRT-ud-j7C"/>
-                                            </connections>
-                                        </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="gnX-sp-kUd" firstAttribute="top" secondItem="IO9-Na-45g" secondAttribute="top" constant="5" id="Jij-f8-2QI"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="a6t-wJ-cVk" secondAttribute="trailing" id="5ia-Zi-cOY"/>
                                         <constraint firstItem="a6t-wJ-cVk" firstAttribute="top" secondItem="IO9-Na-45g" secondAttribute="topMargin" id="Lbd-IN-N0G"/>
-                                        <constraint firstAttribute="bottom" secondItem="gnX-sp-kUd" secondAttribute="bottom" constant="5" id="Lge-19-ulR"/>
                                         <constraint firstItem="a6t-wJ-cVk" firstAttribute="leading" secondItem="IO9-Na-45g" secondAttribute="leadingMargin" constant="5" id="M2d-HE-BrT"/>
-                                        <constraint firstItem="gnX-sp-kUd" firstAttribute="leading" secondItem="a6t-wJ-cVk" secondAttribute="trailing" constant="5" id="TYv-of-Rtg"/>
-                                        <constraint firstAttribute="trailing" secondItem="gnX-sp-kUd" secondAttribute="trailing" constant="5" id="dBC-hI-WWH"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="a6t-wJ-cVk" secondAttribute="bottom" id="tJq-JQ-26j"/>
                                     </constraints>
                                     <connections>
-                                        <outlet property="deleteGroupButton" destination="gnX-sp-kUd" id="iMc-fu-H2U"/>
                                         <outlet property="groupNameTitle" destination="a6t-wJ-cVk" id="Yfw-az-B73"/>
                                     </connections>
                                 </collectionReusableView>
@@ -773,10 +753,6 @@
         <image name="pencil.circle" catalog="system" width="128" height="123"/>
         <image name="pinkFloydPhoto" width="640" height="640"/>
         <image name="plus.app" catalog="system" width="128" height="114"/>
-        <image name="trash.circle" catalog="system" width="128" height="123"/>
-        <namedColor name="mainColor">
-            <color red="0.58799999952316284" green="0.3529999852180481" blue="0.7839999794960022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

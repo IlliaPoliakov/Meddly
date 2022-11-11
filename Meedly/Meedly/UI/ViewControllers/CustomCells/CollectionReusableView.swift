@@ -8,11 +8,5 @@
 import UIKit
 
 class CollectionReusableView: UICollectionReusableView {
-        
-  
-  @IBAction func deleteGroupButton(_ sender: Any) {
-    
-  }
-  
   @IBOutlet weak var groupNameTitle: UILabel!
 }

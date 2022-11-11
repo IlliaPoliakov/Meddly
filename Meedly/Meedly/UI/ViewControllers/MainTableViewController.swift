@@ -14,12 +14,6 @@ enum UpdateState {
 
 class MainTableViewController: UITableViewController {
   
-  
-  @IBAction func cleanData(_ sender: Any) {
-    getFeedGroupsUseCase.cleanData()
-    viewDidLoad()
-  }
-  
   // -MARK: - Properties -
   
   lazy var mainTableView: MainTableView = AppDelegate.DIContainer.resolve(MainTableView.self)!
@@ -239,4 +233,21 @@ class MainTableViewController: UITableViewController {
     }
   }
   
+}
+
+// -MARK: - Extensions -
+
+extension MainTableViewController: UIContextMenuInteractionDelegate {
+  func contextMenuInteraction(
+    _ interaction: UIContextMenuInteraction,
+    configurationForMenuAtLocation location: CGPoint)
+  -> UIContextMenuConfiguration? {
+    return UIContextMenuConfiguration(
+      identifier: nil,
+      previewProvider: nil,
+      actionProvider: { _ in
+        let children: [UIMenuElement] = []
+        return UIMenu(title: "", children: children)
+      })
+  }
 }

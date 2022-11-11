@@ -34,7 +34,7 @@ class SideBarViewController: UIViewController, UICollectionViewDelegate, UIColle
   // -MARK: - Properties -
   
   var groups: [FeedGroup] = [FeedGroup]()
-  
+  var sectionIndexPath: IndexPath? = nil
   
   // -MARK: - LifeCycle -
   
@@ -50,6 +50,8 @@ class SideBarViewController: UIViewController, UICollectionViewDelegate, UIColle
     avatarImage.layer.borderColor = UIColor(named: "mainColor")!.cgColor
     
     stackView.layer.cornerRadius = 10
+    stackView.layer.borderWidth = 2.5
+    stackView.layer.borderColor = UIColor(named: "mainColor")!.cgColor
   }
   
   
@@ -119,11 +121,40 @@ class SideBarViewController: UIViewController, UICollectionViewDelegate, UIColle
       }
       
       headerView.groupNameTitle.text = groups[indexPath.section].title
+      headerView.layer.borderColor = UIColor(named: "mainColor")!.cgColor
+      headerView.layer.borderWidth = 2.5
+      headerView.layer.cornerRadius = 10
+      
+      sectionIndexPath = indexPath
+      
+      let gestureRecognizer = UITapGestureRecognizer(target: self,
+                                                     action: #selector(self.handleTap(_:)))
+      headerView.addGestureRecognizer(gestureRecognizer)
       
       return headerView
     default:
       assert(false, "Invalid element type")
     }
   }
-
+  
+  @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
+    let group = groups[sectionIndexPath!.section]
+    let title: String = group.title
+    let alert = UIAlertController(title: title,
+                                  message: nil,
+                                  preferredStyle: .alert)
+    
+    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+    let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { _ in
+      self.deleteGroupUseCase.execute(forGroup: group)
+      self.groups.remove(at: self.sectionIndexPath!.section)
+      self.collectionVIew.reloadData()
+    }
+    
+    alert.addAction(cancelAction)
+    alert.addAction(deleteAction)
+    
+    self.present(alert, animated: true, completion: nil)
+  }
+  
 }

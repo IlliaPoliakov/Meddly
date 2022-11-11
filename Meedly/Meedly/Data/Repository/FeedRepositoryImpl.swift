@@ -11,10 +11,6 @@ import FeedKit
 
 class FeedRepositoryImpl: FeedRepository {
   
-  func cleanData(){
-    localDataSource.cleanData()
-  }
-  
   // -MARK: - Properties -
   
   private let localDataSource: DataBaseDataSource

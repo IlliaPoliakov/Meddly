@@ -17,28 +17,6 @@ class DataBaseDataSource {
   
   // -MARK: - Functions -
   
-  func cleanData() {
-    let groups = loadData()
-    guard groups != nil
-    else {
-      return
-    }
-    for group in groups! {
-      if group.items != nil {
-        for item in group.items! {
-          coreDataStack.managedContext.delete(item)
-        }
-      }
-      if group.feeds != nil {
-        for feed in group.feeds! {
-          coreDataStack.managedContext.delete(feed)
-        }
-      }
-      coreDataStack.managedContext.delete(group)
-    }
-    try? coreDataStack.managedContext.save()
-  }
-  
   func getPredicatedGroup(withGroupTitle groupTitle: String) -> FeedGroupEntity? {
     
     let predicate = NSPredicate(format: "%K == %@",
@@ -129,29 +107,42 @@ class DataBaseDataSource {
   func deleteFeed(forFeed feed: Feed) {
     DispatchQueue.global().async {
       let groups = self.loadData()
-      let poorGroup = groups?.first { $0.feeds != nil && $0.feeds!.contains {
+      let group = groups?.first { $0.feeds != nil && $0.feeds!.contains {
         $0.title == feed.title
       }}
       
-      let poorFeed = poorGroup!.feeds!.first { $0.title == feed.title}
-      self.coreDataStack.managedContext.delete(poorFeed!)
-      
-      let poorItems = poorGroup!.items?.filter { $0.parentFeedLink == feed.link}
-      guard poorItems != nil
+      let items = group!.items?.filter { $0.parentFeedLink == feed.link}
+      guard items != nil
       else {
         return
       }
       
-      for item in poorItems! {
+      for item in items! {
         self.coreDataStack.managedContext.delete(item)
       }
+      
+      let feed = group!.feeds!.first { $0.title == feed.title}
+      self.coreDataStack.managedContext.delete(feed!)
     }
   }
   
   func deleteGroup(forGroup group: FeedGroup) {
     DispatchQueue.global().async {
-      let poorGroup = self.getPredicatedGroup(withGroupTitle: group.title)
-      self.coreDataStack.managedContext.delete(poorGroup!)
+      let group = self.getPredicatedGroup(withGroupTitle: group.title)
+      
+      if group?.feeds != nil {
+        for feed in group!.feeds! {
+          self.coreDataStack.managedContext.delete(feed)
+        }
+      }
+      if group?.items != nil {
+        for item in group!.items! {
+          self.coreDataStack.managedContext.delete(item)
+        }
+      }
+      
+      self.coreDataStack.managedContext.delete(group!)
+      
       try? self.coreDataStack.managedContext.save()
     }
   }
