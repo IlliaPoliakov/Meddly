@@ -155,6 +155,7 @@
                                 <button key="customView" opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="g7i-1m-d9z">
                                     <rect key="frame" x="348.33333333333331" y="9.3333333333333339" width="25.666666666666686" height="25.666666666666664"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="1"/>
                                     <color key="tintColor" name="mainColor"/>
                                     <menu key="menu" id="81b-mr-wiz">
                                         <children>
@@ -162,7 +163,8 @@
                                             <command title="Item 2" id="fAS-7R-o8f"/>
                                         </children>
                                     </menu>
-                                    <state key="normal">
+                                    <state key="normal" title="one hour">
+                                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <imageReference key="image" image="checkmark.circle" catalog="system" symbolScale="large"/>
                                     </state>
                                 </button>
@@ -171,6 +173,7 @@
                                 <button key="customView" opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="N8E-eT-Pvg">
                                     <rect key="frame" x="314.66666666666669" y="9.3333333333333339" width="25.666666666666686" height="25.666666666666664"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="1"/>
                                     <color key="tintColor" name="mainColor"/>
                                     <menu key="menu" id="KkP-gm-5pY">
                                         <children>
@@ -178,8 +181,8 @@
                                             <command title="Text Only" id="dQW-V8-gTM"/>
                                         </children>
                                     </menu>
-                                    <state key="normal">
-                                        <color key="titleColor" name="mainColor"/>
+                                    <state key="normal" title="convinient">
+                                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <imageReference key="image" image="pencil.circle" catalog="system" symbolScale="large"/>
                                     </state>
                                 </button>

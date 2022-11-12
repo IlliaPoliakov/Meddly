@@ -15,4 +15,5 @@ protocol FeedRepository {
   func markAsReaded(feedItem item: FeedItem)
   func deleteFeed(forFeed feed: Feed)
   func deleteGroup(forGroup group: FeedGroup)
+  func markAsReadedOld(forTimePeriod timePeriod: String)
 }

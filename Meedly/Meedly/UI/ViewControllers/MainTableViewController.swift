@@ -10,6 +10,7 @@ import UIKit
 enum UpdateState {
   case initialUpdate
   case regularUpdate
+  case localUpdate
 }
 
 class MainTableViewController: UITableViewController {
@@ -31,6 +32,8 @@ class MainTableViewController: UITableViewController {
   AppDelegate.DIContainer.resolve(GetFeedGroupsUseCase.self)!
   private let markAsReadedUseCase: MarkAsReadedUseCase =
   AppDelegate.DIContainer.resolve(MarkAsReadedUseCase.self)!
+  private let markAsReadedOldUseCase: MarkAsReadedOldUseCase =
+  AppDelegate.DIContainer.resolve(MarkAsReadedOldUseCase.self)!
   
   
   // -MARK: - LifeCycle -
@@ -45,6 +48,8 @@ class MainTableViewController: UITableViewController {
     setSortButton()
     
     setPresentationStyleButton()
+    
+    setReadButton()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -158,15 +163,7 @@ class MainTableViewController: UITableViewController {
   
   // MARK: - IBActions -
   
-  @IBAction func showSideBar(_ sender: Any) {
-    
-  }
-  
   @IBAction func checkActivity(_ sender: Any) {
-    
-  }
-  
-  @IBAction func markAsReaded(_ sender: Any) {
     
   }
   
@@ -235,12 +232,14 @@ class MainTableViewController: UITableViewController {
   
   func setReadButton() {
     let menuClosure = {(action: UIAction) in
-      if self.mainTableView.presentationState != action.title {
-        self.mainTableView.presentationState = action.title
-        self.mainTableView.tableView.reloadData()
+      self.markAsReadedOldUseCase.execute(forTimePeriod: action.title)
+      self.updateGroups(updateState: .initialUpdate) { [weak self] newGroups in
+        self?.mainTableView.groups = newGroups
+        self?.mainTableView.configureInitialSnapshot(withGroups: newGroups)
       }
+      self.markViewedButton.titleLabel!.text = ""
     }
-    presentationStyleButton.menu =
+    markViewedButton.menu =
     UIMenu(title: "Set as read news, older than:",
            children: [
             UIAction(title: "One Hour", handler: menuClosure),
@@ -249,8 +248,8 @@ class MainTableViewController: UITableViewController {
             UIAction(title: "One Month", handler: menuClosure),
             UIAction(title: "Non", handler: menuClosure),
            ])
-    presentationStyleButton.showsMenuAsPrimaryAction = true
-    presentationStyleButton.changesSelectionAsPrimaryAction = true
+    markViewedButton.showsMenuAsPrimaryAction = true
+    markViewedButton.changesSelectionAsPrimaryAction = true
   }
 }
 

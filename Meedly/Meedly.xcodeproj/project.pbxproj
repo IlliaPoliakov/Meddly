@@ -11,6 +11,7 @@
 		F219374628FEFBA100AD5AF0 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F219374528FEFBA100AD5AF0 /* CoreDataStack.swift */; };
 		F2256F1F290876A0003DA153 /* DIConatiner.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2256F1E290876A0003DA153 /* DIConatiner.swift */; };
 		F2347487290FAEF60027C0A2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2347486290FAEF60027C0A2 /* Extensions.swift */; };
+		F23B6CD6291F98DB00AD3BAD /* MarkAsReadedOldUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23B6CD5291F98DB00AD3BAD /* MarkAsReadedOldUseCase.swift */; };
 		F25708CA290C4A2B005FBE1D /* ItemDescripitonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25708C9290C4A2B005FBE1D /* ItemDescripitonViewController.swift */; };
 		F2574FEF290082F800CF540C /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2574FEE290082F800CF540C /* Connectivity.swift */; };
 		F265B020290ED5F5006EA513 /* AddFeedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F265B01F290ED5F5006EA513 /* AddFeedTableView.swift */; };
@@ -57,6 +58,7 @@
 		F219374528FEFBA100AD5AF0 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		F2256F1E290876A0003DA153 /* DIConatiner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIConatiner.swift; sourceTree = "<group>"; };
 		F2347486290FAEF60027C0A2 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		F23B6CD5291F98DB00AD3BAD /* MarkAsReadedOldUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkAsReadedOldUseCase.swift; sourceTree = "<group>"; };
 		F25708C9290C4A2B005FBE1D /* ItemDescripitonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDescripitonViewController.swift; sourceTree = "<group>"; };
 		F2574FEE290082F800CF540C /* Connectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connectivity.swift; sourceTree = "<group>"; };
 		F265B01F290ED5F5006EA513 /* AddFeedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedTableView.swift; sourceTree = "<group>"; };
@@ -127,13 +129,13 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		F27D280D290F0CF700290AD7 /* TableVieweRepresentation */ = {
+		F27D280D290F0CF700290AD7 /* ViewControllersDataHandlers */ = {
 			isa = PBXGroup;
 			children = (
 				F2E2D7F2290D9C720019B5F7 /* MainTableView.swift */,
 				F265B01F290ED5F5006EA513 /* AddFeedTableView.swift */,
 			);
-			path = TableVieweRepresentation;
+			path = ViewControllersDataHandlers;
 			sourceTree = "<group>";
 		};
 		F2C4B9E728F7269500359E5D = {
@@ -237,6 +239,7 @@
 				F2E41FB129020A4700FCA844 /* SaveNewFeedUseCase.swift */,
 				F2A31C12290EF6A100EC5B79 /* GetFeedGrouspUseCase.swift */,
 				F2CD63D9291BB905003B48BD /* MarkAsReadedUseCase.swift */,
+				F23B6CD5291F98DB00AD3BAD /* MarkAsReadedOldUseCase.swift */,
 				F2CD63DB291C269D003B48BD /* DeleteGroupUseCase.swift */,
 				F2CD63DD291C26B0003B48BD /* DeleteFeedUseCase.swift */,
 			);
@@ -295,7 +298,7 @@
 			isa = PBXGroup;
 			children = (
 				F2C4BA5328F97EE500359E5D /* CustomCells */,
-				F27D280D290F0CF700290AD7 /* TableVieweRepresentation */,
+				F27D280D290F0CF700290AD7 /* ViewControllersDataHandlers */,
 				F2C4BA4B28F8AB7600359E5D /* MainTableViewController.swift */,
 				F2C4BA4D28F8AE1C00359E5D /* AddFeedViewController.swift */,
 				F25708C9290C4A2B005FBE1D /* ItemDescripitonViewController.swift */,
@@ -475,6 +478,7 @@
 				F2C4BA4E28F8AE1C00359E5D /* AddFeedViewController.swift in Sources */,
 				F2932B8E2906D1B300581568 /* FeedItem.swift in Sources */,
 				F2B86320291C5CB1000C3BBA /* FeedGroupEntity+CoreDataClass.swift in Sources */,
+				F23B6CD6291F98DB00AD3BAD /* MarkAsReadedOldUseCase.swift in Sources */,
 				F2256F1F290876A0003DA153 /* DIConatiner.swift in Sources */,
 				F2B86315291C5B0A000C3BBA /* NewCoreDataModel.xcdatamodeld in Sources */,
 				F2C4B9F428F7269500359E5D /* AppDelegate.swift in Sources */,

@@ -33,9 +33,12 @@ class FeedRepositoryImpl: FeedRepository {
       
       var groups = self.localDataSource.loadData()
       
-      if state == .initialUpdate {
+      if state == .initialUpdate || state == .localUpdate {
         DispatchQueue.main.async {
           completion(FeedGroupEntity.convertToDomainGroups(withEntities: groups), nil)
+        }
+        if state == .localUpdate {
+          return
         }
       }
       
@@ -197,9 +200,14 @@ class FeedRepositoryImpl: FeedRepository {
     localDataSource.saveNewFeed(withNewFeedUrl: newFeedUrl, withParentGroup: groupEntity!)
   }
   
+  func markAsReadedOld(forTimePeriod timePeriod: String) {
+    localDataSource.markAsReadedOld(forTimePeriod: timePeriod)
+  }
+  
   func markAsReaded(feedItem item: FeedItem) {
     localDataSource.markAsReaded(forFeedItem: item)
   }
+
   
   func deleteFeed(forFeed feed: Feed) {
     localDataSource.deleteFeed(forFeed: feed)

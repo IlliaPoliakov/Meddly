@@ -47,6 +47,9 @@ class DependencyInjectionContainer {
     DependencyInjectionContainer.shared.register(DeleteGroupUseCase.self) { resolver in
       DeleteGroupUseCase(repo: resolver.resolve(FeedRepository.self)!)
     }
+    DependencyInjectionContainer.shared.register(MarkAsReadedOldUseCase.self) { resolver in
+      MarkAsReadedOldUseCase(repo: resolver.resolve(FeedRepository.self)!)
+    }
   }
 }
 

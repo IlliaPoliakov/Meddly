@@ -14,7 +14,7 @@ class MarkAsReadedUseCase {
     self.repo = repo
   }
   
-  func execute(forFeedItem item: FeedItem) {
-    repo.markAsReaded(feedItem: item)
+  func execute(forFeedItem feedItem: FeedItem) {
+    repo.markAsReaded(feedItem: feedItem)
   }
 }

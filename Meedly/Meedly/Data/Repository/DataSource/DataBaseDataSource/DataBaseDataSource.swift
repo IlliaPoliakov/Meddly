@@ -95,56 +95,76 @@ class DataBaseDataSource {
     coreDataStack.saveContext()
   }
   
-  func markAsReaded(forTimePeriod timePeriod: String){
+  func markAsReaded(forFeedItem item: FeedItem){
+    let group = getPredicatedGroup(withGroupTitle: item.parentGroupTitle)
+    let groupItem = group!.items?.filter { $0.title == item.title }
+    groupItem!.first!.isViewed = true
+    coreDataStack.saveContext()
     DispatchQueue.global(qos: .userInitiated).async {
-      let groups = self.loadData()
-      
-      var groupItems = [FeedItemEntity]()
-      
-      let formatter = DateFormatter()
-      formatter.locale = Locale(identifier: "en_US_POSIX")
-      formatter.dateFormat = "HH:mm E, d MMM y"
-      
-//      let newItems = allItems!.sorted {
-//        formatter.date(from: $0.pubDate)! > formatter.date(from: $1.pubDate)!
-//      }
-      
-      for group in groups! {
-        if group.items != nil {
-          switch timePeriod {
-          case "One Hour":
-            groupItems.append(contentsOf: group.items!.filter {
-              .now > formatter.date(from: $1.pubDate)! + Calendar.current.date(byAdding: .hour,
-                                                                               value: -1,
-                                                                               to: Date())
-            })
-          case "One Day":
-            groupItems.append(group.items!.filter {
-              .now > formatter.date(from: $1.pubDate)! + Calendar.current.date(byAdding: .day,
-                                                                               value: -1,
-                                                                               to: Date())
-            })
-          case "One Week":
-            groupItems.append(group.items!.filter {
-              .now > formatter.date(from: $1.pubDate)! + Calendar.current.date(byAdding: .weekOfMonth,
-                                                                               value: -1,
-                                                                               to: Date())
-            })
-          case "One Month":
-            groupItems.append(group.items!.filter {
-              .now > formatter.date(from: $1.pubDate)! + Calendar.current.date(byAdding: .month,
-                                                                               value: -1,
-                                                                               to: Date())
-            })
-          default:
-            break
-          }
-        }
-      }
-      
+      let group = self.getPredicatedGroup(withGroupTitle: item.parentGroupTitle)
+      let groupItem = group!.items?.filter { $0.title == item.title }
+      groupItem!.first!.isViewed = true
       self.coreDataStack.saveContext()
     }
   }
+  
+  
+  func markAsReadedOld(forTimePeriod timePeriod: String){
+    let groups = self.loadData()
+    
+    var groupItems = [FeedItemEntity]()
+    
+    let formatter = DateFormatter()
+    formatter.locale = Locale(identifier: "en_US_POSIX")
+    formatter.dateFormat = "HH:mm E, d MMM y"
+    
+    for group in groups! {
+      if group.items != nil {
+        switch timePeriod {
+        case "One Hour":
+          let hour = Calendar.current.date(byAdding: .hour,
+                                           value: -1,
+                                           to: Date())
+          groupItems.append(contentsOf: group.items!.filter { item in
+              .now - hour!.timeIntervalSinceNow > formatter.date(from: item.pubDate)!
+          })
+        case "One Day":
+          let day = Calendar.current.date(byAdding: .day,
+                                          value: -1,
+                                          to: Date())
+          groupItems.append(contentsOf: group.items!.filter { item in
+              .now - day!.timeIntervalSinceNow > formatter.date(from: item.pubDate)!
+          })
+        case "One Week":
+          let week = Calendar.current.date(byAdding: .weekOfMonth,
+                                           value: -1,
+                                           to: Date())
+          groupItems.append(contentsOf: group.items!.filter { item in
+              .now - week!.timeIntervalSinceNow > formatter.date(from: item.pubDate)!
+          })
+        case "One Month":
+          let month = Calendar.current.date(byAdding: .day,
+                                            value: -1,
+                                            to: Date())
+          groupItems.append(contentsOf: group.items!.filter { item in
+              .now - month!.timeIntervalSinceNow > formatter.date(from: item.pubDate)!
+          })
+        default:
+          break
+        }
+      }
+      
+      guard !groupItems.isEmpty
+      else {
+        return
+      }
+      for groupItem in groupItems {
+        groupItem.isViewed = true
+      }
+      self.coreDataStack.saveContext()
+    }
+  }
+  
   
   func deleteFeed(forFeed feed: Feed) {
     DispatchQueue.global().async {
