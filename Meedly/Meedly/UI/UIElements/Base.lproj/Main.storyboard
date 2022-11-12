@@ -168,7 +168,7 @@
                                 </button>
                             </barButtonItem>
                             <barButtonItem style="plain" id="1oY-Qa-5xy">
-                                <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="N8E-eT-Pvg">
+                                <button key="customView" opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="N8E-eT-Pvg">
                                     <rect key="frame" x="314.66666666666669" y="9.3333333333333339" width="25.666666666666686" height="25.666666666666664"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="tintColor" name="mainColor"/>
@@ -188,8 +188,8 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="markViewedButton" destination="gEs-zT-Q17" id="R4i-ia-50H"/>
-                        <outlet property="presentationStyleButton" destination="1oY-Qa-5xy" id="uOV-xT-XA5"/>
+                        <outlet property="markViewedButton" destination="g7i-1m-d9z" id="dRB-N3-788"/>
+                        <outlet property="presentationStyleButton" destination="N8E-eT-Pvg" id="SsM-ZY-d1X"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vLD-R2-xZ1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -16,9 +16,8 @@ class MainTableViewController: UITableViewController {
   
   // MARK: - IBOutlets -
   
-  @IBOutlet weak var presentationStyleButton: UIBarButtonItem!
-  @IBOutlet weak var markViewedButton: UIBarButtonItem!
-  
+  @IBOutlet weak var presentationStyleButton: UIButton!
+  @IBOutlet weak var markViewedButton: UIButton!
   
   // -MARK: - Properties -
   
@@ -40,7 +39,7 @@ class MainTableViewController: UITableViewController {
     super.viewDidLoad()
     
     setTableView()
-    
+  
     updateState = .initialUpdate
     
     setSortButton()
@@ -217,7 +216,41 @@ class MainTableViewController: UITableViewController {
   }
   
   func setPresentationStyleButton() {
-    
+    let menuClosure = {(action: UIAction) in
+      if self.mainTableView.presentationState != action.title {
+        self.mainTableView.presentationState = action.title
+        self.mainTableView.tableView.reloadData()
+      }
+    }
+    presentationStyleButton.menu =
+    UIMenu(title: "Presentation Style:",
+           children: [
+            UIAction(title: "Text only", handler:
+                      menuClosure),
+            UIAction(title: "Convinient", state: .on, handler: menuClosure)
+           ])
+    presentationStyleButton.showsMenuAsPrimaryAction = true
+    presentationStyleButton.changesSelectionAsPrimaryAction = true
+  }
+  
+  func setReadButton() {
+    let menuClosure = {(action: UIAction) in
+      if self.mainTableView.presentationState != action.title {
+        self.mainTableView.presentationState = action.title
+        self.mainTableView.tableView.reloadData()
+      }
+    }
+    presentationStyleButton.menu =
+    UIMenu(title: "Set as read news, older than:",
+           children: [
+            UIAction(title: "One Hour", handler: menuClosure),
+            UIAction(title: "One Day", handler: menuClosure),
+            UIAction(title: "One Week", handler: menuClosure),
+            UIAction(title: "One Month", handler: menuClosure),
+            UIAction(title: "Non", handler: menuClosure),
+           ])
+    presentationStyleButton.showsMenuAsPrimaryAction = true
+    presentationStyleButton.changesSelectionAsPrimaryAction = true
   }
 }
 
@@ -262,11 +295,6 @@ extension MainTableViewController: UIContextMenuInteractionDelegate {
         self.title = "Show All"
       }
   }
-  
-//  if self.mainTableView.presentationState == .textOnly {
-//    self.mainTableView.presentationState = .convinient
-//    self.mainTableView.tableView.reloadData()
-//  }
   
   func makeUnreadOnlyAction() -> UIAction {
     let unreadAttributes = UIMenuElement.Attributes()

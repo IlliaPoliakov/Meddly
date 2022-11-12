@@ -7,11 +7,6 @@
 
 import UIKit
 
-enum PresentationState {
-  case textOnly
-  case convinient
-}
-
 class MainTableView: NSObject, UITableViewDelegate {
   
   // -MARK: - Properties -
@@ -21,7 +16,7 @@ class MainTableView: NSObject, UITableViewDelegate {
   
   lazy var allItems: [FeedItem]? = groups?.flatMap { $0.items != nil ? $0.items! : [FeedItem]() }
   var presentationType: String = "Show All"
-  var presentationState: PresentationState = .convinient
+  var presentationState: String = "Convinient"
   
   lazy var dataSource: UITableViewDiffableDataSource<FeedGroup, FeedItem> =  UITableViewDiffableDataSource<FeedGroup, FeedItem> (tableView: tableView) {
     tableView, indexPath, itemIdentifier in
@@ -45,7 +40,7 @@ class MainTableView: NSObject, UITableViewDelegate {
       return UITableViewCell()
     }
     
-    if item!.imageUrl != nil && self.presentationState == .convinient {
+    if item!.imageUrl != nil && self.presentationState == "Convinient" {
       guard let cell = tableView.dequeueReusableCell(withIdentifier: "MainVCCustomCell")
               as? MainTableViewControllerCustomCell
       else {
