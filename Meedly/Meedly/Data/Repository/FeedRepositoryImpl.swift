@@ -144,14 +144,16 @@ class FeedRepositoryImpl: FeedRepository {
                           contentDiscp : descriptionDescp
                           
                           if !(group.items?.contains(where: { $0.title == item.title}) ?? false) {
-                            self?.localDataSource
-                              .saveNewFeedItem(withTitle: item.title ?? "[no title]",
-                                               withDescription: description,
-                                               withLink: URL(string: item.link!)!,
-                                               withImageUrl: imageUrl,
-                                               withPubDate: date,
-                                               withGroup: group,
-                                               withParentFeedLink: groupFeed.link)
+                            if !groupFeed.isFault {
+                              self?.localDataSource
+                                .saveNewFeedItem(withTitle: item.title ?? "[no title]",
+                                                 withDescription: description,
+                                                 withLink: URL(string: item.link!)!,
+                                                 withImageUrl: imageUrl,
+                                                 withPubDate: date,
+                                                 withGroup: group,
+                                                 withParentFeedLink: groupFeed.link)
+                            }
                           }
                         }
                       }

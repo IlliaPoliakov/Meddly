@@ -122,70 +122,85 @@ class DataBaseDataSource {
       if group.items != nil {
         switch timePeriod {
         case "One Hour":
-          let hour = Calendar.current.date(byAdding: .hour,
-                                           value: -1,
-                                           to: Date())
           groupItems.append(contentsOf: group.items!.filter { item in
-              .now - hour!.timeIntervalSinceNow > formatter.date(from: item.pubDate)!
+            let hourBeforeNow = Calendar.current.date(byAdding: .hour,
+                                                      value: 0,
+                                                      to: .now)
+            if hourBeforeNow! > formatter.date(from: item.pubDate)! {
+              return true
+            }
+            return false
           })
+          
         case "One Day":
-          let day = Calendar.current.date(byAdding: .day,
-                                          value: -1,
-                                          to: Date())
           groupItems.append(contentsOf: group.items!.filter { item in
-              .now - day!.timeIntervalSinceNow > formatter.date(from: item.pubDate)!
+            let dayBeforeNow = Calendar.current.date(byAdding: .day,
+                                                     value: -1,
+                                                     to: .now)
+            if dayBeforeNow! > formatter.date(from: item.pubDate)! {
+              return true
+            }
+            return false
           })
         case "One Week":
-          let week = Calendar.current.date(byAdding: .weekOfMonth,
-                                           value: -1,
-                                           to: Date())
           groupItems.append(contentsOf: group.items!.filter { item in
-              .now - week!.timeIntervalSinceNow > formatter.date(from: item.pubDate)!
+            let weekBeforeNow = Calendar.current.date(byAdding: .weekOfMonth,
+                                                      value: 0,
+                                                      to: .now)
+            if weekBeforeNow! > formatter.date(from: item.pubDate)! {
+              return true
+            }
+            return false
           })
         case "One Month":
-          let month = Calendar.current.date(byAdding: .day,
-                                            value: -1,
-                                            to: Date())
           groupItems.append(contentsOf: group.items!.filter { item in
-              .now - month!.timeIntervalSinceNow > formatter.date(from: item.pubDate)!
+            let monthBeforeNow = Calendar.current.date(byAdding: .month,
+                                                       value: 0,
+                                                       to: .now)
+            if monthBeforeNow! > formatter.date(from: item.pubDate)! {
+              return true
+            }
+            return false
           })
         default:
           break
         }
       }
-      
-      guard !groupItems.isEmpty
-      else {
-        return
-      }
-      for groupItem in groupItems {
-        groupItem.isViewed = true
-      }
-      self.coreDataStack.saveContext()
     }
+    
+    guard !groupItems.isEmpty
+    else {
+      return
+    }
+    for groupItem in groupItems {
+      groupItem.isViewed = true
+    }
+    
+    try? self.coreDataStack.managedContext.save()
   }
   
   
   func deleteFeed(forFeed feed: Feed) {
-    DispatchQueue.global().async {
-      let groups = self.loadData()
-      let group = groups?.first { $0.feeds != nil && $0.feeds!.contains {
-        $0.title == feed.title
-      }}
-      
-      let items = group!.items?.filter { $0.parentFeedLink == feed.link}
-      guard items != nil
-      else {
-        return
-      }
-      
-      for item in items! {
-        self.coreDataStack.managedContext.delete(item)
-      }
-      
-      let feed = group!.feeds!.first { $0.title == feed.title}
-      self.coreDataStack.managedContext.delete(feed!)
+    let groups = self.loadData()
+    let group = groups?.first { $0.feeds != nil && $0.feeds!.contains {
+      $0.title == feed.title
+    }}
+    
+    let items = group!.items?.filter { $0.parentFeedLink == feed.link}
+    guard items != nil
+    else {
+      return
     }
+    
+    for item in items! {
+      self.coreDataStack.managedContext.delete(item)
+    }
+    
+    let feed = group!.feeds!.first { $0.title == feed.title}
+    self.coreDataStack.managedContext.delete(feed!)
+    
+    try? self.coreDataStack.managedContext.save()
+    
   }
   
   func deleteGroup(forGroup group: FeedGroup) {
@@ -207,9 +222,5 @@ class DataBaseDataSource {
       
       try? self.coreDataStack.managedContext.save()
     }
-  }
-  
-  func saveContext(){
-    coreDataStack.saveContext()
   }
 }

@@ -35,6 +35,7 @@ class SideBarViewController: UIViewController, UICollectionViewDelegate, UIColle
   
   var groups: [FeedGroup] = [FeedGroup]()
   var sectionIndexPath: IndexPath? = nil
+  var mainTableViewController: MainTableViewController = MainTableViewController()
   
   // -MARK: - LifeCycle -
   
@@ -91,7 +92,15 @@ class SideBarViewController: UIViewController, UICollectionViewDelegate, UIColle
       self.deleteFeedUseCase.execute(forFeed:
                                       feed)
       self.groups[indexPath.section].feeds!.remove(at: indexPath.row)
+      if self.groups[indexPath.section].feeds!.isEmpty {
+        self.groups.remove(at: indexPath.section)
+      }
       collectionView.reloadData()
+      
+      self.mainTableViewController.updateGroups(updateState: .localUpdate) { newGroups in
+        self.mainTableViewController.mainTableView.groups = newGroups
+        self.mainTableViewController.mainTableView.updatePresentation()
+      }
     }
     
     if message != "" {
@@ -143,12 +152,16 @@ class SideBarViewController: UIViewController, UICollectionViewDelegate, UIColle
     let alert = UIAlertController(title: title,
                                   message: nil,
                                   preferredStyle: .alert)
-    
     let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
     let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { _ in
       self.deleteGroupUseCase.execute(forGroup: group)
       self.groups.remove(at: self.sectionIndexPath!.section)
       self.collectionVIew.reloadData()
+      
+      self.mainTableViewController.updateGroups(updateState: .localUpdate) { newGroups in
+        self.mainTableViewController.mainTableView.groups = newGroups
+        self.mainTableViewController.mainTableView.updatePresentation()
+      }
     }
     
     alert.addAction(cancelAction)

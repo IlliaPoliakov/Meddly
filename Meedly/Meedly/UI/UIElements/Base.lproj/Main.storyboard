@@ -116,19 +116,18 @@
                     <toolbarItems>
                         <barButtonItem systemItem="flexibleSpace" id="MoI-kk-KZq"/>
                         <barButtonItem title="Item" image="line.3.horizontal.decrease" catalog="system" springLoaded="YES" style="done" id="Sre-Mj-v2e">
-                            <color key="tintColor" red="0.74901960784313726" green="0.35294117647058826" blue="0.94901960784313721" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="tintColor" name="mainColor"/>
                             <connections>
-                                <action selector="showSideBar:" destination="Ii9-o7-ios" id="hsT-g8-g94"/>
                                 <segue destination="wHY-0q-gP6" kind="presentation" identifier="id" id="rCK-zM-Etd"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem systemItem="flexibleSpace" id="HUX-fK-aAE"/>
                         <barButtonItem title="Item" image="arrow.up.and.down.text.horizontal" catalog="system" style="done" id="k9Q-iU-sfW">
-                            <color key="tintColor" red="0.74901960779999999" green="0.35294117650000001" blue="0.94901960780000005" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="tintColor" name="mainColor"/>
                         </barButtonItem>
                         <barButtonItem systemItem="flexibleSpace" id="Gp7-pT-G9W"/>
                         <barButtonItem title="Item" image="plus.app" catalog="system" id="Bmv-9G-UwV">
-                            <color key="tintColor" red="0.74901960779999999" green="0.35294117650000001" blue="0.94901960780000005" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="tintColor" name="mainColor"/>
                             <connections>
                                 <segue destination="Tra-FC-Whj" kind="presentation" identifier="showAddVC" id="ww5-JI-pxu"/>
                             </connections>
@@ -136,24 +135,16 @@
                         <barButtonItem systemItem="flexibleSpace" id="idx-er-Ljs"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="All Your Feeds" id="ow4-7Z-EeD">
-                        <leftBarButtonItems>
-                            <barButtonItem title="Item" image="circle" catalog="system" style="done" id="PLl-fx-Y2S">
-                                <color key="tintColor" red="0.74901960779999999" green="0.35294117650000001" blue="0.94901960780000005" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
-                                <connections>
-                                    <action selector="checkActivity:" destination="Ii9-o7-ios" id="wsT-ST-Ode"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem title="Item" image="clock.arrow.circlepath" catalog="system" style="done" id="nlb-O8-cHI">
-                                <color key="tintColor" name="mainColor"/>
-                                <connections>
-                                    <action selector="update:" destination="Ii9-o7-ios" id="lld-eR-tYX"/>
-                                </connections>
-                            </barButtonItem>
-                        </leftBarButtonItems>
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="clock.arrow.circlepath" catalog="system" style="done" id="nlb-O8-cHI">
+                            <color key="tintColor" name="mainColor"/>
+                            <connections>
+                                <action selector="update:" destination="Ii9-o7-ios" id="lld-eR-tYX"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem style="plain" id="gEs-zT-Q17">
                                 <button key="customView" opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="g7i-1m-d9z">
-                                    <rect key="frame" x="348.33333333333331" y="9.3333333333333339" width="25.666666666666686" height="25.666666666666664"/>
+                                    <rect key="frame" x="343.33333333333331" y="9.3333333333333339" width="30.666666666666686" height="25.666666666666664"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="1"/>
                                     <color key="tintColor" name="mainColor"/>
@@ -171,7 +162,7 @@
                             </barButtonItem>
                             <barButtonItem style="plain" id="1oY-Qa-5xy">
                                 <button key="customView" opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="N8E-eT-Pvg">
-                                    <rect key="frame" x="314.66666666666669" y="9.3333333333333339" width="25.666666666666686" height="25.666666666666664"/>
+                                    <rect key="frame" x="303.66666666666669" y="9.3333333333333339" width="31.666666666666686" height="25.666666666666664"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="1"/>
                                     <color key="tintColor" name="mainColor"/>
@@ -215,23 +206,6 @@
                                 </constraints>
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="ultraLight"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jFU-Q0-q1t">
-                                <rect key="frame" x="20" y="227" width="350" height="40.333333333333314"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Settings" cornerStyle="large">
-                                    <backgroundConfiguration key="background">
-                                        <color key="backgroundColor" systemColor="secondarySystemFillColor"/>
-                                    </backgroundConfiguration>
-                                    <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle2"/>
-                                    <color key="baseForegroundColor" red="0.74901960779999999" green="0.35294117650000001" blue="0.94901960780000005" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="addNewFeed:" destination="Tra-FC-Whj" eventType="touchUpInside" id="8HD-vd-wH3"/>
-                                    <action selector="settingsButton:" destination="wHY-0q-gP6" eventType="touchUpInside" id="EWF-L3-ReL"/>
-                                    <action selector="visitWebSiteButtonTupped:" destination="YsR-D6-0j1" eventType="touchUpInside" id="l3I-NO-Jvz"/>
-                                </connections>
-                            </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="kj6-2U-4Ex">
                                 <rect key="frame" x="157" y="97.666666666666657" width="213" height="81.666666666666657"/>
                                 <subviews>
@@ -252,8 +226,25 @@
                                     <constraint firstItem="LUE-G5-5MP" firstAttribute="height" secondItem="TrV-xv-1Gn" secondAttribute="height" id="x6h-yY-ulb"/>
                                 </constraints>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jFU-Q0-q1t">
+                                <rect key="frame" x="20" y="726.66666666666663" width="350" height="40.333333333333371"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Settings" cornerStyle="large">
+                                    <backgroundConfiguration key="background">
+                                        <color key="backgroundColor" systemColor="secondarySystemFillColor"/>
+                                    </backgroundConfiguration>
+                                    <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle2"/>
+                                    <color key="baseForegroundColor" red="0.74901960779999999" green="0.35294117650000001" blue="0.94901960780000005" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="addNewFeed:" destination="Tra-FC-Whj" eventType="touchUpInside" id="8HD-vd-wH3"/>
+                                    <action selector="settingsButton:" destination="wHY-0q-gP6" eventType="touchUpInside" id="EWF-L3-ReL"/>
+                                    <action selector="visitWebSiteButtonTupped:" destination="YsR-D6-0j1" eventType="touchUpInside" id="l3I-NO-Jvz"/>
+                                </connections>
+                            </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="IcN-gA-jM9" userLabel="CollectionVIew">
-                                <rect key="frame" x="0.0" y="277.33333333333326" width="390" height="509.66666666666674"/>
+                                <rect key="frame" x="0.0" y="217.00000000000003" width="390" height="489.66666666666674"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Pi1-tJ-eH8">
                                     <size key="itemSize" width="95" height="126"/>
@@ -264,35 +255,37 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SideBarCollectionViewCell" id="QtX-sD-ZXG" customClass="SideBarCollectionViewCell" customModule="Meedly" customModuleProvider="target">
-                                        <rect key="frame" x="10" y="50" width="95" height="126"/>
+                                        <rect key="frame" x="10" y="50" width="65" height="110"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="GOL-yM-Zdo">
-                                            <rect key="frame" x="0.0" y="0.0" width="95" height="126"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="65" height="110"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Dqp-vl-ekX">
-                                                    <rect key="frame" x="5" y="5" width="85" height="85"/>
+                                                    <rect key="frame" x="5" y="5" width="55" height="55"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="Dqp-vl-ekX" secondAttribute="height" multiplier="1:1" id="6Uy-JW-gL7"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pHQ-O9-uVm">
-                                                    <rect key="frame" x="27.000000000000004" y="100" width="41.333333333333343" height="21"/>
+                                                    <rect key="frame" x="0.0" y="72" width="65" height="33"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="pHQ-O9-uVm" firstAttribute="leading" secondItem="GOL-yM-Zdo" secondAttribute="leading" id="FCV-KT-wCH"/>
+                                                <constraint firstItem="Dqp-vl-ekX" firstAttribute="width" secondItem="GOL-yM-Zdo" secondAttribute="width" multiplier="0.846154" id="LxQ-7u-SxF"/>
                                                 <constraint firstAttribute="trailing" secondItem="Dqp-vl-ekX" secondAttribute="trailing" constant="5" id="ObG-f8-8vK"/>
                                                 <constraint firstAttribute="bottom" secondItem="pHQ-O9-uVm" secondAttribute="bottom" constant="5" id="Veh-2i-16r"/>
                                                 <constraint firstItem="Dqp-vl-ekX" firstAttribute="top" secondItem="GOL-yM-Zdo" secondAttribute="top" constant="5" id="VkF-1D-5MN"/>
                                                 <constraint firstItem="Dqp-vl-ekX" firstAttribute="leading" secondItem="GOL-yM-Zdo" secondAttribute="leading" constant="5" id="gfB-QL-ed2"/>
                                                 <constraint firstItem="pHQ-O9-uVm" firstAttribute="centerX" secondItem="Dqp-vl-ekX" secondAttribute="centerX" id="l8s-dA-iGy"/>
-                                                <constraint firstItem="pHQ-O9-uVm" firstAttribute="top" secondItem="Dqp-vl-ekX" secondAttribute="bottom" constant="10" id="pL8-3Z-AVF"/>
+                                                <constraint firstItem="pHQ-O9-uVm" firstAttribute="top" secondItem="Dqp-vl-ekX" secondAttribute="bottom" multiplier="1.2" id="pL8-3Z-AVF"/>
                                             </constraints>
                                         </collectionViewCellContentView>
-                                        <size key="customSize" width="95" height="126"/>
+                                        <size key="customSize" width="65" height="110"/>
                                         <connections>
                                             <outlet property="collectionImageView" destination="Dqp-vl-ekX" id="W0t-lx-8j5"/>
                                             <outlet property="feedNameLabel" destination="pHQ-O9-uVm" id="I0c-R1-JXq"/>
@@ -328,18 +321,18 @@
                         <constraints>
                             <constraint firstItem="9IH-r9-BBI" firstAttribute="leading" secondItem="v7f-kj-Qen" secondAttribute="leading" constant="20" id="7N6-te-a4g"/>
                             <constraint firstItem="kj6-2U-4Ex" firstAttribute="leading" secondItem="9IH-r9-BBI" secondAttribute="trailing" constant="20" id="7Tz-qS-Dn6"/>
+                            <constraint firstItem="e3t-vf-xSX" firstAttribute="bottom" secondItem="jFU-Q0-q1t" secondAttribute="bottom" constant="20" id="9ii-26-o0A"/>
                             <constraint firstItem="jFU-Q0-q1t" firstAttribute="leading" secondItem="e3t-vf-xSX" secondAttribute="leading" constant="20" id="AUd-dY-Gag"/>
                             <constraint firstAttribute="trailing" secondItem="jFU-Q0-q1t" secondAttribute="trailing" constant="20" id="CE9-9r-0yc"/>
                             <constraint firstItem="9IH-r9-BBI" firstAttribute="top" secondItem="v7f-kj-Qen" secondAttribute="top" constant="80" id="IW2-NT-1NU"/>
-                            <constraint firstItem="jFU-Q0-q1t" firstAttribute="top" secondItem="9IH-r9-BBI" secondAttribute="bottom" constant="30" id="NEV-Q9-m86"/>
+                            <constraint firstItem="jFU-Q0-q1t" firstAttribute="top" secondItem="IcN-gA-jM9" secondAttribute="bottom" constant="20" id="NEV-Q9-m86"/>
                             <constraint firstItem="e3t-vf-xSX" firstAttribute="trailing" secondItem="kj6-2U-4Ex" secondAttribute="trailing" constant="20" id="WH4-b2-1iL"/>
                             <constraint firstItem="9IH-r9-BBI" firstAttribute="width" secondItem="v7f-kj-Qen" secondAttribute="width" multiplier="0.3" id="a0D-7e-Bme"/>
                             <constraint firstItem="kj6-2U-4Ex" firstAttribute="height" secondItem="9IH-r9-BBI" secondAttribute="height" multiplier="0.7" id="cAl-Bg-lxu"/>
-                            <constraint firstItem="e3t-vf-xSX" firstAttribute="bottom" secondItem="IcN-gA-jM9" secondAttribute="bottom" id="obn-Ul-EO6"/>
                             <constraint firstItem="IcN-gA-jM9" firstAttribute="leading" secondItem="e3t-vf-xSX" secondAttribute="leading" id="qgm-Gh-YSx"/>
                             <constraint firstItem="kj6-2U-4Ex" firstAttribute="centerY" secondItem="9IH-r9-BBI" secondAttribute="centerY" id="rFT-il-xbo"/>
                             <constraint firstItem="e3t-vf-xSX" firstAttribute="trailing" secondItem="IcN-gA-jM9" secondAttribute="trailing" id="yh0-TA-82g"/>
-                            <constraint firstItem="IcN-gA-jM9" firstAttribute="top" secondItem="jFU-Q0-q1t" secondAttribute="bottom" constant="10" id="yl3-NW-pGB"/>
+                            <constraint firstItem="IcN-gA-jM9" firstAttribute="top" secondItem="9IH-r9-BBI" secondAttribute="bottom" constant="20" id="yl3-NW-pGB"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="CCz-rZ-vK8"/>
@@ -413,7 +406,7 @@
                                                 <color key="backgroundColor" systemColor="secondarySystemFillColor"/>
                                             </backgroundConfiguration>
                                             <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle2"/>
-                                            <color key="baseForegroundColor" red="0.74901960779999999" green="0.35294117650000001" blue="0.94901960780000005" alpha="0.64742288147376859" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="baseForegroundColor" name="mainColor"/>
                                         </buttonConfiguration>
                                         <connections>
                                             <action selector="addNewFeed:" destination="Tra-FC-Whj" eventType="touchUpInside" id="iJX-ak-GoD"/>
@@ -466,7 +459,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Insert Your URL:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aCk-KF-Wjh">
                                 <rect key="frame" x="20" y="57.000000000000007" width="360" height="26.333333333333336"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                <color key="textColor" red="0.74901960779999999" green="0.35294117650000001" blue="0.94901960780000005" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" name="mainColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="q9W-KR-Wei">
@@ -481,7 +474,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose a Group or create a New One:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JBa-2n-8pi">
                                         <rect key="frame" x="0.0" y="0.0" width="280.33333333333331" height="54.333333333333336"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                        <color key="textColor" red="0.74901960779999999" green="0.35294117650000001" blue="0.94901960780000005" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" name="mainColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CNo-g3-xRq">
@@ -490,7 +483,7 @@
                                         <constraints>
                                             <constraint firstAttribute="width" constant="27.666666666666686" id="lh4-NN-VbB"/>
                                         </constraints>
-                                        <color key="tintColor" red="0.74901960779999999" green="0.35294117650000001" blue="0.94901960780000005" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="tintColor" name="mainColor"/>
                                         <buttonConfiguration key="configuration" style="plain"/>
                                         <connections>
                                             <action selector="createNewGroup:" destination="Tra-FC-Whj" eventType="touchUpInside" id="Jp9-KP-cYi"/>
@@ -521,7 +514,7 @@
                                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ssf-Gg-Hnu">
                                                     <rect key="frame" x="19.166666666666664" y="13.000000000000002" width="25.666666666666668" height="25.666666666666668"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                    <color key="tintColor" red="0.74901960779999999" green="0.35294117650000001" blue="0.94901960780000005" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="tintColor" name="mainColor"/>
                                                     <imageReference key="image" image="folder.circle" catalog="system" symbolScale="large"/>
                                                 </imageView>
                                             </subviews>
@@ -538,7 +531,7 @@
                                         <color key="backgroundColor" systemColor="secondarySystemFillColor"/>
                                     </backgroundConfiguration>
                                     <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle2"/>
-                                    <color key="baseForegroundColor" red="0.74901960779999999" green="0.35294117650000001" blue="0.94901960780000005" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="baseForegroundColor" name="mainColor"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="addNewFeed:" destination="Tra-FC-Whj" eventType="touchUpInside" id="Tw9-b0-2cT"/>
@@ -647,7 +640,7 @@
                                                 <color key="backgroundColor" systemColor="secondarySystemFillColor"/>
                                             </backgroundConfiguration>
                                             <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle2"/>
-                                            <color key="baseForegroundColor" red="0.74901960779999999" green="0.35294117650000001" blue="0.94901960780000005" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="baseForegroundColor" name="mainColor"/>
                                         </buttonConfiguration>
                                         <connections>
                                             <action selector="addNewFeed:" destination="Tra-FC-Whj" eventType="touchUpInside" id="glg-PV-ihy"/>
@@ -692,7 +685,6 @@
     <resources>
         <image name="arrow.up.and.down.text.horizontal" catalog="system" width="128" height="87"/>
         <image name="checkmark.circle" catalog="system" width="128" height="123"/>
-        <image name="circle" catalog="system" width="128" height="123"/>
         <image name="clock.arrow.circlepath" catalog="system" width="128" height="112"/>
         <image name="folder.circle" catalog="system" width="128" height="123"/>
         <image name="line.3.horizontal.decrease" catalog="system" width="128" height="73"/>

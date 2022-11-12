@@ -124,7 +124,7 @@ class AddFeedViewController: UIViewController, UITableViewDelegate {
     saveNewFeedUseCase.execute(withNewFeedUrl: feedUrl, withParentGroup:
                                 addFeedTableView.groups![addFeedTableView.selectedRowIndexPath!.row])
     
-    performSegue(withIdentifier: "unwindToMain", sender: self)
+    performSegue(withIdentifier: "unwindToMainFromAddVC", sender: self)
   }
   
 }

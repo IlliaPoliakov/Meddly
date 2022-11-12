@@ -22,10 +22,11 @@ class MainTableViewControllerCustomCell: UITableViewCell {
     self.pubDateLabel.text = item.pubDate
     self.titleLabel.text = item.title
     
+    self.itemImage.image = nil
+    self.itemImage.backgroundColor = .lightGray
     self.itemImage.pin_updateWithProgress = true
     self.itemImage.pin_setImage(from: item.imageUrl!)
     self.itemImage.layer.cornerRadius = 10
-    self.itemImage.backgroundColor = UIColor.white
   }
 
 }

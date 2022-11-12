@@ -18,6 +18,7 @@ class AddFeedTableView: NSObject, UITableViewDelegate {
   var selectedRowIndexPath: IndexPath? = nil
   var tableView: UITableView?
   var groups: [FeedGroup]?
+  var mainTableViewController: MainTableViewController = MainTableViewController()
   
   lazy var dataSource: UITableViewDiffableDataSource<Section, String> = UITableViewDiffableDataSource(
     tableView: tableView!) { tableView, indexPath, itemIdentifier in
@@ -46,10 +47,22 @@ class AddFeedTableView: NSObject, UITableViewDelegate {
   }
   
   
+  // -MARK: - Dependencies -
+  
+  private let deleteGroupUseCase: DeleteGroupUseCase =
+  AppDelegate.DIContainer.resolve(DeleteGroupUseCase.self)!
+  
+  
   // -MARK: - Functions -
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    selectedRowIndexPath = indexPath
+    if selectedRowIndexPath == indexPath {
+      tableView.cellForRow(at: indexPath)?.isSelected = false
+      selectedRowIndexPath = nil
+    }
+    else {
+      selectedRowIndexPath = indexPath
+    }
   }
   
   func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
@@ -81,5 +94,37 @@ class AddFeedTableView: NSObject, UITableViewDelegate {
     dataSource.apply(snapshot, animatingDifferences: true)
   }
   
+  func tableView(_ tableView: UITableView,
+                 contextMenuConfigurationForRowAt indexPath: IndexPath,
+                 point: CGPoint) -> UIContextMenuConfiguration? {
+    let groupImage = UIImage(systemName: "folder.circle")!
+      .withTintColor(.systemRed, renderingMode: .alwaysOriginal)
+    
+    let group = self.groups![indexPath.row]
+    
+    guard group.title != "Default Group"
+    else {
+      return nil
+    }
+    
+    return UIContextMenuConfiguration(
+      identifier: nil,
+      previewProvider: nil) { _ in
+        let deleteAction = UIAction(
+          title: "Delete Group",
+          image: groupImage) { _ in
+            self.deleteGroupUseCase.execute(forGroup: group)
+            self.groups!.remove(at: indexPath.row)
+            
+            self.mainTableViewController.updateGroups(updateState: .localUpdate) { newGroups in
+              self.mainTableViewController.mainTableView.groups = newGroups
+              self.mainTableViewController.mainTableView.updatePresentation()
+            }
+            self.configureInitialSnapshot()
+          }
+        
+        return UIMenu(title: "", image: nil, children: [deleteAction])
+      }
+  }
   
 }

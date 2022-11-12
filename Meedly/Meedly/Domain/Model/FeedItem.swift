@@ -37,6 +37,6 @@ struct FeedItem: Identifiable, Equatable, Hashable {
   }
   
   static func == (lhs: FeedItem, rhs: FeedItem) -> Bool {
-    return lhs.link == rhs.link
+    return lhs.hashValue == rhs.hashValue
   }
 }

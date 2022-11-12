@@ -33,6 +33,9 @@ class SideBarCollectionViewCell: UICollectionViewCell {
       collectionImageView.pin_setImage(from: feed.imageUrl!)
     }
     collectionImageView.layer.cornerRadius = 10
-    collectionImageView.backgroundColor = UIColor.white
+    collectionImageView.backgroundColor = .lightGray
+    
+    collectionImageView.layer.borderWidth = 2.5
+    collectionImageView.layer.borderColor = UIColor(named: "mainColor")!.cgColor
   }
 }

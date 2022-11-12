@@ -20,6 +20,7 @@ class MainTableViewController: UITableViewController {
   @IBOutlet weak var presentationStyleButton: UIButton!
   @IBOutlet weak var markViewedButton: UIButton!
   
+  
   // -MARK: - Properties -
   
   lazy var mainTableView: MainTableView = AppDelegate.DIContainer.resolve(MainTableView.self)!
@@ -49,11 +50,7 @@ class MainTableViewController: UITableViewController {
     
     setPresentationStyleButton()
     
-    setReadButton()
-  }
-  
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
+    setMarkAsReadButton()
     
     updateGroups(updateState: .initialUpdate) { [weak self] newGroups in
       self?.mainTableView.groups = newGroups
@@ -130,6 +127,7 @@ class MainTableViewController: UITableViewController {
       }
       destinaitonVC.groups = self.mainTableView.groups!.filter { $0.feeds != nil &&
         !($0.feeds!.isEmpty) }
+      destinaitonVC.mainTableViewController = self
       
     default:
       break
@@ -162,10 +160,6 @@ class MainTableViewController: UITableViewController {
   
   
   // MARK: - IBActions -
-  
-  @IBAction func checkActivity(_ sender: Any) {
-    
-  }
   
   @IBAction func update(_ sender: Any) {
     updateGroups(updateState: .regularUpdate) { [weak self] newGroups in
@@ -230,14 +224,14 @@ class MainTableViewController: UITableViewController {
     presentationStyleButton.changesSelectionAsPrimaryAction = true
   }
   
-  func setReadButton() {
+  func setMarkAsReadButton() {
     let menuClosure = {(action: UIAction) in
       self.markAsReadedOldUseCase.execute(forTimePeriod: action.title)
+      
       self.updateGroups(updateState: .initialUpdate) { [weak self] newGroups in
         self?.mainTableView.groups = newGroups
         self?.mainTableView.configureInitialSnapshot(withGroups: newGroups)
       }
-      self.markViewedButton.titleLabel!.text = ""
     }
     markViewedButton.menu =
     UIMenu(title: "Set as read news, older than:",
@@ -246,12 +240,13 @@ class MainTableViewController: UITableViewController {
             UIAction(title: "One Day", handler: menuClosure),
             UIAction(title: "One Week", handler: menuClosure),
             UIAction(title: "One Month", handler: menuClosure),
-            UIAction(title: "Non", handler: menuClosure),
+            UIAction(title: "Non", state: .on, handler: menuClosure),
            ])
     markViewedButton.showsMenuAsPrimaryAction = true
     markViewedButton.changesSelectionAsPrimaryAction = true
   }
 }
+
 
 // -MARK: - Extensions -
 
@@ -276,7 +271,8 @@ extension MainTableViewController: UIContextMenuInteractionDelegate {
   
   func makeAllAction() -> UIAction {
     let allAttributes = UIMenuElement.Attributes()
-    let allImage = UIImage(systemName: "books.vertical")
+    let allImage = UIImage(systemName: "books.vertical")!
+      .withTintColor(UIColor(named: "mainColor")!, renderingMode: .alwaysOriginal)
     
     return UIAction(
       title: "Show All",
@@ -297,7 +293,8 @@ extension MainTableViewController: UIContextMenuInteractionDelegate {
   
   func makeUnreadOnlyAction() -> UIAction {
     let unreadAttributes = UIMenuElement.Attributes()
-    let unreadImage = UIImage(systemName: "bookmark.slash")
+    let unreadImage = UIImage(systemName: "bookmark.slash")!
+      .withTintColor(UIColor(named: "mainColor")!, renderingMode: .alwaysOriginal)
     
     return UIAction(
       title: "Unread Only",
@@ -318,7 +315,8 @@ extension MainTableViewController: UIContextMenuInteractionDelegate {
   
   func makeNewFirstAction() -> UIAction {
     let newFirstAttributes = UIMenuElement.Attributes()
-    let newFirstImage = UIImage(systemName: "dock.arrow.down.rectangle")
+    let newFirstImage = UIImage(systemName: "dock.arrow.down.rectangle")!
+      .withTintColor(UIColor(named: "mainColor")!, renderingMode: .alwaysOriginal)
     
     return UIAction(
       title: "New First",
@@ -339,7 +337,8 @@ extension MainTableViewController: UIContextMenuInteractionDelegate {
   
   func makeOldFirstAction() -> UIAction {
     let oldFirstAttributes = UIMenuElement.Attributes()
-    let oldFirstImage = UIImage(systemName: "dock.arrow.up.rectangle")
+    let oldFirstImage = UIImage(systemName: "dock.arrow.up.rectangle")!
+      .withTintColor(UIColor(named: "mainColor")!, renderingMode: .alwaysOriginal)
     
     return UIAction(
       title: "Old First",
@@ -366,9 +365,12 @@ extension MainTableViewController: UIContextMenuInteractionDelegate {
         handler: updatePresentationBySort(from:))
     }
     
+    let oldFirstImage = UIImage(systemName: "folder.circle")!
+      .withTintColor(UIColor(named: "mainColor")!, renderingMode: .alwaysOriginal)
+    
     return UIMenu(
       title: "Group...",
-      image: UIImage(systemName: "folder.circle"),
+      image: oldFirstImage,
       children: groupsActions)
   }
   

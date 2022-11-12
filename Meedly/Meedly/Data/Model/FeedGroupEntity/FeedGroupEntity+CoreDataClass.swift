@@ -21,13 +21,15 @@ public class FeedGroupEntity: NSManagedObject {
     var modelGroups = [FeedGroup]()
     
     for entity in entities! {
-      modelGroups.append(FeedGroup(title: entity.title,
-                                   feeds: FeedEntity
-        .convertToDomainFeeds(withEntities: entity.feeds),
-                                   items: FeedItemEntity
-        .convertToDomainItems(withEntities: entity.items),
-                                   id: entity.id)
-      )
+      if !entity.isFault {
+        modelGroups.append(FeedGroup(title: entity.title,
+                                     feeds: FeedEntity
+          .convertToDomainFeeds(withEntities: entity.feeds),
+                                     items: FeedItemEntity
+          .convertToDomainItems(withEntities: entity.items),
+                                     id: entity.id)
+        )
+      }
     }
     
     return modelGroups
