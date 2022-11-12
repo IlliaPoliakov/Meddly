@@ -14,12 +14,18 @@ enum UpdateState {
 
 class MainTableViewController: UITableViewController {
   
+  // MARK: - IBOutlets -
+  
+  @IBOutlet weak var presentationStyleButton: UIBarButtonItem!
+  @IBOutlet weak var markViewedButton: UIBarButtonItem!
+  
+  
   // -MARK: - Properties -
   
   lazy var mainTableView: MainTableView = AppDelegate.DIContainer.resolve(MainTableView.self)!
-  var updateState: UpdateState = .initialUpdate
-  
+  var updateState: UpdateState = .initialUpdate  
 
+  
   // -MARK: - Dependencies -
   
   private let getFeedGroupsUseCase: GetFeedGroupsUseCase =
@@ -28,27 +34,24 @@ class MainTableViewController: UITableViewController {
   AppDelegate.DIContainer.resolve(MarkAsReadedUseCase.self)!
   
   
-  
   // -MARK: - LifeCycle -
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    mainTableView.tableView = tableView
-    
-    tableView.dataSource = mainTableView.dataSource
-    tableView.delegate = mainTableView
-    
-    tableView.rowHeight = UITableView.automaticDimension
-    tableView.estimatedRowHeight = 600
+    setTableView()
     
     updateState = .initialUpdate
+    
+    setSortButton()
+    
+    setPresentationStyleButton()
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
-    updateGroups(updateState: updateState) { [weak self] newGroups in
+    updateGroups(updateState: .initialUpdate) { [weak self] newGroups in
       self?.mainTableView.groups = newGroups
       self?.mainTableView.configureInitialSnapshot(withGroups: newGroups)
     }
@@ -116,18 +119,6 @@ class MainTableViewController: UITableViewController {
       tableView.cellForRow(at: selectedIndex!)?.contentView.alpha = 0.5
       markAsReadedUseCase.execute(forFeedItem: feedItem)
       
-    case "SortVCSegueId":
-      guard let destinaitonVC = segue.destination as? SortViewController
-      else {
-        return
-      }
-      let groupNames = self.mainTableView.groups?.map { $0.title }
-      if groupNames != nil {
-        for groupName in groupNames! {
-          destinaitonVC.groups.append(groupName)
-        }
-      }
-      
     case "id":
       guard let destinaitonVC = segue.destination as? SideBarViewController
       else {
@@ -143,7 +134,7 @@ class MainTableViewController: UITableViewController {
     
   @IBAction func unwind( _ segue: UIStoryboardSegue) {
     switch segue.identifier {
-    case "unwindToMain":
+    case "unwindToMainFromAddVC":
       guard let previousVC = segue.source as? AddFeedViewController
       else {
         fatalError("Can't perform segue from AddVC")
@@ -158,34 +149,6 @@ class MainTableViewController: UITableViewController {
         self?.mainTableView.configureInitialSnapshot(withGroups: newGroups)
         
         self?.updateState = .regularUpdate
-      }
-      
-    case "unwindFromSort":
-      guard let previousVC = segue.source as? SortViewController
-      else {
-        fatalError("Can't perform segue from AddVC")
-      }
-      
-      let chosenPresenationType = previousVC.chosenPresentationType
-      
-      self.mainTableView.presentationType = chosenPresenationType
-      self.mainTableView.updatePresentation()
-      
-      switch chosenPresenationType {
-      case "Show All":
-        self.title = "All Your Posts"
-        
-      case "New First":
-        self.title = "Fresh Posts"
-          
-      case "Old First":
-        self.title = "Old Posts"
-            
-      case "Unread Only":
-        self.title = "Unread Posts"
-            
-      default:
-        self.title = chosenPresenationType
       }
       
     default:
@@ -204,10 +167,6 @@ class MainTableViewController: UITableViewController {
     
   }
   
-  @IBAction func configureTypeOfPresentation(_ sender: Any) {
-    
-  }
-  
   @IBAction func markAsReaded(_ sender: Any) {
     
   }
@@ -220,7 +179,7 @@ class MainTableViewController: UITableViewController {
   }
   
   
-  // -MARK: - Supplementary -
+  // -MARK: - Supplementary Functions -
   
   func updateGroups(updateState state: UpdateState, _ completion: @escaping ([FeedGroup]?) -> Void){
     getFeedGroupsUseCase.execute(updateState: state) { loadedGroups, errorMessage in
@@ -233,21 +192,176 @@ class MainTableViewController: UITableViewController {
     }
   }
   
+  func setTableView() {
+    mainTableView.tableView = tableView
+    
+    tableView.dataSource = mainTableView.dataSource
+    tableView.delegate = mainTableView
+    
+    tableView.rowHeight = UITableView.automaticDimension
+    tableView.estimatedRowHeight = 600
+  }
+  
+  func setSortButton() {
+    let button: UIButton = UIButton()
+    button.setImage(UIImage(systemName: "arrow.up.and.down.text.horizontal"), for: .normal)
+    button.frame = CGRectMake(0, 0, 40, 40)
+    button.tintColor = UIColor(named: "mainColor")
+    let interaction = UIContextMenuInteraction(delegate: self)
+    button.addInteraction(interaction)
+    let barButtonItem: UIBarButtonItem = UIBarButtonItem()
+    barButtonItem.customView = button
+
+    self.toolbarItems!.remove(at: 3)
+    self.toolbarItems!.insert(barButtonItem, at: 3)
+  }
+  
+  func setPresentationStyleButton() {
+    
+  }
 }
 
 // -MARK: - Extensions -
 
 extension MainTableViewController: UIContextMenuInteractionDelegate {
-  func contextMenuInteraction(
-    _ interaction: UIContextMenuInteraction,
-    configurationForMenuAtLocation location: CGPoint)
+  func contextMenuInteraction(_ interaction: UIContextMenuInteraction,
+                              configurationForMenuAtLocation location: CGPoint)
   -> UIContextMenuConfiguration? {
+    
     return UIContextMenuConfiguration(
       identifier: nil,
       previewProvider: nil,
       actionProvider: { _ in
-        let children: [UIMenuElement] = []
-        return UIMenu(title: "", children: children)
+        let all = self.makeAllAction()
+        let newFirst = self.makeNewFirstAction()
+        let oldFirst = self.makeOldFirstAction()
+        let unreadOnly = self.makeUnreadOnlyAction()
+        let byGroups = self.makeGroupsMenu()
+        let children: [UIMenuElement] = [all, unreadOnly, newFirst, oldFirst, byGroups]
+        return UIMenu(title: "Sort presentation:", children: children)
       })
   }
+  
+  func makeAllAction() -> UIAction {
+    let allAttributes = UIMenuElement.Attributes()
+    let allImage = UIImage(systemName: "books.vertical")
+    
+    return UIAction(
+      title: "Show All",
+      image: allImage,
+      identifier: nil,
+      attributes: allAttributes) { _ in
+        guard self.mainTableView.presentationType != "Show All"
+        else {
+          return
+        }
+        
+        self.mainTableView.presentationType = "Show All"
+        self.mainTableView.updatePresentation()
+        
+        self.title = "Show All"
+      }
+  }
+  
+//  if self.mainTableView.presentationState == .textOnly {
+//    self.mainTableView.presentationState = .convinient
+//    self.mainTableView.tableView.reloadData()
+//  }
+  
+  func makeUnreadOnlyAction() -> UIAction {
+    let unreadAttributes = UIMenuElement.Attributes()
+    let unreadImage = UIImage(systemName: "bookmark.slash")
+    
+    return UIAction(
+      title: "Unread Only",
+      image: unreadImage,
+      identifier: nil,
+      attributes: unreadAttributes) { _ in
+        guard self.mainTableView.presentationType != "Unread Only"
+        else {
+          return
+        }
+        
+        self.mainTableView.presentationType = "Unread Only"
+        self.mainTableView.updatePresentation()
+        
+        self.title = "Unread Only"
+      }
+  }
+  
+  func makeNewFirstAction() -> UIAction {
+    let newFirstAttributes = UIMenuElement.Attributes()
+    let newFirstImage = UIImage(systemName: "dock.arrow.down.rectangle")
+    
+    return UIAction(
+      title: "New First",
+      image: newFirstImage,
+      identifier: nil,
+      attributes: newFirstAttributes) { _ in
+        guard self.mainTableView.presentationType != "New First"
+        else {
+          return
+        }
+        
+        self.mainTableView.presentationType = "New First"
+        self.mainTableView.updatePresentation()
+        
+        self.title = "New First"
+      }
+  }
+  
+  func makeOldFirstAction() -> UIAction {
+    let oldFirstAttributes = UIMenuElement.Attributes()
+    let oldFirstImage = UIImage(systemName: "dock.arrow.up.rectangle")
+    
+    return UIAction(
+      title: "Old First",
+      image: oldFirstImage,
+      identifier: nil,
+      attributes: oldFirstAttributes) { _ in
+        guard self.mainTableView.presentationType != "Old First"
+        else {
+          return
+        }
+        
+        self.mainTableView.presentationType = "Old First"
+        self.mainTableView.updatePresentation()
+        
+        self.title = "Old First"
+      }
+  }
+  
+  func makeGroupsMenu() -> UIMenu {
+    let groupsActions = mainTableView.groups!.enumerated().map { index, group in
+      return UIAction(
+        title: group.title,
+        identifier: UIAction.Identifier("\(index + 1)"),
+        handler: updatePresentationBySort(from:))
+    }
+    
+    return UIMenu(
+      title: "Group...",
+      image: UIImage(systemName: "folder.circle"),
+      children: groupsActions)
+  }
+  
+  func updatePresentationBySort(from action: UIAction) {
+    guard let index = Int(action.identifier.rawValue)
+    else {
+      return
+    }
+    
+    let chosenPresentationType = mainTableView.groups?[index - 1].title ?? "[no presentation type]"
+    
+    guard mainTableView.presentationType != chosenPresentationType
+    else {
+      return
+    }
+    
+    self.mainTableView.presentationType = chosenPresentationType
+    self.mainTableView.updatePresentation()
+    
+    self.title = chosenPresentationType
+  }
+  
 }
