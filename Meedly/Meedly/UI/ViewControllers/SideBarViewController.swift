@@ -44,6 +44,8 @@ class SideBarViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     collectionVIew.dataSource = self
     collectionVIew.delegate = self
+    collectionVIew.backgroundColor = UIColor(named: "mainColor")!.withAlphaComponent(0.1)
+    collectionVIew.layer.cornerRadius = 10
     
     avatarImage.layer.cornerRadius = avatarImage.bounds.height / 2
     avatarImage.layer.masksToBounds = true
@@ -105,8 +107,10 @@ class SideBarViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     if message != "" {
       let imageView = UIImageView(frame: CGRect(x: 105, y: 50, width: 60, height: 60))
-      imageView.layer.cornerRadius = 10
       imageView.pin_setImage(from: feed.imageUrl)
+      imageView.layer.cornerRadius = 0
+      imageView.layer.borderWidth = 2.5
+      imageView.layer.borderColor = UIColor(named: "mainColor")!.cgColor
       alert.view.addSubview(imageView)
     }
     
@@ -133,6 +137,8 @@ class SideBarViewController: UIViewController, UICollectionViewDelegate, UIColle
       headerView.layer.borderColor = UIColor(named: "mainColor")!.cgColor
       headerView.layer.borderWidth = 2.5
       headerView.layer.cornerRadius = 10
+      headerView.layer.backgroundColor = UIColor(named: "mainColor")!
+        .withAlphaComponent(0.2).cgColor
       
       sectionIndexPath = indexPath
       

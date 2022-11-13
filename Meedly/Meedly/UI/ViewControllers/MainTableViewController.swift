@@ -24,7 +24,7 @@ class MainTableViewController: UITableViewController {
   // -MARK: - Properties -
   
   lazy var mainTableView: MainTableView = AppDelegate.DIContainer.resolve(MainTableView.self)!
-  var updateState: UpdateState = .initialUpdate  
+  var updateState: UpdateState = .initialUpdate
 
   
   // -MARK: - Dependencies -

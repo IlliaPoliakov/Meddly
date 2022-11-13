@@ -55,6 +55,7 @@ class FeedRepositoryImpl: FeedRepository {
                 [weak self] data, error in
                 
                 if data != nil {
+                  
                   let parser = FeedParser(data: data!)
                   let resultFeed = parser.parse()
                   
@@ -84,17 +85,17 @@ class FeedRepositoryImpl: FeedRepository {
                           let link: URL = URL(string: entry.links!.first!.attributes!.href!)!
 
                           if !(group.items?.contains(where: { $0.title == entry.title}) ?? false) {
-
-                            self?.localDataSource
-                              .saveNewFeedItem(withTitle: entry.title ?? "[no title]",
-                                               withDescription: description,
-                                               withLink: link,
-                                               withImageUrl: imageUrl,
-                                               withPubDate: date,
-                                               withGroup: group,
-                                               withParentFeedLink: groupFeed.link)
+                            if !groupFeed.isFault {
+                              self?.localDataSource
+                                .saveNewFeedItem(withTitle: entry.title ?? "[no title]",
+                                                 withDescription: description,
+                                                 withLink: link,
+                                                 withImageUrl: imageUrl,
+                                                 withPubDate: date,
+                                                 withGroup: group,
+                                                 withParentFeedLink: groupFeed.link)
+                            }
                           }
-
                         }
                       }
                       
@@ -109,14 +110,16 @@ class FeedRepositoryImpl: FeedRepository {
                           let date = item.datePublished == nil ? "[no date]" :
                           DateFormatter().string(from: item.datePublished!)
                           if !(group.items?.contains(where: { $0.title == item.title}) ?? false) {
-                            self?.localDataSource
-                              .saveNewFeedItem(withTitle: item.title ?? "[no title]",
-                                               withDescription: item.summary ?? "[no descripiton]",
-                                               withLink: URL(string: item.url!)!,
-                                               withImageUrl: imageUrl,
-                                               withPubDate: date,
-                                               withGroup: group,
-                                               withParentFeedLink: groupFeed.link)
+                            if !groupFeed.isFault {
+                              self?.localDataSource
+                                .saveNewFeedItem(withTitle: item.title ?? "[no title]",
+                                                 withDescription: item.summary ?? "[no descripiton]",
+                                                 withLink: URL(string: item.url!)!,
+                                                 withImageUrl: imageUrl,
+                                                 withPubDate: date,
+                                                 withGroup: group,
+                                                 withParentFeedLink: groupFeed.link)
+                            }
                           }
                         }
                       }

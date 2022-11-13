@@ -12,6 +12,9 @@ class DependencyInjectionContainer {
   public static var shared : Container = Container()
   
   public static func initialize(){
+    
+    // -MARK: - Data -
+    
     DependencyInjectionContainer.shared.register(DataBaseDataSource.self) { _ in DataBaseDataSource()}
     DependencyInjectionContainer.shared.register(NetworkDataSource.self) { _ in NetworkDataSource()}
     

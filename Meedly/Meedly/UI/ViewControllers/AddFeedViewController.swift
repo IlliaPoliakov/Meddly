@@ -38,6 +38,8 @@ class AddFeedViewController: UIViewController, UITableViewDelegate {
     
     tableView.dataSource = addFeedTableView.dataSource
     tableView.delegate = addFeedTableView
+    tableView.backgroundColor = UIColor(named: "mainColor")!.withAlphaComponent(0.1)
+    tableView.layer.cornerRadius = 15
     
     self.hideKeyboardWhenTappedAround()
     
@@ -52,9 +54,9 @@ class AddFeedViewController: UIViewController, UITableViewDelegate {
     let alert = UIAlertController(title: "New Group", message: "Enter a Group Name:", preferredStyle: .alert)
     alert.addTextField { _ in }
     
-    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+    let cancelAction = UIAlertAction(title: "Cancel", style: .default)
     
-    let addAction = UIAlertAction(title: "Add", style: .default) { [self, weak alert] (_) in
+    let addAction = UIAlertAction(title: "Add", style: .cancel) { [self, weak alert] (_) in
       
       guard let groupName = alert!.textFields![0].text,
             groupName != ""
@@ -84,8 +86,8 @@ class AddFeedViewController: UIViewController, UITableViewDelegate {
       }
     }
     
-    alert.addAction(cancelAction)
     alert.addAction(addAction)
+    alert.addAction(cancelAction)
     
     self.present(alert, animated: true, completion: nil)
   }
