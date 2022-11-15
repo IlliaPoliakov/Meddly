@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 
 class CoreDataStack {
-  static let shared = CoreDataStack(modelName: "NewCoreDataModel")
+  static let shared = CoreDataStack(modelName: "FeedlyCoreDataModel")
   
   private let modelName: String
   
@@ -20,7 +20,7 @@ class CoreDataStack {
   lazy var managedContext: NSManagedObjectContext = {
     return self.storeContainer.viewContext
   }()
-
+  
   private lazy var storeContainer: NSPersistentContainer = {
     
     let container = NSPersistentContainer(name: self.modelName)

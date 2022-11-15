@@ -2,7 +2,7 @@
 //  FeedItemEntity+CoreDataClass.swift
 //  Meedly
 //
-//  Created by Illia Poliakov on 10.11.22.
+//  Created by Illia Poliakov on 15.11.22.
 //
 //
 
@@ -11,27 +11,17 @@ import CoreData
 
 @objc(FeedItemEntity)
 public class FeedItemEntity: NSManagedObject {
-  static func convertToDomainItems(withEntities entities:
-                                   [FeedItemEntity]?) -> [FeedItem]? {
+  
+  static func convertToDomain(fromEntities entities: [FeedItemEntity]?) -> [FeedItem]? {
     guard entities != nil
     else {
       return nil
     }
-    
-    var modelItems = [FeedItem]()
-    
-    for entity in entities! {
-      modelItems.append(FeedItem(feedItemDescription: entity.feedItemDescription,
-                                 imageUrl: entity.imageUrl,
-                                 pubDate: entity.pubDate,
-                                 title: entity.title,
-                                 link: entity.link,
-                                 id: entity.id,
-                                 isViewed: entity.isViewed,
-                                 parentGroupTitle: entity.parentGroup.title)
-      )
+  
+    return entities!.map { entity in
+      FeedItem(feedDescription: entity.itemDescription, imageUrl: entity.imageUrl,
+               pubDate: entity.pubDate, title: entity.title, link: entity.link,
+               isViewed: entity.isViewed, isLiked: entity.isLiked, parentGroup: entity.parentGroup)
     }
-    
-    return modelItems
   }
 }

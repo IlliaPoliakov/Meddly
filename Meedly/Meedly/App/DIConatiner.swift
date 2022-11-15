@@ -32,12 +32,6 @@ class DependencyInjectionContainer {
     
     // -MARK: - UseCases -
     
-    DependencyInjectionContainer.shared.register(GetFeedGroupsUseCase.self) { resolver in
-      GetFeedGroupsUseCase(repo: resolver.resolve(FeedRepository.self)!)
-    }
-    DependencyInjectionContainer.shared.register(SaveNewGroupUseCase.self) { resolver in
-      SaveNewGroupUseCase(repo: resolver.resolve(FeedRepository.self)!)
-    }
     DependencyInjectionContainer.shared.register(SaveNewFeedUseCase.self) { resolver in
       SaveNewFeedUseCase(repo: resolver.resolve(FeedRepository.self)!)
     }

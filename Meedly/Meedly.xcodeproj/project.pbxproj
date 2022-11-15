@@ -13,20 +13,16 @@
 		F2347487290FAEF60027C0A2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2347486290FAEF60027C0A2 /* Extensions.swift */; };
 		F23B6CD6291F98DB00AD3BAD /* MarkAsReadedOldUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23B6CD5291F98DB00AD3BAD /* MarkAsReadedOldUseCase.swift */; };
 		F25708CA290C4A2B005FBE1D /* ItemDescripitonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25708C9290C4A2B005FBE1D /* ItemDescripitonViewController.swift */; };
-		F2574FEF290082F800CF540C /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2574FEE290082F800CF540C /* Connectivity.swift */; };
 		F265B020290ED5F5006EA513 /* AddFeedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F265B01F290ED5F5006EA513 /* AddFeedTableView.swift */; };
 		F2929C112906E24B006B96CF /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2929C102906E24B006B96CF /* Feed.swift */; };
-		F2929C132906E296006B96CF /* FeedGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2929C122906E296006B96CF /* FeedGroup.swift */; };
 		F2932B8E2906D1B300581568 /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2932B8D2906D1B300581568 /* FeedItem.swift */; };
-		F2A31C13290EF6A100EC5B79 /* GetFeedGrouspUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A31C12290EF6A100EC5B79 /* GetFeedGrouspUseCase.swift */; };
-		F2B86315291C5B0A000C3BBA /* NewCoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F2B86313291C5B0A000C3BBA /* NewCoreDataModel.xcdatamodeld */; };
-		F2B8631C291C5CB1000C3BBA /* FeedItemEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B86316291C5CB1000C3BBA /* FeedItemEntity+CoreDataClass.swift */; };
-		F2B8631D291C5CB1000C3BBA /* FeedItemEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B86317291C5CB1000C3BBA /* FeedItemEntity+CoreDataProperties.swift */; };
-		F2B8631E291C5CB1000C3BBA /* FeedEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B86318291C5CB1000C3BBA /* FeedEntity+CoreDataClass.swift */; };
-		F2B8631F291C5CB1000C3BBA /* FeedEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B86319291C5CB1000C3BBA /* FeedEntity+CoreDataProperties.swift */; };
-		F2B86320291C5CB1000C3BBA /* FeedGroupEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B8631A291C5CB1000C3BBA /* FeedGroupEntity+CoreDataClass.swift */; };
-		F2B86321291C5CB1000C3BBA /* FeedGroupEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B8631B291C5CB1000C3BBA /* FeedGroupEntity+CoreDataProperties.swift */; };
 		F2B86323291C6BA1000C3BBA /* SideBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B86322291C6BA1000C3BBA /* SideBarViewController.swift */; };
+		F2B9BC03292403DF00BB0E47 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B9BC02292403DF00BB0E47 /* Constants.swift */; };
+		F2B9BC0629240F9B00BB0E47 /* FeedlyCoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F2B9BC0429240F9B00BB0E47 /* FeedlyCoreDataModel.xcdatamodeld */; };
+		F2B9BC0B292415E400BB0E47 /* FeedEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B9BC07292415E400BB0E47 /* FeedEntity+CoreDataClass.swift */; };
+		F2B9BC0C292415E400BB0E47 /* FeedEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B9BC08292415E400BB0E47 /* FeedEntity+CoreDataProperties.swift */; };
+		F2B9BC0D292415E400BB0E47 /* FeedItemEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B9BC09292415E400BB0E47 /* FeedItemEntity+CoreDataClass.swift */; };
+		F2B9BC0E292415E400BB0E47 /* FeedItemEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B9BC0A292415E400BB0E47 /* FeedItemEntity+CoreDataProperties.swift */; };
 		F2C4B9F428F7269500359E5D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4B9F328F7269500359E5D /* AppDelegate.swift */; };
 		F2C4B9F628F7269500359E5D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4B9F528F7269500359E5D /* SceneDelegate.swift */; };
 		F2C4B9FB28F7269500359E5D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2C4B9F928F7269500359E5D /* Main.storyboard */; };
@@ -44,7 +40,6 @@
 		F2CD63DC291C269D003B48BD /* DeleteGroupUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CD63DB291C269D003B48BD /* DeleteGroupUseCase.swift */; };
 		F2CD63DE291C26B0003B48BD /* DeleteFeedUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CD63DD291C26B0003B48BD /* DeleteFeedUseCase.swift */; };
 		F2E2D7F3290D9C720019B5F7 /* MainTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E2D7F2290D9C720019B5F7 /* MainTableView.swift */; };
-		F2E41FAC2901CC1500FCA844 /* SaveNewGroupUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E41FAB2901CC1500FCA844 /* SaveNewGroupUseCase.swift */; };
 		F2E41FB229020A4700FCA844 /* SaveNewFeedUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E41FB129020A4700FCA844 /* SaveNewFeedUseCase.swift */; };
 		F2F1E56C2905D2AC00EE942A /* DataBaseDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F1E56B2905D2AC00EE942A /* DataBaseDataSource.swift */; };
 		F2F5F959291DA07D00FD4E24 /* SideBarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F5F958291DA07D00FD4E24 /* SideBarCollectionViewCell.swift */; };
@@ -60,20 +55,16 @@
 		F2347486290FAEF60027C0A2 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		F23B6CD5291F98DB00AD3BAD /* MarkAsReadedOldUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkAsReadedOldUseCase.swift; sourceTree = "<group>"; };
 		F25708C9290C4A2B005FBE1D /* ItemDescripitonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDescripitonViewController.swift; sourceTree = "<group>"; };
-		F2574FEE290082F800CF540C /* Connectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connectivity.swift; sourceTree = "<group>"; };
 		F265B01F290ED5F5006EA513 /* AddFeedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedTableView.swift; sourceTree = "<group>"; };
 		F2929C102906E24B006B96CF /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
-		F2929C122906E296006B96CF /* FeedGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedGroup.swift; sourceTree = "<group>"; };
 		F2932B8D2906D1B300581568 /* FeedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
-		F2A31C12290EF6A100EC5B79 /* GetFeedGrouspUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFeedGrouspUseCase.swift; sourceTree = "<group>"; };
-		F2B86314291C5B0A000C3BBA /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
-		F2B86316291C5CB1000C3BBA /* FeedItemEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FeedItemEntity+CoreDataClass.swift"; path = "Meedly/Data/Model/FeedItemEntity/FeedItemEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		F2B86317291C5CB1000C3BBA /* FeedItemEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FeedItemEntity+CoreDataProperties.swift"; path = "Meedly/Data/Model/FeedItemEntity/FeedItemEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
-		F2B86318291C5CB1000C3BBA /* FeedEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FeedEntity+CoreDataClass.swift"; path = "Meedly/Data/Model/FeedEntity/FeedEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		F2B86319291C5CB1000C3BBA /* FeedEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FeedEntity+CoreDataProperties.swift"; path = "Meedly/Data/Model/FeedEntity/FeedEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
-		F2B8631A291C5CB1000C3BBA /* FeedGroupEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FeedGroupEntity+CoreDataClass.swift"; path = "Meedly/Data/Model/FeedGroupEntity/FeedGroupEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		F2B8631B291C5CB1000C3BBA /* FeedGroupEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FeedGroupEntity+CoreDataProperties.swift"; path = "Meedly/Data/Model/FeedGroupEntity/FeedGroupEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		F2B86322291C6BA1000C3BBA /* SideBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarViewController.swift; sourceTree = "<group>"; };
+		F2B9BC02292403DF00BB0E47 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		F2B9BC0529240F9B00BB0E47 /* FeedlyCoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FeedlyCoreDataModel.xcdatamodel; sourceTree = "<group>"; };
+		F2B9BC07292415E400BB0E47 /* FeedEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FeedEntity+CoreDataClass.swift"; path = "Meedly/Data/Model/FeedEntity/FeedEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		F2B9BC08292415E400BB0E47 /* FeedEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FeedEntity+CoreDataProperties.swift"; path = "Meedly/Data/Model/FeedEntity/FeedEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		F2B9BC09292415E400BB0E47 /* FeedItemEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FeedItemEntity+CoreDataClass.swift"; path = "Meedly/Data/Model/FeedItemEntity/FeedItemEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		F2B9BC0A292415E400BB0E47 /* FeedItemEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FeedItemEntity+CoreDataProperties.swift"; path = "Meedly/Data/Model/FeedItemEntity/FeedItemEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		F2C4B9F028F7269500359E5D /* Meedly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Meedly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2C4B9F328F7269500359E5D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F2C4B9F528F7269500359E5D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -93,7 +84,6 @@
 		F2CD63DB291C269D003B48BD /* DeleteGroupUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteGroupUseCase.swift; sourceTree = "<group>"; };
 		F2CD63DD291C26B0003B48BD /* DeleteFeedUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteFeedUseCase.swift; sourceTree = "<group>"; };
 		F2E2D7F2290D9C720019B5F7 /* MainTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableView.swift; sourceTree = "<group>"; };
-		F2E41FAB2901CC1500FCA844 /* SaveNewGroupUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveNewGroupUseCase.swift; sourceTree = "<group>"; };
 		F2E41FB129020A4700FCA844 /* SaveNewFeedUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveNewFeedUseCase.swift; sourceTree = "<group>"; };
 		F2F1E56B2905D2AC00EE942A /* DataBaseDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseDataSource.swift; sourceTree = "<group>"; };
 		F2F5F958291DA07D00FD4E24 /* SideBarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -200,7 +190,6 @@
 			children = (
 				F2C4BA3E28F82E8200359E5D /* FeedItemEntity */,
 				F2C4BA3C28F82E6100359E5D /* FeedEntity */,
-				F2C4BA3D28F82E7200359E5D /* FeedGroupEntity */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -208,26 +197,17 @@
 		F2C4BA3C28F82E6100359E5D /* FeedEntity */ = {
 			isa = PBXGroup;
 			children = (
-				F2B86318291C5CB1000C3BBA /* FeedEntity+CoreDataClass.swift */,
-				F2B86319291C5CB1000C3BBA /* FeedEntity+CoreDataProperties.swift */,
+				F2B9BC07292415E400BB0E47 /* FeedEntity+CoreDataClass.swift */,
+				F2B9BC08292415E400BB0E47 /* FeedEntity+CoreDataProperties.swift */,
 			);
 			path = FeedEntity;
-			sourceTree = "<group>";
-		};
-		F2C4BA3D28F82E7200359E5D /* FeedGroupEntity */ = {
-			isa = PBXGroup;
-			children = (
-				F2B8631A291C5CB1000C3BBA /* FeedGroupEntity+CoreDataClass.swift */,
-				F2B8631B291C5CB1000C3BBA /* FeedGroupEntity+CoreDataProperties.swift */,
-			);
-			path = FeedGroupEntity;
 			sourceTree = "<group>";
 		};
 		F2C4BA3E28F82E8200359E5D /* FeedItemEntity */ = {
 			isa = PBXGroup;
 			children = (
-				F2B86316291C5CB1000C3BBA /* FeedItemEntity+CoreDataClass.swift */,
-				F2B86317291C5CB1000C3BBA /* FeedItemEntity+CoreDataProperties.swift */,
+				F2B9BC09292415E400BB0E47 /* FeedItemEntity+CoreDataClass.swift */,
+				F2B9BC0A292415E400BB0E47 /* FeedItemEntity+CoreDataProperties.swift */,
 			);
 			path = FeedItemEntity;
 			sourceTree = "<group>";
@@ -235,13 +215,11 @@
 		F2C4BA4028F830AD00359E5D /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
-				F2E41FAB2901CC1500FCA844 /* SaveNewGroupUseCase.swift */,
 				F2E41FB129020A4700FCA844 /* SaveNewFeedUseCase.swift */,
-				F2A31C12290EF6A100EC5B79 /* GetFeedGrouspUseCase.swift */,
+				F2CD63DD291C26B0003B48BD /* DeleteFeedUseCase.swift */,
 				F2CD63D9291BB905003B48BD /* MarkAsReadedUseCase.swift */,
 				F23B6CD5291F98DB00AD3BAD /* MarkAsReadedOldUseCase.swift */,
 				F2CD63DB291C269D003B48BD /* DeleteGroupUseCase.swift */,
-				F2CD63DD291C26B0003B48BD /* DeleteFeedUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -254,6 +232,7 @@
 				F2C4B9F528F7269500359E5D /* SceneDelegate.swift */,
 				F2256F1E290876A0003DA153 /* DIConatiner.swift */,
 				F2347486290FAEF60027C0A2 /* Extensions.swift */,
+				F2B9BC02292403DF00BB0E47 /* Constants.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -324,7 +303,7 @@
 			children = (
 				F2F1E56B2905D2AC00EE942A /* DataBaseDataSource.swift */,
 				F219374528FEFBA100AD5AF0 /* CoreDataStack.swift */,
-				F2B86313291C5B0A000C3BBA /* NewCoreDataModel.xcdatamodeld */,
+				F2B9BC0429240F9B00BB0E47 /* FeedlyCoreDataModel.xcdatamodeld */,
 			);
 			path = DataBaseDataSource;
 			sourceTree = "<group>";
@@ -333,7 +312,6 @@
 			isa = PBXGroup;
 			children = (
 				F2C4BA6628F9E38A00359E5D /* NetworkDataSource.swift */,
-				F2574FEE290082F800CF540C /* Connectivity.swift */,
 			);
 			path = NetworkDataSources;
 			sourceTree = "<group>";
@@ -343,7 +321,6 @@
 			children = (
 				F2932B8D2906D1B300581568 /* FeedItem.swift */,
 				F2929C102906E24B006B96CF /* Feed.swift */,
-				F2929C122906E296006B96CF /* FeedGroup.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -464,36 +441,31 @@
 			buildActionMask = 2147483647;
 			files = (
 				F2C4BA4C28F8AB7600359E5D /* MainTableViewController.swift in Sources */,
+				F2B9BC0C292415E400BB0E47 /* FeedEntity+CoreDataProperties.swift in Sources */,
 				F2929C112906E24B006B96CF /* Feed.swift in Sources */,
-				F2B86321291C5CB1000C3BBA /* FeedGroupEntity+CoreDataProperties.swift in Sources */,
-				F2B8631E291C5CB1000C3BBA /* FeedEntity+CoreDataClass.swift in Sources */,
-				F2929C132906E296006B96CF /* FeedGroup.swift in Sources */,
+				F2B9BC0629240F9B00BB0E47 /* FeedlyCoreDataModel.xcdatamodeld in Sources */,
 				F265B020290ED5F5006EA513 /* AddFeedTableView.swift in Sources */,
 				F2C4BA5528F97F5000359E5D /* MainTVCCustomCell.swift in Sources */,
 				F2CD63DC291C269D003B48BD /* DeleteGroupUseCase.swift in Sources */,
-				F2B8631C291C5CB1000C3BBA /* FeedItemEntity+CoreDataClass.swift in Sources */,
-				F2B8631F291C5CB1000C3BBA /* FeedEntity+CoreDataProperties.swift in Sources */,
 				F2F5F959291DA07D00FD4E24 /* SideBarCollectionViewCell.swift in Sources */,
 				F25708CA290C4A2B005FBE1D /* ItemDescripitonViewController.swift in Sources */,
 				F2C4BA4E28F8AE1C00359E5D /* AddFeedViewController.swift in Sources */,
+				F2B9BC0D292415E400BB0E47 /* FeedItemEntity+CoreDataClass.swift in Sources */,
+				F2B9BC0B292415E400BB0E47 /* FeedEntity+CoreDataClass.swift in Sources */,
 				F2932B8E2906D1B300581568 /* FeedItem.swift in Sources */,
-				F2B86320291C5CB1000C3BBA /* FeedGroupEntity+CoreDataClass.swift in Sources */,
+				F2B9BC0E292415E400BB0E47 /* FeedItemEntity+CoreDataProperties.swift in Sources */,
 				F23B6CD6291F98DB00AD3BAD /* MarkAsReadedOldUseCase.swift in Sources */,
 				F2256F1F290876A0003DA153 /* DIConatiner.swift in Sources */,
-				F2B86315291C5B0A000C3BBA /* NewCoreDataModel.xcdatamodeld in Sources */,
 				F2C4B9F428F7269500359E5D /* AppDelegate.swift in Sources */,
 				F2C4BA6728F9E38A00359E5D /* NetworkDataSource.swift in Sources */,
+				F2B9BC03292403DF00BB0E47 /* Constants.swift in Sources */,
 				F2E2D7F3290D9C720019B5F7 /* MainTableView.swift in Sources */,
 				F2B86323291C6BA1000C3BBA /* SideBarViewController.swift in Sources */,
-				F2A31C13290EF6A100EC5B79 /* GetFeedGrouspUseCase.swift in Sources */,
 				F219374628FEFBA100AD5AF0 /* CoreDataStack.swift in Sources */,
-				F2E41FAC2901CC1500FCA844 /* SaveNewGroupUseCase.swift in Sources */,
 				F2C4BA6528F9BB5000359E5D /* FeedRepositoryImpl.swift in Sources */,
-				F2B8631D291C5CB1000C3BBA /* FeedItemEntity+CoreDataProperties.swift in Sources */,
 				F2CD63DA291BB906003B48BD /* MarkAsReadedUseCase.swift in Sources */,
 				F2C95DEA290C3941000E36DD /* MainVCCustomCellNoImage.swift in Sources */,
 				F2C4B9F628F7269500359E5D /* SceneDelegate.swift in Sources */,
-				F2574FEF290082F800CF540C /* Connectivity.swift in Sources */,
 				F2CD63DE291C26B0003B48BD /* DeleteFeedUseCase.swift in Sources */,
 				F2347487290FAEF60027C0A2 /* Extensions.swift in Sources */,
 				F2F5F95B291DC17900FD4E24 /* CollectionReusableView.swift in Sources */,
@@ -720,13 +692,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		F2B86313291C5B0A000C3BBA /* NewCoreDataModel.xcdatamodeld */ = {
+		F2B9BC0429240F9B00BB0E47 /* FeedlyCoreDataModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				F2B86314291C5B0A000C3BBA /* CoreDataModel.xcdatamodel */,
+				F2B9BC0529240F9B00BB0E47 /* FeedlyCoreDataModel.xcdatamodel */,
 			);
-			currentVersion = F2B86314291C5B0A000C3BBA /* CoreDataModel.xcdatamodel */;
-			path = NewCoreDataModel.xcdatamodeld;
+			currentVersion = F2B9BC0529240F9B00BB0E47 /* FeedlyCoreDataModel.xcdatamodel */;
+			path = FeedlyCoreDataModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

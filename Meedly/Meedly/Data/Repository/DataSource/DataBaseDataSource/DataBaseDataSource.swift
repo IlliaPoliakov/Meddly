@@ -10,7 +10,7 @@ import UIKit
 
 class DataBaseDataSource {
   
-  // -MARK: - Properties -
+  // -MARK: - Dependencies -
   
   let coreDataStack = AppDelegate.DIContainer.resolve(CoreDataStack.self)!
   

@@ -7,24 +7,19 @@
 
 import Foundation
 
-struct Feed: Identifiable, Equatable, Hashable {
-  var id: UUID
+struct Feed: Hashable {
   var imageUrl: URL?
   var link: URL
   var title: String?
+  var parentGroup: String
   
   init(imageUrl: URL?,
        link: URL,
        title: String?,
-       id: UUID) {
+       parentGroup: String) {
     self.imageUrl = imageUrl
     self.link = link
     self.title = title
-    self.id = id
+    self.parentGroup = parentGroup
   }
-
-  static func == (lhs: Feed, rhs: Feed) -> Bool {
-    return lhs.link == rhs.link
-  }
-  
 }

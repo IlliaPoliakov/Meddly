@@ -6,37 +6,32 @@
 //
 
 import Foundation
-import UIKit
 
-struct FeedItem: Identifiable, Equatable, Hashable {
-  var feedItemDescription: String
+struct FeedItem: Hashable {
+  var feedDescription: String
   var imageUrl: URL?
-  var pubDate: String
+  var pubDate: Date
   var title: String
   var link: URL
   var isViewed: Bool
-  var id: UUID
-  var parentGroupTitle: String
+  var isLiked: Bool
+  var parentGroup: String
   
-  init(feedItemDescription: String,
-       imageUrl: URL? = nil,
-       pubDate: String,
+  init(feedDescription: String,
+       imageUrl: URL?,
+       pubDate: Date,
        title: String,
        link: URL,
-       id: UUID,
        isViewed: Bool,
-       parentGroupTitle: String) {
-    self.feedItemDescription = feedItemDescription
+       isLiked: Bool,
+       parentGroup: String) {
+    self.feedDescription = feedDescription
     self.imageUrl = imageUrl
     self.pubDate = pubDate
     self.title = title
     self.link = link
-    self.id = id
     self.isViewed = isViewed
-    self.parentGroupTitle = parentGroupTitle
-  }
-  
-  static func == (lhs: FeedItem, rhs: FeedItem) -> Bool {
-    return lhs.hashValue == rhs.hashValue
+    self.isLiked = isLiked
+    self.parentGroup = parentGroup
   }
 }
