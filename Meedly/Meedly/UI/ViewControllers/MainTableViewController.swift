@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Combine
 
 enum UpdateState {
   case initialUpdate
@@ -24,7 +23,7 @@ class MainTableViewController: UITableViewController {
   
   // -MARK: - Properties -
   
-  lazy var mainTableView: MainTableView = AppDelegate.DIContainer.resolve(MainTableView.self)! //fix no di
+  lazy var mainTableView: MainTableView = AppDelegate.DIContainer.resolve(MainTableView.self)!
   var updateState: UpdateState = .initialUpdate
 
   
@@ -173,18 +172,6 @@ class MainTableViewController: UITableViewController {
   // -MARK: - Supplementary Functions -
   
   func updateGroups(updateState state: UpdateState, _ completion: @escaping ([FeedGroup]?) -> Void){
-    let subs = AnySubscriber(receiveSubscription: <#T##((Combine.Subscription) -> Void)?#>,
-                             receiveValue: {
-      
-    },
-                             receiveCompletion: nil)
-    
-    getFeedGroupsUseCase.execute(updateState: updateState).receive(subscriber: <#T##S#>)
-    /*
-     
-     
-     */
-    
     getFeedGroupsUseCase.execute(updateState: state) { loadedGroups, errorMessage in
       
       completion(loadedGroups)
@@ -193,7 +180,6 @@ class MainTableViewController: UITableViewController {
         print("'\(errorMessage!)' occurred when downloading data.")
       }
     }
-    
   }
   
   func setTableView() {

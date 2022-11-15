@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Combine
 
 class GetFeedGroupsUseCase {
   private let repo: FeedRepository
@@ -18,10 +17,5 @@ class GetFeedGroupsUseCase {
   func execute(updateState state: UpdateState,
                _ completion: @escaping ([FeedGroup]?, String?) -> Void) {
     repo.getFeedGroups(updateState: state, completion)
-  }
-  
-  func execute(updateState state: UpdateState) -> PassthroughSubject<FeedGroup, Never> {
-    
-    return repo.getFeedGroups(updateState: state)
   }
 }

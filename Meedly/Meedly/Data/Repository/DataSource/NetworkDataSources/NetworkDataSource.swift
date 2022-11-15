@@ -6,18 +6,7 @@
 //
 
 import Foundation
-import Combine
 import Alamofire
-
-struct NetworkError: Error {
-  let initialError: AFError
-  let backendError: BackendError?
-}
-
-struct BackendError: Codable, Error {
-    var status: String
-    var message: String
-}
 
 class NetworkDataSource {
   
@@ -55,28 +44,8 @@ class NetworkDataSource {
     dataTask?.resume()
   }
   
-  func downloadData(withUrl url: URL) -> Future<Data, Never> {
-    return Future { promise in
-      
-    }
+  func parseData(withData data: Data) {
+    //her will live this monsterious parsing part from repo impl
   }
 
-//  func downloadData(fromUrl url: URL)
-//  -> AnPuyblisher<DataResponse<Data, NetworkError>, Never> {
-//    
-//    return AF.request(url, method: .get)
-//      .validate(statusCode: 200..<300)
-//      .publishData()
-//      .map { response in
-//        response.mapError { error in
-//          let backendError = response.data.flatMap { try? JSONDecoder().decode(BackendError.self,
-//                                                                               from: $0)}
-//          return NetworkError(initialError: error, backendError: backendError)
-//        }
-//      }
-//      .receive(on: DispatchQueue.global(qos: .userInitiated))
-//      .eraseToAnyPublisher()
-//  }
-  
-  
 }
