@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 
 struct FeedItem: Identifiable, Equatable, Hashable {
   var feedItemDescription: String

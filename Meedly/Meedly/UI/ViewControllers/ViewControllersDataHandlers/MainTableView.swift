@@ -6,13 +6,14 @@
 //
 
 import UIKit
+import Combine
 
-class MainTableView: NSObject, UITableViewDelegate {
+class MainTableView: NSObject, UITableViewDelegate, ObservableObject {
   
   // -MARK: - Properties -
   
   var tableView: UITableView
-  var groups: [FeedGroup]?
+  @Published var groups: [FeedGroup]?
   
   lazy var allItems: [FeedItem]? = groups?.flatMap { $0.items != nil ? $0.items! : [FeedItem]() }
   var presentationType: String = "Show All"

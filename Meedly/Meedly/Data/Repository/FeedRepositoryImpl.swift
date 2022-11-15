@@ -7,6 +7,7 @@
 
 import Foundation
 import FeedKit
+import Combine
 
 
 class FeedRepositoryImpl: FeedRepository {
@@ -24,6 +25,13 @@ class FeedRepositoryImpl: FeedRepository {
   
   
   // -MARK: - UseCase funcs -
+  
+  func getFeedGroups(updateState state: UpdateState) -> PassthroughSubject<FeedGroup, Never> {
+    let publisher = PassthroughSubject<FeedGroup, Never>()
+    
+    
+    return publisher
+  }
   
   func getFeedGroups(updateState state: UpdateState,
                      _ completion: @escaping ([FeedGroup]?, String?) -> Void) {
