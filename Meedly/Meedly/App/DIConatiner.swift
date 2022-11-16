@@ -15,12 +15,12 @@ class DependencyInjectionContainer {
     
     // -MARK: - Data -
     
+    DependencyInjectionContainer.shared.register(CoreDataStack.self) { _ in CoreDataStack.shared }
+    
     DependencyInjectionContainer.shared.register(DataBaseDataSource.self) { _ in DataBaseDataSource()}
     DependencyInjectionContainer.shared.register(NetworkDataSource.self) { _ in NetworkDataSource()}
     
-    DependencyInjectionContainer.shared.register(CoreDataStack.self) { _ in CoreDataStack.shared }
-    
-    DependencyInjectionContainer.shared.register(MainTableView.self) { _ in MainTableView(tableView: UITableView(), groups: nil) }
+    // -MARK: - Repositories -
     
     DependencyInjectionContainer.shared
       .register(FeedRepository.self) { resolver in

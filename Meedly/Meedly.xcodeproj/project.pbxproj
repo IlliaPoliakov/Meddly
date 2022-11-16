@@ -11,7 +11,6 @@
 		F219374628FEFBA100AD5AF0 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F219374528FEFBA100AD5AF0 /* CoreDataStack.swift */; };
 		F2256F1F290876A0003DA153 /* DIConatiner.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2256F1E290876A0003DA153 /* DIConatiner.swift */; };
 		F2347487290FAEF60027C0A2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2347486290FAEF60027C0A2 /* Extensions.swift */; };
-		F23B6CD6291F98DB00AD3BAD /* MarkAsReadedOldUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23B6CD5291F98DB00AD3BAD /* MarkAsReadedOldUseCase.swift */; };
 		F25708CA290C4A2B005FBE1D /* ItemDescripitonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25708C9290C4A2B005FBE1D /* ItemDescripitonViewController.swift */; };
 		F265B020290ED5F5006EA513 /* AddFeedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F265B01F290ED5F5006EA513 /* AddFeedTableView.swift */; };
 		F2929C112906E24B006B96CF /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2929C102906E24B006B96CF /* Feed.swift */; };
@@ -23,6 +22,8 @@
 		F2B9BC0C292415E400BB0E47 /* FeedEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B9BC08292415E400BB0E47 /* FeedEntity+CoreDataProperties.swift */; };
 		F2B9BC0D292415E400BB0E47 /* FeedItemEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B9BC09292415E400BB0E47 /* FeedItemEntity+CoreDataClass.swift */; };
 		F2B9BC0E292415E400BB0E47 /* FeedItemEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B9BC0A292415E400BB0E47 /* FeedItemEntity+CoreDataProperties.swift */; };
+		F2B9BC1029241D9800BB0E47 /* GetItemsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B9BC0F29241D9800BB0E47 /* GetItemsUseCase.swift */; };
+		F2B9BC1229241DB500BB0E47 /* GetFeedsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B9BC1129241DB500BB0E47 /* GetFeedsUseCase.swift */; };
 		F2C4B9F428F7269500359E5D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4B9F328F7269500359E5D /* AppDelegate.swift */; };
 		F2C4B9F628F7269500359E5D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4B9F528F7269500359E5D /* SceneDelegate.swift */; };
 		F2C4B9FB28F7269500359E5D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2C4B9F928F7269500359E5D /* Main.storyboard */; };
@@ -36,7 +37,7 @@
 		F2C4BA6728F9E38A00359E5D /* NetworkDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4BA6628F9E38A00359E5D /* NetworkDataSource.swift */; };
 		F2C95DEA290C3941000E36DD /* MainVCCustomCellNoImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C95DE9290C3941000E36DD /* MainVCCustomCellNoImage.swift */; };
 		F2CD5C4F291A604B00F0A0B5 /* ItemDescriptionVCWithoutImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CD5C4E291A604B00F0A0B5 /* ItemDescriptionVCWithoutImage.swift */; };
-		F2CD63DA291BB906003B48BD /* MarkAsReadedUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CD63D9291BB905003B48BD /* MarkAsReadedUseCase.swift */; };
+		F2CD63DA291BB906003B48BD /* MarkAsReadUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CD63D9291BB905003B48BD /* MarkAsReadUseCase.swift */; };
 		F2CD63DC291C269D003B48BD /* DeleteGroupUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CD63DB291C269D003B48BD /* DeleteGroupUseCase.swift */; };
 		F2CD63DE291C26B0003B48BD /* DeleteFeedUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CD63DD291C26B0003B48BD /* DeleteFeedUseCase.swift */; };
 		F2E2D7F3290D9C720019B5F7 /* MainTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E2D7F2290D9C720019B5F7 /* MainTableView.swift */; };
@@ -53,7 +54,6 @@
 		F219374528FEFBA100AD5AF0 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		F2256F1E290876A0003DA153 /* DIConatiner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIConatiner.swift; sourceTree = "<group>"; };
 		F2347486290FAEF60027C0A2 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		F23B6CD5291F98DB00AD3BAD /* MarkAsReadedOldUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkAsReadedOldUseCase.swift; sourceTree = "<group>"; };
 		F25708C9290C4A2B005FBE1D /* ItemDescripitonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDescripitonViewController.swift; sourceTree = "<group>"; };
 		F265B01F290ED5F5006EA513 /* AddFeedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedTableView.swift; sourceTree = "<group>"; };
 		F2929C102906E24B006B96CF /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
@@ -65,6 +65,8 @@
 		F2B9BC08292415E400BB0E47 /* FeedEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FeedEntity+CoreDataProperties.swift"; path = "Meedly/Data/Model/FeedEntity/FeedEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		F2B9BC09292415E400BB0E47 /* FeedItemEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FeedItemEntity+CoreDataClass.swift"; path = "Meedly/Data/Model/FeedItemEntity/FeedItemEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		F2B9BC0A292415E400BB0E47 /* FeedItemEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FeedItemEntity+CoreDataProperties.swift"; path = "Meedly/Data/Model/FeedItemEntity/FeedItemEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		F2B9BC0F29241D9800BB0E47 /* GetItemsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetItemsUseCase.swift; sourceTree = "<group>"; };
+		F2B9BC1129241DB500BB0E47 /* GetFeedsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFeedsUseCase.swift; sourceTree = "<group>"; };
 		F2C4B9F028F7269500359E5D /* Meedly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Meedly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2C4B9F328F7269500359E5D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F2C4B9F528F7269500359E5D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -80,7 +82,7 @@
 		F2C4BA6628F9E38A00359E5D /* NetworkDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataSource.swift; sourceTree = "<group>"; };
 		F2C95DE9290C3941000E36DD /* MainVCCustomCellNoImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVCCustomCellNoImage.swift; sourceTree = "<group>"; };
 		F2CD5C4E291A604B00F0A0B5 /* ItemDescriptionVCWithoutImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDescriptionVCWithoutImage.swift; sourceTree = "<group>"; };
-		F2CD63D9291BB905003B48BD /* MarkAsReadedUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkAsReadedUseCase.swift; sourceTree = "<group>"; };
+		F2CD63D9291BB905003B48BD /* MarkAsReadUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkAsReadUseCase.swift; sourceTree = "<group>"; };
 		F2CD63DB291C269D003B48BD /* DeleteGroupUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteGroupUseCase.swift; sourceTree = "<group>"; };
 		F2CD63DD291C26B0003B48BD /* DeleteFeedUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteFeedUseCase.swift; sourceTree = "<group>"; };
 		F2E2D7F2290D9C720019B5F7 /* MainTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableView.swift; sourceTree = "<group>"; };
@@ -216,10 +218,11 @@
 			isa = PBXGroup;
 			children = (
 				F2E41FB129020A4700FCA844 /* SaveNewFeedUseCase.swift */,
+				F2B9BC0F29241D9800BB0E47 /* GetItemsUseCase.swift */,
+				F2B9BC1129241DB500BB0E47 /* GetFeedsUseCase.swift */,
 				F2CD63DD291C26B0003B48BD /* DeleteFeedUseCase.swift */,
-				F2CD63D9291BB905003B48BD /* MarkAsReadedUseCase.swift */,
-				F23B6CD5291F98DB00AD3BAD /* MarkAsReadedOldUseCase.swift */,
 				F2CD63DB291C269D003B48BD /* DeleteGroupUseCase.swift */,
+				F2CD63D9291BB905003B48BD /* MarkAsReadUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -442,6 +445,7 @@
 			files = (
 				F2C4BA4C28F8AB7600359E5D /* MainTableViewController.swift in Sources */,
 				F2B9BC0C292415E400BB0E47 /* FeedEntity+CoreDataProperties.swift in Sources */,
+				F2B9BC1229241DB500BB0E47 /* GetFeedsUseCase.swift in Sources */,
 				F2929C112906E24B006B96CF /* Feed.swift in Sources */,
 				F2B9BC0629240F9B00BB0E47 /* FeedlyCoreDataModel.xcdatamodeld in Sources */,
 				F265B020290ED5F5006EA513 /* AddFeedTableView.swift in Sources */,
@@ -454,7 +458,6 @@
 				F2B9BC0B292415E400BB0E47 /* FeedEntity+CoreDataClass.swift in Sources */,
 				F2932B8E2906D1B300581568 /* FeedItem.swift in Sources */,
 				F2B9BC0E292415E400BB0E47 /* FeedItemEntity+CoreDataProperties.swift in Sources */,
-				F23B6CD6291F98DB00AD3BAD /* MarkAsReadedOldUseCase.swift in Sources */,
 				F2256F1F290876A0003DA153 /* DIConatiner.swift in Sources */,
 				F2C4B9F428F7269500359E5D /* AppDelegate.swift in Sources */,
 				F2C4BA6728F9E38A00359E5D /* NetworkDataSource.swift in Sources */,
@@ -463,7 +466,8 @@
 				F2B86323291C6BA1000C3BBA /* SideBarViewController.swift in Sources */,
 				F219374628FEFBA100AD5AF0 /* CoreDataStack.swift in Sources */,
 				F2C4BA6528F9BB5000359E5D /* FeedRepositoryImpl.swift in Sources */,
-				F2CD63DA291BB906003B48BD /* MarkAsReadedUseCase.swift in Sources */,
+				F2B9BC1029241D9800BB0E47 /* GetItemsUseCase.swift in Sources */,
+				F2CD63DA291BB906003B48BD /* MarkAsReadUseCase.swift in Sources */,
 				F2C95DEA290C3941000E36DD /* MainVCCustomCellNoImage.swift in Sources */,
 				F2C4B9F628F7269500359E5D /* SceneDelegate.swift in Sources */,
 				F2CD63DE291C26B0003B48BD /* DeleteFeedUseCase.swift in Sources */,
