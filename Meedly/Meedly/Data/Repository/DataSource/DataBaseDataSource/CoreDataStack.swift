@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-class CoreDataStack {
+final class CoreDataStack {
   static let shared = CoreDataStack(modelName: "FeedlyCoreDataModel")
   
   private let modelName: String
@@ -22,7 +22,6 @@ class CoreDataStack {
   }()
   
   private lazy var storeContainer: NSPersistentContainer = {
-    
     let container = NSPersistentContainer(name: self.modelName)
     container.loadPersistentStores { _, error in
       if let error = error as NSError? {

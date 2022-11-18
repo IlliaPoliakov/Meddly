@@ -20,7 +20,7 @@ extension FeedEntity {
     @NSManaged public var link: URL
     @NSManaged public var imageUrl: URL?
     @NSManaged public var id: UUID
-    @NSManaged public var parentGroup: FeedGroupEntity
+    @NSManaged public var parentGroup: String
 
 }
 

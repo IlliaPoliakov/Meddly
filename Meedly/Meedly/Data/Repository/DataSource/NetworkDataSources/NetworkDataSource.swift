@@ -9,37 +9,32 @@ import Foundation
 import Alamofire
 import Combine
 
-class NetworkDataSource {
+final class NetworkDataSource {
   
   // -MARK: - Properties -
   
-  var internetConnection: Bool = {
-    NetworkReachabilityManager()?.isReachable ?? false
-  }()
+  private var internetConnection: Bool {
+    get {
+      NetworkReachabilityManager()?.isReachable ?? false
+    }
+  }
   
   
   // -MARK: - Funcs -
   
-  func fetchData(fromUrl url: URL) -> Future<Result<Data?, MeedlyError>, Never> {
+  func fetchData(fromUrl url: URL) -> Result<Data, MeedlyError> {
     guard internetConnection
     else {
-      return Future { completion in
-        completion(.success(.failure(.noInternetConnection)))
-      }
+      return .failure(.noInternetConnection)
     }
     
-    return Future { completion in
-      AF.request(url, method: .get)
-        .validate { _, response, data in
-          guard (200..<300).contains(response.statusCode),
-                let data = data
-          else {
-            completion(.success(.failure(.requestFailed(forUrl: url))))
-            return
-          }
-          
-          completion(.success(data))
-        }
+    let request = AF.request(url, method: .get).validate()
+    
+    guard let data = request.data
+    else {
+      return .failure(.requestFailed(forUrl: url))
     }
+    
+    return .success(data)
   }
 }

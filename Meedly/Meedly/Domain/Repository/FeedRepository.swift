@@ -9,8 +9,8 @@ import Foundation
 import Combine
 
 protocol FeedRepository {
-  func getItems() -> AnyPublisher<[FeedItem]?, MeedlyError>
-  func getFeeds() -> AnyPublisher<[Feed]?, MeedlyError>
+  func getItems() -> AnyPublisher<Result<[FeedItem]?, MeedlyError>, Never>
+  func getFeeds() -> AnyPublisher<[Feed]?, Never>
   
   func saveNewFeed(withUrl feedUrl: URL, inGroupWithTitle groupTitle: String)
   

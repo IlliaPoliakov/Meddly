@@ -6,3 +6,16 @@
 //
 
 import Foundation
+import Combine
+
+class GetFeedsUseCase {
+  private let repo: FeedRepository
+
+  init(repo: FeedRepository) {
+    self.repo = repo
+  }
+  
+  func execute() -> AnyPublisher<[FeedItem]?, Never> {
+    return repo.getFeeds()
+  }
+}

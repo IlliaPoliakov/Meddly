@@ -19,10 +19,15 @@ public class FeedItemEntity: NSManagedObject {
     }
   
     return entities!.map { entity in
-      FeedItem(feedDescription: entity.itemDescription, imageUrl: entity.imageUrl,
-               pubDate: entity.pubDate, title: entity.title, link: entity.link,
-               isViewed: entity.isViewed, isLiked: entity.isLiked,
-               parentGroup: entity.parentGroup, parentFeed: entity.parentFeed)
+      FeedItem(itemDescription: entity.itemDescription,
+               imageUrl: entity.imageUrl,
+               pubDate: entity.pubDate,
+               title: entity.title,
+               link: entity.link,
+               isViewed: entity.isViewed,
+               isLiked: entity.isLiked,
+               parentFeed: entity.parentFeed,
+               parentGroup: entity.parentGroup)
     }
   }
 }

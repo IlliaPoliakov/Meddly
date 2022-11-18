@@ -7,20 +7,23 @@
 
 import Foundation
 
-enum MeedlyError: LocalizedError, Identifiable {
+enum MeedlyError: Error, Identifiable {
   var id: String { localizedDescription }
   
   case noInternetConnection
   case requestFailed(forUrl: URL)
-  case coreDataFetchFailure
+  
+  case cachedDataIsEmpty
+  case coreDataError
   
   var errorDescription: String? {
     switch self {
     case .noInternetConnection: return "No Internet Connection."
     case .requestFailed(let url): return "\(url.absoluteString) is unreachable."
-    default: break
+    default: return String()
     }
   }
+  
 }
 
 enum ConstantSize: Double {

@@ -8,40 +8,44 @@
 import CoreData
 import Combine
 
-class DataBaseDataSource {
+final class DataBaseDataSource {
   
   // -MARK: - Dependencies -
   
-  let coreDataStack = AppDelegate.DIContainer.resolve(CoreDataStack.self)!
+  private let coreDataStack = AppDelegate.DIContainer.resolve(CoreDataStack.self)!
   
   
   // -MARK: - Functions -
   
   func loadItems(withFeetchRequest fetchRequest: NSFetchRequest<FeedItemEntity>) ->
-  Future<[FeedItemEntity]?, MeedlyError> {
+  Deferred<Future<[FeedItemEntity]?, Never>> {
     
-    return Future { completion in
-      guard let items = try? self.coreDataStack.managedContext.fetch(fetchRequest)
-      else {
-        completion(.failure(.coreDataFetchFailure))
-        return
+    return Deferred {
+      Future { completion in
+        guard let items = try? self.coreDataStack.managedContext.fetch(fetchRequest)
+        else {
+          completion(.success(nil))
+          return
+        }
+        
+        completion(.success(items.isEmpty ? nil : items))
       }
-      
-      completion(.success(items.isEmpty ? nil : items))
     }
   }
   
   func loadFeeds(withFeetchRequest fetchRequest: NSFetchRequest<FeedEntity>) ->
-  Future<[FeedEntity]?, MeedlyError> {
+  Deferred<Future<[FeedEntity]?, Never>> {
     
-    return Future { completion in
-      guard let feeds = try? self.coreDataStack.managedContext.fetch(fetchRequest)
-      else {
-        completion(.failure(.coreDataFetchFailure))
-        return
+    return Deferred {
+      Future { completion in
+        guard let feeds = try? self.coreDataStack.managedContext.fetch(fetchRequest)
+        else {
+          completion(.success(nil))
+          return
+        }
+        
+        completion(.success(feeds.isEmpty ? nil : feeds))
       }
-      
-      completion(.success(feeds.isEmpty ? nil : feeds))
     }
   }
   
@@ -73,6 +77,7 @@ class DataBaseDataSource {
   
   
   func deleteFeed(withTitle feedTitle: String) {
+    // first fetch and delete specific feed
     let feedsPredicate = NSPredicate(format: "%K == %@",
                                      #keyPath(FeedEntity.title), "\(feedTitle)")
     let feedsFetchRequest = NSFetchRequest<FeedEntity>(entityName: "FeedEntity")
@@ -91,6 +96,7 @@ class DataBaseDataSource {
       }
     )
     
+    // last fetch an delete specific items
     let itemsPredicate = NSPredicate(format: "%K == %@",
                                      #keyPath(FeedItemEntity.parentFeed), "\(feedTitle)")
     let itemsFetchRequest = NSFetchRequest<FeedItemEntity>(entityName: "FeedItemEntity")
@@ -115,14 +121,18 @@ class DataBaseDataSource {
   }
   
   func deleteGroup(withTitle groupTitle: String) {
+    // fetch and delete feeds with given parent group
     let feedsPredicate = NSPredicate(format: "%K == %@",
                                      #keyPath(FeedEntity.parentGroup), "\(groupTitle)")
     let feedsFetchRequest = NSFetchRequest<FeedEntity>(entityName: "FeedEntity")
     feedsFetchRequest.resultType = .managedObjectResultType
     feedsFetchRequest.predicate = feedsPredicate
     
-    _ = self.loadFeeds(withFeetchRequest: feedsFetchRequest).sink(
-      receiveCompletion: {_ in }, // mb need error handling
+    var subscription: AnyCancellable?
+    subscription = self.loadFeeds(withFeetchRequest: feedsFetchRequest).sink(
+      receiveCompletion: {_ in
+        subscription?.cancel()
+      },
       receiveValue: { feeds in
         guard let feeds
         else {
@@ -148,8 +158,11 @@ class DataBaseDataSource {
       itemsFetchRequest.resultType = .managedObjectResultType
       itemsFetchRequest.predicate = itemsPredicate
       
-      _ = self.loadItems(withFeetchRequest: itemsFetchRequest).sink(
-        receiveCompletion: {_ in }, // mb need error handling
+      var subscription: AnyCancellable?
+      subscription = self.loadItems(withFeetchRequest: itemsFetchRequest).sink(
+        receiveCompletion: {_ in
+          subscription?.cancel()
+        },
         receiveValue: { items in
           guard let item = items?.first
           else {
@@ -160,7 +173,7 @@ class DataBaseDataSource {
         }
       )
     }
-    else if let timePeriod { // dont sure how it will work
+    else if let timePeriod { // dont sure how predicate will work
       let itemsPredicate = NSPredicate(format: "%K < %@",
                                        #keyPath(FeedItemEntity.pubDate),
                                        "\(Date(timeIntervalSinceNow: timePeriod.rawValue))")
@@ -168,8 +181,11 @@ class DataBaseDataSource {
       itemsFetchRequest.resultType = .managedObjectResultType
       itemsFetchRequest.predicate = itemsPredicate
       
-      _ = self.loadItems(withFeetchRequest: itemsFetchRequest).sink(
-        receiveCompletion: {_ in }, // mb need error handling
+      var subscription: AnyCancellable?
+      subscription = self.loadItems(withFeetchRequest: itemsFetchRequest).sink(
+        receiveCompletion: {_ in
+          subscription?.cancel()
+        },
         receiveValue: { items in
           guard let items
           else {
@@ -193,8 +209,11 @@ class DataBaseDataSource {
     itemsFetchRequest.resultType = .managedObjectResultType
     itemsFetchRequest.predicate = itemsPredicate
     
-    _ = self.loadItems(withFeetchRequest: itemsFetchRequest).sink(
-      receiveCompletion: {_ in }, // mb need error handling
+    var subscription: AnyCancellable?
+    subscription = self.loadItems(withFeetchRequest: itemsFetchRequest).sink(
+      receiveCompletion: { _ in
+        subscription?.cancel()
+      },
       receiveValue: { items in
         guard let item = items?.first
         else {
@@ -204,6 +223,5 @@ class DataBaseDataSource {
         item.isLiked = !item.isLiked
       }
     )
-    
   }
 }

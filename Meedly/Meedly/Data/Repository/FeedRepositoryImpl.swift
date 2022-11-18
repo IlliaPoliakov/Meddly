@@ -26,35 +26,35 @@ class FeedRepositoryImpl: FeedRepository {
   
   // -MARK: - UseCase Funcs -
   
-  func getItems()/* -> AnyPublisher<[FeedItem]?, MeedlyError> */{
-    localDataSource.loadFeeds(withFeetchRequest: FeedEntity.fetchRequest())
-      .sink(receiveCompletion: { _ in },
-            receiveValue: { feeds in
+  func getItems() -> AnyPublisher<Result<[FeedItem]?, MeedlyError>, Never> {
+    let localPublisher = localDataSource.loadItems(withFeetchRequest: FeedItemEntity.fetchRequest())
+      .flatMap { items in
+
+        items.publisher
+      }
+    
+    let remotePublisher = localDataSource.loadFeeds(withFeetchRequest: FeedEntity.fetchRequest())
+      .map { feeds -> Result<[FeedItem]?, MeedlyError> in
         guard let feeds
         else {
-          return
+          return .failure(.cachedDataIsEmpty)
         }
         
+        feeds.forEach { feed in
+          
+        }
+      }
       
-      }).store(in: &subscriptions)
     
-    
-    localDataSource.loadItems(withFeetchRequest: FeedItemEntity.fetchRequest())
-      .sink(receiveCompletion: { _ in },
-            receiveValue: { items in
-        
-      }).store(in: &subscriptions)
-    
-    Publishers.ReceiveOn(
-      upstream: localDataSource.loadFeeds( withFeetchRequest: FeedEntity.fetchRequest()),
-      scheduler: DispatchQueue.global(qos: .userInitiated),
-      options: nil)
-    
-    
+    return Publishers.Merge(localPublisher, remotePublisher)
   }
   
-  func getFeeds() -> AnyPublisher<[Feed]?, MeedlyError> {
-    
+  func getFeeds() -> AnyPublisher<[Feed]?, Never> {
+    localDataSource.loadFeeds(withFeetchRequest: FeedEntity.fetchRequest())
+      .map { feeds in
+        FeedEntity.convertToDomain(withEntities: feeds)
+      }
+      .eraseToAnyPublisher()
   }
   
   
