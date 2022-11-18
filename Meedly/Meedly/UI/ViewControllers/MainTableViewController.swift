@@ -60,7 +60,12 @@ class MainTableViewController: UITableViewController {
   
   //for commit
   //aga
+<<<<<<< HEAD
   //fdasf
+=======
+  //fas
+  
+>>>>>>> feature2
   
   // MARK: - Navigation
   
