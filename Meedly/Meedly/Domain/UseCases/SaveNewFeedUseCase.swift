@@ -14,7 +14,7 @@ class SaveNewFeedUseCase {
     self.repo = repo
   }
   
-  func execute(withUrl url: URL, inGroupWithName groupName: String) {
-    return repo.saveNewFeed(withUrl: url, inGroupWithName: groupName)
+  func execute(withUrl feedUrl: URL, inGroupWithTitle groupTitle: String) {
+    return repo.saveNewFeed(withUrl: feedUrl, inGroupWithTitle: groupTitle)
   }
 }
