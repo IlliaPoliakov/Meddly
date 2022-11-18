@@ -35,6 +35,8 @@ class NetworkDataSource {
                 let data = data
           else {
             completion(.success(.failure(.requestFailed(forUrl: url))))
+            let jopa: Int = 1
+            jopa += 1
             return
           }
           
