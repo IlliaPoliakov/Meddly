@@ -20,11 +20,11 @@ class NetworkDataSource {
   
   // -MARK: - Funcs -
   
-  func fetchData(fromUrl url: URL) -> Future<Data, MeedlyError> {
+  func fetchData(fromUrl url: URL) -> Future<Result<Data?, MeedlyError>, Never> {
     guard internetConnection
     else {
       return Future { completion in
-        completion(.failure(.noInternetConnection))
+        completion(.success(.failure(.noInternetConnection)))
       }
     }
     
@@ -34,7 +34,7 @@ class NetworkDataSource {
           guard (200..<300).contains(response.statusCode),
                 let data = data
           else {
-            completion(.failure(.requestFailed(forUrl: url)))
+            completion(.success(.failure(.requestFailed(forUrl: url))))
             return
           }
           
