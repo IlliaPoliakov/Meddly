@@ -24,6 +24,7 @@ extension FeedItemEntity {
     @NSManaged public var isViewed: Bool
     @NSManaged public var isLiked: Bool
     @NSManaged public var parentGroup: String
+    @NSManaged public var parentFeed: String
 
 }
 

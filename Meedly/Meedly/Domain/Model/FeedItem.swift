@@ -8,7 +8,7 @@
 import Foundation
 
 struct FeedItem: Hashable {
-  var feedDescription: String
+  var itemDescription: String
   var imageUrl: URL?
   var pubDate: Date
   var title: String
@@ -16,16 +16,18 @@ struct FeedItem: Hashable {
   var isViewed: Bool
   var isLiked: Bool
   var parentGroup: String
+  var parentFeed: String
   
-  init(feedDescription: String,
+  init(itemDescription: String,
        imageUrl: URL?,
        pubDate: Date,
        title: String,
        link: URL,
        isViewed: Bool,
        isLiked: Bool,
+       parentFeed: String,
        parentGroup: String) {
-    self.feedDescription = feedDescription
+    self.itemDescription = itemDescription
     self.imageUrl = imageUrl
     self.pubDate = pubDate
     self.title = title
@@ -33,5 +35,6 @@ struct FeedItem: Hashable {
     self.isViewed = isViewed
     self.isLiked = isLiked
     self.parentGroup = parentGroup
+    self.parentFeed = parentFeed
   }
 }

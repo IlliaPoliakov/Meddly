@@ -12,6 +12,7 @@
         <attribute name="isViewed" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="itemDescription" attributeType="String"/>
         <attribute name="link" attributeType="URI"/>
+        <attribute name="parentFeed" attributeType="String"/>
         <attribute name="parentGroup" attributeType="String"/>
         <attribute name="pubDate" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="title" attributeType="String"/>

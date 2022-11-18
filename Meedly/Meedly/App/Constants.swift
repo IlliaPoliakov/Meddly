@@ -7,29 +7,29 @@
 
 import Foundation
 
-enum MeedlyErrors: LocalizedError, Identifiable {
+enum MeedlyError: LocalizedError, Identifiable {
   var id: String { localizedDescription }
   
-  case noInternetConnectino
-  case requestFailed(URL)
+  case noInternetConnection
+  case requestFailed(forUrl: URL)
+  case coreDataFetchFailure
   
   var errorDescription: String? {
     switch self {
-    case .noInternetConnectino: return "No Internet Connection."
+    case .noInternetConnection: return "No Internet Connection."
     case .requestFailed(let url): return "\(url.absoluteString) is unreachable."
+    default: break
     }
   }
 }
 
-enum ConstantSizes: Double {
+enum ConstantSize: Double {
   case imageBorderWidth = 2.5
 }
 
-enum TimeIntervals: String {
-  case oneHour = "One Hour"
-  case twelveHours = "Twelve Hours"
-  case oneDay = "One Day"
-  case twoDays = "Two Days"
-  case oneWeak = "One Weak"
-  case oneMonth = "One Month"
+enum TimePeriod: TimeInterval {
+  case oneHour = 3600
+  case oneDay = 86400
+  case twoDays = 172800
+  case oneWeak = 604800
 }

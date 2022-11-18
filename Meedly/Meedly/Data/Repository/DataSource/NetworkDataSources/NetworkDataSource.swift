@@ -13,26 +13,33 @@ class NetworkDataSource {
   
   // -MARK: - Properties -
   
-  var internetConnection = {
+  var internetConnection: Bool = {
     NetworkReachabilityManager()?.isReachable ?? false
-  }
-
-  func fetchItems(fromUrls url: URL) -> Future<Data, Never> {
-    
-    return Future<Data, Never> { promise in
-      let data = AF.request(url, method: .get)
-        .validate()
+  }()
+  
+  
+  // -MARK: - Funcs -
+  
+  func fetchData(fromUrl url: URL) -> Future<Data, MeedlyError> {
+    guard internetConnection
+    else {
+      return Future { completion in
+        completion(.failure(.noInternetConnection))
+      }
     }
     
-//    return AF.request(url, method: .get)
-//      .validate()
-//      .publishUnserialized()
-//      .map { reponse in
-//        reponse.mapError { error in
-//          return MeedlyErrors
-//        }
-//      }
-//      .receive(on: DispatchQueue.main)
-//      .eraseToAnyPublisher()
-//  }
+    return Future { completion in
+      AF.request(url, method: .get)
+        .validate { _, response, data in
+          guard (200..<300).contains(response.statusCode),
+                let data = data
+          else {
+            completion(.failure(.requestFailed(forUrl: url)))
+            return
+          }
+          
+          completion(.success(data))
+        }
+    }
+  }
 }

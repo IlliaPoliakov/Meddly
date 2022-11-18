@@ -15,7 +15,7 @@ class GetItemsUseCase {
     self.repo = repo
   }
   
-  func execute() -> Any {
-    return repo.saveNewFeed(withUrl: url, inGroupWithName: groupName)
+  func execute() -> AnyPublisher<[FeedItem]?, MeedlyError> {
+    return repo.getItems()
   }
 }

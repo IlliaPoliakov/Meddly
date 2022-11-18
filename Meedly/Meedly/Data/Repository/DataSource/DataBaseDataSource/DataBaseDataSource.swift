@@ -6,7 +6,7 @@
 //
 
 import CoreData
-import UIKit
+import Combine
 
 class DataBaseDataSource {
   
@@ -17,210 +17,193 @@ class DataBaseDataSource {
   
   // -MARK: - Functions -
   
-  func getPredicatedGroup(withGroupTitle groupTitle: String) -> FeedGroupEntity? {
+  func loadItems(withFeetchRequest fetchRequest: NSFetchRequest<FeedItemEntity>) ->
+  Future<[FeedItemEntity]?, MeedlyError> {
     
-    let predicate = NSPredicate(format: "%K == %@",
-                                #keyPath(FeedGroupEntity.title), "\(groupTitle)")
-    
-    let fetchRequest =
-    NSFetchRequest<FeedGroupEntity>(entityName: "FeedGroupEntity")
-    fetchRequest.resultType = .managedObjectResultType
-    fetchRequest.predicate = predicate
-    guard let group = try? coreDataStack.managedContext.fetch(fetchRequest)
-    else {
-      return nil
+    return Future { completion in
+      guard let items = try? self.coreDataStack.managedContext.fetch(fetchRequest)
+      else {
+        completion(.failure(.coreDataFetchFailure))
+        return
+      }
+      
+      completion(.success(items.isEmpty ? nil : items))
     }
-    
-    return group.first
   }
   
-  func loadData() -> [FeedGroupEntity]? {
+  func loadFeeds(withFeetchRequest fetchRequest: NSFetchRequest<FeedEntity>) ->
+  Future<[FeedEntity]?, MeedlyError> {
     
-    guard var groups = try? coreDataStack.managedContext.fetch(FeedGroupEntity.fetchRequest())
-    else {
-      return nil
+    return Future { completion in
+      guard let feeds = try? self.coreDataStack.managedContext.fetch(fetchRequest)
+      else {
+        completion(.failure(.coreDataFetchFailure))
+        return
+      }
+      
+      completion(.success(feeds.isEmpty ? nil : feeds))
     }
-    
-    if groups.isEmpty {
-      let group = saveNewGroup(withNewGroupName: "Default Group")
-      groups.append(group)
-    }
-    
-    return groups
   }
   
-  func saveNewGroup(withNewGroupName name: String) -> FeedGroupEntity {
-    let group = FeedGroupEntity.init(context: coreDataStack.managedContext)
-    
-    group.title = name
-    group.id = UUID()
-    
-    coreDataStack.saveContext()
-    
-    return group
-  }
   
-  func saveNewFeed(withNewFeedUrl url: URL, withParentGroup group: FeedGroupEntity) {
+  func saveNewFeed(withUrl feedUrl: URL, inGroupWithTitle groupName: String) {
     let newFeed = FeedEntity.init(context: coreDataStack.managedContext)
     
-    newFeed.link = url
-    newFeed.id = UUID()
-    newFeed.parentGroup = group
-    
-    group.addToFeeds(newFeed)
+    newFeed.link = feedUrl
+    newFeed.parentGroup = groupName
     
     coreDataStack.saveContext()
   }
   
-  func saveNewFeedItem(withTitle title: String,
-                       withDescription feedDescription: String,
-                       withLink link: URL,
-                       withImageUrl imageUrl: URL?,
-                       withPubDate pubDate: String,
-                       withGroup group: FeedGroupEntity,
-                       withParentFeedLink parentFeedLink: URL) {
+  func saveNewItem(_ feedItem: FeedItem) {
+    let newItem = FeedItemEntity.init(context: coreDataStack.managedContext)
     
-    let newFeedItem = FeedItemEntity.init(context: coreDataStack.managedContext)
-    newFeedItem.title = title
-    newFeedItem.feedItemDescription = feedDescription
-    newFeedItem.link = link
-    newFeedItem.imageUrl = imageUrl
-    newFeedItem.pubDate = pubDate
-    newFeedItem.parentGroup = group
-    newFeedItem.id = UUID()
-    newFeedItem.parentFeedLink = parentFeedLink
-    
-    group.addToItems(newFeedItem)
+    newItem.title = feedItem.title
+    newItem.link = feedItem.link
+    newItem.parentFeed = feedItem.parentFeed
+    newItem.parentGroup = feedItem.parentGroup
+    newItem.isLiked = feedItem.isLiked
+    newItem.isViewed = feedItem.isViewed
+    newItem.pubDate = feedItem.pubDate
+    newItem.imageUrl = feedItem.imageUrl
+    newItem.itemDescription = feedItem.itemDescription
     
     coreDataStack.saveContext()
   }
   
-  func markAsReaded(forFeedItem item: FeedItem){
-    let group = getPredicatedGroup(withGroupTitle: item.parentGroupTitle)
-    let groupItem = group!.items?.filter { $0.title == item.title }
-    groupItem!.first!.isViewed = true
-    coreDataStack.saveContext()
-    DispatchQueue.global(qos: .userInitiated).async {
-      let group = self.getPredicatedGroup(withGroupTitle: item.parentGroupTitle)
-      let groupItem = group!.items?.filter { $0.title == item.title }
-      groupItem!.first!.isViewed = true
-      self.coreDataStack.saveContext()
-    }
-  }
   
-  
-  func markAsReadedOld(forTimePeriod timePeriod: String){
-    let groups = self.loadData()
+  func deleteFeed(withTitle feedTitle: String) {
+    let feedsPredicate = NSPredicate(format: "%K == %@",
+                                     #keyPath(FeedEntity.title), "\(feedTitle)")
+    let feedsFetchRequest = NSFetchRequest<FeedEntity>(entityName: "FeedEntity")
+    feedsFetchRequest.resultType = .managedObjectResultType
+    feedsFetchRequest.predicate = feedsPredicate
     
-    var groupItems = [FeedItemEntity]()
-    
-    let formatter = DateFormatter()
-    formatter.locale = Locale(identifier: "en_US_POSIX")
-    formatter.dateFormat = "HH:mm E, d MMM y"
-    
-    for group in groups! {
-      if group.items != nil {
-        switch timePeriod {
-        case "One Hour":
-          groupItems.append(contentsOf: group.items!.filter { item in
-            let hourBeforeNow = Calendar.current.date(byAdding: .hour,
-                                                      value: 0,
-                                                      to: .now)
-            if hourBeforeNow! > formatter.date(from: item.pubDate)! {
-              return true
-            }
-            return false
-          })
-          
-        case "One Day":
-          groupItems.append(contentsOf: group.items!.filter { item in
-            let dayBeforeNow = Calendar.current.date(byAdding: .day,
-                                                     value: -1,
-                                                     to: .now)
-            if dayBeforeNow! > formatter.date(from: item.pubDate)! {
-              return true
-            }
-            return false
-          })
-        case "One Week":
-          groupItems.append(contentsOf: group.items!.filter { item in
-            let weekBeforeNow = Calendar.current.date(byAdding: .weekOfMonth,
-                                                      value: 0,
-                                                      to: .now)
-            if weekBeforeNow! > formatter.date(from: item.pubDate)! {
-              return true
-            }
-            return false
-          })
-        case "One Month":
-          groupItems.append(contentsOf: group.items!.filter { item in
-            let monthBeforeNow = Calendar.current.date(byAdding: .month,
-                                                       value: 0,
-                                                       to: .now)
-            if monthBeforeNow! > formatter.date(from: item.pubDate)! {
-              return true
-            }
-            return false
-          })
-        default:
-          break
+    _ = self.loadFeeds(withFeetchRequest: feedsFetchRequest).sink(
+      receiveCompletion: {_ in }, // mb need error handling
+      receiveValue: { feeds in
+        guard let feed = feeds?.first
+        else {
+          return
         }
+        
+        self.coreDataStack.managedContext.delete(feed)
       }
-    }
+    )
     
-    guard !groupItems.isEmpty
-    else {
-      return
-    }
-    for groupItem in groupItems {
-      groupItem.isViewed = true
-    }
+    let itemsPredicate = NSPredicate(format: "%K == %@",
+                                     #keyPath(FeedItemEntity.parentFeed), "\(feedTitle)")
+    let itemsFetchRequest = NSFetchRequest<FeedItemEntity>(entityName: "FeedItemEntity")
+    itemsFetchRequest.resultType = .managedObjectResultType
+    itemsFetchRequest.predicate = itemsPredicate
     
-    try? self.coreDataStack.managedContext.save()
-  }
-  
-  
-  func deleteFeed(forFeed feed: Feed) {
-    let groups = self.loadData()
-    let group = groups?.first { $0.feeds != nil && $0.feeds!.contains {
-      $0.title == feed.title
-    }}
-    
-    let items = group!.items?.filter { $0.parentFeedLink == feed.link}
-    guard items != nil
-    else {
-      return
-    }
-    
-    for item in items! {
-      self.coreDataStack.managedContext.delete(item)
-    }
-    
-    let feed = group!.feeds!.first { $0.title == feed.title}
-    self.coreDataStack.managedContext.delete(feed!)
-    
-    try? self.coreDataStack.managedContext.save()
-    
-  }
-  
-  func deleteGroup(forGroup group: FeedGroup) {
-    DispatchQueue.global().async {
-      let group = self.getPredicatedGroup(withGroupTitle: group.title)
-      
-      if group?.feeds != nil {
-        for feed in group!.feeds! {
-          self.coreDataStack.managedContext.delete(feed)
+    _ = self.loadItems(withFeetchRequest: itemsFetchRequest).sink(
+      receiveCompletion: {_ in }, // mb need error handling
+      receiveValue: { items in
+        guard let items
+        else {
+          return
         }
-      }
-      if group?.items != nil {
-        for item in group!.items! {
+        
+        items.forEach { item in
           self.coreDataStack.managedContext.delete(item)
         }
       }
+    )
+    
+    self.coreDataStack.saveContext()
+  }
+  
+  func deleteGroup(withTitle groupTitle: String) {
+    let feedsPredicate = NSPredicate(format: "%K == %@",
+                                     #keyPath(FeedEntity.parentGroup), "\(groupTitle)")
+    let feedsFetchRequest = NSFetchRequest<FeedEntity>(entityName: "FeedEntity")
+    feedsFetchRequest.resultType = .managedObjectResultType
+    feedsFetchRequest.predicate = feedsPredicate
+    
+    _ = self.loadFeeds(withFeetchRequest: feedsFetchRequest).sink(
+      receiveCompletion: {_ in }, // mb need error handling
+      receiveValue: { feeds in
+        guard let feeds
+        else {
+          return
+        }
+        feeds.forEach { feed in
+          if let feedTitle = feed.title {
+            self.deleteFeed(withTitle: feedTitle)
+          }
+        }
+      }
+    )
+    
+    self.coreDataStack.saveContext()
+  }
+  
+  
+  func adjustIsReadState(forFeedItem feedItem: FeedItem?, forTimePeriod timePeriod: TimePeriod?) {
+    if let feedItem {
+      let itemsPredicate = NSPredicate(format: "%K == %@",
+                                       #keyPath(FeedItemEntity.parentFeed), "\(feedItem.title)")
+      let itemsFetchRequest = NSFetchRequest<FeedItemEntity>(entityName: "FeedItemEntity")
+      itemsFetchRequest.resultType = .managedObjectResultType
+      itemsFetchRequest.predicate = itemsPredicate
       
-      self.coreDataStack.managedContext.delete(group!)
-      
-      try? self.coreDataStack.managedContext.save()
+      _ = self.loadItems(withFeetchRequest: itemsFetchRequest).sink(
+        receiveCompletion: {_ in }, // mb need error handling
+        receiveValue: { items in
+          guard let item = items?.first
+          else {
+            return
+          }
+          
+          item.isViewed = !item.isViewed
+        }
+      )
     }
+    else if let timePeriod { // dont sure how it will work
+      let itemsPredicate = NSPredicate(format: "%K < %@",
+                                       #keyPath(FeedItemEntity.pubDate),
+                                       "\(Date(timeIntervalSinceNow: timePeriod.rawValue))")
+      let itemsFetchRequest = NSFetchRequest<FeedItemEntity>(entityName: "FeedItemEntity")
+      itemsFetchRequest.resultType = .managedObjectResultType
+      itemsFetchRequest.predicate = itemsPredicate
+      
+      _ = self.loadItems(withFeetchRequest: itemsFetchRequest).sink(
+        receiveCompletion: {_ in }, // mb need error handling
+        receiveValue: { items in
+          guard let items
+          else {
+            return
+          }
+          
+          items.forEach { item in
+            item.isViewed = true
+          }
+        }
+      )
+    }
+    
+    self.coreDataStack.saveContext()
+  }
+  
+  func adjustIsLikedState(forFeedItem feedItem: FeedItem) {
+    let itemsPredicate = NSPredicate(format: "%K == %@",
+                                     #keyPath(FeedItemEntity.parentFeed), "\(feedItem.title)")
+    let itemsFetchRequest = NSFetchRequest<FeedItemEntity>(entityName: "FeedItemEntity")
+    itemsFetchRequest.resultType = .managedObjectResultType
+    itemsFetchRequest.predicate = itemsPredicate
+    
+    _ = self.loadItems(withFeetchRequest: itemsFetchRequest).sink(
+      receiveCompletion: {_ in }, // mb need error handling
+      receiveValue: { items in
+        guard let item = items?.first
+        else {
+          return
+        }
+        
+        item.isLiked = !item.isLiked
+      }
+    )
+    
   }
 }

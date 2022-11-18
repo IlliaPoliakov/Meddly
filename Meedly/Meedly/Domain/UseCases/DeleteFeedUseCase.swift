@@ -15,6 +15,6 @@ class DeleteFeedUseCase {
   }
   
   func execute(withName feedName: String) {
-    repo.deleteFeed(withName: feedName)
+    repo.deleteFeed(withTitle: feedName)
   }
 }

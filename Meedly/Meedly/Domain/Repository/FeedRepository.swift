@@ -6,11 +6,17 @@
 //
 
 import Foundation
+import Combine
 
 protocol FeedRepository {
-  func getItems() -> Published<Any>//BLABLAA
-  func saveNewFeed(withUrl feedUrl: URL, inGroupWithName groupName: String)
-  func deleteFeed(withName feedName: String)
-  func deleteGroup(withName groupName: String)
-  func markAsRead(_ feedItem: FeedItem?, forTimeInterval timeInterval: TimeIntervals?)
+  func getItems() -> AnyPublisher<[FeedItem]?, MeedlyError>
+  func getFeeds() -> AnyPublisher<[Feed]?, MeedlyError>
+  
+  func saveNewFeed(withUrl feedUrl: URL, inGroupWithTitle groupTitle: String)
+  
+  func deleteFeed(withTitle feedTitle: String)
+  func deleteGroup(withTitle groupTitle: String)
+  
+  func adjustIsReadState(forFeedItem feedItem: FeedItem?, forTimePeriod timePeriod: TimePeriod?)
+  func adjustIsLikedState(forFeedItem feedItem: FeedItem)
 }

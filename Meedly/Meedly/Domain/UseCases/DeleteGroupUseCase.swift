@@ -14,7 +14,7 @@ class DeleteGroupUseCase {
     self.repo = repo
   }
   
-  func execute(withGroupName groupName: String) {
-    repo.deleteGroup(withName: groupName)
+  func execute(withTitle groupTitle: String) {
+    repo.deleteGroup(withTitle: groupTitle)
   }
 }
