@@ -57,20 +57,7 @@ class MainTableViewController: UITableViewController {
       self?.mainTableView.configureInitialSnapshot(withGroups: newGroups)
     }
   }
-  
-  //for commit
-<<<<<<< HEAD
-  
-=======
-  //aga
-<<<<<<< HEAD
-  //fdasf
-=======
-  //fas
-  
->>>>>>> feature2
->>>>>>> feature
-  
+
   // MARK: - Navigation
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
