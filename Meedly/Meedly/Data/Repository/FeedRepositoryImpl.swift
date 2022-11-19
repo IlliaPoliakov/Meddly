@@ -12,7 +12,7 @@ class FeedRepositoryImpl: FeedRepository {
   
   // -MARK: - Properties -
   
-  private var subscriptions = Set<AnyCancellable>()
+  private var parser = XMLDataParser()
   
   private let localDataSource: DataBaseDataSource
   private let remoteDataSource: NetworkDataSource
@@ -26,33 +26,67 @@ class FeedRepositoryImpl: FeedRepository {
   
   // -MARK: - UseCase Funcs -
   
-  func getItems() -> AnyPublisher<Result<[FeedItem]?, MeedlyError>, Never> {
+  func getItems() -> AnyPublisher<Result<[FeedItem], MeedlyError>, Never> {
     let localPublisher = localDataSource.loadItems(withFeetchRequest: FeedItemEntity.fetchRequest())
-      .flatMap { items in
-
-        items.publisher
+      .compactMap { feedItemEntities in // get rid of nil, unwrap not-nil and cast to model
+        FeedItemEntity.convertToDomain(fromEntities: feedItemEntities)
       }
+      .map{ feedItems -> Result<[FeedItem], MeedlyError> in //cast to Result<...,...>
+        var result: Result<[FeedItem], MeedlyError>
+        result = .success(feedItems)
+        
+        return result
+      }
+      .eraseToAnyPublisher()
+    
     
     let remotePublisher = localDataSource.loadFeeds(withFeetchRequest: FeedEntity.fetchRequest())
-      .map { feeds -> Result<[FeedItem]?, MeedlyError> in
-        guard let feeds
-        else {
-          return .failure(.cachedDataIsEmpty)
+      .compactMap { feedEntities in // get rid of nil and unwrap not-nil
+        return feedEntities
+      }
+      .flatMap { feedEntityes -> Publishers.Sequence in
+        return feedEntityes.publisher
+      }
+      .map { feedEntity -> Result<[FeedItem], MeedlyError> in
+        var result: Result<[FeedItem], MeedlyError>
+        let fetchResult = self.remoteDataSource.fetchData(fromUrl: feedEntity.link)
+        
+        switch fetchResult {
+        case .success(let data):
+          let (feed, feedItems) = self.parser.parse(forGroupWithTitle: feedEntity.parentGroup,
+                                                    forFeedWithTitle: feedEntity.title,
+                                                    data)
+          
+          if let feed, feedEntity.title == nil  {
+            self.localDataSource.updateFeedEntity(withFeed: feed, forFeedEntity: feedEntity)
+          }
+          
+          if let feedItems {
+            result = .success(feedItems)
+          }
+          else {
+            result = .failure(.empty) // error prone
+          }
+
+        case .failure(let error):
+          result = .failure(error)
         }
         
-        feeds.forEach { feed in
-          
-        }
+        return result
       }
+      .eraseToAnyPublisher()
       
     
-    return Publishers.Merge(localPublisher, remotePublisher)
+    return localPublisher.merge(with: remotePublisher).eraseToAnyPublisher()
   }
   
-  func getFeeds() -> AnyPublisher<[Feed]?, Never> {
+  func getFeeds() -> AnyPublisher<[Feed], Never> {
     localDataSource.loadFeeds(withFeetchRequest: FeedEntity.fetchRequest())
-      .map { feeds in
-        FeedEntity.convertToDomain(withEntities: feeds)
+      .compactMap { feedEntities in // get rid of nil and unwrap not-nil
+        return feedEntities
+      }
+      .map { feedEntities in
+        FeedEntity.convertToDomain(withEntities: feedEntities) ?? [Feed]()
       }
       .eraseToAnyPublisher()
   }

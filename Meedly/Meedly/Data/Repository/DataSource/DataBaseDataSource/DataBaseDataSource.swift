@@ -24,6 +24,7 @@ final class DataBaseDataSource {
       Future { completion in
         guard let items = try? self.coreDataStack.managedContext.fetch(fetchRequest)
         else {
+          print("CoreData fetch is failed")
           completion(.success(nil))
           return
         }
@@ -40,6 +41,7 @@ final class DataBaseDataSource {
       Future { completion in
         guard let feeds = try? self.coreDataStack.managedContext.fetch(fetchRequest)
         else {
+          print("CoreData fetch is failed")
           completion(.success(nil))
           return
         }
@@ -223,5 +225,15 @@ final class DataBaseDataSource {
         item.isLiked = !item.isLiked
       }
     )
+    
+    self.coreDataStack.saveContext()
   }
+  
+  func updateFeedEntity(withFeed feed: Feed, forFeedEntity feedEntity: FeedEntity){
+    feedEntity.imageUrl = feed.imageUrl
+    feedEntity.title = feed.title
+    
+    self.coreDataStack.saveContext()
+  }
+  
 }

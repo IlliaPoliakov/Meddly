@@ -7,14 +7,14 @@
 
 import Foundation
 
-enum MeedlyError: Error, Identifiable {
-  var id: String { localizedDescription }
-  
+enum MeedlyError: Error {
   case noInternetConnection
   case requestFailed(forUrl: URL)
   
   case cachedDataIsEmpty
   case coreDataError
+  
+  case empty
   
   var errorDescription: String? {
     switch self {
@@ -40,5 +40,5 @@ enum TimePeriod: TimeInterval {
 enum DefautlModelProperty: String {
   case title = "[no title provided]"
   case description = "[no description provided]"
-  case link = "https://rt.pornhub.com/"
+  case link = "https://en.wikipedia.org/wiki/Bobby_Caldwell" /*"https://rt.pornhub.com/"*/
 }

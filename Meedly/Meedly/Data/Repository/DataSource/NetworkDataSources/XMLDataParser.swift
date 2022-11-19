@@ -10,7 +10,7 @@ import FeedKit
 
 final class XMLDataParser {
   
-  func parse(_ data: Data, forGroupWithTitle groupTitle: String, forFeedWithTitle feedTitle: String)
+  func parse(forGroupWithTitle groupTitle: String, forFeedWithTitle feedTitle: String?, _ data: Data)
   -> (Feed?, [FeedItem]?){
     var feed: Feed = Feed(imageUrl: nil,
                           link: URL(string: DefautlModelProperty.link.rawValue)!,
@@ -53,7 +53,7 @@ final class XMLDataParser {
                                   link: link,
                                   isViewed: false,
                                   isLiked: false,
-                                  parentFeed: feedTitle,
+                                  parentFeed: feed.title!,
                                   parentGroup: groupTitle))
           }
         }
@@ -85,7 +85,7 @@ final class XMLDataParser {
                                   link: link,
                                   isViewed: false,
                                   isLiked: false,
-                                  parentFeed: feedTitle,
+                                  parentFeed: feed.title!,
                                   parentGroup: groupTitle))
           }
         }
@@ -124,7 +124,7 @@ final class XMLDataParser {
                                   link: link,
                                   isViewed: false,
                                   isLiked: false,
-                                  parentFeed: feedTitle,
+                                  parentFeed: feed.title!,
                                   parentGroup: groupTitle))
           }
         }
