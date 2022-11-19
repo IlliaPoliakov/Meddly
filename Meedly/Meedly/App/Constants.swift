@@ -36,3 +36,9 @@ enum TimePeriod: TimeInterval {
   case twoDays = 172800
   case oneWeak = 604800
 }
+
+enum DefautlModelProperty: String {
+  case title = "[no title provided]"
+  case description = "[no description provided]"
+  case link = "https://rt.pornhub.com/"
+}
