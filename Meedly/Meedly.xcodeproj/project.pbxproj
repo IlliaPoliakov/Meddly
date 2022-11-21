@@ -17,6 +17,7 @@
 		F2932B8E2906D1B300581568 /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2932B8D2906D1B300581568 /* FeedItem.swift */; };
 		F2AC3A4F292790AE00F0EC5A /* AdjustIsLikedUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AC3A4E292790AE00F0EC5A /* AdjustIsLikedUseCase.swift */; };
 		F2AC3A512928449500F0EC5A /* XMLDataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AC3A502928449500F0EC5A /* XMLDataParser.swift */; };
+		F2B2B02D292A99DA00459684 /* MainTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B2B02C292A99DA00459684 /* MainTableView.swift */; };
 		F2B86323291C6BA1000C3BBA /* SideBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B86322291C6BA1000C3BBA /* SideBarViewController.swift */; };
 		F2B9BC03292403DF00BB0E47 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B9BC02292403DF00BB0E47 /* Constants.swift */; };
 		F2B9BC0629240F9B00BB0E47 /* FeedlyCoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F2B9BC0429240F9B00BB0E47 /* FeedlyCoreDataModel.xcdatamodeld */; };
@@ -26,6 +27,7 @@
 		F2B9BC0E292415E400BB0E47 /* FeedItemEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B9BC0A292415E400BB0E47 /* FeedItemEntity+CoreDataProperties.swift */; };
 		F2B9BC1029241D9800BB0E47 /* GetItemsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B9BC0F29241D9800BB0E47 /* GetItemsUseCase.swift */; };
 		F2B9BC1229241DB500BB0E47 /* GetFeedsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B9BC1129241DB500BB0E47 /* GetFeedsUseCase.swift */; };
+		F2C356B4292B686200D50B19 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C356B3292B686200D50B19 /* MainTableViewCell.swift */; };
 		F2C4B9F428F7269500359E5D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4B9F328F7269500359E5D /* AppDelegate.swift */; };
 		F2C4B9F628F7269500359E5D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C4B9F528F7269500359E5D /* SceneDelegate.swift */; };
 		F2C4B9FB28F7269500359E5D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2C4B9F928F7269500359E5D /* Main.storyboard */; };
@@ -62,6 +64,7 @@
 		F2932B8D2906D1B300581568 /* FeedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
 		F2AC3A4E292790AE00F0EC5A /* AdjustIsLikedUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustIsLikedUseCase.swift; sourceTree = "<group>"; };
 		F2AC3A502928449500F0EC5A /* XMLDataParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLDataParser.swift; sourceTree = "<group>"; };
+		F2B2B02C292A99DA00459684 /* MainTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableView.swift; sourceTree = "<group>"; };
 		F2B86322291C6BA1000C3BBA /* SideBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarViewController.swift; sourceTree = "<group>"; };
 		F2B9BC02292403DF00BB0E47 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F2B9BC0529240F9B00BB0E47 /* FeedlyCoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FeedlyCoreDataModel.xcdatamodel; sourceTree = "<group>"; };
@@ -71,6 +74,7 @@
 		F2B9BC0A292415E400BB0E47 /* FeedItemEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FeedItemEntity+CoreDataProperties.swift"; path = "Meedly/Data/Model/FeedItemEntity/FeedItemEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		F2B9BC0F29241D9800BB0E47 /* GetItemsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetItemsUseCase.swift; sourceTree = "<group>"; };
 		F2B9BC1129241DB500BB0E47 /* GetFeedsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFeedsUseCase.swift; sourceTree = "<group>"; };
+		F2C356B3292B686200D50B19 /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
 		F2C4B9F028F7269500359E5D /* Meedly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Meedly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2C4B9F328F7269500359E5D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F2C4B9F528F7269500359E5D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -284,6 +288,8 @@
 		F2C4BA4828F88B8200359E5D /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				F2B2B02C292A99DA00459684 /* MainTableView.swift */,
+				F2C356B3292B686200D50B19 /* MainTableViewCell.swift */,
 				F2C4BA5328F97EE500359E5D /* CustomCells */,
 				F27D280D290F0CF700290AD7 /* ViewControllersDataHandlers */,
 				F2C4BA4B28F8AB7600359E5D /* MainTableViewController.swift */,
@@ -471,8 +477,10 @@
 				F2B9BC03292403DF00BB0E47 /* Constants.swift in Sources */,
 				F2E2D7F3290D9C720019B5F7 /* MainTableView.swift in Sources */,
 				F2B86323291C6BA1000C3BBA /* SideBarViewController.swift in Sources */,
+				F2C356B4292B686200D50B19 /* MainTableViewCell.swift in Sources */,
 				F219374628FEFBA100AD5AF0 /* CoreDataStack.swift in Sources */,
 				F2C4BA6528F9BB5000359E5D /* FeedRepositoryImpl.swift in Sources */,
+				F2B2B02D292A99DA00459684 /* MainTableView.swift in Sources */,
 				F2B9BC1029241D9800BB0E47 /* GetItemsUseCase.swift in Sources */,
 				F2CD63DA291BB906003B48BD /* AdjustIsReadUseCase.swift in Sources */,
 				F2C95DEA290C3941000E36DD /* MainVCCustomCellNoImage.swift in Sources */,

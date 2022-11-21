@@ -1,46 +1,36 @@
 PODS:
   - Alamofire (5.6.2)
   - FeedKit (9.1.2)
-  - PINCache (3.0.3):
-    - PINCache/Arc-exception-safe (= 3.0.3)
-    - PINCache/Core (= 3.0.3)
-  - PINCache/Arc-exception-safe (3.0.3):
-    - PINCache/Core
-  - PINCache/Core (3.0.3):
-    - PINOperation (~> 1.2.1)
-  - PINOperation (1.2.1)
-  - PINRemoteImage (3.0.3):
-    - PINRemoteImage/PINCache (= 3.0.3)
-  - PINRemoteImage/Core (3.0.3):
-    - PINOperation
-  - PINRemoteImage/PINCache (3.0.3):
-    - PINCache (~> 3.0.3)
-    - PINRemoteImage/Core
+  - Kingfisher (7.4.1)
+  - SnapKit (5.6.0)
   - Swinject (2.8.2)
+  - Then (3.0.0)
 
 DEPENDENCIES:
   - Alamofire (~> 5.6)
   - FeedKit (~> 9.1)
-  - PINRemoteImage (~> 3.0)
+  - Kingfisher (~> 7.4)
+  - SnapKit (~> 5.6)
   - Swinject (~> 2.8)
+  - Then (~> 3.0)
 
 SPEC REPOS:
   trunk:
     - Alamofire
     - FeedKit
-    - PINCache
-    - PINOperation
-    - PINRemoteImage
+    - Kingfisher
+    - SnapKit
     - Swinject
+    - Then
 
 SPEC CHECKSUMS:
   Alamofire: d368e1ff8a298e6dde360e35a3e68e6c610e7204
   FeedKit: 71653273ab08e618cd6fd1301ca08fc02dca6a9e
-  PINCache: 7a8fc1a691173d21dbddbf86cd515de6efa55086
-  PINOperation: 00c935935f1e8cf0d1e2d6b542e75b88fc3e5e20
-  PINRemoteImage: f1295b29f8c5e640e25335a1b2bd9d805171bd01
+  Kingfisher: cd762a593a61b2fbecf7645c00f9a801a3ebfc9c
+  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   Swinject: b4a11b31992e8668308dc594ba1cb9b3164a37ab
+  Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
 
-PODFILE CHECKSUM: 7d8921d96dec7920ebf95fdfb370541dd8ce402b
+PODFILE CHECKSUM: 3e9be3ef3aa709787935ae14af2fe59bf8291906
 
 COCOAPODS: 1.11.3

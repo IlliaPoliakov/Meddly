@@ -48,24 +48,28 @@ class FeedRepositoryImpl: FeedRepository {
         return feedEntityes.publisher
       }
       .map { feedEntity -> Result<[FeedItem], MeedlyError> in
-        var result: Result<[FeedItem], MeedlyError>
-        let fetchResult = self.remoteDataSource.fetchData(fromUrl: feedEntity.link)
+        var result: Result<[FeedItem], MeedlyError> //return value
+        let fetchResult = self.remoteDataSource.fetchData(fromUrl: feedEntity.link) // 1. fetch data from net
         
         switch fetchResult {
         case .success(let data):
           let (feed, feedItems) = self.parser.parse(forGroupWithTitle: feedEntity.parentGroup,
                                                     forFeedWithTitle: feedEntity.title,
-                                                    data)
+                                                    data) // 2. parse given data
           
-          if let feed, feedEntity.title == nil  {
+          if let feed, feedEntity.title == nil  { // 3. update feed if needed
             self.localDataSource.updateFeedEntity(withFeed: feed, forFeedEntity: feedEntity)
           }
           
           if let feedItems {
+            feedItems.forEach { feedItem in
+              self.localDataSource.saveNewItem(feedItem)
+            }
+            
             result = .success(feedItems)
           }
           else {
-            result = .failure(.empty) // error prone
+            result = .failure(.emptyFeed)
           }
 
         case .failure(let error):

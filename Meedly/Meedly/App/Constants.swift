@@ -14,6 +14,7 @@ enum MeedlyError: Error {
   case cachedDataIsEmpty
   case coreDataError
   
+  case emptyFeed
   case empty
   
   var errorDescription: String? {
@@ -28,6 +29,7 @@ enum MeedlyError: Error {
 
 enum ConstantSize: Double {
   case imageBorderWidth = 2.5
+  case imageCornerRadius = 15
 }
 
 enum TimePeriod: TimeInterval {

@@ -178,18 +178,18 @@ code_sign_if_enabled() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/FeedKit/FeedKit.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/PINCache/PINCache.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/PINOperation/PINOperation.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/PINRemoteImage/PINRemoteImage.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Swinject/Swinject.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Then/Then.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/FeedKit/FeedKit.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/PINCache/PINCache.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/PINOperation/PINOperation.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/PINRemoteImage/PINRemoteImage.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Swinject/Swinject.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Then/Then.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait
