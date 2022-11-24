@@ -2,178 +2,104 @@
 //  SideBarViewController.swift
 //  Meedly
 //
-//  Created by Illia Poliakov on 10.11.22.
+//  Created by Illia Poliakov on 23.11.22.
 //
 
 import Foundation
 import UIKit
-import PINRemoteImage
 
-enum Section {
-  case main
-}
-
-class SideBarViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
-  
-  // -MARK: - Dependencies -
-  
-  private let deleteGroupUseCase: DeleteGroupUseCase =
-  AppDelegate.DIContainer.resolve(DeleteGroupUseCase.self)!
-  private let deleteFeedUseCase: DeleteFeedUseCase =
-  AppDelegate.DIContainer.resolve(DeleteFeedUseCase.self)!
-  
-  // -MARK: - IBOutlets -
-  
-  @IBOutlet weak var avatarImage: UIImageView!
-  @IBOutlet weak var nickNameLavel: UILabel!
-  @IBOutlet weak var collectionVIew: UICollectionView!
-  @IBOutlet weak var stackView: UIStackView!
-  @IBOutlet weak var emailLabel: UILabel!
-  
-  
-  // -MARK: - Properties -
-  
-  var groups: [FeedGroup] = [FeedGroup]()
-  var sectionIndexPath: IndexPath? = nil
-  var mainTableViewController: MainTableViewController = MainTableViewController()
-  
-  // -MARK: - LifeCycle -
+final class SideBarViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    collectionVIew.dataSource = self
-    collectionVIew.delegate = self
-    collectionVIew.backgroundColor = UIColor(named: "mainColor")!.withAlphaComponent(0.1)
-    collectionVIew.layer.cornerRadius = 10
-    
-    avatarImage.layer.cornerRadius = avatarImage.bounds.height / 2
-    avatarImage.layer.masksToBounds = true
-    avatarImage.layer.borderWidth = 2.5
-    avatarImage.layer.borderColor = UIColor(named: "mainColor")!.cgColor
-    
-    stackView.layer.cornerRadius = 10
-    stackView.layer.borderWidth = 2.5
-    stackView.layer.borderColor = UIColor(named: "mainColor")!.cgColor
+    setupViews()
+    layoutViews()
   }
   
   
-  // -MARK: - CollectionView -
+  // -MARK: - Views -
   
-  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    
-    guard let cell = collectionView.dequeueReusableCell(
-      withReuseIdentifier: "SideBarCollectionViewCell",
-      for: indexPath) as? SideBarCollectionViewCell
-    else {
-      return UICollectionViewCell()
-    }
-
-    cell.bind(withFeed: groups[indexPath.section].feeds![indexPath.row])
-    return cell
-  }
+  private var avatarImageView: UIImageView!
   
-  func numberOfSections(in collectionView: UICollectionView) -> Int {
-    return groups.count
-  }
+  private var nickNameLabel: UILabel!
   
-  func collectionView(_ collectionView: UICollectionView,
-                      numberOfItemsInSection section: Int) -> Int {
-    return groups[section].feeds?.count ?? 0
-  }
-
-  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    let feed = groups[indexPath.section].feeds![indexPath.row]
-    let title: String = feed.title ?? "[no feed name]"
-    let message: String = feed.imageUrl != nil ? ".\n.\n.\n" : ""
-    let alert = UIAlertController(title: title,
-                                  message: message, preferredStyle: .alert)
+  private var collectionView: UICollectionView!
+  
+  
+  // -MARK: - Funcs -
+  
+  func setupViews() {
+    avatarImageView = UIImageView().then { image in
+      image.layer.cornerRadius = 30
+      image.contentMode = .scaleAspectFill
+      image.image = UIImage(named: "defaultAvatarImage")
+      image.alpha = 0.2
+      image.layer.borderWidth = 1.5
+      image.layer.borderColor = Colors.color(.mainColorClear)().cgColor
+      image.layer.masksToBounds = true
+    } // set actual info
     
-    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-    let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { _ in 
-      self.deleteFeedUseCase.execute(forFeed:
-                                      feed)
-      self.groups[indexPath.section].feeds!.remove(at: indexPath.row)
-      if self.groups[indexPath.section].feeds!.isEmpty {
-        self.groups.remove(at: indexPath.section)
-      }
-      collectionView.reloadData()
-      
-      self.mainTableViewController.updateGroups(updateState: .localUpdate) { newGroups in
-        self.mainTableViewController.mainTableView.groups = newGroups
-        self.mainTableViewController.mainTableView.updatePresentation()
-      }
-    }
+    nickNameLabel = UILabel().then { label in
+      label.text = "Insert Your Url:"
+      label.textColor = Colors.color(.mainColorClear)()
+      label.font = .systemFont(ofSize: 25)
+    } //actual info
     
-    if message != "" {
-      let imageView = UIImageView(frame: CGRect(x: 105, y: 50, width: 60, height: 60))
-      imageView.pin_setImage(from: feed.imageUrl)
-      imageView.layer.cornerRadius = 0
-      imageView.layer.borderWidth = 2.5
-      imageView.layer.borderColor = UIColor(named: "mainColor")!.cgColor
-      alert.view.addSubview(imageView)
-    }
-    
-    alert.addAction(cancelAction)
-    alert.addAction(deleteAction)
-    
-    self.present(alert, animated: true, completion: nil)
-  }
-    
-  func collectionView(_ collectionView: UICollectionView,
-                      viewForSupplementaryElementOfKind kind: String,
-                      at indexPath: IndexPath ) -> UICollectionReusableView {
-    switch kind {
-    case UICollectionView.elementKindSectionHeader:
-      guard let headerView = collectionView.dequeueReusableSupplementaryView(
-        ofKind: kind,
-        withReuseIdentifier: "headerId",
-        for: indexPath) as? CollectionReusableView
-      else {
-        return UICollectionReusableView()
+    collectionView = {
+      let layout = UICollectionViewCompositionalLayout {
+        sectionIndex, layoutEnvironment -> NSCollectionLayoutSection? in
+        
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.2),
+                                              heightDimension: .estimated(0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                               heightDimension: .estimated(0))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = 16
+        
+        return section
       }
       
-      headerView.groupNameTitle.text = groups[indexPath.section].title
-      headerView.layer.borderColor = UIColor(named: "mainColor")!.cgColor
-      headerView.layer.borderWidth = 2.5
-      headerView.layer.cornerRadius = 10
-      headerView.layer.backgroundColor = UIColor(named: "mainColor")!
-        .withAlphaComponent(0.2).cgColor
+      let collectionView = UICollectionView(frame: self.view.frame,
+                                            collectionViewLayout: layout)
       
-      sectionIndexPath = indexPath
+      collectionView.register(
+        MainViewCell.self,
+        forCellWithReuseIdentifier: "MainCollectionViewCell")
       
-      let gestureRecognizer = UITapGestureRecognizer(target: self,
-                                                     action: #selector(self.handleTap(_:)))
-      headerView.addGestureRecognizer(gestureRecognizer)
-      
-      return headerView
-    default:
-      assert(false, "Invalid element type")
-    }
+      collectionView.backgroundColor = Colors.color(.mainColorBackground)()
+      collectionView.layer.cornerRadius = 15
+      return collectionView
+    }()
   }
   
-  @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
-    let group = groups[sectionIndexPath!.section]
-    let title: String = group.title
-    let alert = UIAlertController(title: title,
-                                  message: nil,
-                                  preferredStyle: .alert)
-    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-    let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { _ in
-      self.deleteGroupUseCase.execute(forGroup: group)
-      self.groups.remove(at: self.sectionIndexPath!.section)
-      self.collectionVIew.reloadData()
-      
-      self.mainTableViewController.updateGroups(updateState: .localUpdate) { newGroups in
-        self.mainTableViewController.mainTableView.groups = newGroups
-        self.mainTableViewController.mainTableView.updatePresentation()
-      }
+  func layoutViews() {
+    [nickNameLabel, avatarImageView, collectionView].forEach {
+      view in
+      self.view.addSubview(view)
     }
     
-    alert.addAction(cancelAction)
-    alert.addAction(deleteAction)
+    avatarImageView.snp.makeConstraints { make in
+      make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(20)
+      make.height.width.equalTo(self.view.frame.width / 3)
+      make.leading.equalToSuperview().offset(20)
+    }
     
-    self.present(alert, animated: true, completion: nil)
+    nickNameLabel.snp.makeConstraints { make in
+      make.leading.equalTo(avatarImageView.snp.trailing).offset(15)
+      make.trailing.equalToSuperview().offset(-20)
+      make.centerY.equalTo(avatarImageView)
+    }
+    
+    collectionView.snp.makeConstraints { make in
+      make.top.equalTo(avatarImageView.snp.bottom).offset(20)
+      make.leading.trailing.equalToSuperview().inset(15)
+      make.bottom.equalToSuperview().offset(-20)
+    }
+    
   }
-  
 }

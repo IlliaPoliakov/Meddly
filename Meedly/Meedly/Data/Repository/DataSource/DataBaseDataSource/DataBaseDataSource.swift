@@ -80,8 +80,10 @@ final class DataBaseDataSource {
   
   func deleteFeed(withTitle feedTitle: String) {
     // first fetch and delete specific feed
-    let feedsPredicate = NSPredicate(format: "%K == %@",
-                                     #keyPath(FeedEntity.title), "\(feedTitle)")
+    let feedsPredicate = NSPredicate(
+      format: "%K == %@",
+      #keyPath(FeedEntity.title), "\(feedTitle)"
+    )
     let feedsFetchRequest = NSFetchRequest<FeedEntity>(entityName: "FeedEntity")
     feedsFetchRequest.resultType = .managedObjectResultType
     feedsFetchRequest.predicate = feedsPredicate
@@ -99,8 +101,10 @@ final class DataBaseDataSource {
     )
     
     // last fetch an delete specific items
-    let itemsPredicate = NSPredicate(format: "%K == %@",
-                                     #keyPath(FeedItemEntity.parentFeed), "\(feedTitle)")
+    let itemsPredicate = NSPredicate(
+      format: "%K == %@",
+      #keyPath(FeedItemEntity.parentFeed), "\(feedTitle)"
+    )
     let itemsFetchRequest = NSFetchRequest<FeedItemEntity>(entityName: "FeedItemEntity")
     itemsFetchRequest.resultType = .managedObjectResultType
     itemsFetchRequest.predicate = itemsPredicate
@@ -124,8 +128,10 @@ final class DataBaseDataSource {
   
   func deleteGroup(withTitle groupTitle: String) {
     // fetch and delete feeds with given parent group
-    let feedsPredicate = NSPredicate(format: "%K == %@",
-                                     #keyPath(FeedEntity.parentGroup), "\(groupTitle)")
+    let feedsPredicate = NSPredicate(
+      format: "%K == %@",
+      #keyPath(FeedEntity.parentGroup), "\(groupTitle)"
+    )
     let feedsFetchRequest = NSFetchRequest<FeedEntity>(entityName: "FeedEntity")
     feedsFetchRequest.resultType = .managedObjectResultType
     feedsFetchRequest.predicate = feedsPredicate
@@ -134,8 +140,7 @@ final class DataBaseDataSource {
     subscription = self.loadFeeds(withFeetchRequest: feedsFetchRequest).sink(
       receiveCompletion: {_ in
         subscription?.cancel()
-      },
-      receiveValue: { feeds in
+      }) { feeds in
         guard let feeds
         else {
           return
@@ -146,7 +151,6 @@ final class DataBaseDataSource {
           }
         }
       }
-    )
     
     self.coreDataStack.saveContext()
   }
@@ -154,8 +158,9 @@ final class DataBaseDataSource {
   
   func adjustIsReadState(forFeedItem feedItem: FeedItem?, forTimePeriod timePeriod: TimePeriod?) {
     if let feedItem {
-      let itemsPredicate = NSPredicate(format: "%K == %@",
-                                       #keyPath(FeedItemEntity.parentFeed), "\(feedItem.title)")
+      let itemsPredicate = NSPredicate(
+        format: "%K == %@",
+        #keyPath(FeedItemEntity.parentFeed), "\(feedItem.title)")
       let itemsFetchRequest = NSFetchRequest<FeedItemEntity>(entityName: "FeedItemEntity")
       itemsFetchRequest.resultType = .managedObjectResultType
       itemsFetchRequest.predicate = itemsPredicate
@@ -164,8 +169,7 @@ final class DataBaseDataSource {
       subscription = self.loadItems(withFeetchRequest: itemsFetchRequest).sink(
         receiveCompletion: {_ in
           subscription?.cancel()
-        },
-        receiveValue: { items in
+        }) { items in
           guard let item = items?.first
           else {
             return
@@ -173,12 +177,12 @@ final class DataBaseDataSource {
           
           item.isViewed = !item.isViewed
         }
-      )
     }
     else if let timePeriod { // dont sure how predicate will work
-      let itemsPredicate = NSPredicate(format: "%K < %@",
-                                       #keyPath(FeedItemEntity.pubDate),
-                                       "\(Date(timeIntervalSinceNow: timePeriod.rawValue))")
+      let itemsPredicate = NSPredicate(
+        format: "%K < %@",
+        #keyPath(FeedItemEntity.pubDate),
+        "\(Date(timeIntervalSinceNow: timePeriod.rawValue))")
       let itemsFetchRequest = NSFetchRequest<FeedItemEntity>(entityName: "FeedItemEntity")
       itemsFetchRequest.resultType = .managedObjectResultType
       itemsFetchRequest.predicate = itemsPredicate
@@ -187,8 +191,7 @@ final class DataBaseDataSource {
       subscription = self.loadItems(withFeetchRequest: itemsFetchRequest).sink(
         receiveCompletion: {_ in
           subscription?.cancel()
-        },
-        receiveValue: { items in
+        }) { items in
           guard let items
           else {
             return
@@ -198,15 +201,15 @@ final class DataBaseDataSource {
             item.isViewed = true
           }
         }
-      )
     }
     
     self.coreDataStack.saveContext()
   }
   
   func adjustIsLikedState(forFeedItem feedItem: FeedItem) {
-    let itemsPredicate = NSPredicate(format: "%K == %@",
-                                     #keyPath(FeedItemEntity.parentFeed), "\(feedItem.title)")
+    let itemsPredicate = NSPredicate(
+      format: "%K == %@",
+      #keyPath(FeedItemEntity.parentFeed), "\(feedItem.title)")
     let itemsFetchRequest = NSFetchRequest<FeedItemEntity>(entityName: "FeedItemEntity")
     itemsFetchRequest.resultType = .managedObjectResultType
     itemsFetchRequest.predicate = itemsPredicate
@@ -215,8 +218,7 @@ final class DataBaseDataSource {
     subscription = self.loadItems(withFeetchRequest: itemsFetchRequest).sink(
       receiveCompletion: { _ in
         subscription?.cancel()
-      },
-      receiveValue: { items in
+      }) { items in
         guard let item = items?.first
         else {
           return
@@ -224,7 +226,7 @@ final class DataBaseDataSource {
         
         item.isLiked = !item.isLiked
       }
-    )
+    
     
     self.coreDataStack.saveContext()
   }

@@ -15,12 +15,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   // -MARK: - Properties -
   
   public static let DIContainer = DependencyInjectionContainer.shared
+  public static let router = Router.shared
   
   // MARK: UISceneSession Lifecycle
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     
-    DependencyInjectionContainer.initialize() // initialize dependensies
+    DependencyInjectionContainer.initialize()
+    AppDelegate.router.initialize()
     
     return true
   }

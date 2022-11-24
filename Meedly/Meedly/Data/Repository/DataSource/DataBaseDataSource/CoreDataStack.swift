@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 
 final class CoreDataStack {
-  static let shared = CoreDataStack(modelName: "FeedlyCoreDataModel")
+  static let shared = CoreDataStack(modelName: "DataModelFeedly")
   
   private let modelName: String
   

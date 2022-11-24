@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21512" systemVersion="21G217" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="FeedEntity" representedClassName="FeedEntity" syncable="YES">
+        <attribute name="imageUrl" optional="YES" attributeType="URI"/>
+        <attribute name="link" attributeType="URI"/>
+        <attribute name="parentGroup" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="FeedItemEntity" representedClassName="FeedItemEntity" syncable="YES">
+        <attribute name="imageUrl" optional="YES" attributeType="URI"/>
+        <attribute name="isLiked" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="isViewed" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="itemDescription" attributeType="String"/>
+        <attribute name="link" attributeType="URI"/>
+        <attribute name="parentFeed" attributeType="String"/>
+        <attribute name="parentGroup" attributeType="String"/>
+        <attribute name="pubDate" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="title" attributeType="String"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="link"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+</model>

@@ -9,7 +9,7 @@ import Foundation
 import Swinject
 
 class DependencyInjectionContainer {
-  public static var shared : Container = Container()
+  public static var shared: Container = Container()
   
   public static func initialize(){
     
@@ -35,8 +35,11 @@ class DependencyInjectionContainer {
     DependencyInjectionContainer.shared.register(SaveNewFeedUseCase.self) { resolver in
       SaveNewFeedUseCase(repo: resolver.resolve(FeedRepository.self)!)
     }
-    DependencyInjectionContainer.shared.register(MarkAsReadedUseCase.self) { resolver in
-      MarkAsReadedUseCase(repo: resolver.resolve(FeedRepository.self)!)
+    DependencyInjectionContainer.shared.register(GetItemsUseCase.self) { resolver in
+      GetItemsUseCase(repo: resolver.resolve(FeedRepository.self)!)
+    }
+    DependencyInjectionContainer.shared.register(GetFeedsUseCase.self) { resolver in
+      GetFeedsUseCase(repo: resolver.resolve(FeedRepository.self)!)
     }
     DependencyInjectionContainer.shared.register(DeleteFeedUseCase.self) { resolver in
       DeleteFeedUseCase(repo: resolver.resolve(FeedRepository.self)!)
@@ -44,8 +47,11 @@ class DependencyInjectionContainer {
     DependencyInjectionContainer.shared.register(DeleteGroupUseCase.self) { resolver in
       DeleteGroupUseCase(repo: resolver.resolve(FeedRepository.self)!)
     }
-    DependencyInjectionContainer.shared.register(MarkAsReadedOldUseCase.self) { resolver in
-      MarkAsReadedOldUseCase(repo: resolver.resolve(FeedRepository.self)!)
+    DependencyInjectionContainer.shared.register(AdjustIsReadStateUseCase.self) { resolver in
+      AdjustIsReadStateUseCase(repo: resolver.resolve(FeedRepository.self)!)
+    }
+    DependencyInjectionContainer.shared.register(AdjustIsLikedStatetUseCase.self) { resolver in
+      AdjustIsLikedStatetUseCase(repo: resolver.resolve(FeedRepository.self)!)
     }
   }
 }

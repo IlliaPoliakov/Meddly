@@ -15,7 +15,7 @@ class GetItemsUseCase {
     self.repo = repo
   }
   
-  func execute() -> AnyPublisher<[FeedItem]?, MeedlyError> {
+  func execute() -> AnyPublisher<Result<[FeedItem], MeedlyError>, Never> {
     return repo.getItems()
   }
 }

@@ -27,7 +27,7 @@ class FeedRepositoryImpl: FeedRepository {
   // -MARK: - UseCase Funcs -
   
   func getItems() -> AnyPublisher<Result<[FeedItem], MeedlyError>, Never> {
-    let localPublisher = localDataSource.loadItems(withFeetchRequest: FeedItemEntity.fetchRequest())
+    let localDataPublisher = localDataSource.loadItems(withFeetchRequest: FeedItemEntity.fetchRequest())
       .compactMap { feedItemEntities in // get rid of nil, unwrap not-nil and cast to model
         FeedItemEntity.convertToDomain(fromEntities: feedItemEntities)
       }
@@ -40,7 +40,7 @@ class FeedRepositoryImpl: FeedRepository {
       .eraseToAnyPublisher()
     
     
-    let remotePublisher = localDataSource.loadFeeds(withFeetchRequest: FeedEntity.fetchRequest())
+    let remoteDataPublisher = localDataSource.loadFeeds(withFeetchRequest: FeedEntity.fetchRequest())
       .compactMap { feedEntities in // get rid of nil and unwrap not-nil
         return feedEntities
       }
@@ -61,9 +61,11 @@ class FeedRepositoryImpl: FeedRepository {
             self.localDataSource.updateFeedEntity(withFeed: feed, forFeedEntity: feedEntity)
           }
           
-          if let feedItems {
-            feedItems.forEach { feedItem in
-              self.localDataSource.saveNewItem(feedItem)
+          if let feedItems { // 4. store new items in db
+            DispatchQueue.global(qos: .background).async {
+              feedItems.forEach { feedItem in
+                self.localDataSource.saveNewItem(feedItem)
+              }
             }
             
             result = .success(feedItems)
@@ -81,7 +83,7 @@ class FeedRepositoryImpl: FeedRepository {
       .eraseToAnyPublisher()
       
     
-    return localPublisher.merge(with: remotePublisher).eraseToAnyPublisher()
+    return localDataPublisher.merge(with: remoteDataPublisher).eraseToAnyPublisher()
   }
   
   func getFeeds() -> AnyPublisher<[Feed], Never> {

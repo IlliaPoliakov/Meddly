@@ -15,7 +15,7 @@ class GetFeedsUseCase {
     self.repo = repo
   }
   
-  func execute() -> AnyPublisher<[FeedItem]?, Never> {
+  func execute() -> AnyPublisher<[Feed], Never> {
     return repo.getFeeds()
   }
 }
