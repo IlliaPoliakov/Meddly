@@ -29,9 +29,6 @@ final class MainViewController: UIViewController {
     setupViews()
     layoutViews()
     
-    collectionView.dataSource = presenter.dataSource
-    collectionView.delegate = presenter
-    
     presenter.updateButtonTupped() //????
     
     self.title = SortType.all.rawValue
@@ -89,6 +86,9 @@ final class MainViewController: UIViewController {
       collectionView.register(
         MainViewCell.self,
         forCellWithReuseIdentifier: "MainCollectionViewCell")
+      
+      collectionView.dataSource = presenter.dataSource
+      collectionView.delegate = presenter
       
       return collectionView
     }()
