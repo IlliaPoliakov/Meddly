@@ -28,11 +28,29 @@ final class NetworkDataSource {
       return .failure(.noInternetConnection)
     }
     
-    let request = AF.request(url, method: .get).validate()
+    let semaphore = DispatchSemaphore(value: 0)
     
-    guard let data = request.data
+    var responseData: Data? = nil
+    var responseError: Error? = nil
+
+    
+    AF.request(url, method: .get).validate().responseData { data in
+      switch data.result {
+      case .success(let value):
+        responseData = value
+
+      case .failure(let error):
+        responseError = error
+
+      }
+      semaphore.signal()
+    }
+    
+    semaphore.wait()
+    
+    guard let data = responseData
     else {
-      return .failure(.requestFailed(forUrl: url))
+      return .failure(.requestFailed(forUrl: url, withError: responseError!))
     }
     
     return .success(data)

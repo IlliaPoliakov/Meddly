@@ -12,57 +12,86 @@ final class DataBaseDataSource {
   
   // -MARK: - Dependencies -
   
-  private let coreDataStack = AppDelegate.DIContainer.resolve(CoreDataStack.self)!
+  private let coreDataManager = AppDelegate.DIContainer.resolve(CoreDataManager.self)!
   
   
   // -MARK: - Functions -
   
-  func loadItems(withFeetchRequest fetchRequest: NSFetchRequest<FeedItemEntity>) ->
-  Deferred<Future<[FeedItemEntity]?, Never>> {
-    
-    return Deferred {
-      Future { completion in
-        guard let items = try? self.coreDataStack.managedContext.fetch(fetchRequest)
-        else {
-          print("CoreData fetch is failed")
-          completion(.success(nil))
-          return
-        }
-        
-        completion(.success(items.isEmpty ? nil : items))
-      }
+  func loadItems(withFeetchRequest fetchRequest: NSFetchRequest<FeedItemEntity>) -> [FeedItemEntity]? {
+    let sortDescriptor = NSSortDescriptor(key: "pubDate", ascending: false)
+    fetchRequest.sortDescriptors = [sortDescriptor]
+
+    let fetchedResultsController = NSFetchedResultsController(
+      fetchRequest: fetchRequest,
+      managedObjectContext: self.coreDataManager.managedObjectContext,
+      sectionNameKeyPath: nil,
+      cacheName: nil)
+
+    do {
+        try fetchedResultsController.performFetch()
+    } catch {
+        let fetchError = error as NSError
+        print("Unable to Save Note")
+        print("\(fetchError), \(fetchError.localizedDescription)")
     }
+    
+    
+    guard let items = fetchedResultsController.fetchedObjects,
+          !items.isEmpty
+    else {
+      print("FUCK!!! CoreData items-fetch is failed")
+      return nil
+    }
+    
+    return items
   }
   
-  func loadFeeds(withFeetchRequest fetchRequest: NSFetchRequest<FeedEntity>) ->
-  Deferred<Future<[FeedEntity]?, Never>> {
-    
-    return Deferred {
-      Future { completion in
-        guard let feeds = try? self.coreDataStack.managedContext.fetch(fetchRequest)
-        else {
-          print("CoreData fetch is failed")
-          completion(.success(nil))
-          return
-        }
-        
-        completion(.success(feeds.isEmpty ? nil : feeds))
-      }
+  func loadFeeds(withFeetchRequest fetchRequest: NSFetchRequest<FeedEntity>) -> [FeedEntity]? {
+    let sortDescriptor = NSSortDescriptor(key: "title", ascending: false)
+    fetchRequest.sortDescriptors = [sortDescriptor]
+
+      let fetchedResultsController = NSFetchedResultsController(
+        fetchRequest: fetchRequest,
+        managedObjectContext: self.coreDataManager.managedObjectContext,
+        sectionNameKeyPath: nil,
+        cacheName: nil)
+
+    do {
+        try fetchedResultsController.performFetch()
+    } catch {
+        let fetchError = error as NSError
+        print("Unable to Save Note")
+        print("\(fetchError), \(fetchError.localizedDescription)")
     }
+    
+    guard let feeds = fetchedResultsController.fetchedObjects,
+          !feeds.isEmpty
+    else {
+      print("FUCK!!! CoreData items-fetch is failed")
+      return nil
+    }
+    
+    return feeds
   }
   
   
   func saveNewFeed(withUrl feedUrl: URL, inGroupWithTitle groupName: String) {
-    let newFeed = FeedEntity.init(context: coreDataStack.managedContext)
+    let newFeed = FeedEntity(context: coreDataManager.managedObjectContext)
     
     newFeed.link = feedUrl
     newFeed.parentGroup = groupName
     
-    coreDataStack.saveContext()
+    do {
+        try newFeed.managedObjectContext?.save()
+    } catch {
+        let saveError = error as NSError
+        print("Unable to Save Note")
+        print("\(saveError), \(saveError.localizedDescription)")
+    }
   }
   
   func saveNewItem(_ feedItem: FeedItem) {
-    let newItem = FeedItemEntity.init(context: coreDataStack.managedContext)
+    let newItem = FeedItemEntity(context: coreDataManager.managedObjectContext)
     
     newItem.title = feedItem.title
     newItem.link = feedItem.link
@@ -74,168 +103,262 @@ final class DataBaseDataSource {
     newItem.imageUrl = feedItem.imageUrl
     newItem.itemDescription = feedItem.itemDescription
     
-    coreDataStack.saveContext()
+    do {
+        try newItem.managedObjectContext?.save()
+    } catch {
+        let saveError = error as NSError
+        print("Unable to Save Note")
+        print("\(saveError), \(saveError.localizedDescription)")
+    }
   }
   
   
   func deleteFeed(withTitle feedTitle: String) {
-    // first fetch and delete specific feed
+    let feedsFetchRequest = NSFetchRequest<FeedEntity>(entityName: "FeedEntity")
+    
     let feedsPredicate = NSPredicate(
       format: "%K == %@",
       #keyPath(FeedEntity.title), "\(feedTitle)"
     )
-    let feedsFetchRequest = NSFetchRequest<FeedEntity>(entityName: "FeedEntity")
-    feedsFetchRequest.resultType = .managedObjectResultType
+    
+    let feedsSortDescriptor = NSSortDescriptor(key: "title", ascending: false)
+    
+    feedsFetchRequest.sortDescriptors = [feedsSortDescriptor]
     feedsFetchRequest.predicate = feedsPredicate
     
-    _ = self.loadFeeds(withFeetchRequest: feedsFetchRequest).sink(
-      receiveCompletion: {_ in }, // mb need error handling
-      receiveValue: { feeds in
-        guard let feed = feeds?.first
-        else {
-          return
-        }
-        
-        self.coreDataStack.managedContext.delete(feed)
-      }
-    )
+    let feedsFetchedResultsController = NSFetchedResultsController(
+      fetchRequest: feedsFetchRequest,
+      managedObjectContext: self.coreDataManager.managedObjectContext,
+      sectionNameKeyPath: nil,
+      cacheName: nil)
     
-    // last fetch an delete specific items
+    do {
+      try feedsFetchedResultsController.performFetch()
+    } catch {
+      let fetchError = error as NSError
+      print("Unable to Save Note")
+      print("\(fetchError), \(fetchError.localizedDescription)")
+    }
+    
+    guard let feeds = feedsFetchedResultsController.fetchedObjects,
+          !feeds.isEmpty,
+          let feed = feeds.first
+    else {
+      print("FUCK!!! CoreData items-fetch is failed")
+      return
+    }
+    
+    coreDataManager.managedObjectContext.delete(feed)
+    
+    
+    let itemsFetchRequest = NSFetchRequest<FeedItemEntity>(entityName: "FeedItemEntity")
+        
     let itemsPredicate = NSPredicate(
       format: "%K == %@",
       #keyPath(FeedItemEntity.parentFeed), "\(feedTitle)"
     )
-    let itemsFetchRequest = NSFetchRequest<FeedItemEntity>(entityName: "FeedItemEntity")
-    itemsFetchRequest.resultType = .managedObjectResultType
+    
+    let itemsSortDescriptor = NSSortDescriptor(key: "pubDate", ascending: false)
+    
+    itemsFetchRequest.sortDescriptors = [itemsSortDescriptor]
     itemsFetchRequest.predicate = itemsPredicate
     
-    _ = self.loadItems(withFeetchRequest: itemsFetchRequest).sink(
-      receiveCompletion: {_ in }, // mb need error handling
-      receiveValue: { items in
-        guard let items
-        else {
-          return
-        }
-        
-        items.forEach { item in
-          self.coreDataStack.managedContext.delete(item)
-        }
-      }
-    )
+    let itemsFetchedResultsController = NSFetchedResultsController(
+      fetchRequest: itemsFetchRequest,
+      managedObjectContext: self.coreDataManager.managedObjectContext,
+      sectionNameKeyPath: nil,
+      cacheName: nil)
     
-    self.coreDataStack.saveContext()
+    do {
+      try itemsFetchedResultsController.performFetch()
+    } catch {
+      let fetchError = error as NSError
+      print("Unable to Save Note")
+      print("\(fetchError), \(fetchError.localizedDescription)")
+    }
+    
+    guard let items = itemsFetchedResultsController.fetchedObjects,
+          !items.isEmpty
+    else {
+      print("FUCK!!! CoreData items-fetch is failed")
+      return
+    }
+
+    items.forEach { item in
+      coreDataManager.managedObjectContext.delete(item)
+    }
+    
+    try? coreDataManager.managedObjectContext.save()
   }
   
   func deleteGroup(withTitle groupTitle: String) {
-    // fetch and delete feeds with given parent group
+    let feedsFetchRequest = NSFetchRequest<FeedEntity>(entityName: "FeedEntity")
+    
     let feedsPredicate = NSPredicate(
       format: "%K == %@",
       #keyPath(FeedEntity.parentGroup), "\(groupTitle)"
     )
-    let feedsFetchRequest = NSFetchRequest<FeedEntity>(entityName: "FeedEntity")
-    feedsFetchRequest.resultType = .managedObjectResultType
+    
+    let feedsSortDescriptor = NSSortDescriptor(key: "title", ascending: false)
+    
+    feedsFetchRequest.sortDescriptors = [feedsSortDescriptor]
     feedsFetchRequest.predicate = feedsPredicate
     
-    var subscription: AnyCancellable?
-    subscription = self.loadFeeds(withFeetchRequest: feedsFetchRequest).sink(
-      receiveCompletion: {_ in
-        subscription?.cancel()
-      }) { feeds in
-        guard let feeds
-        else {
-          return
-        }
-        feeds.forEach { feed in
-          if let feedTitle = feed.title {
-            self.deleteFeed(withTitle: feedTitle)
-          }
-        }
-      }
+    let feedsFetchedResultsController = NSFetchedResultsController(
+      fetchRequest: feedsFetchRequest,
+      managedObjectContext: self.coreDataManager.managedObjectContext,
+      sectionNameKeyPath: nil,
+      cacheName: nil)
     
-    self.coreDataStack.saveContext()
+    do {
+      try feedsFetchedResultsController.performFetch()
+    } catch {
+      let fetchError = error as NSError
+      print("Unable to Save Note")
+      print("\(fetchError), \(fetchError.localizedDescription)")
+    }
+    
+    guard let feeds = feedsFetchedResultsController.fetchedObjects,
+          !feeds.isEmpty
+    else {
+      print("FUCK!!! CoreData items-fetch is failed")
+      return
+    }
+    
+    feeds.forEach { feed in
+      if let feedTitle = feed.title {
+        self.deleteFeed(withTitle: feedTitle)
+      }
+    }
+    
+    try? coreDataManager.managedObjectContext.save()
   }
   
   
-  func adjustIsReadState(forFeedItem feedItem: FeedItem?, forTimePeriod timePeriod: TimePeriod?) {
-    if let feedItem {
-      let itemsPredicate = NSPredicate(
-        format: "%K == %@",
-        #keyPath(FeedItemEntity.parentFeed), "\(feedItem.title)")
-      let itemsFetchRequest = NSFetchRequest<FeedItemEntity>(entityName: "FeedItemEntity")
-      itemsFetchRequest.resultType = .managedObjectResultType
-      itemsFetchRequest.predicate = itemsPredicate
-      
-      var subscription: AnyCancellable?
-      subscription = self.loadItems(withFeetchRequest: itemsFetchRequest).sink(
-        receiveCompletion: {_ in
-          subscription?.cancel()
-        }) { items in
-          guard let item = items?.first
-          else {
-            return
-          }
-          
-          item.isViewed = !item.isViewed
-        }
-    }
-    else if let timePeriod { // dont sure how predicate will work
-      let itemsPredicate = NSPredicate(
-        format: "%K < %@",
-        #keyPath(FeedItemEntity.pubDate),
-        "\(Date(timeIntervalSinceNow: timePeriod.rawValue))")
-      let itemsFetchRequest = NSFetchRequest<FeedItemEntity>(entityName: "FeedItemEntity")
-      itemsFetchRequest.resultType = .managedObjectResultType
-      itemsFetchRequest.predicate = itemsPredicate
-      
-      var subscription: AnyCancellable?
-      subscription = self.loadItems(withFeetchRequest: itemsFetchRequest).sink(
-        receiveCompletion: {_ in
-          subscription?.cancel()
-        }) { items in
-          guard let items
-          else {
-            return
-          }
-          
-          items.forEach { item in
-            item.isViewed = true
-          }
-        }
+  func markAsRead(forTimePeriod timePeriod: TimePeriod) {
+    let itemsFetchRequest = NSFetchRequest<FeedItemEntity>(entityName: "FeedItemEntity")
+    
+    let itemsPredicate = NSPredicate(
+      format: "%K < %@",
+      #keyPath(FeedItemEntity.pubDate),
+      Date(timeIntervalSinceNow: -timePeriod.rawValue) as CVarArg)
+    
+    let itemsSortDescriptor = NSSortDescriptor(key: "pubDate", ascending: false)
+    
+    itemsFetchRequest.sortDescriptors = [itemsSortDescriptor]
+    itemsFetchRequest.predicate = itemsPredicate
+    
+    let itemsFetchedResultsController = NSFetchedResultsController(
+      fetchRequest: itemsFetchRequest,
+      managedObjectContext: self.coreDataManager.managedObjectContext,
+      sectionNameKeyPath: nil,
+      cacheName: nil)
+    
+    do {
+      try itemsFetchedResultsController.performFetch()
+    } catch {
+      let fetchError = error as NSError
+      print("Unable to Save Note")
+      print("\(fetchError), \(fetchError.localizedDescription)")
     }
     
-    self.coreDataStack.saveContext()
+    guard let items = itemsFetchedResultsController.fetchedObjects,
+          !items.isEmpty
+    else {
+      print("FUCK!!! CoreData items-fetch is failed")
+      return
+    }
+    
+    items.forEach { item in
+      item.isViewed = true
+    }
+    
+    try? coreDataManager.managedObjectContext.save()
+  }
+  
+  func adjustIsReadState(forFeedItem feedItem: FeedItem) {
+    let itemsFetchRequest = NSFetchRequest<FeedItemEntity>(entityName: "FeedItemEntity")
+    
+    let itemsPredicate = NSPredicate(
+      format: "%K == %@",
+      #keyPath(FeedItemEntity.title), "\(feedItem.title)")
+    
+    let itemsSortDescriptor = NSSortDescriptor(key: "pubDate", ascending: false)
+    
+    itemsFetchRequest.sortDescriptors = [itemsSortDescriptor]
+    itemsFetchRequest.predicate = itemsPredicate
+    
+    let itemsFetchedResultsController = NSFetchedResultsController(
+      fetchRequest: itemsFetchRequest,
+      managedObjectContext: self.coreDataManager.managedObjectContext,
+      sectionNameKeyPath: nil,
+      cacheName: nil)
+    
+    do {
+      try itemsFetchedResultsController.performFetch()
+    } catch {
+      let fetchError = error as NSError
+      print("Unable to Save Note")
+      print("\(fetchError), \(fetchError.localizedDescription)")
+    }
+    
+    guard let items = itemsFetchedResultsController.fetchedObjects,
+          !items.isEmpty,
+          let item = items.last
+    else {
+      print("FUCK!!! CoreData items-fetch is failed")
+      return
+    }
+    
+    item.isViewed = !item.isViewed
+    
+    try? coreDataManager.managedObjectContext.save()
   }
   
   func adjustIsLikedState(forFeedItem feedItem: FeedItem) {
+    let itemsFetchRequest = NSFetchRequest<FeedItemEntity>(entityName: "FeedItemEntity")
+    
     let itemsPredicate = NSPredicate(
       format: "%K == %@",
-      #keyPath(FeedItemEntity.parentFeed), "\(feedItem.title)")
-    let itemsFetchRequest = NSFetchRequest<FeedItemEntity>(entityName: "FeedItemEntity")
-    itemsFetchRequest.resultType = .managedObjectResultType
+      #keyPath(FeedItemEntity.title), "\(feedItem.title)")
+    
+    let itemsSortDescriptor = NSSortDescriptor(key: "pubDate", ascending: false)
+    
+    itemsFetchRequest.sortDescriptors = [itemsSortDescriptor]
     itemsFetchRequest.predicate = itemsPredicate
     
-    var subscription: AnyCancellable?
-    subscription = self.loadItems(withFeetchRequest: itemsFetchRequest).sink(
-      receiveCompletion: { _ in
-        subscription?.cancel()
-      }) { items in
-        guard let item = items?.first
-        else {
-          return
-        }
-        
-        item.isLiked = !item.isLiked
-      }
+    let itemsFetchedResultsController = NSFetchedResultsController(
+      fetchRequest: itemsFetchRequest,
+      managedObjectContext: self.coreDataManager.managedObjectContext,
+      sectionNameKeyPath: nil,
+      cacheName: nil)
     
+    do {
+      try itemsFetchedResultsController.performFetch()
+    } catch {
+      let fetchError = error as NSError
+      print("Unable to Save Note")
+      print("\(fetchError), \(fetchError.localizedDescription)")
+    }
     
-    self.coreDataStack.saveContext()
+    guard let items = itemsFetchedResultsController.fetchedObjects,
+          !items.isEmpty,
+          let item = items.first
+    else {
+      print("FUCK!!! CoreData items-fetch is failed")
+      return
+    }
+    
+    item.isLiked = !item.isLiked
+    
+    try? coreDataManager.managedObjectContext.save()
   }
   
   func updateFeedEntity(withFeed feed: Feed, forFeedEntity feedEntity: FeedEntity){
     feedEntity.imageUrl = feed.imageUrl
     feedEntity.title = feed.title
     
-    self.coreDataStack.saveContext()
+    try? coreDataManager.managedObjectContext.save()
   }
   
 }

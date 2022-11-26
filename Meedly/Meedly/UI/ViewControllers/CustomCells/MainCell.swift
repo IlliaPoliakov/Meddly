@@ -32,7 +32,8 @@ final class MainViewCell: UICollectionViewCell {
         imageView.kf.setImage(with: imageUrl)
       }
       titleLabel.text = feedItem?.title
-      pubDateLabel.text = meedlyDateFormatter.string(from: feedItem?.pubDate ?? Date(timeIntervalSinceNow: 0))
+      pubDateLabel.text = MeedlyDateFormatter.string(
+        from: feedItem?.pubDate ?? Date(timeIntervalSinceNow: 0))
     }
   }
   
@@ -49,8 +50,6 @@ final class MainViewCell: UICollectionViewCell {
   // -MARK: - Funcs -
   
   func bind(withFeedItem feedItem: FeedItem, withPresentationType presentationType: PresentationType){
-    self.feedItem = feedItem
-    
     if presentationType == .convinient,
        feedItem.imageUrl != nil {
       layoutImageView(withState: true)
@@ -58,10 +57,12 @@ final class MainViewCell: UICollectionViewCell {
     else {
       layoutImageView(withState: false)
     }
+    
+    self.feedItem = feedItem
   }
   
   private func setupViewes() {
-    imageView = UIImageView().then { image in // add shades
+    imageView = UIImageView().then { image in
       image.layer.masksToBounds = true
       image.layer.cornerRadius = ConstantSize.imageCornerRadius.rawValue
       image.contentMode = .scaleAspectFill

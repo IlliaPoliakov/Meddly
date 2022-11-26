@@ -18,6 +18,9 @@
         <attribute name="title" attributeType="String"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
+                <constraint value="title"/>
+            </uniquenessConstraint>
+            <uniquenessConstraint>
                 <constraint value="link"/>
             </uniquenessConstraint>
         </uniquenessConstraints>

@@ -27,74 +27,82 @@ class FeedRepositoryImpl: FeedRepository {
   // -MARK: - UseCase Funcs -
   
   func getItems() -> AnyPublisher<Result<[FeedItem], MeedlyError>, Never> {
-    let localDataPublisher = localDataSource.loadItems(withFeetchRequest: FeedItemEntity.fetchRequest())
-      .compactMap { feedItemEntities in // get rid of nil, unwrap not-nil and cast to model
-        FeedItemEntity.convertToDomain(fromEntities: feedItemEntities)
-      }
-      .map{ feedItems -> Result<[FeedItem], MeedlyError> in //cast to Result<...,...>
-        var result: Result<[FeedItem], MeedlyError>
-        result = .success(feedItems)
-        
-        return result
-      }
-      .eraseToAnyPublisher()
+    let publisher = PassthroughSubject<Result<[FeedItem], MeedlyError>, Never>()
     
-    
-    let remoteDataPublisher = localDataSource.loadFeeds(withFeetchRequest: FeedEntity.fetchRequest())
-      .compactMap { feedEntities in // get rid of nil and unwrap not-nil
-        return feedEntities
-      }
-      .flatMap { feedEntityes -> Publishers.Sequence in
-        return feedEntityes.publisher
-      }
-      .map { feedEntity -> Result<[FeedItem], MeedlyError> in
-        var result: Result<[FeedItem], MeedlyError> //return value
-        let fetchResult = self.remoteDataSource.fetchData(fromUrl: feedEntity.link) // 1. fetch data from net
+    DispatchQueue.global(qos: .userInitiated).async {
+      let localFeedItems = self.localDataSource.loadItems(
+        withFeetchRequest: FeedItemEntity.fetchRequest())
+      
+      if let localFeedItems {
+        let feedItems = FeedItemEntity.convertToDomain(fromEntities: localFeedItems)
         
-        switch fetchResult {
-        case .success(let data):
-          let (feed, feedItems) = self.parser.parse(forGroupWithTitle: feedEntity.parentGroup,
-                                                    forFeedWithTitle: feedEntity.title,
-                                                    data) // 2. parse given data
+        DispatchQueue.main.async {
+          publisher.send(.success(feedItems))
+        }
+      }
+      
+      let feedEnttities = self.localDataSource.loadFeeds(withFeetchRequest: FeedEntity.fetchRequest())
+      if let feedEnttities {
+        feedEnttities.forEach { feedEntity in
+          let fetchResult = self.remoteDataSource.fetchData(fromUrl: feedEntity.link)
           
-          if let feed, feedEntity.title == nil  { // 3. update feed if needed
-            self.localDataSource.updateFeedEntity(withFeed: feed, forFeedEntity: feedEntity)
-          }
-          
-          if let feedItems { // 4. store new items in db
-            DispatchQueue.global(qos: .background).async {
+          switch fetchResult {
+          case .success(let data):
+            let (feed, feedItems) = self.parser.parse(forGroupWithTitle: feedEntity.parentGroup,
+                                                      forFeedWithTitle: feedEntity.title,
+                                                      data)
+            if let feed, feedEntity.title == nil  {
+              self.localDataSource.updateFeedEntity(withFeed: feed, forFeedEntity: feedEntity)
+            }
+            
+            if let feedItems {
               feedItems.forEach { feedItem in
                 self.localDataSource.saveNewItem(feedItem)
               }
+              DispatchQueue.main.async {
+                publisher.send(.success(feedItems))
+              }
+            }
+            else {
+              DispatchQueue.main.async {
+                publisher.send(.failure(.emptyFeed))
+              }
             }
             
-            result = .success(feedItems)
+          case .failure(let error):
+            DispatchQueue.main.async {
+              publisher.send(.failure(error))
+            }
           }
-          else {
-            result = .failure(.emptyFeed)
-          }
-
-        case .failure(let error):
-          result = .failure(error)
         }
-        
-        return result
+        DispatchQueue.main.async {
+          publisher.send(completion: .finished)
+        }
       }
-      .eraseToAnyPublisher()
-      
+    }
     
-    return localDataPublisher.merge(with: remoteDataPublisher).eraseToAnyPublisher()
+    return publisher.eraseToAnyPublisher()
   }
   
   func getFeeds() -> AnyPublisher<[Feed], Never> {
-    localDataSource.loadFeeds(withFeetchRequest: FeedEntity.fetchRequest())
-      .compactMap { feedEntities in // get rid of nil and unwrap not-nil
-        return feedEntities
+    let publisher = PassthroughSubject<[Feed], Never>()
+    
+    DispatchQueue.global(qos: .userInitiated).async {
+      let feedEntities = self.localDataSource.loadFeeds(withFeetchRequest: FeedEntity.fetchRequest())
+      
+      if let feedEntities {
+        let feeds = FeedEntity.convertToDomain(withEntities: feedEntities)
+        DispatchQueue.main.async {
+          publisher.send(feeds)
+        }
       }
-      .map { feedEntities in
-        FeedEntity.convertToDomain(withEntities: feedEntities) ?? [Feed]()
+      
+      DispatchQueue.main.async {
+        publisher.send(completion: .finished)
       }
-      .eraseToAnyPublisher()
+    }
+    
+    return publisher.eraseToAnyPublisher()
   }
   
   
@@ -104,7 +112,9 @@ class FeedRepositoryImpl: FeedRepository {
   
   
   func deleteFeed(withTitle feedTitle: String) {
-    localDataSource.deleteFeed(withTitle: feedTitle)
+    DispatchQueue.global(qos: .background).async {
+      self.localDataSource.deleteFeed(withTitle: feedTitle)
+    }
   }
   
   func deleteGroup(withTitle groupTitle: String) {
@@ -112,8 +122,11 @@ class FeedRepositoryImpl: FeedRepository {
   }
   
   
-  func adjustIsReadState(forFeedItem feedItem: FeedItem?, forTimePeriod timePeriod: TimePeriod?) {
-    localDataSource.adjustIsReadState(forFeedItem: feedItem, forTimePeriod: timePeriod)
+  func markAsRead(forTimePeriod timePeriod: TimePeriod) {
+    localDataSource.markAsRead(forTimePeriod: timePeriod)
+  }
+  func adjustIsReadState(forFeedItem feedItem: FeedItem) {
+    localDataSource.adjustIsReadState(forFeedItem: feedItem)
   }
   
   func adjustIsLikedState(forFeedItem feedItem: FeedItem) {

@@ -66,7 +66,7 @@ final class AddFeedCell: UICollectionViewCell {
       make.top.equalToSuperview().offset(10)
       make.leading.equalToSuperview().offset(15)
       make.height.width.equalTo(self.frame.width * 0.1)
-      make.bottom.equalToSuperview()
+      make.bottom.equalToSuperview().offset(-10)
     }
     
     titleLabel.snp.makeConstraints { make in

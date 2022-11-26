@@ -29,15 +29,13 @@ final class MainViewController: UIViewController {
     setupViews()
     layoutViews()
     
-    presenter.updateButtonTupped() //????
-    
-    self.title = SortType.all.rawValue
+    presenter.intialize()
   }
   
   
   // -MARK: - Dependencies -
   
-  private var presenter: MainPresenterProtocol
+  private(set) var presenter: MainPresenterProtocol
   
   
   // -MARK: - Views -
@@ -60,16 +58,18 @@ final class MainViewController: UIViewController {
   // -MARK: - Funcs -
   
   private func setupViews() {
+    self.title = SortType.all.rawValue
+    
     collectionView = {
       let layout = UICollectionViewCompositionalLayout {
         sectionIndex, layoutEnvironment -> NSCollectionLayoutSection? in
         
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                              heightDimension: .estimated(0))
+                                              heightDimension: .estimated(10))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                               heightDimension: .estimated(0))
+                                               heightDimension: .estimated(10))
         let group = NSCollectionLayoutGroup.horizontal(
           layoutSize: groupSize,
           repeatingSubitem: item,
@@ -87,11 +87,10 @@ final class MainViewController: UIViewController {
         MainViewCell.self,
         forCellWithReuseIdentifier: "MainCollectionViewCell")
       
-      collectionView.dataSource = presenter.dataSource
-      collectionView.delegate = presenter
-      
       return collectionView
     }()
+    collectionView.dataSource = presenter.dataSource
+    collectionView.delegate = presenter
     
     sortButton = {
       let button: UIButton = UIButton(type: .custom)
@@ -178,18 +177,18 @@ final class MainViewController: UIViewController {
       button.menu = UIMenu(
         title: "Mark As Read News, Older than:",
         children: [
-          UIAction(title: TimePeriodText.oneHour.rawValue,
+          UIAction(title: TimePeriod.text(.oneHour)(),
                    state: .off) { _ in self.presenter.markAsReadForPeriodChose(
-                    withPeriod: TimePeriod.oneHour.rawValue) },
-          UIAction(title: TimePeriodText.oneDay.rawValue,
+                    withPeriod: TimePeriod.oneHour) },
+          UIAction(title: TimePeriod.text(.oneDay)(),
                    state: .off) { _ in self.presenter.markAsReadForPeriodChose(
-                    withPeriod: TimePeriod.oneDay.rawValue) },
-          UIAction(title: TimePeriodText.twoDays.rawValue,
+                    withPeriod: TimePeriod.oneDay) },
+          UIAction(title: TimePeriod.text(.twoDays)(),
                    state: .off) { _ in self.presenter.markAsReadForPeriodChose(
-                    withPeriod: TimePeriod.twoDays.rawValue) },
-          UIAction(title: TimePeriodText.oneWeak.rawValue,
+                    withPeriod: TimePeriod.twoDays) },
+          UIAction(title: TimePeriod.text(.oneWeak)(),
                    state: .off) { _ in self.presenter.markAsReadForPeriodChose(
-                    withPeriod: TimePeriod.oneWeak.rawValue) }
+                    withPeriod: TimePeriod.oneWeak) }
         ])
       
       button.showsMenuAsPrimaryAction = true
@@ -305,6 +304,19 @@ final class MainViewController: UIViewController {
       identifier: nil) { _ in
         self.presenter.sortTypeChose(withType: SortType.oldFirst)
         self.title = SortType.oldFirst.rawValue
+      }
+  }
+  
+  private func makeLikedAction() -> UIAction {
+    let likedImage = UIImage(systemName: "heart")!
+      .withTintColor(Colors.color(.mainColorClear)(), renderingMode: .alwaysOriginal)
+    
+    return UIAction(
+      title: SortType.liked.rawValue,
+      image: likedImage,
+      identifier: nil) { _ in
+        self.presenter.sortTypeChose(withType: SortType.liked)
+        self.title = SortType.liked.rawValue
       }
   }
   

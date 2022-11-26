@@ -26,15 +26,21 @@ final class AddFeedViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-   
+    
     setupViews()
     layoutViews()
     
-    collectionView.dataSource = presenter.dataSource
-    collectionView.delegate = presenter
-    
     presenter.loadFeeds()
   }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    AppDelegate.router.navigationController.isToolbarHidden = true
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    AppDelegate.router.navigationController.isToolbarHidden = false
+  }
+  
   
   // -MARK: - Dependensies -
   
@@ -59,6 +65,8 @@ final class AddFeedViewController: UIViewController {
   // -MARK: - Funcs -
   
   func setupViews() {
+    self.view.backgroundColor = .systemBackground
+    
     insertUrlLabel = UILabel().then { label in
       label.text = "Insert Your Url:"
       label.textColor = UIColor(named: "mainColor")
@@ -90,36 +98,37 @@ final class AddFeedViewController: UIViewController {
     }
     
     collectionView = {
-     let layout = UICollectionViewCompositionalLayout {
-       sectionIndex, layoutEnvironment -> NSCollectionLayoutSection? in
-       
-       let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                             heightDimension: .estimated(0))
-       let item = NSCollectionLayoutItem(layoutSize: itemSize)
-       
-       let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                              heightDimension: .estimated(0))
-       let group = NSCollectionLayoutGroup.horizontal(
-         layoutSize: groupSize,
-         repeatingSubitem: item,
-         count: 1)
-       
-       let section = NSCollectionLayoutSection(group: group)
-       section.interGroupSpacing = 16
-       
-       return section
-     }
-     
-     let collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
-     
-     collectionView.register(
-       AddFeedCell.self,
-       forCellWithReuseIdentifier: "AddFeedCell")
-     
-     collectionView.backgroundColor = UIColor(named: "mainColor")!.withAlphaComponent(0.2)
-     collectionView.layer.cornerRadius = 15
-     return collectionView
-   }()
+      let layout = UICollectionViewCompositionalLayout {
+        sectionIndex, layoutEnvironment -> NSCollectionLayoutSection? in
+        
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                              heightDimension: .estimated(10))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                               heightDimension: .estimated(10))
+        let group = NSCollectionLayoutGroup.horizontal(
+          layoutSize: groupSize,
+          repeatingSubitem: item,
+          count: 1)
+        
+        let section = NSCollectionLayoutSection(group: group)
+        
+        return section
+      }
+      
+      let collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
+      
+      collectionView.register(
+        AddFeedCell.self,
+        forCellWithReuseIdentifier: "AddFeedCell")
+      
+      collectionView.backgroundColor = UIColor(named: "mainColor")!.withAlphaComponent(0.2)
+      collectionView.layer.cornerRadius = 15
+      return collectionView
+    }()
+    collectionView.dataSource = presenter.dataSource
+    collectionView.delegate = presenter
     
     addFeedButton = UIButton().then { button in
       button.setTitle("Add Feed", for: .normal)
@@ -138,7 +147,7 @@ final class AddFeedViewController: UIViewController {
         for: .touchUpInside)
     }
   }
-
+  
   func layoutViews() {
     [insertUrlLabel, addGroupButton,
      collectionView, addFeedButton, textField, chooseGroupLabel].forEach {
@@ -162,19 +171,19 @@ final class AddFeedViewController: UIViewController {
       make.leading.equalToSuperview().offset(15)
       make.trailing.equalTo(addGroupButton.snp.leading).offset(-15)
     }
-
+    
     addGroupButton.snp.makeConstraints { make in
       make.centerY.equalTo(chooseGroupLabel)
       make.trailing.equalToSuperview().offset(-25)
       make.height.equalTo(textField.snp.height)
       make.width.equalTo(textField.snp.height)
     }
-
+    
     collectionView.snp.makeConstraints { make in
       make.top.equalTo(chooseGroupLabel.snp.bottom).offset(20)
       make.leading.trailing.equalToSuperview().inset(15)
     }
-
+    
     addFeedButton.snp.makeConstraints { make in
       make.top.equalTo(collectionView.snp.bottom).offset(20)
       make.leading.trailing.equalToSuperview().inset(15)

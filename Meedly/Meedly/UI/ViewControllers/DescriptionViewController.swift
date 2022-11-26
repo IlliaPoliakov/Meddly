@@ -11,6 +11,19 @@ import Kingfisher
 
 final class DescriptionViewController: UIViewController {
   
+  init(_ presenter: DescriptionPresenterProtocol){
+    self.presenter = presenter
+    
+    super.init(nibName: nil, bundle: nil)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
+  
+  // -MARK: - LifeCycle -
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -18,7 +31,20 @@ final class DescriptionViewController: UIViewController {
     layoutViews()
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    AppDelegate.router.navigationController.isToolbarHidden = true
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    AppDelegate.router.navigationController.isToolbarHidden = false
+  }
+  
 
+  // -MARK: - Dependencies -
+  
+  private var presenter: DescriptionPresenterProtocol
+  
+  
   // -MARK: - Properties -
   
   var feedItem: FeedItem? {
@@ -32,8 +58,8 @@ final class DescriptionViewController: UIViewController {
       }
       titleLabel.text = feedItem?.title
       descriptionLabel.text = feedItem?.itemDescription
-      pubDateLabel.text = meedlyDateFormatter.string(from: feedItem?.pubDate ??
-                                                     Date(timeIntervalSinceNow: 0))
+      pubDateLabel.text = MeedlyDateFormatter.string(
+        from: feedItem?.pubDate ?? Date(timeIntervalSinceNow: 0))
     }
   }
   
@@ -56,10 +82,12 @@ final class DescriptionViewController: UIViewController {
   // -MARK: - Funcs -
   
   func setupViews() {
+    self.view.backgroundColor = .systemBackground
+    
     titleLabel = UILabel().then { label in
       label.numberOfLines = 0
       label.textAlignment = .center
-      label.font = .systemFont(ofSize: 20)
+      label.font = .systemFont(ofSize: 25)
     }
     
     imageView = UIImageView().then { image in
@@ -82,7 +110,7 @@ final class DescriptionViewController: UIViewController {
     }
     
     goToWebSiteButton = UIButton().then { button in
-      button.setTitle("Add Feed", for: .normal)
+      button.setTitle("Go To Web Site", for: .normal)
       button.setTitleColor(Colors.color(.mainColorClear)(), for: .normal)
       button.setTitleColor(Colors.color(.mainColorClear)().withAlphaComponent(0.3),
                            for: .highlighted)
@@ -92,6 +120,8 @@ final class DescriptionViewController: UIViewController {
       button.layer.cornerRadius = 10
       button.layer.borderWidth = 1.5
       button.layer.borderColor = Colors.color(.mainColorClear)().cgColor
+      button.addAction(UIAction(handler: { _ in self.presenter.visiteWebSiteButtonTupped()}),
+                       for: .touchUpInside)
     }
   }
   
@@ -103,7 +133,7 @@ final class DescriptionViewController: UIViewController {
     }
     
     scrollView.snp.makeConstraints { make in
-      make.top.equalToSuperview()
+      make.top.equalToSuperview().offset(10)
       make.leading.trailing.equalToSuperview()
       make.bottom.equalToSuperview()
     }

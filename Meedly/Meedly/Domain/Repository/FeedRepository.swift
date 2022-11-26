@@ -17,6 +17,7 @@ protocol FeedRepository {
   func deleteFeed(withTitle feedTitle: String)
   func deleteGroup(withTitle groupTitle: String)
   
-  func adjustIsReadState(forFeedItem feedItem: FeedItem?, forTimePeriod timePeriod: TimePeriod?)
+  func markAsRead(forTimePeriod timePeriod: TimePeriod)
+  func adjustIsReadState(forFeedItem feedItem: FeedItem)
   func adjustIsLikedState(forFeedItem feedItem: FeedItem)
 }

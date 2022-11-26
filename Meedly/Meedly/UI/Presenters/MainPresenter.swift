@@ -12,15 +12,16 @@ import Combine
 protocol MainPresenterProtocol: UICollectionViewDelegate {
   var dataSource: UICollectionViewDiffableDataSource<CollectionViewSection, FeedItem> { get }
   
+  func intialize()
   func countGroups() -> [String]?
-  func assignViewController(_ viewController: MainViewController)
+  func assignViewController(_ viewController: UIViewController)
   
   func sideBarButtonTupped()
   func addFeedButtonTupped()
   func updateButtonTupped()
   
   func presentationTypeChose(withType presentationType: PresentationType)
-  func markAsReadForPeriodChose(withPeriod timePeriod: TimeInterval)
+  func markAsReadForPeriodChose(withPeriod timePeriod: TimePeriod)
   func groupForPresentationChose(withTitle groupTitle: String)
   func sortTypeChose(withType sortType: SortType)
 }
@@ -38,6 +39,8 @@ final class MainPresenter: NSObject, MainPresenterProtocol {
   AppDelegate.DIContainer.resolve(AdjustIsLikedStatetUseCase.self)!
   private let adjustIdReadStateUseCase: AdjustIsReadStateUseCase =
   AppDelegate.DIContainer.resolve(AdjustIsReadStateUseCase.self)!
+  private let markAsReadUseCase: MarkAsReadUseCase =
+  AppDelegate.DIContainer.resolve(MarkAsReadUseCase.self)!
   
   
   // -MARK: - Properties -
@@ -46,25 +49,40 @@ final class MainPresenter: NSObject, MainPresenterProtocol {
   
   private var subscribtions = Set<AnyCancellable>()
   
-  private var feedItems: [FeedItem]?
+  private var feedItems: [FeedItem] = [FeedItem]()
   
   lazy var dataSource: UICollectionViewDiffableDataSource<CollectionViewSection, FeedItem> =
   UICollectionViewDiffableDataSource(collectionView: self.viewController!.collectionView) {
     collectionView, indexPath, itemIdentifier in
-    guard let item = self.feedItems?[indexPath.row],
-          let cell = collectionView.dequeueReusableCell(
-      withReuseIdentifier: "MainVieCell", for: indexPath) as? MainViewCell
+    guard !self.feedItems.isEmpty,
+          let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MainCollectionViewCell",
+                                                        for: indexPath) as? MainViewCell
     else {
       return UICollectionViewCell()
     }
     
-    cell.bind(withFeedItem: item, withPresentationType: self.presentationType)
+    let item = self.feedItems[indexPath.row]
+    cell.bind(withFeedItem: self.feedItems[indexPath.row], withPresentationType: self.presentationType)
+    
+    cell.alpha = 1
+    
+    if item.isViewed == true {
+      cell.alpha = 0.5
+    }
     
     return cell
   }
   
   
   // -MARK: - Funcs -
+  
+  func assignViewController(_ viewController: UIViewController){
+    self.viewController = (viewController as? MainViewController)
+  }
+  
+  func intialize() {
+    self.updateButtonTupped()
+  }
   
   func sideBarButtonTupped() {
      
@@ -89,8 +107,15 @@ final class MainPresenter: NSObject, MainPresenterProtocol {
     viewController?.collectionView.reloadData()
   }
   
-  func markAsReadForPeriodChose(withPeriod timePeriod: TimeInterval) {
+  func markAsReadForPeriodChose(withPeriod timePeriod: TimePeriod) {
+    markAsReadUseCase.execute(forTimePeriod: timePeriod)
+    for i in (0 ..< feedItems.count) {
+      if feedItems[i].pubDate < Date(timeIntervalSinceNow: -timePeriod.rawValue) {
+        feedItems[i].isViewed = true
+      }
+    }
     
+    viewController?.collectionView.reloadData()
   }
   
   func groupForPresentationChose(withTitle groupTitle: String) {
@@ -103,10 +128,6 @@ final class MainPresenter: NSObject, MainPresenterProtocol {
   
   
   // -MARK: - SuppFuncs -
-  
-  func assignViewController(_ viewController: MainViewController){
-    self.viewController = viewController
-  }
   
   func configureSnapshot(withItems feedItems: [FeedItem]?) {
     var snapshot = NSDiffableDataSourceSnapshot<CollectionViewSection, FeedItem>()
@@ -125,7 +146,7 @@ final class MainPresenter: NSObject, MainPresenterProtocol {
   func countGroups() -> [String]? {
     var groups: [String] = [DefaultGroup.defaultGroup.rawValue]
 
-    guard let feedItems
+    guard !feedItems.isEmpty
     else {
       return groups
     }
@@ -142,17 +163,18 @@ final class MainPresenter: NSObject, MainPresenterProtocol {
   func refreshFeedItems() {
     subscribtions.removeAll()
     
-    getItemsUseCase.execute().sink { result in
+    getItemsUseCase.execute()
+      .subscribe(on: DispatchQueue.global(qos: .userInitiated))
+      .receive(on: DispatchQueue.main)
+      .sink (receiveCompletion: { _ in
+        self.configureSnapshot(withItems: self.feedItems)
+      }) { result in
       switch result {
       case .success(let feedItems):
         let uniqueItems = self.checkForUniqueItems(feedItems)
         
-        if self.feedItems != nil,
-           let uniqueItems {
-          self.feedItems?.append(contentsOf: uniqueItems)
-        }
-        else {
-          self.feedItems = uniqueItems
+        if let uniqueItems {
+          self.feedItems.append(contentsOf: uniqueItems)
         }
         
         self.configureSnapshot(withItems: uniqueItems)
@@ -167,14 +189,14 @@ final class MainPresenter: NSObject, MainPresenterProtocol {
   }
   
   func checkForUniqueItems(_ feedItems: [FeedItem]) -> [FeedItem]?{
-    guard let selfFeedItems = self.feedItems
+    guard !self.feedItems.isEmpty
     else {
       return feedItems
     }
     
     var resultItems = [FeedItem]()
     feedItems.forEach { item in
-      if !selfFeedItems.contains(where: { $0.hashValue == item.hashValue }){
+      if !self.feedItems.contains(where: { $0.title == item.title }){
         resultItems.append(item)
       }
     }
@@ -190,5 +212,14 @@ final class MainPresenter: NSObject, MainPresenterProtocol {
   // -MARK: - Extensions -
 
 extension MainPresenter: UICollectionViewDelegate {
-  
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    let item = feedItems[indexPath.row]
+    AppDelegate.router.presentDescriptionViewControole(forFeedItem: item)
+    
+    if item.isViewed == false {
+      collectionView.cellForItem(at: indexPath)?.alpha = 0.5
+      feedItems[indexPath.row].isViewed = true
+      adjustIdReadStateUseCase.execute(forFeedItem: item)
+    }
+  }
 }

@@ -14,7 +14,7 @@ class AdjustIsReadStateUseCase {
     self.repo = repo
   }
   
-  func execute(forFeedItem feedItem: FeedItem?, forTimePeriod timePeriod: TimePeriod?) {
-    repo.adjustIsReadState(forFeedItem: feedItem, forTimePeriod: timePeriod)
+  func execute(forFeedItem feedItem: FeedItem) {
+    repo.adjustIsReadState(forFeedItem: feedItem)
   }
 }

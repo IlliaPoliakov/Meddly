@@ -12,7 +12,7 @@ import Combine
 protocol AddFeedPresenterProtocol: UICollectionViewDelegate {
   var dataSource: UICollectionViewDiffableDataSource<CollectionViewSection, String> { get }
   
-  func assignViewController(_ viewController: AddFeedViewController)
+  func assignViewController(_ viewController: UIViewController)
   
   func addGroupButtonTupped()
   func addFeedButtonTupped(withUrlString urlString: String?)
@@ -31,12 +31,14 @@ final class AddFeedPresenter: NSObject, AddFeedPresenterProtocol {
   AppDelegate.DIContainer.resolve(SaveNewFeedUseCase.self)!
   private let getFeedsUseCase: GetFeedsUseCase =
   AppDelegate.DIContainer.resolve(GetFeedsUseCase.self)!
+  private let delete: DeleteFeedUseCase =///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  AppDelegate.DIContainer.resolve(DeleteFeedUseCase.self)!
   
   
   // -MARK: - Properties -
   
-  private var feeds: [Feed]?
-  private lazy var groups = countGroups()
+  private var feeds = [Feed]()
+  private var groups = [String]()
   private var savedIndexPath: IndexPath? = nil
   
   lazy var dataSource: UICollectionViewDiffableDataSource<CollectionViewSection, String> =
@@ -57,8 +59,8 @@ final class AddFeedPresenter: NSObject, AddFeedPresenterProtocol {
   
   // -MARK: - Funcs -
   
-  func assignViewController(_ viewController: AddFeedViewController) {
-    self.viewController = viewController
+  func assignViewController(_ viewController: UIViewController) {
+    self.viewController = (viewController as? AddFeedViewController)
   }
   
   func configureSnapshot() {
@@ -73,8 +75,12 @@ final class AddFeedPresenter: NSObject, AddFeedPresenterProtocol {
     var subscription: AnyCancellable? = nil
     
     subscription = getFeedsUseCase.execute()
+      .subscribe(on: DispatchQueue.global(qos: .userInitiated))
+      .receive(on: DispatchQueue.main)
       .sink(receiveCompletion: { _ in
         subscription?.cancel()
+        
+        self.groups = self.countGroups()
         
         self.configureSnapshot()
       }) { feeds in
@@ -83,9 +89,9 @@ final class AddFeedPresenter: NSObject, AddFeedPresenterProtocol {
   }
   
   func countGroups() -> [String] {
-    var groups: [String] = [DefaultGroup.defaultGroup.rawValue]
+    self.groups = [DefaultGroup.defaultGroup.rawValue]
 
-    guard let feeds
+    guard !feeds.isEmpty
     else {
       return groups
     }
@@ -138,7 +144,7 @@ final class AddFeedPresenter: NSObject, AddFeedPresenterProtocol {
       return
     }
     
-    if let feeds {
+    if !feeds.isEmpty {
       guard !feeds.contains(where: { $0.link == url})
       else {
         AppDelegate.router.presentWarningAlert(
@@ -149,25 +155,28 @@ final class AddFeedPresenter: NSObject, AddFeedPresenterProtocol {
     
     saveNewFeedUseCase.execute(withUrl: url, inGroupWithTitle: groupTitle)
     
-//    AppDelegate.router.closeViewController(self.addFeedViewController!)
+    AppDelegate.router.closeAddFeedViewController()
   }
   
 }
 
 extension AddFeedPresenter: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    if let savedIndexPath {
-      collectionView.deselectItem(at: savedIndexPath, animated: true)
+    guard savedIndexPath != indexPath
+    else {
+      collectionView.cellForItem(at: indexPath)?.backgroundColor = .clear
+      savedIndexPath = nil
+      return
     }
     
-    collectionView.selectItem(at: indexPath,
-                              animated: true,
-                              scrollPosition: .centeredVertically)
+    if let savedIndexPath {
+      collectionView.cellForItem(at: savedIndexPath)?.backgroundColor = .clear
+      self.savedIndexPath = nil
+    }
+    
+    collectionView.cellForItem(at: indexPath)?.backgroundColor =
+      .lightGray.withAlphaComponent(0.5)
+    
     self.savedIndexPath = indexPath
-  }
-  
-  func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-    collectionView.deselectItem(at: indexPath, animated: true)
-    savedIndexPath = nil
   }
 }

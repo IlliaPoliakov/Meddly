@@ -12,13 +12,8 @@ import CoreData
 @objc(FeedItemEntity)
 public class FeedItemEntity: NSManagedObject {
   
-  static func convertToDomain(fromEntities entities: [FeedItemEntity]?) -> [FeedItem]? {
-    guard entities != nil
-    else {
-      return nil
-    }
-  
-    return entities!.map { entity in
+  static func convertToDomain(fromEntities entities: [FeedItemEntity]) -> [FeedItem] {
+    return entities.map { entity in
       FeedItem(itemDescription: entity.itemDescription,
                imageUrl: entity.imageUrl,
                pubDate: entity.pubDate,

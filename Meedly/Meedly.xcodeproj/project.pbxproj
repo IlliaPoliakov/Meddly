@@ -10,7 +10,9 @@
 		6E4A1BB02F84B84571F55F17 /* Pods_Meedly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C93F3276B4A8D7FC09E2DBAE /* Pods_Meedly.framework */; };
 		F217ADB9292FEBD300289495 /* SideBarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F217ADB8292FEBD300289495 /* SideBarCell.swift */; };
 		F217ADBC292FEC6A00289495 /* DataModelFeedly.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F217ADBA292FEC6A00289495 /* DataModelFeedly.xcdatamodeld */; };
-		F219374628FEFBA100AD5AF0 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F219374528FEFBA100AD5AF0 /* CoreDataStack.swift */; };
+		F217ADBE2930A98200289495 /* MarkAsReadUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F217ADBD2930A98200289495 /* MarkAsReadUseCase.swift */; };
+		F217ADC02930AB4300289495 /* UIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F217ADBF2930AB4300289495 /* UIConstants.swift */; };
+		F219374628FEFBA100AD5AF0 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F219374528FEFBA100AD5AF0 /* CoreDataManager.swift */; };
 		F21D0231292D1B7D0060B18C /* AddFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21D0230292D1B7C0060B18C /* AddFeedViewController.swift */; };
 		F2256F1F290876A0003DA153 /* DIConatiner.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2256F1E290876A0003DA153 /* DIConatiner.swift */; };
 		F2347487290FAEF60027C0A2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2347486290FAEF60027C0A2 /* Extensions.swift */; };
@@ -25,7 +27,6 @@
 		F2985530292E6BF8006C04E5 /* SIdeBarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F298552F292E6BF8006C04E5 /* SIdeBarPresenter.swift */; };
 		F2985533292E6C18006C04E5 /* DescriptionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2985532292E6C18006C04E5 /* DescriptionPresenter.swift */; };
 		F2985535292E6CF7006C04E5 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2985534292E6CF7006C04E5 /* Router.swift */; };
-		F2985537292E75CC006C04E5 /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2985536292E75CC006C04E5 /* Interactor.swift */; };
 		F2985539292E7671006C04E5 /* AddFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2985538292E7671006C04E5 /* AddFeedCell.swift */; };
 		F2AC3A4F292790AE00F0EC5A /* AdjustIsLikedStateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AC3A4E292790AE00F0EC5A /* AdjustIsLikedStateUseCase.swift */; };
 		F2AC3A512928449500F0EC5A /* XMLDataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AC3A502928449500F0EC5A /* XMLDataParser.swift */; };
@@ -56,7 +57,9 @@
 		C93F3276B4A8D7FC09E2DBAE /* Pods_Meedly.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Meedly.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F217ADB8292FEBD300289495 /* SideBarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarCell.swift; sourceTree = "<group>"; };
 		F217ADBB292FEC6A00289495 /* DataModelFeedly.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModelFeedly.xcdatamodel; sourceTree = "<group>"; };
-		F219374528FEFBA100AD5AF0 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		F217ADBD2930A98200289495 /* MarkAsReadUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkAsReadUseCase.swift; sourceTree = "<group>"; };
+		F217ADBF2930AB4300289495 /* UIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConstants.swift; sourceTree = "<group>"; };
+		F219374528FEFBA100AD5AF0 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		F21D0230292D1B7C0060B18C /* AddFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedViewController.swift; sourceTree = "<group>"; };
 		F2256F1E290876A0003DA153 /* DIConatiner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIConatiner.swift; sourceTree = "<group>"; };
 		F2347486290FAEF60027C0A2 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -71,7 +74,6 @@
 		F298552F292E6BF8006C04E5 /* SIdeBarPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SIdeBarPresenter.swift; sourceTree = "<group>"; };
 		F2985532292E6C18006C04E5 /* DescriptionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionPresenter.swift; sourceTree = "<group>"; };
 		F2985534292E6CF7006C04E5 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
-		F2985536292E75CC006C04E5 /* Interactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactor.swift; sourceTree = "<group>"; };
 		F2985538292E7671006C04E5 /* AddFeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedCell.swift; sourceTree = "<group>"; };
 		F2AC3A4E292790AE00F0EC5A /* AdjustIsLikedStateUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustIsLikedStateUseCase.swift; sourceTree = "<group>"; };
 		F2AC3A502928449500F0EC5A /* XMLDataParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLDataParser.swift; sourceTree = "<group>"; };
@@ -180,7 +182,6 @@
 		F2C4BA2C28F82DA300359E5D /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				F2985536292E75CC006C04E5 /* Interactor.swift */,
 				F2F1E5522905231D00EE942A /* Model */,
 				F2C4BA4028F830AD00359E5D /* UseCases */,
 				F2C4BA4428F85DF000359E5D /* Repository */,
@@ -204,6 +205,7 @@
 				F2C4BA4828F88B8200359E5D /* ViewControllers */,
 				F298552A292E6BA1006C04E5 /* Presenters */,
 				F2985534292E6CF7006C04E5 /* Router.swift */,
+				F217ADBF2930AB4300289495 /* UIConstants.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -243,6 +245,7 @@
 				F2B9BC1129241DB500BB0E47 /* GetFeedsUseCase.swift */,
 				F2CD63DD291C26B0003B48BD /* DeleteFeedUseCase.swift */,
 				F2CD63DB291C269D003B48BD /* DeleteGroupUseCase.swift */,
+				F217ADBD2930A98200289495 /* MarkAsReadUseCase.swift */,
 				F2CD63D9291BB905003B48BD /* AdjustIsReadStateUseCase.swift */,
 				F2AC3A4E292790AE00F0EC5A /* AdjustIsLikedStateUseCase.swift */,
 			);
@@ -313,7 +316,7 @@
 			isa = PBXGroup;
 			children = (
 				F2F1E56B2905D2AC00EE942A /* DataBaseDataSource.swift */,
-				F219374528FEFBA100AD5AF0 /* CoreDataStack.swift */,
+				F219374528FEFBA100AD5AF0 /* CoreDataManager.swift */,
 				F217ADBA292FEC6A00289495 /* DataModelFeedly.xcdatamodeld */,
 			);
 			path = DataBaseDataSource;
@@ -458,6 +461,7 @@
 				F2CD63DC291C269D003B48BD /* DeleteGroupUseCase.swift in Sources */,
 				F2B9BC0D292415E400BB0E47 /* FeedItemEntity+CoreDataClass.swift in Sources */,
 				F2AC3A4F292790AE00F0EC5A /* AdjustIsLikedStateUseCase.swift in Sources */,
+				F217ADC02930AB4300289495 /* UIConstants.swift in Sources */,
 				F27C46C1292C0D1E00A93D43 /* MainViewController.swift in Sources */,
 				F2B9BC0B292415E400BB0E47 /* FeedEntity+CoreDataClass.swift in Sources */,
 				F217ADB9292FEBD300289495 /* SideBarCell.swift in Sources */,
@@ -467,6 +471,7 @@
 				F298552C292E6BDE006C04E5 /* AddFeedPresenter.swift in Sources */,
 				F21D0231292D1B7D0060B18C /* AddFeedViewController.swift in Sources */,
 				F2256F1F290876A0003DA153 /* DIConatiner.swift in Sources */,
+				F217ADBE2930A98200289495 /* MarkAsReadUseCase.swift in Sources */,
 				F2969B29292DFC92006E0B2B /* SideBarViewController.swift in Sources */,
 				F2985535292E6CF7006C04E5 /* Router.swift in Sources */,
 				F2985539292E7671006C04E5 /* AddFeedCell.swift in Sources */,
@@ -475,14 +480,13 @@
 				F2C4BA6728F9E38A00359E5D /* NetworkDataSource.swift in Sources */,
 				F2B9BC03292403DF00BB0E47 /* Constants.swift in Sources */,
 				F2985530292E6BF8006C04E5 /* SIdeBarPresenter.swift in Sources */,
-				F219374628FEFBA100AD5AF0 /* CoreDataStack.swift in Sources */,
+				F219374628FEFBA100AD5AF0 /* CoreDataManager.swift in Sources */,
 				F2C4BA6528F9BB5000359E5D /* FeedRepositoryImpl.swift in Sources */,
 				F2B9BC1029241D9800BB0E47 /* GetItemsUseCase.swift in Sources */,
 				F2CD63DA291BB906003B48BD /* AdjustIsReadStateUseCase.swift in Sources */,
 				F2C4B9F628F7269500359E5D /* SceneDelegate.swift in Sources */,
 				F2985533292E6C18006C04E5 /* DescriptionPresenter.swift in Sources */,
 				F2CD63DE291C26B0003B48BD /* DeleteFeedUseCase.swift in Sources */,
-				F2985537292E75CC006C04E5 /* Interactor.swift in Sources */,
 				F2347487290FAEF60027C0A2 /* Extensions.swift in Sources */,
 				F2AC3A512928449500F0EC5A /* XMLDataParser.swift in Sources */,
 				F2E41FB229020A4700FCA844 /* SaveNewFeedUseCase.swift in Sources */,
